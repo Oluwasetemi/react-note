@@ -1,9 +1,9 @@
 ---
 theme: seriph
 background: https://res.cloudinary.com/drnqdd87d/image/upload/f_auto/nmgakkzd3lmlibnfosps
-title: JavaScript Class Note
+title: React Class Note
 info: |
-  ## AltSchool v4 JavaScript Class Notes
+  ## AltSchool v4 React Class Notes
   making of world class developers
   join at [AltSchool Africa](https://altschoolafrica.com)
 class: text-center
@@ -15,9 +15,9 @@ mdc: true
 hideInToc: true
 ---
 
-# JavaScript Class Notes
+# React Class Notes
 
-JavaScript Class notes for the 1st Semester
+React Class notes for the 2nd Semester
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -51,13 +51,13 @@ hideInToc: true
 <Toc columns="2" minDepth="1" maxDepth="2"></Toc>
 ---
 
-# Getting Started With JavaScript?
+# Getting Started With React?
 
 ---
 hideInToc: true
 ---
 
-# What is JavaScript?
+# What is React?
 
 ---
 
