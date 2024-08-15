@@ -37,7 +37,7 @@ jobs:
           npm exec slidev export -- --per-slide --format pptx --output ./_export/react-note.pptx
       - name: Generate Body
         run: |
-          echo -e "## Welcome to the resource download section\n### Please download the class note in PDF or PPTX (just pictures in png) files from the assets section below"\n Best of Luck and may the fourth be with you.
+          echo -e "## Welcome to the resource download section\n### Please download the class note in PDF or PPTX (just pictures in png) files from the assets section below"\n Best of Luck and may the fourth be with you. > ./_export/body.txt
 
       - name: Create Tag
         uses: rickstaa/action-create-tag@v1.7.2
