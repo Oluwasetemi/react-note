@@ -40,7 +40,7 @@ React Class notes for the 2nd Semester
 </div>
 
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+notes
 -->
 ---
 hideInToc: true
@@ -58,6 +58,40 @@ hideInToc: true
 ---
 
 # What is React?
+
+---
+
+# Code Runners
+
+```jsx {monaco-run} { lineNumbers: true, height: '12.5em'}
+function Hello() {
+  const [counter, setCounter] = React.useState(0);
+  const value = 2;
+  const doubled = counter * value
+
+  return (
+    <div className="select-none text-lg flex gap-4 items-center p2 border border-main">
+    <span className="text-gray text-lg">
+      <span className="text-orange">{ counter }</span>{' '}
+      * { value } = {' '}
+      <span className="text-green">{ doubled }</span>
+    </span>
+    <button className="border border-main p2 rounded" onClick={() => setCounter(counter + 1)}>+1</button>
+    <button className="border border-main p2 rounded" onClick={() => setCounter(counter - 1)}>-1</button>
+  </div>
+  );
+}
+```
+
+<!--
+The idea here is super sweet with tailwind like css and ability to render code is powerful and the opportunities here is endless.
+-->
+
+---
+
+# React Components
+
+<CounterReact />
 
 ---
 
