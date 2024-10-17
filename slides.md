@@ -1,11 +1,22 @@
 ---
-theme: seriph
 background: https://res.cloudinary.com/drnqdd87d/image/upload/f_auto/nmgakkzd3lmlibnfosps
 title: React Class Note
+titleTemplate: '%s - AltSchool Africa'
 info: |
   ## AltSchool v4 React Class Notes
   making of world class developers
   join at [AltSchool Africa](https://altschoolafrica.com)
+author: Oluwasetemi
+download: true
+exportFilename: react-note
+export:
+  format: pdf
+  timeout: 60000
+  dark: false
+  withClicks: false
+  withToc: false
+# TODO: add a svg favicon
+# favicon: https://oluwasetemi.dev/favicon-32x32.png
 class: text-center
 highlighter: shiki
 drawings:
@@ -15,13 +26,13 @@ mdc: true
 hideInToc: true
 ---
 
-# React Class Notes
+# React [Class]{.text-8xl.font-hand.mr-4.text-gradient} Notes
 
 React Class notes for the 2nd Semester
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Are you ready to well designed UI with your HTML skills? Press <kbd>space</kbd> on your keyboard <carbon:arrow-right class="inline"/>
+    Are you ready to build a well designed UI from components with your HTML skills? Press <kbd>space</kbd> on your keyboard <carbon:arrow-right class="inline"/>
   </span>
 </div>
 
@@ -42,6 +53,7 @@ React Class notes for the 2nd Semester
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
+
 ---
 hideInToc: true
 ---
@@ -49,6 +61,7 @@ hideInToc: true
 # Table of contents
 
 <Toc columns="2" minDepth="1" maxDepth="2"></Toc>
+
 ---
 
 # Getting Started With React?
@@ -73,7 +86,6 @@ hideInToc: true
 ---
 
 # Contributors
-
 
 - [Adebosin Ridwan](https://github.com/RidwanAdebosin)
 - [Olubebe Faith](https://github.com/Olubebe)
