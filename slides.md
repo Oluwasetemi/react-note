@@ -63,14 +63,256 @@ hideInToc: true
 <Toc columns="2" minDepth="1" maxDepth="2"></Toc>
 
 ---
-
-# Getting Started With React?
-
----
-hideInToc: true
+name: Introduction
+layout: center
 ---
 
-# What is React?
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Introduction to </span>
+  <span>Libraries</span>
+  <sup v-click>ReactJS, VueJS</sup>
+</div>
+<div mt1 forward:delay-300 v-click>From functions to building blocks 🧱</div>
+</h1>
+
+---
+src: ./pages/intro.md
+---
+
+---
+name: JSX
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Javascript </span>
+  <span>XML</span>
+  <sup v-click>syntax, structure, rules</sup>
+</div>
+<div mt1 forward:delay-300 v-click>HMTL ➡️ JSX</div>
+</h1>
+
+---
+src: ./pages/jsx.md
+---
+
+---
+name: Component
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Components in </span>
+  <span>React</span>
+  <sup v-click>parent, child, props</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Reusability and Component Hierarchy 🪜</div>
+</h1>
+
+---
+src: ./pages/component.md
+---
+
+---
+name: Interaction
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Make a Component </span>
+  <span>Interactive</span>
+  <sup v-click>event handlers</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Passing event handlers as props 〰️</div>
+</h1>
+
+---
+src: ./pages/interaction.md
+---
+
+---
+name: Rendering
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>React </span>
+  <span>Lifecycle</span>
+  <sup v-click>mount, trigger, render, commit</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Conditional rendering ❓</div>
+</h1>
+
+---
+src: ./pages/rendering.md
+---
+
+---
+name: Hooks
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Introduction to React </span>
+  <span>Hooks</span>
+  <sup v-click>useState, useEffect</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Mutation and Immutability 🆕</div>
+</h1>
+
+---
+src: ./pages/hooks.md
+---
+
+---
+name: State
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Managing </span>
+  <span>State </span>
+  <sup v-click>imperative vs declarative</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Lifting State Up ⤴️ </div>
+</h1>
+
+---
+src: ./pages/state.md
+---
+
+---
+name: Form
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Data </span>
+  <span>Binding </span>
+  <sup v-click>controls, validations</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Handling Form Inputs ⌨️</div>
+</h1>
+
+---
+src: ./pages/form.md
+---
+
+---
+name: More Hooks
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>More </span>
+  <span>Hooks 🪝</span>
+  <sup v-click>useRef, useLayoutEffect</sup>
+</div>
+<div mt1 forward:delay-300 v-click>useReducer &  useContext </div>
+</h1>
+
+---
+src: ./pages/more-hooks.md
+---
+
+---
+name: Routing
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Routes & </span>
+  <span>  Links</span>
+  <sup v-click>redirects, protecting routes</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Navigating Between Pages 🧭</div>
+</h1>
+
+---
+src: ./pages/routing.md
+---
+
+---
+name: State Management
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>State </span>
+  <span>Management </span>
+  <sup v-click>context API, redux</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Best Practices 👍</div>
+</h1>
+
+---
+src: ./pages/state-management.md
+---
+
+---
+name: Data Fetching
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Data </span>
+  <span>Fetching </span>
+  <sup v-click>fetch, axios, react query</sup>
+</div>
+<div mt1 forward:delay-300 v-click> Working with APIs 🌐</div>
+</h1>
+
+---
+src: ./pages/data-fetching.md
+---
+
+---
+name: Performance
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Performance   </span>
+  <span>Optimization </span>
+  <sup v-click>memo, lazy, suspense</sup>
+</div>
+<div mt1 forward:delay-300 v-click>Avoiding Unnecessary Renders 🙅</div>
+</h1>
+
+---
+src: ./pages/performance.md
+---
+
+---
+name: Test
+layout: center
+---
+
+<h1 flex="~ col">
+<div text-2xl origin-top-left transition duration-500 :class="$clicks <= 2 ? 'scale-150' : 'op50'">
+  <span v-click>Introduction to </span>
+  <span>Testing</span>
+  <sup v-click>unit, end-to-end </sup>
+</div>
+<div mt1 forward:delay-300 v-click>React Testing Library  🔎</div>
+</h1>
+
+---
+src: ./pages/test.md
+---
 
 ---
 
