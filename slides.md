@@ -342,11 +342,6 @@ function Hello() {
 The idea here is super sweet with tailwind like css and ability to render code is powerful and the opportunities here is endless.
 -->
 
----
-
-# React Components
-
-<CounterReact />
 
 ---
 
@@ -354,7 +349,7 @@ The idea here is super sweet with tailwind like css and ability to render code i
 
 <ul>
   <li ><a @click="$slidev.nav.next()">Assignment 1</a></li>
-  <li ><a @click="$slidev.nav.go(113)">Assignment 2</a></li>
+  <li ><a @click="$nav.currentSlide() + 2">Assignment 2</a></li>
 </ul>
 
 ---
@@ -363,5 +358,5 @@ hideInToc: true
 
 # Contributors
 
-- [Adebosin Ridwan](https://github.com/RidwanAdebosin)
-- [Olubebe Faith](https://github.com/Olubebe)
+- {@Stan015}
+- {@victorvictoria-maker}
