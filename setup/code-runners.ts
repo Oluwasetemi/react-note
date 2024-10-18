@@ -2,6 +2,7 @@
 import { defineCodeRunnersSetup } from '@slidev/types'
 
 export default defineCodeRunnersSetup(() => {
+
   return {
     // Support Vue SFC
     async vue(code) {
@@ -36,42 +37,39 @@ export default defineCodeRunnersSetup(() => {
       // console.log(component)
 
       // Mount the component
-      const app = Vue.createApp(component)
-      const el = document.createElement('div')
-      app.mount(el)
+      const app = Vue.createApp(component);
+      const el = document.createElement('div');
+      app.mount(el);
 
       return {
         element: el,
-      }
+      };
     },
-    async jsx(code, ctx) {
-      console.log(ctx)
-      const highlight = ctx.highlight
-
-      let a = highlight(code, 'jsx')
-
-      console.log(a)
-
-      const React = await import('react')
-      const ReactDOM = await import('react-dom/client')
-      const Babel = await import('@babel/standalone')
+    async jsx(code) {
+      const React = await import('react');
+      const ReactDOM = await import('react-dom/client');
+      const Babel = await import('@babel/standalone');
 
       const result = Babel.transform(code, {
         presets: ['react'],
-      })
-
-      // replace import
+      });
 
       let Component = new Function(`return (React) => ${result.code}`)()(React)
+      let app = React.createElement(Component);
+      const el = document.createElement('div');
+      el.className = 'jsx-runner';
 
-      const el = document.createElement('div')
+      // style
+      el.style.width = '100%';
+      el.style.height = '50vh';
+      // el.style.minHeight = '400px';
+      el.style.overflow = 'auto';
 
-      ReactDOM.createRoot(el).render(React.createElement(Component))
-      console.log(el)
+      ReactDOM.createRoot(el).render(app);
 
       return {
         element: el,
       }
     },
-  }
-})
+  };
+});
