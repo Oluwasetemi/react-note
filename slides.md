@@ -318,7 +318,7 @@ src: ./pages/test.md
 
 # Code Runners
 
-```jsx {monaco-run} { lineNumbers: true, height: '12.5em'}
+```jsx {monaco-run} { lineNumbers: 'true', height: '12.5em'}
 function Hello() {
   const [counter, setCounter] = React.useState(0)
   const value = 2

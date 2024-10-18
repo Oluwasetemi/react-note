@@ -48,6 +48,7 @@ export default defineCodeRunnersSetup(() => {
       const React = await import('react')
       const ReactDOM = await import('react-dom/client')
       const Babel = await import('@babel/standalone')
+      console.log(React)
 
       const result = Babel.transform(code, {
         presets: ['react'],
