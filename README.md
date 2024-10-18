@@ -1,13 +1,57 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bf3a46a6-a3e4-4398-ab99-dc889e026023/deploy-status)](https://app.netlify.com/sites/css-note-karatu/deploys)
+# React Class Teaching Slides
 
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+<!-- [![Netlify Status](https://api.netlify.com/api/v1/badges/60445541-0ee9-4604-8ef8-3fd950aa9d2a/deploy-status)](https://app.netlify.com/sites/javascript-note/deploys) -->
 
-To start the slide show:
+## Description
 
-- `npm install`
-- `npm run dev`
-- visit http://localhost:3030
+This is a slide for teaching React classes.
 
-Edit the [slides.md](./slides.md) to see the changes.
+## Table of Contents
 
-Learn more about Slidev on [documentations](https://sli.dev/).
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/Oluwasetemi/react-note.git
+
+# Navigate to the project directory
+cd yourproject
+```
+
+2. Install the dependencies
+
+```bash
+npm install
+```
+
+## Usage
+
+Run the following command to start the slide server.
+
+```bash
+npm run dev
+```
+
+Open the browser and go to [http://localhost:3030](http://localhost:3030) to view the slides.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please check or open an issue first to discuss what you would like to change.
+
+Check the [contributing guide](CONTRIBUTING.md) for more information.
+
+## License
+
+[MIT](LICENSE)
+
+## Contributors
+
+- [Oluwasetemi](https://github.com/Oluwasetemi)
+- [Victoria Victor](https://github.com/victorvictoria-maker)
+- [Stanley Azi](https://github.com/Stan015)

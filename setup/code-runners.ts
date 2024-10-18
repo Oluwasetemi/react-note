@@ -1,21 +1,21 @@
 /* eslint-disable no-new-func */
-import { defineCodeRunnersSetup } from '@slidev/types';
+import { defineCodeRunnersSetup } from '@slidev/types'
 
 export default defineCodeRunnersSetup(() => {
 
   return {
     // Support Vue SFC
     async vue(code) {
-      const Vue = await import('vue');
-      const { parse, compileScript } = await import('@vue/compiler-sfc');
+      const Vue = await import('vue')
+      const { parse, compileScript } = await import('@vue/compiler-sfc')
 
       // Compile the script, note this demo does not handle Vue styles
-      const sfc = parse(code);
+      const sfc = parse(code)
       let scripts = compileScript(sfc.descriptor, {
         id: sfc.descriptor.filename,
         genDefaultAs: '__Component',
         inlineTemplate: true,
-      }).content;
+      }).content
 
       // console.log(scripts)
       // console.log(sfc)
@@ -25,14 +25,14 @@ export default defineCodeRunnersSetup(() => {
       scripts = scripts.replace(
         /import (\{[^}]+\}) from ['"]vue['"]/g,
         (_, imports) => `const ${imports.replace(/\sas\s/g, ':')} = Vue`,
-      );
-      scripts += '\nreturn __Component';
+      )
+      scripts += '\nreturn __Component'
 
       // console.log(scripts)
 
       // Create function to evaluate the script and get the component
       // Note this is not sandboxed, it's NOT secure.
-      const component = new Function(`return (Vue) => {${scripts}}`)()(Vue);
+      const component = new Function(`return (Vue) => {${scripts}}`)()(Vue)
 
       // console.log(component)
 
@@ -70,9 +70,6 @@ export default defineCodeRunnersSetup(() => {
       return {
         element: el,
       }
-    },
-    async tsx(code) {
-      return await this.jsx(code);
     },
   };
 });

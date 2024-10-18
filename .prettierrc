@@ -1,4 +1,6 @@
 {
+  "singleQuote": true,
+  "semi": false,
   "overrides": [
     {
       "files": ["slides.md", "pages/*.md"],
