@@ -219,7 +219,7 @@ transition: slide-down
 
 There are few rules that guides writing JSX. They include:
 
-1. Return a single root element: This is simply saying you should always wrap a group of JSX elements with a single root.
+1. <u>Return a single root element:</u> This is simply saying you should always wrap a group of JSX elements with a single root.
 
 ```jsx {*|2|6|*}
 // the `<div></div>` is the parent (root element)
@@ -247,7 +247,7 @@ level: 2
 transition: view-transition
 ---
 
-2. Close all the tags: In JSX, every tag should be explicitly closed. This means that all tags, including self-closing tags like `<img>`, `<link>`, and `<meta>`, should be explicitly closed with the forward-slash (/): `<img />`, `<link />`, and `<meta />`. JSX follows XML rules, and therefore HTML elements must be properly closed. JSX will throw an error if the HTML is not properly closed.
+2. <u>Close all the tags:</u> In JSX, every tag should be explicitly closed. This means that all tags, including self-closing tags like `<img>`, `<link>`, and `<meta>`, should be explicitly closed with the forward-slash (/): `<img />`, `<link />`, and `<meta />`. JSX follows XML rules, and therefore HTML elements must be properly closed. JSX will throw an error if the HTML is not properly closed.
 
 ```jsx {hide|3|4|5|6|*}
 // Closing tags properly
@@ -259,9 +259,11 @@ transition: view-transition
 </>
 ```
 
-<div v-click>
-3. Use camelCase for most of the things!: JSX converts to JavaScript, and attributes written in JSX become keys of JavaScript objects. As we know, JavaScript has limitations on variable names, hence using camelCase is recommended. For example, their names can’t contain dashes or be reserved words like `class`. Since `class` is a reserved word, in React you write `className` instead.
-</div>
+---
+hideInToc: true
+---
+
+3. <u>Use camelCase for most of the things!:</u> JSX converts to JavaScript, and attributes written in JSX become keys of JavaScript objects. As we know, JavaScript has limitations on variable names, hence using camelCase is recommended. For example, their names can’t contain dashes or be reserved words like `class`. Since `class` is a reserved word, in React you write `className` instead.
 
 ```jsx {hide|3|4|*}
 // using camelCase in JSX
