@@ -134,9 +134,9 @@ container.innerHTML = `
 `
 ```
 
-<v-click>
+<div v-click>
 4. <u>String Concatenation:</u> You can use traditional string concatenation to build HTML strings.
-</v-click>
+</div>
 ```js {hide|*|3-7|4|5|6|*}{at:4}
 const title = 'Hello, World!'
 const paragraph = 'This is a paragraph.'
@@ -249,7 +249,6 @@ transition: view-transition
 
 2. Close all the tags: In JSX, every tag should be explicitly closed. This means that all tags, including self-closing tags like `<img>`, `<link>`, and `<meta>`, should be explicitly closed with the forward-slash (/): `<img />`, `<link />`, and `<meta />`. JSX follows XML rules, and therefore HTML elements must be properly closed. JSX will throw an error if the HTML is not properly closed.
 
-<v-click>
 ```jsx {hide|3|4|5|6|*}
 // Closing tags properly
 <>
@@ -259,22 +258,22 @@ transition: view-transition
   <input type="text" />
 </>
 ```
-</v-click>
 
-<v-click>
-
+<div v-click>
 3. Use camelCase for most of the things!: JSX converts to JavaScript, and attributes written in JSX become keys of JavaScript objects. As we know, JavaScript has limitations on variable names, hence using camelCase is recommended. For example, their names can’t contain dashes or be reserved words like `class`. Since `class` is a reserved word, in React you write `className` instead.
-   </v-click>
+</div>
 
-<v-click>
 ```jsx {hide|3|4|*}
 // using camelCase in JSX
 <>
-  <img className="mr-image" src="imageUrl" alt="My class in jsx is written as className" />
+  <img
+    className="mr-image"
+    src="imageUrl"
+    alt="My class in jsx is written as className"
+  />
   <input type="text" className="input-lady" />
 </>
 ```
-</v-click>
 
 ---
 hideInToc: true
@@ -313,31 +312,28 @@ transition: slide-up
 
 There are times you will want to add a little JavaScript logic or reference a dynamic property inside a JSX markup. To achieve this, you simply have to add curly braces (`{}`) which will open up a javascript land/window and allow you to embed a JavaScript logic or reference a dynamic content.
 
-<v-click>
+<div v-click>
+
 ```jsx {monaco-run} { lineNumbers: 'true', height: '11rem' }
-
 function EmbedJavascript() {
-const myHeadingContent =
-'I expect this text content to be embedded to a JSX h1 element!'
-const avatar = '/altschool-logo.png'
-const description = 'AltSchool Africa logo'
+  const myHeadingContent =
+    'I expect this text content to be embedded to a JSX h1 element!'
+  const avatar = '/altschool-logo.png'
+  const description = 'AltSchool Africa logo'
 
-return (
-<div className="select-none flex flex-col items-center p2 border border-main">
-<h1 className="text-gradient !text-xl text-center">{myHeadingContent}</h1>
-<div className="flex gap-4 items-center">
-<img className="avatar w-30" src={avatar} alt={description} />
-
+  return (
+    <div className="select-none flex flex-col items-center p2 border border-main">
+      <h1 className="text-gradient !text-xl text-center">{myHeadingContent}</h1>
+      <div className="flex gap-4 items-center">
+        <img className="avatar w-30" src={avatar} alt={description} />
         <span className="border border-green rounded p-1">{2000 + 24}</span>
       </div>
     </div>
-
-)
+  )
 }
+```
 
-```
-</v-click>
-```
+</div>
 
 ---
 hideInToc: true
@@ -397,6 +393,7 @@ transition: slide-down
 2. CSS Classes: To apply styles from an external style sheet or a .module.css, you simply need to reference the JSX element you want to style by it's `className`, `id`, or other attributes
 
 <div flex justify-evenly gap-2>
+
 ````md magic-move {at: 1,lines: true}
 ```css
 // from style.css file
@@ -405,18 +402,17 @@ transition: slide-down
   font-size: 1rem;
 }
 ```
+
 ```jsx
 import ./style.css;
 
 function StyleJSX() {
-return (
-<h2 className="text-blue">Hello World!</h2>
-);
+  return (
+    <h2 className="text-blue">Hello World!</h2>
+  );
 }
-
 ```
-
-```
+````
 
 ````md magic-move {at: 1,lines: true}
 ```css
@@ -458,10 +454,9 @@ function App() {
 </div>
 </v-click>
 
-<v-click>
-
+<div v-click>
 4. Using styled component: Styled components can also be used to style JSX. You simply have to import the component either from a library or your own styled components folder.
-   </v-click>
+</div>
 
 ---
 hideInToc: true
