@@ -73,7 +73,7 @@ layout: center
   <span>Libraries</span>
   <sup v-click>ReactJS, VueJS</sup>
 </div>
-<div mt1 forward:delay-300 v-click>From functions to building blocks 🧱</div>
+<div mt1 forward:delay-300 v-click>The library for web and native user interfaces 🧱</div>
 </h1>
 
 ---
