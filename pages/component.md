@@ -29,9 +29,9 @@ transition: slide-down
   <img src="/images/house.jpg" alt="My Image"  />
 </div>
 <div>
-<p v-click>A house is made up of reusable elements: <u class="text-teal-400">doors</u>, <u class="text-teal-400">windows</u>, <u class="text-teal-400">rooms</u>, <u class="text-teal-400">furniture</u>, <u class="text-teal-400">lights</u>, and more. You can change one element (like the lights) without affecting others. These are the components of a house. Similarly, React components allow you to divide your UI into logical, reusable parts.</p>
+<p v-click>A house is made up of reusable elements: <span class="text-teal-400">doors</span>, <span class="text-teal-400">windows</span>, <span class="text-teal-400">rooms</span>, <span class="text-teal-400">furniture</span>, <span class="text-teal-400">lights</span>, and more. You can change one element (like the lights) without affecting others. These are the components of a house. Similarly, React components allow you to divide your UI into logical, reusable parts.</p>
 
-<p v-click>To build the house, you break it down into smaller, manageable parts, just as <u class="text-teal-400">React breaks a user interface into components</u>. Each part has a specific role, and all these parts work together to form a functional, maintainable whole. </p>
+<p v-click>To build the house, you break it down into smaller, manageable parts, just as <span class="text-teal-400">React breaks a user interface into components</span>. Each part has a specific role, and all these parts work together to form a functional, maintainable whole. </p>
 
 </div>
 
@@ -40,7 +40,7 @@ transition: slide-down
 <div v-click class="flex gap-3 text-justify mt-6">
 <div>
 
-In React, a website can be broken into smaller components like a <u class="text-teal-400">header</u>, <u class="text-teal-400">sidebar</u>, <u class="text-teal-400">footer</u>, <u class="text-teal-400">main content</u>, and <u class="text-teal-400">buttons</u>. Each component combines its own markup, CSS, and JavaScript, making it unique, reusable, and easy to manage. Together, these components form <u class="text-teal-400">the building blocks</u> of a complete application.
+In React, a website can be broken into smaller components like a <span class="text-teal-400">header</span>, <span class="text-teal-400">sidebar</span>, <span class="text-teal-400">footer</span>, <span class="text-teal-400">main content</span>, and <span class="text-teal-400">buttons</span>. Each component combines its own markup, CSS, and JavaScript, making it unique, reusable, and easy to manage. Together, these components form <span class="text-teal-400">the building blocks</span> of a complete application.
 
 </div>
 <div  class="w-140">
@@ -57,7 +57,7 @@ transition: slide-up
 
 EVERY REACT COMPONENT IS A FUNCTION.
 
-<p v-click> Let&apos;s create a simple functional component that displays a <u>welcome message. </u></p>
+<p v-click> Let&apos;s create a simple functional component that displays a <span class="border ">welcome message. </span></p>
 
 <div >
 
@@ -357,7 +357,7 @@ transition: slide-left
 function Profile() {
   return (
     <div>
-      <Avatar person={{ name: 'Ojo Setemi', imageId: '1bX5QH6' }} />
+      <Avatar name="Ojo Setemi" id="1bX5QH6" />
     </div>
   )
 }
@@ -366,13 +366,13 @@ function Profile() {
 </div>
 
 <div v-click> 
-2️⃣ Destructure Props: Extract props directly in the function parameters, with the option to assign default values.
+2️⃣ Destructure Props: Extract props in the function parameters. Optionally assign default values.
 
 ```jsx
-function Avatar({ person, size = 100 }) {
+function Avatar({ name, id, size = 100 }) {
   return (
     <img
-      src={`https://i.imgur.com/${person.imageId}.jpg`}
+      src={`https://i.imgur.com/${person.id}.jpg`}
       alt={person.name}
       width={size}
       height={size}
