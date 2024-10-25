@@ -18,32 +18,38 @@ hideInToc: true
 ---
 hideInToc: true
 transition: slide-down
+clicksStart: 2
 ---
 
-<h1  class="text-gradient text-4xl">What are components❓❓❓❓❓</h1>
+<v-clicks depth="2">
 
-<p v-click>Think of a house.</p>
+# [What are components❓❓❓❓❓]{.text-gradient.text-4xl}
+
+Think of a house.
 
 <div class="flex gap-3 text-justify">
-<div v-click class="w-160">
+<div class="w-160">
   <img src="/images/house.jpg" alt="My Image"  />
 </div>
 <div>
-<p v-click>A house is made up of reusable elements: <span class="text-teal-400">doors</span>, <span class="text-teal-400">windows</span>, <span class="text-teal-400">rooms</span>, <span class="text-teal-400">furniture</span>, <span class="text-teal-400">lights</span>, and more. You can change one element (like the lights) without affecting others. These are the components of a house. Similarly, React components allow you to divide your UI into logical, reusable parts.</p>
+<p v-click="+4">A house is made up of reusable elements: <span class="text-teal-400">doors</span>, <span class="text-teal-400">windows</span>, <span class="text-teal-400">rooms</span>, <span class="text-teal-400">furniture</span>, <span class="text-teal-400">lights</span>, and more. You can change one element (like the lights) without affecting others. These are the components of a house. Similarly, React components allow you to divide your UI into logical, reusable parts.</p>
 
-<p v-click>To build the house, you break it down into smaller, manageable parts, just as <span class="text-teal-400">React breaks a user interface into components</span>. Each part has a specific role, and all these parts work together to form a functional, maintainable whole. </p>
-
-</div>
+<p v-click="+5">To build the house, you break it down into smaller, manageable parts, just as <span class="text-teal-400">React breaks a user interface into components</span>. Each part has a specific role, and all these parts work together to form a functional, maintainable whole. </p>
 
 </div>
-<p v-click>COMPONENTS ARE THE FOUNDATION UPON WHICH USER INTERFACES (UI) ARE BUILT.</p>
-<div v-click class="flex gap-3 text-justify mt-6">
-<div>
+
+</div>
+</v-clicks>
+
+<p v-click="6">COMPONENTS ARE THE FOUNDATION UPON WHICH USER INTERFACES (UI) ARE BUILT.</p>
+
+<div class="flex gap-3 text-justify mt-6">
+<div v-click="8">
 
 In React, a website can be broken into smaller components like a <span class="text-teal-400">header</span>, <span class="text-teal-400">sidebar</span>, <span class="text-teal-400">footer</span>, <span class="text-teal-400">main content</span>, and <span class="text-teal-400">buttons</span>. Each component combines its own markup, CSS, and JavaScript, making it unique, reusable, and easy to manage. Together, these components form <span class="text-teal-400">the building blocks</span> of a complete application.
 
 </div>
-<div  class="w-140">
+<div v-click="7" class="w-140">
   <img src="/images/reactcomponent.jpeg" alt="My Image" />
 </div>
 </div>
@@ -53,13 +59,13 @@ hideInToc: true
 transition: slide-up
 ---
 
-<h1><span v-click>Your</span> <span v-click class="text-gradient text-5xl">First ❶ </span> <span v-click>Component</span></h1>
+<h1><span>Your</span> <span class="text-gradient text-5xl">First ❶ </span> <span>Component</span></h1>
 
 EVERY REACT COMPONENT IS A FUNCTION.
 
-<p v-click> Let&apos;s create a simple functional component that displays a <span class="border ">welcome message. </span></p>
+<p> Let&apos;s create a simple functional component that displays a <span class="border ">welcome message. </span></p>
 
-<div >
+<div>
 
 ````md magic-move {at: 7,lines: true}
 ```jsx
@@ -93,15 +99,11 @@ export default function Greeting() {
 
 </div>
 
-<v-click at="+2">
-
-</v-click>
-
 <div>
-  <p v-click > 1. <span class="underline text-xl">Define the component function:</span> React components are <span class="text-teal-400">regular JavaScript functions</span>, but their names must start with a capital letter or they won&apos;t work!</p>
-  <p v-click> 2. <span class="underline text-xl">Write return with parenthensis:</span> Always wrap your JSX markup in parentheses after the return statement. <span class="text-teal-400">Without parentheses</span>, any code on the lines after return will be ignored! </p>
-  <p v-click> 3.  <span class="underline text-xl">Add JSX markup:</span> Markup is your code structure. Inside the component, <span class="text-teal-400">write your JSX</span>, which looks like HTML but works under the hood as JavaScript.</p>
-  <p v-click> 4.  <span class="underline text-xl">Export the component:</span> The <span class="text-teal-400">export default prefix</span> is a standard JavaScript syntax (not specific to React). It lets you mark the main function in a file so that you can later import it from other files.</p> 
+  <p> 1. <span class="underline text-xl">Define the component function:</span> React components are <span class="text-teal-400">regular JavaScript functions</span>, but their names must start with a capital letter or they won&apos;t work!</p>
+  <p> 2. <span class="underline text-xl">Write return with parenthensis:</span> Always wrap your JSX markup in parentheses after the return statement. <span class="text-teal-400">Without parentheses</span>, any code on the lines after return will be ignored! </p>
+  <p> 3.  <span class="underline text-xl">Add JSX markup:</span> Markup is your code structure. Inside the component, <span class="text-teal-400">write your JSX</span>, which looks like HTML but works under the hood as JavaScript.</p>
+  <p> 4.  <span class="underline text-xl">Export the component:</span> The <span class="text-teal-400">export default prefix</span> is a standard JavaScript syntax (not specific to React). It lets you mark the main function in a file so that you can later import it from other files.</p> 
 </div>
 
 ---
@@ -164,18 +166,18 @@ This is not valid ❌
 ```jsx
 function Greeting() {
   return (
-    <p>Hello, Altschoolar.</p>
+    <p>Hello, Altschoolers.</p>
     <p>You are welcome here.</p>
     <input placeholder="Your name"/>
     <button>Submit</button>
-);
+  );
 }
 ```
 
 </div>
 
 <div>
-This is valid ✔ (using React Fragment)
+This is valid ✔ (using Fragment)
 
 ```jsx
 function Greeting() {
@@ -205,11 +207,13 @@ transition: slide-down
 
 Below, the `Greeting` component created is imported into the root App component in React.
 
+<div flex="~ row wrap" gap-2>
+
 ```jsx
 export default function Greeting() {
   return (
     <div>
-      <p>Hello, Altschoolar.</p>
+      <p>Hello, Altschoolers.</p>
       <p>You are welcome here.</p>
     </div>
   )
@@ -228,6 +232,41 @@ function App() {
 }
 ```
 
+```jsx
+export function Greeting() {
+  return (
+    <div>
+      <p>Hello, Altschoolers.</p>
+      <p>You are welcome here.</p>
+    </div>
+  )
+}
+```
+
+```jsx
+import { Greeting } from './Greeting'
+function App() {
+  return (
+    <div>
+      <Greeting />
+    </div>
+  )
+}
+```
+
+```jsx
+import { Greeting as RenamedGreeting } from './Greeting'
+function App() {
+  return (
+    <div>
+      <RenamedGreeting />
+    </div>
+  )
+}
+```
+
+</div>
+
 ---
 hideInToc: true
 transition: slide-left
@@ -236,7 +275,7 @@ transition: slide-left
 # Guide for importing components
 
 <div>
-  <p v-click > 1. <span class="underline text-xl">Use the Correct Path:</span> Ensure you provide the <span class="text-teal-400">correct relative path</span> to the component file you want to import.  For example, import Greeting from './Greeting'; if Greeting.jsx is in the same directory.</p>
+  <p v-click > 1. <span class="underline text-xl">Use the Correct Path:</span> Ensure you provide the <span class="text-teal-400">correct relative path</span> to the component file you want to import.  For example, import Greeting from './Greeting'; if Greeting.jsx is in the same directory or '../Greeting'; if the Greeting.jsx is one level deeper.</p>
   <p v-click> 2. <span class="underline text-xl">Case Sensitivity: </span> Component names are case-sensitive. The imported name must match the exported name exactly. For example, import  <span class="text-teal-400">Greeting</span> from  <span class="text-teal-400">'./greeting'</span>; will fail.</p>
   <div v-click>
 
@@ -262,7 +301,7 @@ hideInToc: true
 transition: slide-up
 ---
 
-`Nesting Components`
+# `Nesting Components`
 
 A nested component involves placing one component inside another to efficiently structure your UI. In the example below, we use three components: **Header**, **Content**, and **Footer**. These components are nested within the `App` component to create a well-organized layout:
 
@@ -289,6 +328,7 @@ This enhances reusability across different parts of the app or projects, improve
 
 ---
 hideInToc: true
+clicksStart: 1
 ---
 
 <div v-click>
@@ -300,15 +340,19 @@ hideInToc: true
 
 <br/>
 
+<div v-click>
+
 ## **Think of that House 🏠 again**
 
 A room (parent) may contain **furniture** (children) like a 🛏️ bed, 🪑 chair, or 💡 lamp. Each furniture item (child) serves its specific role, but the room (parent) coordinates their placement and usage.
 
+</div>
+
 <p v-click>Similarly, in React, a <u class="text-teal-400">parent component collaborates with its children to build a cohesive application</u>. The previously discussed nested components 🔙 are the children of the App (parent) component.</p>
 
-<p v-click> - A parent component renders one or more child components within it. It can pass data and functions to its children. </p>
+<p v-click> A parent component renders one or more child components within it. It can pass data and functions to its children. </p>
 
-<p v-click> - A child component is nested within a parent component. It can receive data from the parent to render its UI or perform actions. </p>
+<p v-click> A child component is nested within a parent component. It can receive data from the parent to render its UI or perform actions. </p>
 
 ---
 hideInToc: true
@@ -336,8 +380,7 @@ function Welcome(props) {
 }
 
 // Output:
-// Hello, Alice!
-// Hello, Bob!
+// Hello, Alice! // Hello, Bob!
 ```
 
 </v-click>
@@ -387,12 +430,73 @@ function Avatar({ name, id, size = 100 }) {
 <div v-click>
 Forwarding Props with Spread Syntax: You can forward all props to child components with ...props
 
+<div class="grid" grid-cols-2 gap-2>
+
 ```jsx
 function Profile() {
   return (
     <div>
       <Avatar {...props} />
     </div>
+  )
+}
+```
+
+```jsx
+function Profile({ name = 'default value' }) {
+  return (
+    <div>
+      <Avatar {...props} />
+    </div>
+  )
+}
+```
+
+</div>
+
+</div>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+# Special Props `children`
+
+The `children` prop is a special prop that allows you to pass components as data to other components. It is used to render whatever you include between the opening and closing tags of the component.
+
+<div grid class="grid-cols-2 gap-2">
+
+```jsx
+function Card({ children }) {
+  return <div className="card">{children}</div>
+}
+
+function App() {
+  return (
+    <Card>
+      <h1>Card Title</h1>
+      <p>Card Content</p>
+    </Card>
+  )
+}
+```
+
+```jsx
+function Card({ title, children }) {
+  return (
+    <div className="card">
+      <h2>{title}</h2>
+      {children}
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <Card title="Card Title">
+      <p>Card Content</p>
+    </Card>
   )
 }
 ```
@@ -406,4 +510,20 @@ transition: slide-down
 
 <h1 class="text-gradient">Assignment</h1>
 
-Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favourite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text.
+<div />
+
+Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text.
+
+Turn this `li` into a reusability component.
+
+```html
+<li className="contact-card">
+  <h2>Sunita Kumar</h2>
+  <dl>
+    <dt>Job</dt>
+    <dd>Electrical Engineer</dd>
+    <dt>Email</dt>
+    <dd>sunita.kumar@acme.co</dd>
+  </dl>
+</li>
+```
