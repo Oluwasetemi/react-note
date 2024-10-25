@@ -13,6 +13,7 @@ hideInToc: true
 - Lifting state up
 - Reducer function
 - Controlled vs Uncontrolled Components
+- Keeping your components pure
 
 ---
 hideInToc: true

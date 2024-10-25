@@ -12,6 +12,7 @@ hideInToc: true
 - Form Controls
 - Form Validation
 - Working with Libraries (e.g. Zod)
+- React Hook Form
 
 ---
 hideInToc: true
