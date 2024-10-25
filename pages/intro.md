@@ -51,8 +51,6 @@ Some of the key features of {React} include:
 
 - **JSX**: {React} uses JSX, a syntax extension that allows developers to write HTML-like code in JavaScript.
 
-- **State Management**: {React} provides a way to manage the state of the application using hooks and context API.
-
 </v-clicks>
 
 ---
@@ -63,6 +61,7 @@ clicksStart: 2
 
 <v-clicks>
 
+- **State Management**: {React} provides a way to manage the state of the application using hooks and context API.
 - **Lifecycle Methods**: {React} provides lifecycle methods that allow developers to hook into different stages of the component lifecycle.
 - **Server-side Rendering**: {React} supports server-side rendering, which improves the performance and SEO of the application.
 - **Server Components**: {React} 19 introduces server components, which allow developers to build components that can be rendered on the server and sent to the client. Uses Server Actions to fetch data on the server and send it to the client with heavy support for streaming and partial hydration.
@@ -98,7 +97,7 @@ hideInToc: true
 
 # Counter Example in React
 
-```jsx {monaco-run} { lines: 'true', height: '12.5em', autorun: 'false'}
+```jsx {monaco-run} { lines: true, height: '12.5em', autorun: false}
 function Hello() {
   const [counter, setCounter] = React.useState(0)
   const value = 2
@@ -179,9 +178,51 @@ hideInToc: true
 
 - **Performance** : {React} uses a virtual DOM to improve performance by updating only the parts of the UI that have changed. This makes {React} faster and more efficient than other libraries and frameworks. If its becomes slow then its on you the developer.
 
-- **Flexibility** : {React} is flexible and allows developers to build applications the way they want. It doesn't impose a specific structure or architecture on the application, which gives developers more freedom to build applications according to their requirements.
+- **Flexibility** : {React} is flexible and allows developers to build applications the way they want.
 
 </v-clicks>
+
+---
+hideInToc: true
+---
+
+# [From pure javascript to React]{.text-gradient}
+
+```js {monaco-run} { lines: true, height: '20.5em', autorun: false}
+const makeElem = (elemType, props, children) => {
+  const elem = document.createElement(elemType)
+
+  if (props) {
+    for (const [key, value] of Object.entries(props)) {
+      if (key === 'onclick' && props['once']) {
+        elem.addEventListener('click', value, { once: true })
+      } else {
+        elem[key] = value
+      }
+    }
+  }
+
+  if (children) {
+    elem.prepend(...children)
+  }
+
+  return elem
+}
+
+const createTodo = (todo) => {
+  const text = makeElem(
+    'span',
+    { style: 'flex:1;', ondblclick: () => alert('edit') },
+    [todo.text],
+  )
+  const x = makeElem('button', { onclick: () => alert('remove') }, ['X'])
+
+  const item = makeElem('li', { style: 'display:flex;' }, [text, x])
+  return item
+}
+
+console.log(createTodo({ text: 'Hello World' }))
+```
 
 ---
 hideInToc: true
@@ -489,13 +530,27 @@ hideInToc: true
 name: Setting up everything from scratch 1
 ---
 
-2. Initialize a new npm project:
+2. Initialize a new {npm} or {yarn} or {pnpm} or {bun} project:
 
+````md magic-move
 ```sh
 npm init -y
 ```
 
-3. Install React and React DOM:
+```sh
+yarn init -y
+```
+
+```sh
+pnpm init -y
+```
+
+```sh
+bun init -y
+```
+````
+
+3. Install {React} and {React} DOM:
 
 ```sh
 npm install react react-dom
