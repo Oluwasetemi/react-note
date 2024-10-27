@@ -234,8 +234,7 @@ hideInToc: true
 
 <div class="overflow-y-scroll h-full">
 
-````md magic-move {class: `pb-20`}
-
+````md magic-move {class: 'pb-20'}
 ```js
 function mk() {
   return 'Hello World'
@@ -727,15 +726,25 @@ const App = () => {
 const root = ReactDOM.createRoot(document.body)
 root.render(React.createElement(App))
 ```
-
-```
+````
 
 <Todo v-if="$clicks===11" />
 
 <TodoReact v-if="$clicks===22" />
 
 </div>
-```
+
+---
+hideInToc: true
+layout: iframe
+url: https://stackblitz.com/edit/web-platform-zxxs4v?embed=1&file=script.js
+---
+
+---
+hideInToc: true
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-epzrqa?embed=1&file=main.js
+---
 
 ---
 hideInToc: true
