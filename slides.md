@@ -14,7 +14,7 @@ export:
   timeout: 60000
   dark: false
   withClicks: false
-  withToc: false
+  withToc: true
 # TODO: add a svg favicon
 # favicon: https://oluwasetemi.dev/favicon-32x32.png
 class: text-center

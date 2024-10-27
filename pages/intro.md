@@ -23,11 +23,13 @@ hideInToc: true
 
 <v-clicks>
 
-- **Library**: is a collection of pre-written code that developers can call upon to perform specific tasks. Libraries offer various functionalities, but you are in control of how and when to use them. {React} is often considered a library because it focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. {Vue}, {Angular}, and {Svelte} are other examples of libraries. {jQuery} is another example of a library that provides functionalities like DOM manipulation, event handling, and AJAX calls.
-
-- **Framework**: A framework is a more opinionated structure or skeleton for building applications. It typically provides everything needed (like a routing system, data management, etc.) and controls the flow of the application. Although {Nextjs} uses {React}, it is considered a framework because it provides a predefined structure for building applications, including file-based routing, server-side rendering, and static site generation. {Nuxt} is another example of a framework that uses {Vue}.
+<div />
 
 Javascript libraries and frameworks are tools that help developers build applications faster and more efficiently. They provide a set of functionalities that can be reused across different projects, saving time and effort.
+
+**Library** is a collection of pre-written code that developers can call upon to perform specific tasks. Libraries offer various functionalities, but you are in control of how and when to use them. {React} is often considered a library because it focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. {Vue}, {Angular}, and {Svelte} are other examples of libraries. {jQuery} is another example of a library that provides functionalities like DOM manipulation, event handling, and AJAX calls.
+
+**Framework** A framework is a more opinionated structure or skeleton for building applications. It typically provides everything needed (like a routing system, data management, etc.) and controls the flow of the application. Although {Nextjs} uses {React}, it is considered a framework because it provides a predefined structure for building applications, including file-based routing, server-side rendering, and static site generation. {Nuxt} is another example of a framework that uses {Vue}.
 
 </v-clicks>
 
@@ -221,7 +223,7 @@ const createTodo = (todo) => {
   return item
 }
 
-console.log(createTodo({ text: 'Hello World' }))
+console.log(createTodo({ text: 'Hello World' }).innerHTML)
 ```
 
 ---
@@ -230,7 +232,10 @@ hideInToc: true
 
 # [From pure javascript to React]{.text-gradient}
 
-````md magic-move
+<div class="overflow-y-scroll h-full">
+
+````md magic-move {class: `pb-20`}
+
 ```js
 function mk() {
   return 'Hello World'
@@ -239,6 +244,7 @@ function mk() {
 
 ```js
 function mk(type) {
+  // create element of type `type` and set text content to 'Hello World'
   const el = document.createElement(type)
   el.textContent = 'Hello World'
   return el
@@ -247,7 +253,9 @@ function mk(type) {
 
 ```js
 function mk(type, props) {
+  // create element of type `type` and set text content to 'Hello World'
   const el = document.createElement(type)
+  // set properties of the element if `props` is provided, e.g. className, style, etc.
   if (props) Object.assign(el, props)
   el.textContent = 'Hello World'
   return el
@@ -256,8 +264,11 @@ function mk(type, props) {
 
 ```js
 function mk(type, props, children) {
+  // create element of type `type`
   const el = document.createElement(type)
+  // set properties of the element if `props` is provided, e.g. className, style, etc.
   if (props) Object.assign(el, props)
+  // append children to the element if `children` is provided
   if (children) el.prepend(...children)
   return el
 }
@@ -267,6 +278,7 @@ function mk(type, props, children) {
 mk('div', { className: 'text-lg' }, [
   mk('span', { className: 'text-orange' }, ['Hello']),
 ])
+// <div class="text-lg"><span class="text-orange">Hello</span></div>
 ```
 
 ```js
@@ -274,14 +286,18 @@ mk('div', { className: 'text-lg' }, [
   mk('span', { className: 'text-orange' }, ['Hello']),
   mk('span', { className: 'text-green' }, ['World']),
 ])
+// <div class="text-lg"><span class="text-orange">Hello</span><span class="text-green">World</span></div>
 ```
 
 ```js
 mk('input')
+// <input>
 
 mk('button', { onClick: () => alert('Hello World') }, ['Add ToDo'])
+// <button>Add ToDo</button>
 
 mk('ul', { style: 'padding:5px;' })
+// <ul style="padding: 5px;"></ul>
 ```
 
 ```js
@@ -290,6 +306,8 @@ mk('form', null, [
   mk('input'),
   mk('button', { onClick: () => alert('Hello World') }, ['Add ToDo']),
 ])
+
+// <form><input><button>Add ToDo</button></form>
 ```
 
 ```js
@@ -301,6 +319,8 @@ mk('div', { id: 'app' }, [
   ]),
   mk('ul', { style: 'padding:5px;' }),
 ])
+
+// <div id="app"><form><input><button>Add ToDo</button></form><ul style="padding: 5px;"></ul></div>
 ```
 
 ```js
@@ -452,7 +472,270 @@ function createTodo(todo) {
   return item;
 }
 ```
-````
+
+```js
+// just the ui
+const App = () => {
+  return React.createElement(
+    'div',
+    { id: 'app' },
+    React.createElement(
+      'form',
+      { onSubmit: createTodo },
+      React.createElement('input'),
+      React.createElement('button', { type: 'submit' }, 'Add ToDo'),
+    ),
+    React.createElement('ul', { style: { padding: '5px' } }),
+  )
+}
+```
+
+```js
+// ui and state
+const App = () => {
+  const [todos, setTodos] = React.useState([])
+  const [id, setId] = React.useState(0)
+  const [text, setText] = React.useState('')
+  const [editingId, setEditingId] = React.useState(null)
+  const [editText, setEditText] = React.useState('')
+
+  return React.createElement(
+    'div',
+    { id: 'app' },
+    React.createElement(
+      'form',
+      { onSubmit: createTodo },
+      React.createElement('input', {
+        value: text,
+        onChange: (e) => setText(e.target.value),
+      }),
+      React.createElement('button', { type: 'submit' }, 'Add ToDo'),
+    ),
+    React.createElement(
+      'ul',
+      { style: { padding: '5px' } },
+      todos.map((todo) =>
+        React.createElement(
+          'li',
+          { style: { display: 'flex' }, key: todo.id },
+          editingId === todo.id
+            ? React.createElement('input', {
+                value: editText,
+                onChange: (e) => setEditText(e.target.value),
+                onBlur: saveEdit,
+                onKeyDown: handleKeyDown,
+                autoFocus: true,
+              })
+            : React.createElement(
+                'span',
+                {
+                  style: { flex: 1 },
+                  onDoubleClick: () => startEditing(todo),
+                },
+                todo.text,
+              ),
+          React.createElement(
+            'button',
+            { onClick: () => remove(todo.id) },
+            '❌',
+          ),
+        ),
+      ),
+    ),
+  )
+}
+```
+
+```js
+// ui + state + event handlers
+const App = () => {
+  const [todos, setTodos] = React.useState([])
+  const [id, setId] = React.useState(0)
+  const [text, setText] = React.useState('')
+  const [editingId, setEditingId] = React.useState(null)
+  const [editText, setEditText] = React.useState('')
+
+  const createTodo = (e) => {
+    e.preventDefault()
+    if (!text.trim()) return
+    setTodos([...todos, { id: id, text: text, completed: false }])
+    setId(id + 1)
+    setText('')
+  }
+
+  const remove = (id) => setTodos(todos.filter((todo) => todo.id !== id))
+
+  const startEditing = (todo) => {
+    setEditingId(todo.id)
+    setEditText(todo.text + '✅')
+  }
+
+  const saveEdit = () => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === editingId ? { ...todo, text: editText } : todo,
+      ),
+    )
+    setEditingId(null)
+    setEditText('')
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') saveEdit()
+    if (e.key === 'Escape') {
+      setEditingId(null)
+      setEditText('')
+    }
+  }
+
+  return React.createElement(
+    'div',
+    { id: 'app' },
+    React.createElement(
+      'form',
+      { onSubmit: createTodo },
+      React.createElement('input', {
+        value: text,
+        onChange: (e) => setText(e.target.value),
+      }),
+      React.createElement('button', { type: 'submit' }, 'Add ToDo'),
+    ),
+    React.createElement(
+      'ul',
+      { style: { padding: '5px' } },
+      todos.map((todo) =>
+        React.createElement(
+          'li',
+          { style: { display: 'flex' }, key: todo.id },
+          editingId === todo.id
+            ? React.createElement('input', {
+                value: editText,
+                onChange: (e) => setEditText(e.target.value),
+                onBlur: saveEdit,
+                onKeyDown: handleKeyDown,
+                autoFocus: true,
+              })
+            : React.createElement(
+                'span',
+                {
+                  style: { flex: 1 },
+                  onDoubleClick: () => startEditing(todo),
+                },
+                todo.text,
+              ),
+          React.createElement(
+            'button',
+            { onClick: () => remove(todo.id) },
+            '❌',
+          ),
+        ),
+      ),
+    ),
+  )
+}
+```
+
+```js
+// ui + state + event handlers + render
+const App = () => {
+  const [todos, setTodos] = React.useState([])
+  const [id, setId] = React.useState(0)
+  const [text, setText] = React.useState('')
+  const [editingId, setEditingId] = React.useState(null)
+  const [editText, setEditText] = React.useState('')
+
+  const createTodo = (e) => {
+    e.preventDefault()
+    if (!text.trim()) return
+    setTodos([...todos, { id: id, text: text, completed: false }])
+    setId(id + 1)
+    setText('')
+  }
+
+  const remove = (id) => setTodos(todos.filter((todo) => todo.id !== id))
+
+  const startEditing = (todo) => {
+    setEditingId(todo.id)
+    setEditText(todo.text)
+  }
+
+  const saveEdit = () => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === editingId ? { ...todo, text: editText + ' ✅' } : todo,
+      ),
+    )
+    setEditingId(null)
+    setEditText('')
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') saveEdit()
+    if (e.key === 'Escape') {
+      setEditingId(null)
+      setEditText('')
+    }
+  }
+
+  return React.createElement(
+    'div',
+    { id: 'app' },
+    React.createElement(
+      'form',
+      { onSubmit: createTodo },
+      React.createElement('input', {
+        value: text,
+        onChange: (e) => setText(e.target.value),
+      }),
+      React.createElement('button', { type: 'submit' }, 'Add ToDo'),
+    ),
+    React.createElement(
+      'ul',
+      { style: { padding: '5px' } },
+      todos.map((todo) =>
+        React.createElement(
+          'li',
+          { style: { display: 'flex' }, key: todo.id },
+          editingId === todo.id
+            ? React.createElement('input', {
+                value: editText,
+                onChange: (e) => setEditText(e.target.value),
+                onBlur: saveEdit,
+                onKeyDown: handleKeyDown,
+                autoFocus: true,
+              })
+            : React.createElement(
+                'span',
+                {
+                  style: { flex: 1 },
+                  onDoubleClick: () => startEditing(todo),
+                },
+                todo.text,
+              ),
+          React.createElement(
+            'button',
+            { onClick: () => remove(todo.id) },
+            '❌',
+          ),
+        ),
+      ),
+    ),
+  )
+}
+
+// render with ReactDOM
+const root = ReactDOM.createRoot(document.body)
+root.render(React.createElement(App))
+```
+
+```
+
+<Todo v-if="$clicks===11" />
+
+<TodoReact v-if="$clicks===22" />
+
+</div>
+```
 
 ---
 hideInToc: true
