@@ -33,8 +33,7 @@ jobs:
 
       - name: Export
         run: |
-          npm exec slidev export -- --per-slide --format pdf --output ./_export/react-note.pdf
-          npm exec slidev export -- --per-slide --format pptx --output ./_export/react-note.pptx
+          npm run export:pdf
       - name: Generate Body
         run: |
           echo -e "## Welcome to the resource download section\n### Please download the class note in PDF or PPTX (just pictures in png) files from the assets section below"\n Best of Luck and may the fourth be with you. > ./_export/body.txt
@@ -57,7 +56,6 @@ jobs:
           make_latest: true
           files: |
             ./_export/react-note.pdf
-            ./_export/react-note.pptx
       # Re-enable Git hooks after the action
       - name: Re-enable pre-push hook
         run: mv .git/hooks/pre-push.bak .git/hooks/pre-push || true
