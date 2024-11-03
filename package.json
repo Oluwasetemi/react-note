@@ -6,8 +6,8 @@
     "build": "slidev build",
     "dev": "nodemon -w '../../packages/slidev/dist/*.mjs' --exec \"slidev ./slides.md --open=false --log=info --inspect\"",
     "export": "slidev export",
-    "export:pdf": "npm run export -- --timeout 60000 --with-toc --output ./_export/react-note.pdf",
-    "export:pptx": "npm run export -- --timeout 60000 --with-clicks false --format pptx --output ./_export/react-note.pptx",
+    "export:pdf": "npm run export -- --timeout 160000 --with-toc --output ./_export/react-note.pdf",
+    "export:pptx": "npm run export -- --timeout 160000 --with-clicks false --format pptx --output ./_export/react-note.pptx",
     "format": "prettier --write .",
     "postinstall": "npx playwright-core install chromium"
   },
