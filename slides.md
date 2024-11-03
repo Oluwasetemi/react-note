@@ -11,7 +11,7 @@ download: true
 exportFilename: react-note
 export:
   format: pdf
-  timeout: 60000
+  timeout: 160000
   dark: false
   withClicks: false
   withToc: true
