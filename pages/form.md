@@ -8,11 +8,11 @@ hideInToc: true
 
 <div mt-2 />
 
-- Introduction
-- Handling Form Inputs - Data Binding
-- Form Controls
-- Form Validation
-- React Hook Form
+- <a @click="$slidev.nav.next()">Introduction</a>
+- <a @click="$slidev.nav.go($nav.currentPage+2)">Handling Form Inputs - Data Binding</a>
+- <a @click="$slidev.nav.go($nav.currentPage+6)">Form Controls</a>
+- <a @click="$slidev.nav.go($nav.currentPage+8)">Form Validation </a>
+- <a @click="$slidev.nav.go($nav.currentPage+11)"> React Hook Form</a>
 
 ---
 hideInToc: true
@@ -426,14 +426,37 @@ const registrationSchema = z.object({
 
 ---
 hideInToc: true
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-ozsubh?file=src%2FApp.jsx,src%2Fcomponents%2Fregistrationform.jsx
+---
+
+---
+hideInToc: true
 transition: slide-up
 ---
 
 # React Hook Form
 
-React Hook Form is a powerful library for managing form state with minimal re-renders and providing better performance for complex forms.
+React Hook Form is a powerful library for managing form state with minimal re-renders and providing better performance for complex forms. It manages form state, handles form submission, and provides basic validation support.
 
-To use React Hook Form in a React application, you'll first need to install it: `npm/pnpm install react-hook-form`
+To use React Hook Form in a React application, you'll first need to install it with @hookform/resolvers: `npm/pnpm install react-hook-form @hookform/resolvers`
+
+<v-click>
+<h3><span class="text-teal-400">Why add @hookform/resolvers?</span></h3> It is a companion package that connects external schema validation libraries (like Zod) with React Hook Form.
+</v-click>
+
+<v-click>
+
+⚠️ Using only Zod, you manually handle input state, errors, and validation for each field, updating state on every change. This can become complex in larger forms as you write custom code to manage the form state, errors, and re-renders. However, React Hook Form centralizes state management for the form. You get optimized re-renders, reduced code for managing state and errors, and a streamlined way to track form fields. It also supports complex forms with nested fields and conditional validation out of the box.
+
+The same Registration form using React-Hook-Form and Zod is on the next page ➠
+</v-click>
+
+---
+hideInToc: true
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-ozsubh?file=src%2FApp.jsx,src%2Fcomponents%2FregistrationForm2.jsx
+---
 
 ---
 hideInToc: true
@@ -443,5 +466,7 @@ transition: slide-up
 <h1 class="text-gradient">Assignment</h1>
 
 <div />
+
+Read more on <span class="text-teal-400 underline"><a href="https://zod.dev/">Zod</a></span> and <span class="text-teal-400 underline"> <a href="https://www.react-hook-form.com/">React-hook-form</a></span>
 
 Create a form using `React Hook Form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from React Hook Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.
