@@ -11,10 +11,10 @@ download: true
 exportFilename: react-note
 export:
   format: pdf
-  timeout: 60000
+  timeout: 160000
   dark: false
   withClicks: false
-  withToc: false
+  withToc: true
 # TODO: add a svg favicon
 # favicon: https://oluwasetemi.dev/favicon-32x32.png
 class: text-center
@@ -73,7 +73,7 @@ layout: center
   <span>Libraries</span>
   <sup v-click>ReactJS, VueJS</sup>
 </div>
-<div mt1 forward:delay-300 v-click>From functions to building blocks 🧱</div>
+<div mt1 forward:delay-300 v-click>The library for web and native user interfaces 🧱</div>
 </h1>
 
 ---

@@ -175,6 +175,32 @@ hideInToc: true
 transition: slide-left
 ---
 
+[Dos]{.text-gradient.text-4xl} [and]{.text-4xl} [Don'ts]{.text-gradient.text-4xl}
+
+[Dos:]{.text-green-400.underline}
+
+- <u>Use Arrow Functions for Simplicity:</u> Especially when you need to pass arguments to the event handler.
+
+```jsx
+<button onClick={() => handleClick(item.id)}>Click me</button>
+```
+
+- <u>Use `event.preventDefault()`:</u> When you want to prevent the default behavior of events like form submissions or link clicks.
+
+```jsx
+function handleSubmit(event) {
+  event.preventDefault()
+  // Handle form submission logic
+}
+```
+
+- <u>Keep Event Handlers Small:</u> If your event handler logic grows too large, consider moving it into a separate function for better readability.
+
+---
+hideInToc: true
+transition: slide-left
+---
+
 # [Dos]{.text-gradient} and [Don'ts]{.text-gradient}
 
 [Don'ts:]{.text-red.underline}

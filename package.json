@@ -6,8 +6,8 @@
     "build": "slidev build",
     "dev": "nodemon -w '../../packages/slidev/dist/*.mjs' --exec \"slidev ./slides.md --open=false --log=info --inspect\"",
     "export": "slidev export",
-    "export:pdf": "npm run export -- --timeout 60000 --with-toc --output ./_export/react-note.pdf",
-    "export:pptx": "npm run export -- --timeout 60000 --with-clicks false --format pptx --output ./_export/react-note.pptx",
+    "export:pdf": "npm run export -- --timeout 160000 --with-toc --output ./_export/react-note.pdf",
+    "export:pptx": "npm run export -- --timeout 160000 --with-clicks false --format pptx --output ./_export/react-note.pptx",
     "format": "prettier --write .",
     "postinstall": "npx playwright-core install chromium"
   },
@@ -18,23 +18,23 @@
     "markdown-it-magic-link": "^0.1.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "vue": "^3.5.3"
+    "vue": "^3.5.12"
   },
   "devDependencies": {
-    "@iconify-json/logos": "^1.1.43",
-    "@iconify-json/mdi": "^1.1.67",
+    "@iconify-json/logos": "^1.2.3",
+    "@iconify-json/mdi": "^1.2.1",
     "@slidev/types": "^0.50.0-beta.4",
     "@types/babel__standalone": "^7.1.7",
-    "@types/react": "^18.3.11",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@vue/compiler-sfc": "^3.4.37",
+    "@vue/compiler-sfc": "^3.5.12",
     "nano-staged": "^0.8.0",
-    "nodemon": "^3.1.4",
-    "playwright-chromium": "^1.47.0",
+    "nodemon": "^3.1.7",
+    "playwright-chromium": "^1.48.1",
     "prettier": "^3.3.3",
     "prettier-plugin-slidev": "^1.0.5",
     "simple-git-hooks": "^2.11.1",
-    "unocss": "^0.63.4"
+    "unocss": "^0.63.6"
   },
   "simple-git-hooks": {
     "pre-commit": "npx nano-staged",
