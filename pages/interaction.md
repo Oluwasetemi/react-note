@@ -44,12 +44,12 @@ transition: slide-down
 
 You can add [events]{.text-teal-400} directly to JSX elements rendered by your component. In the example below, the `onClick` event is used listen to a click interaction to apply a `state` update to the component with `setCount`. The `useState` hook is used to update the state of a component in React. We will talk more on `useState` when learning about Hooks and State Management in React.
 
-```jsx {monaco-run}
+```jsx {monaco-run} { lineNumbers: 'true', height: '13rem' }
 function Counter() {
   const [count, setCount] = React.useState(0)
 
   return (
-    <div>
+    <div className="flex gap-3 items-center">
       <button onClick={() => setCount(count + 1)} className="btn">
         Click Me
       </button>
@@ -60,6 +60,66 @@ function Counter() {
   )
 }
 ```
+
+---
+hideInToc: true
+transition: fade
+---
+
+# [Roles of State in a React Component's Interactivity]{.text-gradient}
+
+[State]{.text-teal-400} is regarded as the memory of a {React} component. When a component gains interaction, it compares its previous form before the interaction, and its form after the interaction. This action can be termed as <i>"Comparing of [State Change]{.text-teal-400} in the component"</i>. When React compares the before and after form of a component during <span class="text-gradient italic">State Change</span> and they differ, React goes ahead to update the component with the latest changes.
+
+<v-click>
+
+You can add a [State]{.text-teal-400} to your component using the `useState` Hook React provides. Hooks are helper functions that lets you use some special features in React. [State]{.text-teal-400} updates based on [Interactivity]{.text-gradient}.
+
+</v-click>
+
+<div flex gap-3>
+
+<div>
+
+<v-click>
+
+[Roles of State]{.text-gradient.underline}
+
+</v-click>
+
+<v-clicks>
+
+- Triggering UI Updates
+- Tracking User Input
+- Handling Component Visibility
+- Enabling Conditional Rendering
+- Managing Component Animation and Transitions
+
+</v-clicks>
+
+</div>
+
+<div flex-grow-1 v-click="8">
+
+```jsx {monaco-run} { lineNumbers: 'true', height: '11rem' }
+function FadeComponent() {
+  const [visible, setVisible] = React.useState(false)
+
+  return (
+    <div className="flex gap-3 items-center">
+      <button className="btn" onClick={() => setVisible(!visible)}>
+        Toggle Visibility
+      </button>
+      <div className={visible ? 'block text-gradient' : 'fade-out-leave-to'}>
+        Fading Text
+      </div>
+    </div>
+  )
+}
+```
+
+</div>
+
+</div>
 
 ---
 hideInToc: true
@@ -79,8 +139,36 @@ function handleClick() {
 ```
 
 <span v-click>
+
 In the above codeblock, we created our [event handler]{.text-teal-400.italic} (`handleClick()`) and passed it to the `onClick` prop of the `button` element to console log 'Button clicked' when a user clicks the button.
+
 </span>
+
+---
+hideInToc: true
+transition: slide-left
+---
+
+[Dos]{.text-gradient.text-4xl} [and]{.text-4xl} [Don'ts]{.text-gradient.text-4xl}
+
+[Dos:]{.text-green-400.underline}
+
+- <u>Use Arrow Functions for Simplicity:</u> Especially when you need to pass arguments to the event handler.
+
+```jsx
+<button onClick={() => handleClick(item.id)}>Click me</button>
+```
+
+- <u>Use `event.preventDefault()`:</u> When you want to prevent the default behavior of events like form submissions or link clicks.
+
+```jsx
+function handleSubmit(event) {
+  event.preventDefault()
+  // Handle form submission logic
+}
+```
+
+- <u>Keep Event Handlers Small:</u> If your event handler logic grows too large, consider moving it into a separate function for better readability.
 
 ---
 hideInToc: true
