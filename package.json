@@ -3,7 +3,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider --max_old_space_size=8192' slidev build",
+    "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider --max_old_space_size=8192 --max-http-header-size=16384 --no-warnings' PLAYWRIGHT_TIMEOUT=300000 SLIDEV_TIMEOUT=300000 slidev build --base=/",
+    "build:pdf": "cross-env NODE_OPTIONS='--openssl-legacy-provider --max_old_space_size=8192 --max-http-header-size=16384 --no-warnings' PLAYWRIGHT_TIMEOUT=300000 SLIDEV_TIMEOUT=300000 slidev export --timeout 300000",
     "dev": "nodemon -w '../../packages/slidev/dist/*.mjs' --exec \"slidev ./slides.md --open=false --log=info --inspect\"",
     "export": "slidev export",
     "export:pdf": "npm run export -- --timeout 160000 --with-toc --output ./_export/react-note.pdf",
