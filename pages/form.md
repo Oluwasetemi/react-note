@@ -12,7 +12,8 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+2)">Handling Form Inputs - Data Binding</a>
 - <a @click="$slidev.nav.go($nav.currentPage+6)">Form Controls</a>
 - <a @click="$slidev.nav.go($nav.currentPage+8)">Form Validation </a>
-- <a @click="$slidev.nav.go($nav.currentPage+11)"> React Hook Form</a>
+- <a @click="$slidev.nav.go($nav.currentPage+10)">React Hook Form</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">New Form Features and Updates in React 19</a>
 
 ---
 hideInToc: true
@@ -74,17 +75,15 @@ When users interact with form elements (like inputs), it may trigger changes in 
 
 There are two types of data binding in React:
 
-- <span class="text-teal-400">One-way data binding</span>: Data flows in a single direction, such as from a parent component to a child via props or from the component's state to the UI. React favors one-way binding by default because it keeps components predictable and easy to debug.
-- <span class="text-teal-400">Two-way data binding</span>: Data flows both ways between UI elements (like inputs) and the component’s state. When the user interacts with a form element, it updates the state, and changes in the state trigger re-renders of the UI. This is typically achieved using controlled components (e.g., input, textarea, select).
+- <span class="text-teal-400">One-way data binding</span>: Data flows in a single direction, such as from a parent component to a child via props or from the component&apos;s state to the UI. React favors one-way binding by default because it keeps components predictable and easy to debug.
+- <span class="text-teal-400">Two-way data binding</span>: Data flows both ways between UI elements (like inputs) and the component&apos;s state. When the user interacts with a form element, it updates the state, and changes in the state trigger re-renders of the UI. This is typically achieved using controlled components (e.g., input, textarea, select).
 
-By default, `React supports one-way data binding`, where data flows in one direction—from the component’s state to the UI. In this setup, changes to the data update the UI, but changes made directly in the UI (like typing in an input field) will not update the state unless explicitly managed.
+By default, `React supports one-way data binding`, where data flows in one direction—from the component&apos;s state to the UI. In this setup, changes to the data update the UI, but changes made directly in the UI (like typing in an input field) will not update the state unless explicitly managed.
 
 ---
 hideInToc: true
 transition: slide-left
 ---
-
-<!-- <div class="flex gap-2"> -->
 
 ```jsx
 import React from 'react'
@@ -105,9 +104,9 @@ export default App
 
 <div>
 
-In this example above, if you try changing the value "Hello" directly in the input field, it won’t update because React only supports one-way data binding by default.
+In this example above, if you try changing the value "Hello" directly in the input field, it won&apos;t update because React only supports one-way data binding by default.
 
-However, React allows two-way data binding using `controlled components`. This is especially useful for managing form elements like <span class="text-teal-400">input</span>, <span class="text-teal-400">textarea</span>, and <span class="text-teal-400">select</span>, where the values are synchronized with the component’s state. Controlled components ensure the `UI and state stay in sync` making it easier to handle user input and dynamic form behavior.
+However, React allows two-way data binding using `controlled components`. This is especially useful for managing form elements like <span class="text-teal-400">input</span>, <span class="text-teal-400">textarea</span>, and <span class="text-teal-400">select</span>, where the values are synchronized with the component&apos;s state. Controlled components ensure the `UI and state stay in sync` making it easier to handle user input and dynamic form behavior.
 
 </div>
 
@@ -173,7 +172,7 @@ function App() {
 export default App
 ```
 
-The `inputValue` state stores the input field’s value. The onChange event updates the state with every input change, ensuring two-way synchronization.
+The `inputValue` state stores the input field&apos;s value. The onChange event updates the state with every input change, ensuring two-way synchronization.
 
 ---
 hideInToc: true
@@ -181,7 +180,7 @@ hideInToc: true
 
 [Form Controls]{.text-gradient.text-4xl}
 
-Form controls refer to input elements like text fields, checkboxes, radio buttons, and dropdowns. Here’s how to handle different controls in React.
+Form controls refer to input elements like text fields, checkboxes, radio buttons, and dropdowns. Here&apos;s how to handle different controls in React.
 
 <div  class="flex gap-3">
 <div v-click>
@@ -426,12 +425,6 @@ const registrationSchema = z.object({
 
 ---
 hideInToc: true
-layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-ozsubh?file=src%2FApp.jsx,src%2Fcomponents%2Fregistrationform.jsx
----
-
----
-hideInToc: true
 transition: slide-up
 ---
 
@@ -454,9 +447,78 @@ The same Registration form using React-Hook-Form and Zod is on the next page ➠
 
 ---
 hideInToc: true
-layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-ozsubh?file=src%2FApp.jsx,src%2Fcomponents%2FregistrationForm2.jsx
 ---
+
+<iframe src="https://codesandbox.io/p/sandbox/blue-tdd-26sv4h?file=%2Fsrc%2FApp.js%3A3%2C64" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+
+---
+hideInToc: true
+transition: slide-down
+---
+
+[New Form Features and Updates in React 19]{.text-gradient.text-4xl}
+
+React 19 introduces powerful new features to simplify form handling, streamline server interactions, and enhance accessibility in web applications. These updates reflect a focus on <span class="text-teal-400">efficient form processing</span>, enabling developers to manage complex user inputs with less code and more intuitive design patterns.
+
+These features collectively empower developers to build faster, more accessible, and user-friendly applications by making form processing easier and more robust.
+
+<v-clicks>
+We&apos;ll explore two of the key form-handling features in React 19:
+
+1️⃣ `Form Actions` — Simplified methods for handling form submissions directly to the server, reducing the need for complex API routes and custom handlers.
+
+2️⃣ `Form Reset and State Management` — Improved control over form reset actions and state updates, allowing developers to manage form data more efficiently.
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-right
+---
+
+`1. Form Actions`
+
+In previous React versions, handling form submissions typically involved <span class="text-teal-400">writing functions to process form data within the component</span>. You often had to rely on custom handlers and libraries (like React Hook Form) for complex form logic. Additionally, any server interactions had to be handled through API routes, adding an extra layer of complexity.
+
+<v-click>
+
+Form Actions in React 19 introduce a more streamlined approach. They are a specialized implementation of `Server Actions` (actions in React 19 that allow any component to perform server-side operations directly) that focus specifically on handling form submissions. It allow developers to attach specific actions directly to form submissions <span class="text-teal-400">without needing intermediate API routes or external libraries</span>. This feature integrates form handling with server-side logic seamlessly, enabling simpler, more direct interactions with the server.
+
+It simplify this process by allowing us to <span class="text-teal-400">handle submissions directly on the server side</span>, bypassing the need for an API route. Form actions make it easier to define and customize actions like saving, editing, or deleting data right in the form itself, making the handling of form logic more straightforward and efficient.
+
+See how forms were handled before form actions and how they&apos;re handled using form actions 👉
+
+</v-click>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+<iframe src="https://codesandbox.io/p/sandbox/compassionate-bhaskara-yhhjsw?file=%2Fsrc%2FformWithoutFormActions.js%3A15%2C38" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+
+---
+hideInToc: true
+transition: slide-down
+---
+
+`2. Form Reset and State Management`
+
+React 19 introduced improvements in managing form state and resetting forms, making it easier to <span class="text-teal-400">handle form data consistently and efficiently</span>. Previously, managing form reset behavior required explicit handling of state and additional code. The update make this process more efficient and straightforward by making form resets more predictable and easier to manage, reducing the need for extra code and ensuring a cleaner, more intuitive form experience.
+
+Before React 19, form resetting was done by manually updating each field&apos;s state or setting all state variables back to their initial values. This approach could lead to <span class="text-teal-400">more verbose code and was prone to errors</span>, especially in large forms but in React 19, the entire form state is managed more easily. The approach is particularly useful with Form Actions or any forms that use server-side actions because it resets the form to its original state automatically, <span class="text-teal-400">without needing to define each field individually</span>.
+
+Key Benefits of React 19's Streamlined Form Reset and State Management
+
+1. `Improved Simplicity`: Forms can be reset without manually updating each field's state.
+2. `Enhanced Performance`: Reducing the reliance on multiple useState calls minimizes re-renders.
+3. `Better Compatibility with Server Actions`: When using server actions for form submissions, form data is automatically managed and reset, keeping forms clean and ready for subsequent submissions.
+
+---
+hideInToc: true
+---
+
+<iframe src="https://codesandbox.io/p/sandbox/pedantic-bose-ypmc3c?file=%2Fsrc%2Fform.js%3A39%2C5-39%2C8" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
