@@ -134,31 +134,102 @@ sequenceDiagram
 hideInToc: true
 ---
 
-## Concepts
-
 <v-clicks>
 
-1. Purpose
-
-- Adds state management to functional components
-- Returns an array with two elements:
-- Current state value
-- Setter function to update the state
-
-2. State Updates
-
-- Direct updates: setState(newValue)
-- Functional updates: setState(prevState => newValue)
-- Updates are batched for performance
-- State updates trigger re-renders
-
-3. Important Rules
-
-- Must be called at top level of component
-- Cannot be called in loops or conditions
-- State updates are asynchronous
-- Initial state is only used on first render
-
+   <div class="max-w-4xl mx-auto bg-white rounded-lg  p-6">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">React useState Concepts</h2>
+        <div class="relative">
+            <div class="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+            <div class="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none z-10"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+            <div class="overflow-auto max-h-96 rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="sticky top-0 left-0 bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b z-20">Concept</th>
+                            <th class="sticky top-0 bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b z-10 min-w-[200px]">Explanation</th>
+                            <th class="sticky top-0 bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b z-10 min-w-[300px]">Example</th>
+                            <th class="sticky top-0 bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b z-10 min-w-[200px]">Common Pitfalls</th>
+                            <th class="sticky top-0 bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b z-10 min-w-[200px]">Best Practices</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Basic Usage</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Creates a state variable and its setter function</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">const [count, setCount] = useState(0);</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Forgetting to use the setter function</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Use descriptive names for state and setter</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Direct Updates</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Set the state to a specific new value</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setCount(5);</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Modifying state directly without setter</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Always use setter function for updates</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Functional Updates</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Update state based on previous value</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setCount(prev => prev + 1);</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Not using functional updates when depending on previous state</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Use when new state depends on previous state</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Placement Rules</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Must be at top level of component</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">
+                                function Component() {<br>
+                                &nbsp;&nbsp;const [state, setState] = useState(0);<br>
+                                }
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Putting useState in conditions or loops</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Always declare at component top level</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Initial State</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Only used on first render</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">const [count, setCount] = useState(0);</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Expensive initial state calculations</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Use useState(() => expensiveCalc()) for heavy computations</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Update Behavior</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Updates are asynchronous and batched</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">
+                                setCount(1);<br>
+                                setCount(2);
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Expecting immediate updates</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Use useEffect for side effects after state changes</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Re-render Trigger</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Component re-renders when state changes</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setCount(newValue); // Triggers re-render</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Too many state updates causing performance issues</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Combine related state updates, use useMemo when needed</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Object State</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Managing object state properly</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setState(prev => ({...prev, key: value}));</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Mutating object state directly</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Always create new object references when updating</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Array State</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Managing array state properly</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setArray(prev => [...prev, newItem]);</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Using array mutation methods like push()</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Use spread operator or array methods that return new arrays</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </v-clicks>
 
 ---
