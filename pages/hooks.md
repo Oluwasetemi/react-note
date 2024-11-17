@@ -725,52 +725,6 @@ function FormWithComplexState() {
 hideInToc: true
 ---
 
-```mermaid
-graph TB
-    subgraph "Complex State Management"
-        direction TB
-
-        subgraph "Updating Objects"
-            direction LR
-            obj[Existing Object] --> spread["Use Spread Operator"]
-            spread --> newObj[New Object with Updates]
-            newObj --> setState[Set State with New Object]
-            note1["Avoid mutating the object directly. Instead, create a new object with the desired changes."] --> obj
-            note2["The spread operator (...) creates a new object with the same properties as the existing object, plus any additional or updated properties."] --> spread
-        end
-
-        subgraph "Updating Arrays"
-            direction LR
-            arr[Existing Array] --> methods["Use Array Methods"]
-            methods --> filter["filter()"]
-            filter --> newArr[New Array with Filtered Items]
-            methods --> map["map()"]
-            map --> newArr2[New Array with Transformed Items]
-            methods --> spread2["Use Spread Operator"]
-            spread2 --> newArr3[New Array with Added Items]
-            newArr --> setState2[Set State with New Array]
-            newArr2 --> setState2
-            newArr3 --> setState2
-            note3["Avoid mutating the array directly. Instead, create a new array using immutable array methods."] --> arr
-            note4["Common array methods like filter(), map(), and the spread operator can be used to create new arrays without modifying the original."] --> methods
-        end
-    end
-
-    subgraph "Immutability"
-        direction LR
-        newObj & newArr --> immutable[Create New Objects & Arrays]
-        immutable --> efficient[Efficient Re-renders]
-        note5["Maintaining immutability ensures that React can efficiently compare previous and current state, leading to optimized re-renders."] --> immutable
-    end
-
-    complex[Complex State] --> immutability
-    note6["Properly managing complex state, such as objects and arrays, is crucial for maintaining the benefits of React's efficient rendering."] --> complex
-```
-
----
-hideInToc: true
----
-
 ### Immutability
 
 Immutability refers to the concept of not modifying an object or array directly, but rather creating a new one with the desired changes. This is an important principle in React, as it allows React to efficiently determine what has changed between renders and optimize the rendering process.
