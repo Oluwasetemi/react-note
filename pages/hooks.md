@@ -262,7 +262,6 @@ hideInToc: true
             </div>
             <div class="md:w-1/2  overflow-y-auto">
                 <div class="p-6 space-y-6">
-                    <!-- State Declaration -->
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h3 class="text-lg font-semibold text-blue-800 mb-2">1. State Declaration</h3>
                         <ul class="space-y-2 text-gray-700">
