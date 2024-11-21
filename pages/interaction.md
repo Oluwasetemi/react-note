@@ -38,6 +38,7 @@ Now that we mentioned <span text-teal-400>Events</span>, let's talk about <span 
 ---
 hideInToc: true
 transition: slide-down
+name: Making a Component Interactive with Events
 ---
 
 [Making a Component Interactive with Events]{.text-gradient.text-4xl}
@@ -124,11 +125,14 @@ function FadeComponent() {
 ---
 hideInToc: true
 transition: fade-out
+name: Creating and Adding Event Handlers to JSX in React
 ---
 
 [Creating and Adding Event Handlers to JSX in React]{.text-gradient.text-4xl}
 
 React allows you add [event handlers]{.text-teal-400.italic} to JSX. Event handlers are functions we created to be triggered when a user interacts with a `Component` or a `JSX` element like clicking, hovering, focusing on a `button`.
+
+<!-- prettier-ignore-start -->
 
 ```jsx {hide|*}
 function handleClick() {
@@ -147,6 +151,7 @@ In the above codeblock, we created our [event handler]{.text-teal-400.italic} (`
 ---
 hideInToc: true
 transition: slide-left
+name: Dos and Don'ts
 ---
 
 [Dos]{.text-gradient.text-4xl} [and]{.text-4xl} [Don'ts]{.text-gradient.text-4xl}
@@ -173,6 +178,7 @@ function handleSubmit(event) {
 ---
 hideInToc: true
 transition: slide-left
+name: Dos and Don'ts
 ---
 
 [Dos]{.text-gradient.text-4xl} [and]{.text-4xl} [Don'ts]{.text-gradient.text-4xl}
@@ -199,6 +205,7 @@ function handleSubmit(event) {
 ---
 hideInToc: true
 transition: slide-left
+name: Dos and Don'ts
 ---
 
 # [Dos]{.text-gradient} and [Don'ts]{.text-gradient}
@@ -257,6 +264,7 @@ function Product({ price, discount }) {
 ---
 hideInToc: true
 transition: slide-right
+name: Dos and Don'ts
 ---
 
 # [Dos]{.text-gradient} and [Don'ts]{.text-gradient}
@@ -308,6 +316,7 @@ function UserList({ users, onSelectUser }) {
 ---
 hideInToc: true
 transition: slide-right
+name: Passing Event Handlers as Props
 ---
 
 [Passing Event Handlers as Props]{.text-gradient.text-4xl}
@@ -373,6 +382,7 @@ This follows the same convention as built-in DOM events like `onClick` and `onCh
 ---
 hideInToc: true
 transition: fade
+name: Event Propagation in React
 ---
 
 # [Propagation]{.text-gradient}
@@ -407,6 +417,7 @@ function Child() {
 ---
 hideInToc: true
 transition: fade-out
+name: Event Capturing and Stopping Propagation in React
 ---
 
 - <u>Event Capturing:</u> You can use capture to handle the event during the capture phase before it reaches the target.

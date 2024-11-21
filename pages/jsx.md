@@ -17,6 +17,7 @@ hideInToc: true
 
 ---
 hideInToc: true
+name: Ways of writing HTML in a JavaScript file
 ---
 
 [Ways of writing HTML in a JavaScript file]{.text-gradient.text-4xl}
@@ -54,6 +55,7 @@ const content = `
 ---
 hideInToc: true
 transition: slide-up
+name: Ways of writing HTML in a JavaScript file
 ---
 
 2. <u>`document.createElement` Method:</u> This method creates HTML elements dynamically using JavaScript.
@@ -122,6 +124,7 @@ window.makeElem = makeElem
 ---
 hideInToc: true
 transition: slide-down
+name: Ways of writing HTML in a JavaScript file
 ---
 
 3. <u>Using the `innerHTML` Property:</u> You can directly set the `innerHTML` property of a DOM element with a string containing HTML.
@@ -176,6 +179,7 @@ Note:
 ---
 hideInToc: true
 transition: fade
+name: Syntax and Structure of JSX
 ---
 
 [Syntax and Structure of JSX]{.text-gradient.text-4xl}
@@ -213,6 +217,7 @@ root.render(myElement)
 ---
 hideInToc: true
 transition: slide-down
+name: Rules of JSX
 ---
 
 [The]{.text-4xl} [Rules]{.text-gradient.text-4xl} [of]{.text-4xl} [JSX]{.text-gradient.text-4xl}
@@ -245,6 +250,7 @@ If you don’t want to add an extra `<div>` to your markup, you can use `<>` and
 hideInToc: true
 level: 2
 transition: view-transition
+name: Rules of JSX
 ---
 
 2. <u>Close all the tags:</u> In JSX, every tag should be explicitly closed. This means that all tags, including self-closing tags like `<img>`, `<link>`, and `<meta>`, should be explicitly closed with the forward-slash (/): `<img />`, `<link />`, and `<meta />`. JSX follows XML rules, and therefore HTML elements must be properly closed. JSX will throw an error if the HTML is not properly closed.
@@ -261,6 +267,7 @@ transition: view-transition
 
 ---
 hideInToc: true
+name: Rules of JSX
 ---
 
 3. <u>Use camelCase for most of the things!:</u> JSX converts to JavaScript, and attributes written in JSX become keys of JavaScript objects. As we know, JavaScript has limitations on variable names, hence using camelCase is recommended. For example, their names can’t contain dashes or be reserved words like `class`. Since `class` is a reserved word, in React you write `className` instead.
@@ -280,6 +287,7 @@ hideInToc: true
 ---
 hideInToc: true
 transition: fade-out
+name: Convert HTML to JSX
 ---
 
 [Convert]{.text-3xl} [HTML]{.text-gradient.text-4xl} [to]{.text-3xl} [JSX]{.text-gradient.text-4xl}
@@ -308,6 +316,7 @@ Here are some HTML to JSX conversion tools:
 ---
 hideInToc: true
 transition: slide-up
+name: Embedding JavaScript in JSX
 ---
 
 [Embedding JavaScript in JSX]{.text-gradient.text-4xl}
@@ -340,6 +349,7 @@ function EmbedJavascript() {
 ---
 hideInToc: true
 transition: fade
+name: CSS in JSX
 ---
 
 [CSS]{.text-gradient.text-4xl} [in]{.text-4xl} [JSX]{.text-gradient.text-4xl}
@@ -390,6 +400,7 @@ function App() {
 ---
 hideInToc: true
 transition: slide-down
+name: CSS in JSX
 ---
 
 2. CSS Classes: To apply styles from an external style sheet or a .module.css, you simply need to reference the JSX element you want to style by it's `className`, `id`, or other attributes

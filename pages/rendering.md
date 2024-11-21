@@ -17,6 +17,7 @@ hideInToc: true
 ---
 hideInToc: true
 transition: fade
+name: React Lifecycle
 ---
 
 # [React Lifecycle (Mount, Trigger, Render and Commit)]{.text-gradient}
@@ -62,6 +63,7 @@ root.render(<Message />)
 ---
 hideInToc: true
 transition: fade-out
+name: Trigger
 ---
 
 2. [Trigger:]{.text-gradient.underline}
@@ -119,6 +121,7 @@ During a [trigger]{.text-gradient}, {React} checks to see what part of the compo
 ---
 hideInToc: true
 transition: slide-right
+name: Render
 ---
 
 3. [Render:]{.text-gradient.underline}
@@ -148,6 +151,7 @@ This is the stage where {React} calls the components to know what to display on 
 ---
 hideInToc: true
 transition: slide-up
+name: React Lifecycle in Summary
 ---
 
 # [Lifecycle Summery]{.text-gradient}
@@ -184,6 +188,7 @@ React does not touch the DOM if the rendering result is the same as last time.
 ---
 hideInToc: true
 transition: slide-down
+name: Batching
 ---
 
 # [Batching]{.text-gradient}
@@ -261,6 +266,7 @@ function Counter() {
 ---
 hideInToc: true
 transition: slide-down
+name: Batching
 ---
 
 2. <u>Promises, Async Calls, and Timeouts:</u> Before {React} 18, [batching]{.text-teal-400} did not automatically happen in async contexts (e.g., setTimeout, Promise.then). In {React} 18 and later, however, automatic batching extends to async functions and other async situations, which minimizes unnecessary renders across all scenarios.
@@ -342,6 +348,7 @@ function delay(ms) {
 ---
 hideInToc: true
 transition: fade-out
+name: Bypass batching with flushSync
 ---
 
 # Bypass [batching]{.text-gradient} with `flushSync`
@@ -377,6 +384,7 @@ Use flushSync sparingly because it forces {React} to re-render immediately, bypa
 ---
 hideInToc: true
 transition: slide-down
+name: Rendering lists
 ---
 
 # [Rendering lists]{.text-gradient}
@@ -460,6 +468,7 @@ function List () {
 ---
 hideInToc: true
 transition: slide-up
+name: Why does a list need a key?
 ---
 
 # Why List [key]{.text-gradient}? Where to find a `key` value?
@@ -489,6 +498,7 @@ A list `key` is a unique identifier that gives the lits item a name in the DOM s
 ---
 hideInToc: true
 transition: fade-out
+name: Conditional rendering - if-else, ternary, && operator
 ---
 
 # [Conditional rendering - if-else, ternary, && operator]{.text-gradient}
@@ -645,6 +655,7 @@ function Notification({ hasMessages }) {
 
 ---
 hideInToc: true
+name: Resources
 ---
 
 [Resources]{.text-gradient.text-4xl}

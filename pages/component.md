@@ -19,6 +19,7 @@ hideInToc: true
 hideInToc: true
 transition: slide-down
 clicksStart: 2
+name: What are components?
 ---
 
 <v-clicks depth="2">
@@ -57,6 +58,7 @@ In React, a website can be broken into smaller components like a <span class="te
 ---
 hideInToc: true
 transition: slide-up
+name: Your first component
 ---
 
 <h1><span>Your</span> <span class="text-gradient text-5xl">First ❶ </span> <span>Component</span></h1>
@@ -109,6 +111,7 @@ export default function Greeting() {
 ---
 hideInToc: true
 transition: slide-right
+name: More on your first component
 ---
 
 # Did you notice that the greeting returned on the previous page 🔙 was not wrapped in parentheses?
@@ -136,6 +139,7 @@ function Greeting() {
 ---
 hideInToc: true
 transition: slide-up
+name: Single root element
 ---
 
 <h1  class="text-gradient text-4xl">Single Root Element</h1>
@@ -199,6 +203,7 @@ function Greeting() {
 ---
 hideInToc: true
 transition: slide-down
+name: Exporting, Importing, and Nesting Components
 ---
 
 <h1  class="text-gradient text-4xl">Exporting, Importing, and Nesting Components </h1>
@@ -299,6 +304,7 @@ import { Greeting } from './Greeting'
 ---
 hideInToc: true
 transition: slide-up
+name: Parent and Child component
 ---
 
 # `Nesting Components`
@@ -506,6 +512,7 @@ function App() {
 ---
 hideInToc: true
 transition: slide-down
+name: Assignments on Components
 ---
 
 <h1 class="text-gradient">Assignment</h1>

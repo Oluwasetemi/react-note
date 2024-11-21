@@ -737,13 +737,15 @@ root.render(React.createElement(App))
 ---
 hideInToc: true
 layout: iframe
-url: https://stackblitz.com/edit/web-platform-zxxs4v?embed=1&file=script.js
+name: Todo App All With JavaScript
+url: https://stackblitz.com/edit/web-platform-zxxs4v?ctl=1&embed=1&file=script.js&hideExplorer=1&hideNavigation=1
 ---
 
 ---
 hideInToc: true
 layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-epzrqa?embed=1&file=main.js
+name: Todo App All With React
+url: https://stackblitz.com/edit/vitejs-vite-epzrqa?ctl=1&embed=1&file=main.js&hideExplorer=1&hideNavigation=1
 ---
 
 ---
