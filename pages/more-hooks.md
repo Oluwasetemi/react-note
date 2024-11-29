@@ -11,6 +11,8 @@ hideInToc: true
 - <a @click="$slidev.nav.next()">useRef</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">useReducer</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">useContext</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">useLayoutEffect</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">useDeferredValue</a>
 
 ---
 hideInToc: true
@@ -233,4 +235,132 @@ function App() {
 }
 ```
 
-Without useContext: You’d need to pass the theme prop down manually, making the code harder to maintain.
+Without useContext: You&apos;d need to pass the theme prop down manually, making the code harder to maintain.
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## ✴ [ useLayoutEffect]{.text-gradient.text-4xl}
+
+useLayoutEffect is a hook designed to perform <span class="text-teal-400">synchronous side effects</span> after DOM mutations `but before the browser repaints the screen`. This ensures that any layout measurements or updates are applied before the user sees them, making it valuable for scenarios where precise alignment or measurements of DOM elements are critical.
+
+It is a <span class="text-teal-400">version of useEffect</span>. However, in contrast, useEffect runs <span class="text-teal-400">asynchronously</span> after the paint cycle, making it more suitable for non-blocking side effects like fetching data or setting up event listeners. While `both hooks allow for side effects`, their timing and use cases differ significantly.
+
+<v-clicks>
+
+Syntax
+
+```jsx
+useLayoutEffect(setup, dependencies?)
+```
+
+Use Cases:
+
+- DOM Measurements: If you need to measure an element&apos;s dimensions before rendering dependent content, such as calculating a tooltip's position.
+
+- Avoiding Flickers: When you want to avoid the user seeing visual changes (e.g., moving elements) after the paint cycle.
+
+</v-clicks>
+
+---
+hideInToc: true
+---
+
+## useLayoutEffect vs useEffect
+
+Use `useLayoutEffect` when you need to measure or synchronize changes to the DOM before the browser repaints, such as positioning tooltips or avoiding flickers in animations. For most other side effects, like fetching data or setting up subscriptions, prefer `useEffect` because it runs after the browser paint, ensuring better performance and smoother user experiences.
+
+⚠️ useLayoutEffect can hurt performance. Prefer useEffect when possible.
+
+| **Feature**               | `useEffect`                                 | `useLayoutEffect`                              |
+| ------------------------- | ------------------------------------------- | ---------------------------------------------- |
+| 🕑 **Timing**             | Runs _after_ the browser paints the screen. | Runs _before_ the browser repaints the screen. |
+| ⚡ **Performance Impact** | Non-blocking, better for most use cases.    | Blocks rendering, may hurt performance.        |
+| 🌐 **Server Behavior**    | Executes normally on the server.            | No effect on the server.                       |
+
+---
+hideInToc: true
+transition: slide-right
+---
+
+<iframe src="https://codesandbox.io/p/sandbox/inspiring-panna-36d7cr?file=%2Fsrc%2FApp.js%3A8%2C8-8%2C24" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+In the previous example 👈, a tooltip was implemented using both useEffect and useLayoutEffect.
+
+<v-clicks>
+
+`Observations`:
+
+- useEffect: On slower devices, you might notice a <span class="text-teal-400">slight flicker</span> when the tooltip adjusts its position. This happens because the position calculation occurs after the browser paints the DOM.
+- useLayoutEffect: The tooltip <span class="text-teal-400">renders in the correct position immediately</span>, avoiding the flicker. This is because layout calculations and DOM updates are completed before the browser paints.
+
+`Key Difference`:
+
+Use useLayoutEffect when you need to measure DOM elements and apply layout changes before the browser paints. Use useEffect for non-blocking effects to maintain performance unless layout adjustments are strictly necessary.
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## ✴ [useDeferredValue ]{.text-gradient.text-4xl}
+
+useDeferredValue is a React Hook that lets you `defer the update of certain parts of the user interface`. This improves application responsiveness by delaying non-urgent updates during <span class="text-teal-400">resource-intensive operations</span> & <span class="text-teal-400">high-priority user interactions</span>, like typing in a search box, filtering or rendering a large list.
+
+Syntax
+
+```jsx
+const deferredValue = useDeferredValue(value)
+```
+
+value: The original value to defer and it returns a deferred value that may lag behind the original during updates.
+
+<v-clicks>
+
+How it Works
+
+1️⃣ On input change, React first renders with the previous deferred value.
+
+2️⃣ React attempts to re-render with the updated deferred value in the background.
+
+3️⃣ If background rendering suspends (e.g., waiting for data), the old deferred value remains visible until ready.
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-down
+---
+
+<v-clicks>
+Use Cases:
+
+- `Search Filtering`: When typing in a search bar that triggers heavy computations, you can use useDeferredValue to show intermediate results while keeping the typing experience snappy.
+- `Rendering Large Data`: While dynamically rendering large datasets, deferring updates prevents blocking other user interactions.
+
+Advantages
+
+- `Enhanced Responsiveness`: Improves UI performance by prioritizing critical updates.
+- `Ease of Integration`: Simple to add into existing React codebases for performance optimization.
+
+⚠️ Pitfall in useDeferredValue Optimization
+
+When using useDeferredValue to optimize performance, a key pitfall is that <span class="text-teal-400">components depending on the deferred value must avoid unnecessary re-renders</span>. This often requires wrapping such components in `React.memo`.
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-down
+---
+
+<iframe src="https://codesandbox.io/p/sandbox/heuristic-gwen-cc6xlm?file=%2Fsrc%2FApp.js%3A5%2C17" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
