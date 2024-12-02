@@ -83,9 +83,9 @@ This highlights a key difference: `useState` is for reactive data that affects t
 ---
 hideInToc: true
 transition: slide-right
+layout: iframe
+url: https://codesandbox.io/embed/566hdt?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseRefCounter.jsx&hidenavigation=1
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/laughing-brook-d4j887?file=%2Fsrc%2Fcomponents%2FuseStateCounter.jsx%3A15%2C4" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -168,9 +168,9 @@ You should use useReducer when your <span class="text-teal-400">state logic beco
 
 ---
 hideInToc: true
+layout: iframe
+url: https://codesandbox.io/embed/vkmlhg?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseStateCart.jsx%3A25%2C54
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/competent-saha-vkmlhg?file=%2Fsrc%2Fcomponents%2FuseStateCart.jsx%3A25%2C54" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -199,9 +199,9 @@ Use Cases:
 
 ---
 hideInToc: true
+layout: iframe
+url: https://codesandbox.io/embed/zxzrcz?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseContext.jsx%3A41%2C29
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/stupefied-bouman-zxzrcz?file=%2Fsrc%2Fcomponents%2FuseContext.jsx%3A41%2C29" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -283,9 +283,9 @@ Use `useLayoutEffect` when you need to measure or synchronize changes to the DOM
 ---
 hideInToc: true
 transition: slide-right
+layout: iframe
+url: https://codesandbox.io/embed/36d7cr?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A8%2C8-8%2C24
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/inspiring-panna-36d7cr?file=%2Fsrc%2FApp.js%3A8%2C8-8%2C24" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -361,6 +361,22 @@ When using useDeferredValue to optimize performance, a key pitfall is that <span
 ---
 hideInToc: true
 transition: slide-down
+layout: iframe
+url: https://codesandbox.io/embed/cc6xlm?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A5%2C17
 ---
 
-<iframe src="https://codesandbox.io/p/sandbox/heuristic-gwen-cc6xlm?file=%2Fsrc%2FApp.js%3A5%2C17" style="width: 100%; height: 480px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+<!--
+Talk about useOptimistic and useTransition
+-->
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+# Custom Hooks
+
+Custom Hooks are reusable functions that contain logic shared across multiple components. They allow you to extract complex logic from components, making them more readable and maintainable. Custom Hooks follow the naming convention `useSomething` to indicate that they are hooks.
+
+- [UseForm](https://stackblitz.com/edit/vitejs-vite-fdk26g?file=package.json)
+- [UseFetch](https://stackblitz.com/edit/vitejs-vite-hyv9j2?file=src%2Fhooks%2FuseFetch.js)

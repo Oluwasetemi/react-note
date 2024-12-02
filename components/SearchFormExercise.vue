@@ -15,7 +15,7 @@
 // Your task: Complete the SearchForm component using new form hooks
 function SearchForm() {
   // Implement form state and status
-  
+
   return (
     &lt;form&gt;
       {/* Add search input and submit button */}
@@ -36,18 +36,18 @@ function SearchForm() {
       </transition>
       <transition name="slide">
         <div v-if="showSolution" key="solution" class="space-y-4">
-          <div class="bg-green-100 rounded-md p-4">
+          <div class="bg-green-100 rounded-md p-4 light:text-white">
             <h2 class="text-xl text-green-900 font-bold mb-2">Solution</h2>
             <div class="bg-gray-900 rounded-md p-3 overflow-auto text-sm">
               <pre class="whitespace-pre-wrap">
                 <code>
 function SearchForm() {
-  const [results, formAction] = useFormState(async (state, formData) => {
+  const [results, formAction] = useActionState(async (state, formData) => {
     const query = formData.get('search');
     const results = await fetch(`/api/search?q=${query}`).then(r => r.json());
     return results;
   }, []);
-  
+
   return (
     &lt;form action={formAction}&gt;
       &lt;input name="search" type="text" /&gt;
@@ -77,18 +77,13 @@ function SearchForm() {
   </div>
 </template>
 
-<script>
-export default {
-  name: 'QuestionAnswerComponent',
-  data() {
-    return {
-      showSolution: false,
-    }
-  },
-}
+<script setup>
+import { ref } from 'vue'
+
+const showSolution = ref(false)
 </script>
 
-<style>
+<style scoped>
 .slide-enter-active,
 .slide-leave-active {
   transition:

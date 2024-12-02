@@ -9,5 +9,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "exclude": ["**/*.md"]
+  "exclude": ["**/*.md", "**/*.vue"]
 }

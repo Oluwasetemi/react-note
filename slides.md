@@ -315,37 +315,28 @@ src: ./pages/test.md
 ---
 
 ---
+name: Pagination Order
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-hwtrzb?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+---
 
-# Code Runners
+---
+name: Infinite Scroll Pagination
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-zjmule?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+---
 
-```jsx {monaco-run} { lineNumbers: 'true', height: '12.5em'}
-function Hello() {
-  const [counter, setCounter] = React.useState(0)
-  const value = 2
-  const doubled = counter * value
+---
+name: Pagination GraphQL
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-q5wnda?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+---
 
-  return (
-    <div className="select-none text-lg flex gap-4 items-center p2 border border-main">
-      <span className="text-gray text-lg">
-        <span className="text-orange">{counter}</span> * {value} ={' '}
-        <span className="text-green">{doubled}</span>
-      </span>
-      <button
-        className="border border-main p2 rounded"
-        onClick={() => setCounter(counter + 1)}
-      >
-        +1
-      </button>
-      <button
-        className="border border-main p2 rounded"
-        onClick={() => setCounter(counter - 1)}
-      >
-        -1
-      </button>
-    </div>
-  )
-}
-```
+---
+name: Router Example
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-hswavt?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+---
 
 <!--
 The idea here is super sweet with tailwind like css and ability to render code is powerful and the opportunities here is endless.
@@ -362,9 +353,22 @@ The idea here is super sweet with tailwind like css and ability to render code i
 
 ---
 hideInToc: true
+name: Important Links
+---
+
+# Important Links
+
+- [Stackblitz AltSchool Collection](https://stackblitz.com/@Oluwasetemi/collections/altschool-frontend)
+- [React Documentation](https://react.dev/)
+- [React Router Documentation](https://reactrouter.com/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+
+---
+hideInToc: true
 ---
 
 # Contributors
 
 - {@Stan015}
 - {@victorvictoria-maker}
+- {@Olubebe}

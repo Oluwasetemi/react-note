@@ -15,4 +15,7 @@ hideInToc: true
 
 ---
 hideInToc: true
+layout: iframe
+name: Using Tanstack Query
+url: https://stackblitz.com/edit/github-zvtcsu?ctl=1&embed=1&file=src%2Findex.tsx&hideExplorer=1
 ---

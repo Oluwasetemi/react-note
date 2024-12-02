@@ -26,8 +26,11 @@ hideInToc: true
 <v-clicks>
 
 - #### React.js has been revolutionizing web development for 11 remarkable years, establishing itself as the go-to JavaScript library for developers worldwide 🏆. Now, as we witness the transition from version 18 to version 19, something extraordinary is happening in the React ecosystem ✨.
+
 - #### Enter React 19 – a release that's turning heads for all the right reasons 🎯. But here's what makes this update truly special: instead of adding layers of complexity, it's stripping them away. Think of it as React getting a minimalist makeover that actually makes it more powerful 💪.
+
 - #### For all you React enthusiasts out there, this isn't just another update – it's a breath of fresh air 🌬️. React 19 is here to streamline your development process, boost your productivity, and make your coding journey more enjoyable than ever 🚀.
+
 - #### Ready to elevate your React game? Let's explore how this game-changing release will transform your projects from good to exceptional! ⚡
 
 </v-clicks>
@@ -58,8 +61,8 @@ graph TD
     E --> E1[Automatic Optimization]
     E --> E2[React Compiler]
 
-    F --> F1[useFormState]
-    F --> F2[useFormStatus]
+    F --> F1[useFormStatus]
+    F --> F2[useActionState]
 ```
 
 ---
@@ -248,7 +251,7 @@ hideInToc: true
   const [count, setCount] = useState(0);
   // 2. Update Functions
   const increment = () => setCount(prev => prev + 1);
-  const decrement = () => setCount(prev => prev - 1); 
+  const decrement = () => setCount(prev => prev - 1);
   // 3. UI Rendering
   return (
     &lt;div className="counter"&gt;
@@ -573,7 +576,7 @@ const { pending, data, method, action } = useFormStatus()
 ```
 
 ```js
-const { status } = useFormStatus()
+const status = useFormStatus()
 ```
 ````
 
@@ -609,17 +612,17 @@ hideInToc: true
 hideInToc: true
 ---
 
-## useFormState()
+## useActionState()
 
 ### This hook manages form state and updates based on submission results.
 
 ````md magic-move
 ```js
-const [state, formAction] = useFormState(fn, initialState)
+const [state, formAction] = useActionState(fn, initialState)
 ```
 
 ```js
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 
 function Form() {
   const handleSubmit = async (prevState, formData) => {
@@ -629,7 +632,7 @@ function Form() {
       : { success: false, message: 'Invalid username' }
   }
 
-  const [state, formAction] = useFormState(handleSubmit, null)
+  const [state, formAction] = useActionState(handleSubmit, null)
 
   return (
     <form action={formAction}>
@@ -685,26 +688,18 @@ hideInToc: true
 
 ## Complex State Updates
 
+<!--prettier-ignore-->
 ```js
 function FormWithComplexState() {
   const [form, setForm] = useState({
-    user: {
-      name: '',
-      email: '',
-    },
-    preferences: {
-      newsletter: false,
-      theme: 'light',
-    },
+    user: { name: '', email: '', },
+    preferences: { newsletter: false, theme: 'light', },
   })
   // Updating nested state
   const updateName = (name) => {
     setForm((prev) => ({
       ...prev,
-      user: {
-        ...prev.user,
-        name,
-      },
+      user: { ...prev.user, name, },
     }))
   }
   // Using state updater function
@@ -733,7 +728,7 @@ When you update state in React, you should always create a new object or array i
 hideInToc: true
 ---
 
-<div class="h-screen overflow-y-auto">
+<div class="max-h-screen overflow-y-auto">
     <!-- Content wrapper with padding -->
     <div class="p-6">
       <div class="max-w-6xl mx-auto">
@@ -839,7 +834,7 @@ hideInToc: true
             </div>
           </div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-300px">
           <h3 class="text-lg font-semibold mb-4 text-gray-800">Benefits of Immutability</h3>
           <div class="grid grid-cols-3 gap-6">
             <div class="p-4 bg-gray-50 rounded-lg">
@@ -918,7 +913,7 @@ hideInToc: true
 ---
 
 <div class="flex items-center justify-center h-screen">
-  <div class="max-w-md w-full h-full min-h-[400px] overflow-y-auto px-6 py-8 space-y-6 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+  <div class="max-w-l w-full h-full max-h-[700px] overflow-y-auto px-6 py-8 space-y-6 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
     <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
       <h2 class="text-2xl text-blue-500 font-semibold mb-4">Rule 1: Only Call Hooks at the Top Level</h2>
       <div class="space-y-4">
@@ -971,9 +966,3 @@ hideInToc: true
 ---
 
 <HookForm />
-
----
-
-
----
-

@@ -76,9 +76,9 @@ See the basic setup with Routes ➠
 ---
 hideInToc: true
 transition: slide-left
+layout: iframe
+url: https://codesandbox.io/embed/vq9qn3?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A12%2C17
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/charming-khayyam-vq9qn3?file=%2Fsrc%2FApp.js%3A12%2C17" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -87,7 +87,7 @@ transition: slide-left
 
 In a <span class="text-gradient">more structured setup</span>, each route’s component (e.g., Home, About, and NavBar) is imported from its own file. This setup keeps App.js `cleaner and allows for better organization`, especially as your application grows. As you would see below, <span class="text-gradient">index.js</span> wraps the App component in BrowserRouter, enabling client-side routing while <span class="text-gradient">App.js</span> defines routes and imports components for each path.
 
-<iframe src="https://codesandbox.io/p/sandbox/silly-cray-nlcw6p?file=%2Fsrc%2FApp.js%3A11%2C1" style="width: 100%; height: 380px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+<iframe src="https://codesandbox.io/embed/nlcw6p?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A11%2C1" style="width: 100%; height: 380px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -164,9 +164,9 @@ In the example in the next page ➠, here is what happens:
 ---
 hideInToc: true
 transition: slide-up
+layout: iframe
+url: https://codesandbox.io/embed/6pcsm2?view=editor+%2B+preview&module=%2Fsrc%2FProfile.js%3A1%2C1
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/patient-dust-6pcsm2?file=%2Fsrc%2FProfile.js%3A1%2C1" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -191,9 +191,9 @@ In the next example in the next page ➠, we create a protected route that only 
 ---
 hideInToc: true
 transition: slide-down
+layout: iframe
+url: https://codesandbox.io/embed/x8w7rr?view=editor+%2B+preview&module=%2Fsrc%2FProtectedRoute.js%3A11%2C2
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/cool-dawn-x8w7rr?file=%2Fsrc%2FProtectedRoute.js%3A11%2C2" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -203,3 +203,7 @@ transition: slide-right
 ## [Assignment]{.text-gradient.text-4xl}
 
 Build a simple `Blog Application` with `React Router`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page`. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited.
+
+Try out [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/installation) for a different experience.
+
+We will discuss more about frameworks in the next semester. 🚀 Nextjs, ReactRouterv7, Tanstack, and more.

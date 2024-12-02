@@ -10,7 +10,7 @@ export default mergeConfigs([
       'bg-main': 'bg-white text-[#181818] dark:(bg-[#121212] text-[#ddd])',
       'text-common': 'text-[#5D8392]',
       logo: 'i-logos-react w-6em h-6em transform transition-800 hover:rotate-180',
-      btn: 'px-4 py-1 bg-blue-500 text-white rounded',
+      btn: 'px-4 py-1 bg-blue-500 text-white rounded transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-50',
       card: 'p-4 shadow-md border rounded-lg',
       input:
         'px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200',

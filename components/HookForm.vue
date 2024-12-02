@@ -32,16 +32,16 @@ function RegistrationForm() {
     }
   });
   // 2. Update handlers
-  const updatePersonal = (field) => (event) => {  
+  const updatePersonal = (field) => (event) => {
   };
   const updateAddress = (field) => (event) => {
   };
-  const toggleNewsletter = () => { 
+  const toggleNewsletter = () => {
   };
   // 3. Side effect for form validation
-  useEffect(() => {  
+  useEffect(() => {
   }, [form]);
-  
+
   return (
     <form>
       {/* Personal Information */}
@@ -51,7 +51,7 @@ function RegistrationForm() {
         placeholder="First Name"
       /> -->
       {/* Add other fields similarly */}
-      
+
       {/* Newsletter Toggle */}
     </form>
   );
@@ -69,7 +69,11 @@ function RegistrationForm() {
         </div>
       </transition>
       <transition name="slide">
-        <div v-if="showSolution" key="solution" class="space-y-4">
+        <div
+          v-if="showSolution"
+          key="solution"
+          class="space-y-4 light:text-white"
+        >
           <div class="bg-green-100 rounded-md p-4">
             <h2 class="text-xl text-green-900 font-bold mb-2">Solution</h2>
             <div class="bg-gray-900 rounded-md p-3 overflow-auto text-sm">
@@ -103,7 +107,7 @@ function RegistrationForm() {
         [field]: event.target.value
       }
     }));
-  }; 
+  };
   const updateAddress = (field) => (event) => {
     setForm(prev => ({
       ...prev,
@@ -112,7 +116,7 @@ function RegistrationForm() {
         [field]: event.target.value
       }
     }));
-  }; 
+  };
   const toggleNewsletter = () => {
     setForm(prev => ({
       ...prev,
@@ -129,7 +133,7 @@ function RegistrationForm() {
       console.log('Form has errors:', errors);
     }
   }, [form]);
-  
+
   return (
     <form>
       {/* Personal Information */}
@@ -139,7 +143,7 @@ function RegistrationForm() {
         placeholder="First Name"
       />
       {/* Add other fields similarly */}
-      
+
       {/* Newsletter Toggle */}
       <label>
         <input
@@ -167,16 +171,12 @@ function RegistrationForm() {
   </div>
 </template>
 
-<script>
-export default {
-  name: 'QuestionAnswerComponent',
-  data() {
-    return {
-      showSolution: false,
-    }
-  },
-}
+<script setup>
+import { ref } from 'vue'
+
+const showSolution = ref(false)
 </script>
+s
 
 <style>
 .slide-enter-active,

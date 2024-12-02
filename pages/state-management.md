@@ -118,7 +118,7 @@ Here is the interactive mode of the code example in the previous slide.
 <iframe
   width="100%"
   height="400"
-  src="https://codesandbox.io/p/sandbox/lifting-up-state-in-react-pzvrd4"
+  src="https://codesandbox.io/embed/pzvrd4"
 >
 </iframe>
 
@@ -191,7 +191,7 @@ Here is a theme context example code in action.
 <iframe
   width="100%"
   height="400"
-  src="https://codesandbox.io/p/sandbox/react-context-api-kwslzk"
+  src="https://codesandbox.io/embed/kwslzk"
 >
 </iframe>
 

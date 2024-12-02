@@ -99,7 +99,7 @@ transition: slide-down
 <iframe
   width="100%"
   height="400"
-  src="https://codesandbox.io/p/sandbox/react-memo-in-action-rqngm9"
+  src="https://codesandbox.io/embed/rqngm9"
 >
 </iframe>
 
@@ -327,7 +327,7 @@ Ensure the preview tab is loaded. Open dev tool to see the console when you clic
 <iframe
   width="100%"
   height="400"
-  src="https://codesandbox.io/p/sandbox/optimising-re-render-with-memo-and-usememo-5mwcd8"
+  src="https://codesandbox.io/embed/5mwcd8"
 >
 </iframe>
 
@@ -739,8 +739,8 @@ transition: slide-left
 
 Showing stale content while fresh content is loading
 
-<iFrame 
-  src="https://codesandbox.io/p/sandbox/show-stale-content-fresh-content-is-loading-in-react-gfv64p"
+<iFrame
+  src="https://codesandbox.io/embed/gfv64p"
   width="100%"
   height="400"
 />

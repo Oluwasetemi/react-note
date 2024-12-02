@@ -388,6 +388,8 @@ transition: slide-down
 
 # Validation using libraries - Zod
 
+<div mt-1 />
+
 Zod is a schema validation library that works well with `TypeScript` and `React`. Zod is particularly useful for validating data from forms threby helping to catch errors early in the development process.
 
 To use Zod in a React application, you'll first need to install it: `npm/pnpm install zod`
@@ -402,18 +404,15 @@ Step-by-step example of how to use Zod for validating a user registration form.
 1️⃣ <span class="text-teal-400 underline"> Define a Schema</span>: Create a Zod schema for the data you want to validate.
 </p>
 
+<!--prettier-ignore-->
 ```jsx
 import { z } from 'zod'
 
 // Define the schema for the registration form
 const registrationSchema = z.object({
-  username: z
-    .string()
-    .min(3, { message: 'Username must be at least 3 characters long' }),
+  username: z .string() .min(3, { message: 'Username must be at least 3 characters long' }),
   email: z.string().email({ message: 'Invalid email address' }),
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters long' }),
+  password: z .string() .min(6, { message: 'Password must be at least 6 characters long' }),
 })
 ```
 
@@ -447,9 +446,9 @@ The same Registration form using React-Hook-Form and Zod is on the next page ➠
 
 ---
 hideInToc: true
+layout: iframe
+url: https://codesandbox.io/embed/26sv4h?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A3%2C64
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/blue-tdd-26sv4h?file=%2Fsrc%2FApp.js%3A3%2C64" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -463,6 +462,7 @@ React 19 introduces powerful new features to simplify form handling, streamline 
 These features collectively empower developers to build faster, more accessible, and user-friendly applications by making form processing easier and more robust.
 
 <v-clicks>
+
 We&apos;ll explore two of the key form-handling features in React 19:
 
 1️⃣ `Form Actions` — Simplified methods for handling form submissions directly to the server, reducing the need for complex API routes and custom handlers.
@@ -493,9 +493,9 @@ See how forms were handled before form actions and how they&apos;re handled usin
 ---
 hideInToc: true
 transition: slide-up
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-j9uc3f?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1&hideNavigation=1
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/compassionate-bhaskara-yhhjsw?file=%2Fsrc%2FformWithoutFormActions.js%3A15%2C38" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true
@@ -516,9 +516,9 @@ Key Benefits of React 19's Streamlined Form Reset and State Management
 
 ---
 hideInToc: true
+layout: iframe
+url: https://codesandbox.io/embed/ypmc3c?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2Fform.js%3A39%2C5-39%2C8
 ---
-
-<iframe src="https://codesandbox.io/p/sandbox/pedantic-bose-ypmc3c?file=%2Fsrc%2Fform.js%3A39%2C5-39%2C8" style="width: 100%; height: 500px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ---
 hideInToc: true

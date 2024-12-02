@@ -105,7 +105,7 @@ export default function Greeting() {
   <p> 1. <span class="underline text-xl">Define the component function:</span> React components are <span class="text-teal-400">regular JavaScript functions</span>, but their names must start with a capital letter or they won&apos;t work!</p>
   <p> 2. <span class="underline text-xl">Write return with parenthensis:</span> Always wrap your JSX markup in parentheses after the return statement. <span class="text-teal-400">Without parentheses</span>, any code on the lines after return will be ignored! </p>
   <p> 3.  <span class="underline text-xl">Add JSX markup:</span> Markup is your code structure. Inside the component, <span class="text-teal-400">write your JSX</span>, which looks like HTML but works under the hood as JavaScript.</p>
-  <p> 4.  <span class="underline text-xl">Export the component:</span> The <span class="text-teal-400">export default prefix</span> is a standard JavaScript syntax (not specific to React). It lets you mark the main function in a file so that you can later import it from other files.</p> 
+  <p> 4.  <span class="underline text-xl">Export the component:</span> The <span class="text-teal-400">export default prefix</span> is a standard JavaScript syntax (not specific to React). It lets you mark the main function in a file so that you can later import it from other files.</p>
 </div>
 
 ---
@@ -297,8 +297,8 @@ import { Greeting } from './Greeting'
 ```
 
   </div>
-  
-  <p v-click> 4.  <span class="underline text-xl">File Extensions:</span>  Use the <span class="text-teal-400">appropriate file extension</span>. You can omit the .js or .jsx extension when importing, but including it can sometimes improve clarity.</p> 
+
+  <p v-click> 4.  <span class="underline text-xl">File Extensions:</span>  Use the <span class="text-teal-400">appropriate file extension</span>. You can omit the .js or .jsx extension when importing, but including it can sometimes improve clarity.</p>
 </div>
 
 ---
@@ -414,7 +414,7 @@ function Profile() {
 
 </div>
 
-<div v-click> 
+<div v-click>
 2️⃣ Destructure Props: Extract props in the function parameters. Optionally assign default values.
 
 ```jsx
@@ -534,3 +534,12 @@ Turn this `li` into a reusability component.
   </dl>
 </li>
 ```
+
+---
+hideInToc: true
+---
+
+# Summary
+
+- Try to read the codebase of React Component Libraries from React Aria, Chakra UI, Material UI.
+- Check out [Tanstack](https://tanstack.com/) family of libraries.
