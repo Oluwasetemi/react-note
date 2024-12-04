@@ -35,7 +35,7 @@ When a user type something into the form, the `submit` button becomes enabled. W
 hideInToc: true
 ---
 
-<Tips type="tips" fullWidth>
+<Tips type="tip" fullWidth>
 This involves listing out all the states your component can be in and how it transitions between those states. EMPTY: form has a disabled submit button, TYPING: Form has an enabled submit button, SUBMITTING: Form and button are disabled, spinner appears, SUCCESS: Spinner disappears, success message appears, ERROR: Spinner disappears, error message appears.
 </Tips>
 
