@@ -67,11 +67,12 @@
 
       <!-- Code Content -->
       <div class="relative">
-        <pre
+        <div
           ref="codeContainer"
+          v-if="ready"
+          v-html="examples[currentIndex]?.code"
           class="max-h-[300px] overflow-y-auto p-6 text-sm font-mono leading-relaxed text-gray-100 whitespace-pre-wrap break-words scrollbar-custom"
-          >{{ examples[currentIndex].code }}</pre
-        >
+        ></div>
 
         <!-- Scroll Indicators -->
         <div
@@ -118,6 +119,7 @@ const currentIndex = ref(0)
 const codeContainer = ref(null)
 const canScrollUp = ref(false)
 const canScrollDown = ref(false)
+const ready = ref(false)
 
 const examples = [
   {
@@ -129,9 +131,9 @@ const examples = [
 // Submit Button Component with Loading State
 function SubmitButton() {
   const { pending } = useFormStatus();
-  
+
   return (
-    <button 
+    <button
       disabled={pending}
       className="px-4 py-2 bg-blue-500 text-white rounded"
     >
@@ -143,17 +145,17 @@ function SubmitButton() {
 // Main Form Component
 function Form() {
   return (
-    <form 
+    <form
       action={async () => {
-        await new Promise(resolve => 
+        await new Promise(resolve =>
           setTimeout(resolve, 1000)
         );
       }}
       className="space-y-4"
     >
-      <input 
-        type="text" 
-        name="data" 
+      <input
+        type="text"
+        name="data"
         className="w-full px-4 py-2 border rounded"
       />
       <SubmitButton />
@@ -176,7 +178,7 @@ function SearchForm() {
         \`/api/search?q=\${query}\`
       );
       return await response.json();
-    }, 
+    },
     []
   );
 
@@ -187,16 +189,16 @@ function SearchForm() {
     <div className="max-w-xl mx-auto p-6">
       <form action={formAction} className="space-y-6">
         <div className="relative">
-          <input 
-            name="search" 
-            type="text" 
+          <input
+            name="search"
+            type="text"
             disabled={pending}
             placeholder="Search..."
             className="w-full px-4 py-2 border rounded-lg"
           />
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={pending}
             className="absolute right-2 top-2 px-4 py-1 bg-blue-500 text-white rounded"
           >
@@ -208,7 +210,7 @@ function SearchForm() {
         {results && (
           <ul className="space-y-2 divide-y">
             {results.map(item => (
-              <li 
+              <li
                 key={item.id}
                 className="py-2 hover:bg-gray-50"
               >
@@ -244,19 +246,54 @@ const checkScroll = () => {
 }
 
 // Watch for changes and check scroll
-watch(currentIndex, () => {
+watch(currentIndex, async () => {
+  await formatCode()
+
   if (codeContainer.value) {
     codeContainer.value.scrollTop = 0
   }
   setTimeout(checkScroll, 100)
 })
 
-onMounted(() => {
+onMounted(async () => {
   checkScroll()
   if (codeContainer.value) {
     codeContainer.value.addEventListener('scroll', checkScroll)
   }
+  await formatCode()
+  ready.value = true
 })
+
+async function formatCode() {
+  // Format code
+  const { default: prettier } = await import(
+    'https://esm.sh/prettier@2.3.2/standalone.mjs'
+  )
+  const prettierPluginBabel = await import('prettier/parser-babel')
+  const code = examples[currentIndex.value].code
+  const options = {
+    semi: true,
+    singleQuote: true,
+    trailingComma: 'all',
+    printWidth: 80,
+  }
+
+  const formattedCode = prettier.format(code, {
+    ...options,
+    parser: 'babel',
+    plugins: [prettierPluginBabel],
+  })
+
+  examples[currentIndex.value].code = formattedCode
+
+  // highlight code
+  const { codeToHtml } = await import('https://esm.sh/shiki@1.0.0')
+
+  examples[currentIndex.value].code = await codeToHtml(formattedCode, {
+    lang: 'jsx',
+    theme: 'vitesse-dark',
+  })
+}
 </script>
 
 <style scoped>

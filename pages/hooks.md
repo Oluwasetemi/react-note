@@ -161,28 +161,28 @@ hideInToc: true
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Basic Usage</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Creates a state variable and its setter function</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">const [count, setCount] = useState(0);</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">const [count, setCount] = useState(0);</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Forgetting to use the setter function</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Use descriptive names for state and setter</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Direct Updates</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Set the state to a specific new value</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setCount(5);</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">setCount(5);</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Modifying state directly without setter</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Always use setter function for updates</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Functional Updates</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Update state based on previous value</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setCount(prev => prev + 1);</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">setCount(prev => prev + 1);</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Not using functional updates when depending on previous state</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Use when new state depends on previous state</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Placement Rules</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Must be at top level of component</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">
                                 function Component() {<br>
                                 &nbsp;&nbsp;const [state, setState] = useState(0);<br>
                                 }
@@ -193,14 +193,14 @@ hideInToc: true
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Initial State</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Only used on first render</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">const [count, setCount] = useState(0);</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">const [count, setCount] = useState(0);</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Expensive initial state calculations</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Use useState(() => expensiveCalc()) for heavy computations</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Update Behavior</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Updates are asynchronous and batched</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">
                                 setCount(1);<br>
                                 setCount(2);
                             </td>
@@ -210,21 +210,21 @@ hideInToc: true
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Re-render Trigger</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Component re-renders when state changes</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setCount(newValue); // Triggers re-render</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">setCount(newValue); // Triggers re-render</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Too many state updates causing performance issues</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Combine related state updates, use useMemo when needed</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Object State</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Managing object state properly</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setState(prev => ({...prev, key: value}));</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">setState(prev => ({...prev, key: value}));</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Mutating object state directly</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Always create new object references when updating</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <td class="sticky left-0 bg-white px-6 py-4 whitespace-nowrap font-medium text-gray-900">Array State</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Managing array state properly</td>
-                            <td class="px-6 py-4 text-sm font-mono bg-gray-50">setArray(prev => [...prev, newItem]);</td>
+                            <td class="px-6 py-4 text-sm font-mono bg-gray-50 dark:text-black">setArray(prev => [...prev, newItem]);</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Using array mutation methods like push()</td>
                             <td class="px-6 py-4 text-sm text-gray-500">Use spread operator or array methods that return new arrays</td>
                         </tr>
@@ -239,87 +239,7 @@ hideInToc: true
 hideInToc: true
 ---
 
-<div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-2 sticky top-0 z-10">
-            <h1 class="text-xl text-center font-semibold text-white">React State Management Explained</h1>
-        </div>
-        <div class="flex flex-col md:flex-row h-[400px]">
-            <div class="md:w-1/2 text-white overflow-y-auto">
-                <div class="p-6">
-                    <pre class="language-javascript"><code class="text-sm">function Counter() {
-  // 1. State Declaration
-  const [count, setCount] = useState(0);
-  // 2. Update Functions
-  const increment = () => setCount(prev => prev + 1);
-  const decrement = () => setCount(prev => prev - 1);
-  // 3. UI Rendering
-  return (
-    &lt;div className="counter"&gt;
-      &lt;button onClick={decrement}&gt;-&lt;/button&gt;
-      &lt;span&gt;{count}&lt;/span&gt;
-      &lt;button onClick={increment}&gt;+&lt;/button&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-                </div>
-            </div>
-            <div class="md:w-1/2  overflow-y-auto">
-                <div class="p-6 space-y-6">
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-blue-800 mb-2">1. State Declaration</h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">•</span>
-                                <span><code class="bg-blue-100 px-1 rounded">useState(0)</code> creates a new state variable</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">•</span>
-                                <span>Returns array with: [currentValue, updateFunction]</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">•</span>
-                                <span>Initial value is 0</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-green-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-green-800 mb-2">2. Update Functions</h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-2">•</span>
-                                <span>Use function form <code class="bg-green-100 px-1 rounded">(prev => prev + 1)</code> for reliable updates</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-2">•</span>
-                                <span>React batches these updates automatically</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-green-500 mr-2">•</span>
-                                <span>Prevents race conditions</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-purple-50 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold text-purple-800 mb-2">3. UI Rendering</h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="text-purple-500 mr-2">•</span>
-                                <span>React automatically re-renders when state changes</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-purple-500 mr-2">•</span>
-                                <span>Only changed parts of the DOM update</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-purple-500 mr-2">•</span>
-                                <span>State persists between renders</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<ReactStateManagementExplained />
 
 ---
 hideInToc: true
@@ -746,7 +666,7 @@ hideInToc: true
               </thead>
               <tbody class="divide-y divide-gray-200">
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 font-medium">Update Object Property</td>
+                  <td class="px-6 py-4 font-medium dark:text-black">Update Object Property</td>
                   <td class="px-6 py-4">
                     <pre class="bg-red-50 p-2 rounded"><code class="text-sm text-red-600">person.age = 31;</code></pre>
                   </td>
@@ -756,7 +676,7 @@ hideInToc: true
                   <td class="px-6 py-4 text-sm text-gray-600">Creates a new object with updated age property while keeping other properties unchanged</td>
                 </tr>
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 font-medium">Add Array Item</td>
+                  <td class="px-6 py-4 font-medium dark:text-black">Add Array Item</td>
                   <td class="px-6 py-4">
                     <pre class="bg-red-50 p-2 rounded"><code class="text-sm text-red-600">items.push(4);</code></pre>
                   </td>
@@ -766,7 +686,7 @@ hideInToc: true
                   <td class="px-6 py-4 text-sm text-gray-600">Creates a new array with all existing items plus the new item</td>
                 </tr>
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 font-medium">Remove Array Item</td>
+                  <td class="px-6 py-4 font-medium dark:text-black">Remove Array Item</td>
                   <td class="px-6 py-4">
                     <pre class="bg-red-50 p-2 rounded"><code class="text-sm text-red-600">items.splice(index, 1);</code></pre>
                   </td>
@@ -776,7 +696,7 @@ hideInToc: true
                   <td class="px-6 py-4 text-sm text-gray-600">Creates a new array excluding the specified item</td>
                 </tr>
                 <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 font-medium">Update Nested Object</td>
+                  <td class="px-6 py-4 font-medium dark:text-black">Update Nested Object</td>
                   <td class="px-6 py-4">
                     <pre class="bg-red-50 p-2 rounded"><code class="text-sm text-red-600">user.address.city = 'New York';</code></pre>
                   </td>
@@ -838,15 +758,15 @@ hideInToc: true
           <h3 class="text-lg font-semibold mb-4 text-gray-800">Benefits of Immutability</h3>
           <div class="grid grid-cols-3 gap-6">
             <div class="p-4 bg-gray-50 rounded-lg">
-              <h4 class="font-medium mb-2">Predictable State Updates</h4>
+              <h4 class="font-medium mb-2 dark:text-black">Predictable State Updates</h4>
               <p class="text-sm text-gray-600">State changes are more predictable because objects cannot be modified after creation</p>
             </div>
             <div class="p-4 bg-gray-50 rounded-lg">
-              <h4 class="font-medium mb-2">Efficient Change Detection</h4>
+              <h4 class="font-medium mb-2 dark:text-black">Efficient Change Detection</h4>
               <p class="text-sm text-gray-600">React can quickly determine if state has changed by comparing object references</p>
             </div>
             <div class="p-4 bg-gray-50 rounded-lg">
-              <h4 class="font-medium mb-2">Pure Components</h4>
+              <h4 class="font-medium mb-2 dark:text-black">Pure Components</h4>
               <p class="text-sm text-gray-600">Enables the use of pure components for better performance optimization</p>
             </div>
           </div>
