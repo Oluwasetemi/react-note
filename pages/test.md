@@ -8,10 +8,10 @@ hideInToc: true
 
 <div mt-2 />
 
-- Introduction to Testing
-- Unit Testing with Jest and React Testing Library
-- Integration Testing
-- End-to-End Testing
+- <a @click="$slidev.nav.next()">Introduction to Testing</a>
+- <a @click="$slidev.nav.go($nav.currentPage+2)">Unit Testing with Jest and React Testing Library</a>
+- <a @click="$slidev.nav.go($nav.currentPage+4)">Integration Testing</a>
+- <a @click="$slidev.nav.go($nav.currentPage+6)">End-to-End Testing</a>
 
 ---
 hideInToc: true
