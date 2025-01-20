@@ -11,10 +11,10 @@ download: false
 exportFilename: react-note
 export:
   format: pdf
-  timeout: 160000
+  timeout: 1600000
   dark: false
   withClicks: false
-  withToc: true
+  withToc: false
 # TODO: add a svg favicon
 # favicon: https://oluwasetemi.dev/favicon-32x32.png
 class: text-center
@@ -24,6 +24,8 @@ drawings:
 transition: slide-left
 mdc: true
 hideInToc: true
+overviewSnapshots: true
+selectable: true
 ---
 
 # React [Class]{.text-8xl.font-hand.mr-4.text-gradient} Notes
