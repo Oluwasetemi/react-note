@@ -3,7 +3,7 @@ background: https://res.cloudinary.com/drnqdd87d/image/upload/f_auto/nmgakkzd3lm
 title: React Class Note
 titleTemplate: '%s - AltSchool Africa'
 info: |
-  ## AltSchool v4 React Class Notes
+  AltSchool v4 React Class Notes
   making of world class developers
   join at [AltSchool Africa](https://altschoolafrica.com)
 author: Oluwasetemi
