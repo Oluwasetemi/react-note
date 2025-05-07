@@ -93,7 +93,7 @@ layout: center
   <span>XML</span>
   <sup v-click>syntax, structure, rules</sup>
 </div>
-<div mt1 forward:delay-300 v-click>HMTL ➡️ JSX</div>
+<div mt1 forward:delay-300 v-click>HTML ➡️ JSX</div>
 </h1>
 
 ---

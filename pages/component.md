@@ -59,6 +59,7 @@ In React, a website can be broken into smaller components like a <span class="te
 hideInToc: true
 transition: slide-up
 name: Your first component
+clicksStart: 6
 ---
 
 <h1><span>Your</span> <span class="text-gradient text-5xl">First ❶ </span> <span>Component</span></h1>
@@ -156,7 +157,7 @@ This is valid ✔
 function Greeting() {
   return (
     <div>
-      <p>Hello, Altschoolar.</p>
+      <p>Hello, Altschooler.</p>
       <p>You are welcome here.</p>
     </div>
   )
@@ -187,7 +188,7 @@ This is valid ✔ (using Fragment)
 function Greeting() {
   return (
     <>
-      <p>Hello, Altschoolar.</p>
+      <p>Hello, Altschooler.</p>
       <p>You are welcome here.</p>
       <button>Click Me</button>
     </>
@@ -367,7 +368,7 @@ transition: slide-down
 
 <h1 class="text-gradient text-4xl">Props <span class="text-common">📨</span>: Passing and Reading Data Between Components</h1>
 
-#### Props (short for properties) allow parent components to pass data to their child components, just like <u>arguments in functions</u> and <u>attributes in html</u>. <span class="text-teal-400">You can pass any JavaScript value as a prop</span> (objects, arrays, functions, etc.). Below, child compoent `Welcome` is receiving name props from parent component `App`
+#### Props (short for properties) allow parent components to pass data to their child components, just like <u>arguments in functions</u> and <u>attributes in html</u>. <span class="text-teal-400">You can pass any JavaScript value as a prop</span> (objects, arrays, functions, etc.). Below, child component `Welcome` is receiving name props from parent component `App`
 
 <v-click>
 

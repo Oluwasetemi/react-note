@@ -29,7 +29,7 @@ UI is a function of state and it should be declarative using JSX and the power o
 
 Reacting to user input is a key part of building interactive UIs. Handling user input with React typically involves updating the state of your components based on the user's input and interactions. Triggering state changes based on user input is how you build interactive UIs.
 
-When a user type something into the form, the `submit` button becomes enabled. When the user clicks the `submit` button, both the form and the button becomes diabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears. The above can be represented imperatively or declaratively. React enforces a declarative approach.
+When a user type something into the form, the `submit` button becomes enabled. When the user clicks the `submit` button, both the form and the button becomes disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears. The above can be represented imperatively or declaratively. React enforces a declarative approach.
 
 ---
 hideInToc: true
@@ -182,7 +182,7 @@ const [user, setUser] = useState({ firstName: '', lastName: '' })
 setUser({ ...user, firstName: 'John' })
 ```
 
-This way, you don't have to worry about the state being out of sync and uneccessary nesting of states. Keeping the states flat and simple as possible.
+This way, you don't have to worry about the state being out of sync and unnecessary nesting of states. Keeping the states flat and simple as possible.
 
 ---
 hideInToc: true
@@ -210,9 +210,11 @@ The Child component can now be a functional component that receives the `count` 
 hideInToc: true
 ---
 
-<div className="overflow-y-scroll max-h-screen mb-300px">
+<div grid="~ cols-2" gap="2">
 
-```jsx {lineNumbers: 'true', overflowY: 'scroll'}
+
+
+```jsx
 function Panel({ title, children, isActive, onShow }) {
   return (
     <section className="panel">
@@ -227,7 +229,9 @@ function Panel({ title, children, isActive, onShow }) {
     </section>
   )
 }
+```
 
+```jsx
 function Accordion() {
   const [activeIndex, setActiveIndex] = React.useState(0)
   return (
@@ -255,7 +259,6 @@ function Accordion() {
 }
 ```
 
-<div class="mb-300px" />
 </div>
 
 ---
@@ -404,7 +407,7 @@ function ImpureComponent() {
 
 </div>
 
-Keeping your components pure make rendering predicatable. Its easier to manage, it doesn't have any side effects and doesn't depend on anything other than its props and state. Effects are a way to add side effects to your components and it should be done with caution using events, refs and special hooks designed for such purpose.
+Keeping your components pure make rendering predictable. Its easier to manage, it doesn't have any side effects and doesn't depend on anything other than its props and state. Effects are a way to add side effects to your components and it should be done with caution using events, refs and special hooks designed for such purpose.
 
 <Tips type="danger" fullWidth>
 You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, “set” state instead of mutating preexisting objects.<br />

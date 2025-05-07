@@ -38,14 +38,6 @@
     "simple-git-hooks": "^2.11.1",
     "unocss": "^0.63.6"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx nano-staged",
-    "pre-push": "npm run format",
-    "preserveUnused": true
-  },
-  "nano-staged": {
-    "*.{js,ts,md,vue,json}": "prettier --write"
-  },
   "license": "MIT",
   "packageManager": "npm@10.9.2"
 }

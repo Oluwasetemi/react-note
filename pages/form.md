@@ -47,12 +47,7 @@ function App() {
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -182,7 +177,7 @@ hideInToc: true
 
 Form controls refer to input elements like text fields, checkboxes, radio buttons, and dropdowns. Here&apos;s how to handle different controls in React.
 
-<div  class="flex gap-3">
+<div  class="grid grid-cols-2 gap-4">
 <div v-click>
 ✔ Text Input
 
@@ -198,12 +193,7 @@ function TextInput() {
   }
 
   return (
-    <input
-      type="text"
-      value={name}
-      onChange={handleChange}
-      placeholder="Enter your name"
-    />
+    <input type="text" value={name} onChange={handleChange} placeholder="Enter your name" />
   )
 }
 
@@ -220,12 +210,10 @@ import React, { useState } from 'react'
 
 function CheckboxInput() {
   const [isChecked, setIsChecked] = useState(false)
-
   const handleChange = (e) => {
     setIsChecked(e.target.checked)
     console.log('Accepted terms and conditions?:', e.target.checked)
   }
-
   return (
     <label>
       <input type="checkbox" checked={isChecked} onChange={handleChange} />
@@ -246,7 +234,6 @@ hideInToc: true
 transition: slide-up
 ---
 
-<div class="flex gap-2 wrap">
 <div class="w-200">
 ✔  Radio Buttons
 
@@ -262,20 +249,10 @@ function RadioButton() {
 
   return (
       <label>
-        <input
-          type="radio"
-          value="male"
-          checked={gender === "male"}
-          onChange={handleChange}
-        /> Male
+        <input type="radio" value="male" checked={gender === "male"} onChange={handleChange} /> Male
       </label>
       <label>
-        <input
-          type="radio"
-          value="female"
-          checked={gender === "female"}
-          onChange={handleChange}
-        />  Female
+        <input type="radio" value="female" checked={gender === "female"} onChange={handleChange} />  Female
       </label>
   )
 }
@@ -285,7 +262,12 @@ export default RadioButton
 
 </div>
 
-<div  v-click>
+---
+hideInToc: true
+transition: slide-up
+---
+
+
 ✔ Select (Dropdown)
 
 ```jsx
@@ -312,9 +294,7 @@ function SelectInput() {
 export default SelectInput
 ```
 
-</div>
 
-</div>
 
 ---
 hideInToc: true
@@ -362,12 +342,7 @@ const handleSubmit = (e) => {
 
 return (
   <form onSubmit={handleSubmit}>
-    <input
-      type="email"
-      value={email}
-      onChange={handleChange}
-      placeholder="Enter your email"
-    />
+    <input type="email" value={email} onChange={handleChange} placeholder="Enter your email" />
     {error && <p style={{ color: 'red' }}>{error}</p>}
     <button type="submit" disabled={!!error}>
       Submit
@@ -390,7 +365,7 @@ transition: slide-down
 
 <div mt-1 />
 
-Zod is a schema validation library that works well with `TypeScript` and `React`. Zod is particularly useful for validating data from forms threby helping to catch errors early in the development process.
+Zod is a schema validation library that works well with `TypeScript` and `React`. Zod is particularly useful for validating data from forms thereby helping to catch errors early in the development process.
 
 To use Zod in a React application, you'll first need to install it: `npm/pnpm install zod`
 
@@ -449,6 +424,125 @@ hideInToc: true
 layout: iframe
 url: https://codesandbox.io/embed/26sv4h?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A3%2C64
 ---
+
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+# Tanstack `<Form />`
+
+TanStack Form is the ultimate solution for handling forms in web applications, providing a powerful and flexible approach to form management. Designed with first-class TypeScript support, headless UI components, and a framework-agnostic design, it streamlines form handling and ensures a seamless experience across various front-end frameworks.
+
+To use Tanstack Form in a React application, you'll first need to install it: `npm/pnpm/bun/yarn install @tanstack/react-form`
+
+- A Form Instance is an object that represents an individual form and provides methods and properties for working with the form. 
+- A Form Field is a component that represents an individual field within a form. It provides methods and properties for managing the field's state, validation, and submission.
+- Each field has its own state, which includes its current value, validation status, error messages, and other metadata. You can access a field's state using the field.state property.
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+<div class="scrollable">
+
+```jsx
+import React from 'react';
+import { useForm } from '@tanstack/react-form';
+
+export default function App() {
+  const form = useForm({
+    defaultValues: { firstName: '', lastName: '', },
+    onSubmit: async ({ value }) => { // Do something with form data console.log(value); },
+  });
+
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); form.handleSubmit(); }} >
+      <div>
+        <form.Field name="firstName"
+          validators={{
+            onChange: ({ value }) => !value ? 'A first name is required' : value.length < 3 ? 'First name must be at least 3 characters' : undefined,
+            onChangeAsyncDebounceMs: 500,
+            onChangeAsync: async ({ value }) => {
+              await new Promise((resolve) => setTimeout(resolve, 1000));
+              return ( value.includes('error') && 'No "error" allowed in first name' );
+            },
+          }}
+          children={(field) => {
+            return (
+              <>
+                <label htmlFor={field.name}>First Name:</label>
+                <input id={field.name} name={field.name} value={field.state.value} onBlur={field.handleBlur} onChange={(e) => field.handleChange(e.target.value)} />
+                {!field.state.meta.isValid && ( <em style={{color: red;}} role="alert">{field.state.meta.errors.join(', ')}</em> )}
+              </>
+            );
+          }}
+        />
+      </div>
+      <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]} children={([canSubmit, isSubmitting]) => ( 
+          <button type="submit" disabled={!canSubmit}> {isSubmitting ? '...' : 'Submit'} </button> 
+        )} 
+      />
+    </form>
+  );
+}
+```
+
+</div>
+
+<style>
+  /* make scrollable */
+  .scrollable {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  .scrollable::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollable::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  .scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+</style>
+
+---
+hideInToc: true
+transition: slide-up
+layout: iframe
+url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?ctl=1&embed=1&file=src%2Findex.jsx&hideExplorer=1
+---
+
+---
+hideInToc: true
+transition: slide-left
+---
+
+# Validation with Standard Schema Libraries
+
+TanStack Form supports validation with standard schema libraries like Zod, Valibot, and Arktype. This allows you to define your validation rules using the library of your choice and integrate them seamlessly into your form handling process.
+
+```jsx
+import { z } from 'zod'
+
+const userSchema = z.object({ age: z.number().gte(13, 'You must be 13 to make an account'), })
+
+function App() {
+  const form = useForm({
+    defaultValues: { age: 0, },
+    validators: { onChange: userSchema, },
+  })
+  return (
+    <div>
+      <form.Field name="age" children={(field) => { return <>{/* ... */}</> }} />
+    </div>
+  )
+}
+```
 
 ---
 hideInToc: true
@@ -529,6 +623,6 @@ transition: slide-up
 
 <div />
 
-Read more on <span class="text-teal-400 underline"><a href="https://zod.dev/">Zod</a></span> and <span class="text-teal-400 underline"> <a href="https://www.react-hook-form.com/">React-hook-form</a></span>
+Read more on <span class="text-teal-400 underline"><a href="https://zod.dev/">Zod</a></span> and <span class="text-teal-400 underline"> <a href="https://tanstack.com/form/latest">@tanstack/react-form</a></span>
 
-Create a form using `React Hook Form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from React Hook Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.
+Create a form using `@tanstack/react-form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from React Hook Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.

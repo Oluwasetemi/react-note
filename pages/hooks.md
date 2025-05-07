@@ -135,6 +135,7 @@ sequenceDiagram
 
 ---
 hideInToc: true
+clicksStart: 1
 ---
 
 <v-clicks>
@@ -538,7 +539,7 @@ hideInToc: true
 
 ````md magic-move
 ```js
-const [state, formAction] = useActionState(fn, initialState)
+const [state, formAction] = useActionState(fn, initialState, permalink?)
 ```
 
 ```js

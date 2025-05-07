@@ -197,6 +197,109 @@ url: https://codesandbox.io/embed/x8w7rr?view=editor+%2B+preview&module=%2Fsrc%2
 
 ---
 hideInToc: true
+transition: slide-left
+---
+
+## [React Router vs. Tanstack Router]{.text-gradient.text-4xl}
+React Router is a powerful library for managing routing in React applications, but it can be complex and sometimes overwhelming. Tanstack Router is a newer alternative that aims to simplify routing while providing similar functionality. It offers a more intuitive API, better performance, and improved developer experience.
+
+Tanstack Router is designed to be more flexible and easier to use, making it a great choice for developers looking for a simpler routing solution. It also integrates well with other Tanstack libraries, such as Tanstack Query, providing a cohesive experience for managing data and routing in your applications.
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## Key Differences
+
+| Feature                     | React Router                          | Tanstack Router                      |
+| --------------------------- | ------------------------------------- | ------------------------------------ |
+| **API Complexity**          | More complex, with a steeper learning curve | Simpler and more intuitive API       |
+| **Performance**             | Good, but can be slower with large apps | Optimized for better performance     |
+| **Data Fetching**           | Requires additional libraries (e.g., React Query) | Built-in data fetching capabilities   |
+| **Integration**             | Integrates with various libraries     | Seamless integration with Tanstack libraries |
+| **Community**               | Large and active community            | Growing community, but smaller than React Router |
+| **Documentation**           | Comprehensive, but can be overwhelming | Clear and concise documentation      |
+| **Learning Resources**      | Abundant tutorials and resources      | Fewer resources available            |
+| **Flexibility**             | Highly flexible, but can lead to complexity | More opinionated, but easier to use |
+| **State Management**        | Requires external libraries (e.g., Redux) | Built-in state management capabilities |
+
+<style>
+  /* reduce font-size of the table */
+
+  table {
+    font-size: 0.8rem;
+    color: black;
+  }
+  th {
+    font-size: 0.8rem;
+  }
+  td {
+    font-size: 0.8rem;
+  }
+  th, td {
+    padding: 0.5rem;
+  }
+  th {
+    background-color: #f0f0f0;
+  }
+  td {
+    background-color: #fff;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+</style>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Tanstack Router]{.text-gradient.text-4xl}
+
+Tanstack Router is a powerful and flexible routing library for React applications. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures. With Tanstack Router, you can define routes, handle URL parameters, and manage nested routes with ease.
+
+---
+hideInToc: true
+transition: slide-left
+---
+
+## [Frameworks]{.text-gradient.text-4xl}
+
+Frameworks are pre-built libraries that provide a structure for building applications. They often include built-in features like routing, state management, and data fetching, making it easier to develop complex applications quickly. Some popular frameworks include:
+
+
+- **Next.js**: A React framework for building server-rendered applications. It provides features like static site generation, API routes, and built-in CSS support.
+- **Remix**: A full-stack React framework that focuses on server-rendered applications. It provides features like data loading, nested routes, and built-in caching.
+- **Tanstack Start**: A new framework for building web applications using Tanstack Router. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures.
+- **React Router v7**: The latest version of React Router, which includes new features and improvements over previous versions. It provides a more flexible API for managing routes and handling URL parameters.
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## Next.js
+
+Next.js is a React framework that enables server-side rendering and static site generation. It provides a powerful routing system, allowing you to create dynamic routes and handle URL parameters easily. Next.js also offers features like API routes, built-in CSS support, and automatic code splitting, making it a great choice for building modern web applications. With its App Router and Pages Router, Next.js allows you to choose between a file-based routing system and a more flexible approach, giving you the best of both worlds.
+
+---
+hideInToc: true
+transition: slide-left
+---
+
+## Tanstack Start
+
+Tanstack Start is a new framework for building web applications using Tanstack Router. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures. With Tanstack Start, you can define routes, handle URL parameters, and manage nested routes with ease. It also integrates well with other Tanstack libraries, such as Tanstack Query, providing a cohesive experience for managing data and routing in your applications.
+
+
+
+---
+hideInToc: true
 transition: slide-right
 ---
 
