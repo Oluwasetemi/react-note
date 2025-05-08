@@ -13,8 +13,8 @@
     "postinstall": "npx playwright-core install chromium"
   },
   "dependencies": {
-    "@slidev/cli": "51.0.1",
-    "@slidev/client": "51.0.1",
+    "@slidev/cli": "51.6.0",
+    "@slidev/client": "51.6.0",
     "@slidev/theme-default": "latest",
     "cross-env": "^7.0.3",
     "markdown-it-magic-link": "^0.1.4",
@@ -24,20 +24,20 @@
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/mdi": "^1.2.2",
-    "@slidev/types": "51.0.1",
+    "@iconify-json/mdi": "^1.2.3",
+    "@slidev/types": "51.6.0",
     "@types/babel__standalone": "^7.1.9",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "19.1.3",
+    "@types/react-dom": "19.1.3",
     "@vue/compiler-sfc": "^3.5.13",
     "nano-staged": "^0.8.0",
-    "nodemon": "^3.1.9",
-    "playwright-chromium": "^1.49.1",
-    "prettier": "^3.4.2",
+    "nodemon": "^3.1.10",
+    "playwright-chromium": "^1.52.0",
+    "prettier": "^3.5.3",
     "prettier-plugin-slidev": "^1.0.5",
-    "simple-git-hooks": "^2.11.1",
-    "unocss": "^0.63.6"
+    "simple-git-hooks": "^2.13.0",
+    "unocss": "66.1.1"
   },
   "license": "MIT",
-  "packageManager": "npm@10.9.2"
+  "packageManager": "pnpm@10.10.0"
 }

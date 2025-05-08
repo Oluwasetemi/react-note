@@ -833,7 +833,7 @@ graph TD
 hideInToc: true
 ---
 
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center">
   <div class="max-w-l w-full h-full max-h-[700px] overflow-y-auto px-6 py-8 space-y-6 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
     <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
       <h2 class="text-2xl text-blue-500 font-semibold mb-4">Rule 1: Only Call Hooks at the Top Level</h2>
