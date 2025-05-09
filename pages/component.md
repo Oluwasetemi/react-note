@@ -422,8 +422,8 @@ function Profile() {
 function Avatar({ name, id, size = 100 }) {
   return (
     <img
-      src={`https://i.imgur.com/${person.id}.jpg`}
-      alt={person.name}
+      src={`https://i.imgur.com/${id}.jpg`}
+      alt={name}
       width={size}
       height={size}
     />
@@ -450,7 +450,7 @@ function Profile() {
 ```
 
 ```jsx
-function Profile({ name = 'default value' }) {
+function Profile({ name = 'default value', ...props }) {
   return (
     <div>
       <Avatar {...props} />
