@@ -85,6 +85,7 @@ hideInToc: true
 transition: slide-right
 layout: iframe
 url: https://codesandbox.io/embed/566hdt?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseRefCounter.jsx&hidenavigation=1
+name: useRef Counter
 ---
 
 ---
@@ -170,6 +171,7 @@ You should use useReducer when your <span class="text-teal-400">state logic beco
 hideInToc: true
 layout: iframe
 url: https://codesandbox.io/embed/vkmlhg?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseStateCart.jsx%3A25%2C54
+name: useReducer Cart
 ---
 
 ---
@@ -201,11 +203,13 @@ Use Cases:
 hideInToc: true
 layout: iframe
 url: https://codesandbox.io/embed/zxzrcz?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseContext.jsx%3A41%2C29
+name: useContext
 ---
 
 ---
 hideInToc: true
 transition: slide-right
+name: useContext Example
 ---
 
 ```jsx
@@ -285,11 +289,13 @@ hideInToc: true
 transition: slide-right
 layout: iframe
 url: https://codesandbox.io/embed/36d7cr?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A8%2C8-8%2C24
+name: useLayoutEffect
 ---
 
 ---
 hideInToc: true
 transition: slide-up
+name: useLayoutEffect Explanation
 ---
 
 In the previous example 👈, a tooltip was implemented using both useEffect and useLayoutEffect.
@@ -310,6 +316,7 @@ Use useLayoutEffect when you need to measure DOM elements and apply layout chang
 ---
 hideInToc: true
 transition: slide-up
+name: useDeferredValue 
 ---
 
 ## ✴ [useDeferredValue ]{.text-gradient.text-4xl}
@@ -339,6 +346,7 @@ How it Works
 ---
 hideInToc: true
 transition: slide-down
+name: useDeferredValue Example Of Usage
 ---
 
 <v-clicks>
@@ -363,10 +371,11 @@ hideInToc: true
 transition: slide-down
 layout: iframe
 url: https://codesandbox.io/embed/cc6xlm?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A5%2C17
+name: useDeferredValue Example
 ---
 
 <!--
-Talk about useOptimistic and useTransition
+TODO: Talk about useOptimistic and useTransition
 -->
 
 ---

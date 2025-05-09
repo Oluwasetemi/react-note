@@ -78,11 +78,13 @@ hideInToc: true
 transition: slide-left
 layout: iframe
 url: https://codesandbox.io/embed/vq9qn3?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A12%2C17
+name: Basic Setup with Routes
 ---
 
 ---
 hideInToc: true
 transition: slide-left
+name: Explanation of Basic Setup
 ---
 
 In a <span class="text-gradient">more structured setup</span>, each route’s component (e.g., Home, About, and NavBar) is imported from its own file. This setup keeps App.js `cleaner and allows for better organization`, especially as your application grows. As you would see below, <span class="text-gradient">index.js</span> wraps the App component in BrowserRouter, enabling client-side routing while <span class="text-gradient">App.js</span> defines routes and imports components for each path.
@@ -166,6 +168,7 @@ hideInToc: true
 transition: slide-up
 layout: iframe
 url: https://codesandbox.io/embed/6pcsm2?view=editor+%2B+preview&module=%2Fsrc%2FProfile.js%3A1%2C1
+name: Redirects and Protected Routes
 ---
 
 ---
@@ -193,6 +196,7 @@ hideInToc: true
 transition: slide-down
 layout: iframe
 url: https://codesandbox.io/embed/x8w7rr?view=editor+%2B+preview&module=%2Fsrc%2FProtectedRoute.js%3A11%2C2
+name: Redirects and Protected Routes Example
 ---
 
 ---

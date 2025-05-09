@@ -68,6 +68,7 @@ To setup
 ---
 hideInToc: true
 transition: slide-down
+name: Unit Testing Example
 ---
 
 The Counter component below includes a button to increment a displayed count value, with tests verifying `the initial count is displayed correctly` & `clicking the button increments the count`.
@@ -160,6 +161,7 @@ hideInToc: true
 transition: slide-up
 layout: iframe
 url: https://codesandbox.io/p/sandbox/friendly-banzai-4q2mvm?file=%2Fsrc%2FApp.test.js%3A5%2C37
+name: Testing Example
 ---
 
 ---

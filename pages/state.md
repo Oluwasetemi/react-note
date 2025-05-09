@@ -33,6 +33,7 @@ When a user type something into the form, the `submit` button becomes enabled. W
 
 ---
 hideInToc: true
+name: Declarative Programming
 ---
 
 <Tips type="tip" fullWidth>
@@ -50,6 +51,7 @@ The example in the next slide shows a form that has a textarea input field and a
 
 ---
 hideInToc: true
+name: Declarative Programming Example
 ---
 
 ```jsx {monaco-run} {lineNumbers: 'true', height: '20rem', overflowY: 'scroll'}
@@ -208,6 +210,7 @@ The Child component can now be a functional component that receives the `count` 
 
 ---
 hideInToc: true
+name: Lifting State Up Example
 ---
 
 <div grid="~ cols-2" gap="2">
@@ -339,6 +342,7 @@ function UncontrolledInput() {
 
 ---
 hideInToc: true
+name: Uncontrolled Components Example
 ---
 
 ```jsx {monaco-run} {lineNumbers: 'true', height: '20rem'}

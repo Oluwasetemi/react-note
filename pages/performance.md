@@ -314,6 +314,7 @@ export default App
 ---
 hideInToc: true
 transition: slide-up
+name: Example code of useMemo() in action
 ---
 
 <span class="text-[1.3rem] mb-0">

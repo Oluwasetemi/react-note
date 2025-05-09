@@ -136,6 +136,7 @@ sequenceDiagram
 ---
 hideInToc: true
 clicksStart: 1
+name: React useState Concepts
 ---
 
 <v-clicks>
@@ -301,6 +302,7 @@ graph LR
 
 ---
 hideInToc: true
+name: useEffect Hook
 ---
 
 ### useEffect Hook
@@ -318,6 +320,7 @@ graph TD
 
 ---
 hideInToc: true
+name: Fetching Data with useEffect
 ---
 
 ```js
@@ -329,7 +332,7 @@ function DataFetcher({ id }) {
     let mounted = true
 
     async function fetchData() {
-      const result = await fetch(`/api/data/${id}`)
+      const result = await fetch(`https://api.github.com/users/${id}`)
       const json = await result.json()
 
       if (mounted) {
@@ -351,6 +354,7 @@ function DataFetcher({ id }) {
 
 ---
 hideInToc: true
+name: useEffect
 ---
 
 # Managing Side Effects
@@ -373,6 +377,7 @@ graph TD
 
 ---
 hideInToc: true
+name: Managing Side Effects
 ---
 
 ```js
@@ -525,6 +530,7 @@ sequenceDiagram
 
 ---
 hideInToc: true
+name: Form Hook Demo
 ---
 
 <FormHookDemo />
@@ -568,6 +574,7 @@ function Form() {
 
 ---
 hideInToc: true
+name: SearchFormExercise
 ---
 
 <SearchFormExercise />
@@ -647,6 +654,7 @@ When you update state in React, you should always create a new object or array i
 
 ---
 hideInToc: true
+name: Understanding Immutability in React
 ---
 
 <div class="max-h-screen overflow-y-auto">
@@ -831,6 +839,7 @@ graph TD
 
 ---
 hideInToc: true
+name: Rules of Hooks
 ---
 
 <div class="flex items-center justify-center">
@@ -884,6 +893,7 @@ hideInToc: true
 
 ---
 hideInToc: true
+name: HookForm
 ---
 
 <HookForm />

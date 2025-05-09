@@ -11,8 +11,9 @@ hideInToc: true
 - <a @click="$slidev.nav.next()">Introduction</a>
 - <a @click="$slidev.nav.go($nav.currentPage+2)">Handling Form Inputs - Data Binding</a>
 - <a @click="$slidev.nav.go($nav.currentPage+6)">Form Controls</a>
-- <a @click="$slidev.nav.go($nav.currentPage+8)">Form Validation </a>
-- <a @click="$slidev.nav.go($nav.currentPage+10)">React Hook Form</a>
+- <a @click="$slidev.nav.go($nav.currentPage+9)">Form Validation </a>
+- <a @click="$slidev.nav.go($nav.currentPage+11)">React Hook Form</a>
+- <a @click="$slidev.nav.go($nav.currentPage+13)">Tanstack Form</a>
 - <a @click="$slidev.nav.go($nav.currentPage+12)">New Form Features and Updates in React 19</a>
 
 ---
@@ -62,6 +63,7 @@ export default App
 ---
 hideInToc: true
 transition: slide-up
+name: Handling Form Inputs
 ---
 
 [Handling Form Inputs - Data Binding]{.text-gradient.text-4xl}
@@ -78,6 +80,7 @@ By default, `React supports one-way data binding`, where data flows in one direc
 ---
 hideInToc: true
 transition: slide-left
+name: One-Way Data Binding
 ---
 
 ```jsx
@@ -171,6 +174,8 @@ The `inputValue` state stores the input field&apos;s value. The onChange event u
 
 ---
 hideInToc: true
+transition: slide-up
+name: Form Controls
 ---
 
 [Form Controls]{.text-gradient.text-4xl}
@@ -232,6 +237,7 @@ export default CheckboxInput
 ---
 hideInToc: true
 transition: slide-up
+name: Form Controls(Radio)
 ---
 
 <div class="w-200">
@@ -265,6 +271,7 @@ export default RadioButton
 ---
 hideInToc: true
 transition: slide-up
+name: Form Controls(Select)
 ---
 
 
@@ -299,6 +306,7 @@ export default SelectInput
 ---
 hideInToc: true
 transition: slide-up
+name: Form Validation
 ---
 
 [Form Validation]{.text-gradient.text-4xl}
@@ -423,12 +431,14 @@ The same Registration form using React-Hook-Form and Zod is on the next page ➠
 hideInToc: true
 layout: iframe
 url: https://codesandbox.io/embed/26sv4h?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A3%2C64
+name: React Hook Form Example
 ---
 
 
 ---
 hideInToc: true
 transition: slide-up
+name: Tanstack Form
 ---
 
 # Tanstack `<Form />`
@@ -444,6 +454,7 @@ To use Tanstack Form in a React application, you'll first need to install it: `n
 ---
 hideInToc: true
 transition: slide-up
+name: Tanstack Form Example
 ---
 
 <div class="scrollable">
@@ -515,11 +526,13 @@ hideInToc: true
 transition: slide-up
 layout: iframe
 url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?ctl=1&embed=1&file=src%2Findex.jsx&hideExplorer=1
+name: Tanstack Form Example
 ---
 
 ---
 hideInToc: true
 transition: slide-left
+name: Validation with Standard Schema Libraries
 ---
 
 # Validation with Standard Schema Libraries
@@ -547,6 +560,7 @@ function App() {
 ---
 hideInToc: true
 transition: slide-down
+name: Form Features In React 19
 ---
 
 [New Form Features and Updates in React 19]{.text-gradient.text-4xl}
@@ -568,6 +582,7 @@ We&apos;ll explore two of the key form-handling features in React 19:
 ---
 hideInToc: true
 transition: slide-right
+name: Form Actions
 ---
 
 `1. Form Actions`
@@ -589,11 +604,13 @@ hideInToc: true
 transition: slide-up
 layout: iframe
 url: https://stackblitz.com/edit/vitejs-vite-j9uc3f?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1&hideNavigation=1
+name: Form Actions Example
 ---
 
 ---
 hideInToc: true
 transition: slide-down
+name: Form Reset and Management
 ---
 
 `2. Form Reset and State Management`
@@ -612,11 +629,13 @@ Key Benefits of React 19's Streamlined Form Reset and State Management
 hideInToc: true
 layout: iframe
 url: https://codesandbox.io/embed/ypmc3c?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2Fform.js%3A39%2C5-39%2C8
+name: Form Reset and Management Example
 ---
 
 ---
 hideInToc: true
 transition: slide-up
+name: Assignment(Form)
 ---
 
 <h1 class="text-gradient">Assignment</h1>

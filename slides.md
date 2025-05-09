@@ -46,7 +46,7 @@ React Class notes for the 2nd Semester
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
-  <a href="https://github.com/Oluwasetemi/react-note/releases" target="_blank" alt="Download" title="Download PDF or PPTX version of the slide"
+  <a href="/export" target="_blank" alt="Download" title="Download PDF or PPTX version of the slide"
     class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-download />
   </a>
@@ -364,6 +364,9 @@ name: Important Links
 - [React Documentation](https://react.dev/)
 - [React Router Documentation](https://reactrouter.com/)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Vitest](https://vitest.dev/)
+- [React Query](https://tanstack.com/query/latest)
+
 
 ---
 hideInToc: true
@@ -374,3 +377,4 @@ hideInToc: true
 - {@Stan015}
 - {@victorvictoria-maker}
 - {@Olubebe}
+- {@rebornay}
