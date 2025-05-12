@@ -43,7 +43,7 @@ name: Making a Component Interactive with Events
 
 [Making a Component Interactive with Events]{.text-gradient.text-4xl}
 
-You can add [events]{.text-teal-400} directly to JSX elements rendered by your component. In the example below, the `onClick` event is used listen to a click interaction to apply a `state` update to the component with `setCount`. The `useState` hook is used to update the state of a component in React. We will talk more on `useState` when learning about Hooks and State Management in React.
+You can add [events]{.text-teal-400} directly to JSX elements rendered by your component. In the example below, the `onClick` event is used to listen for a click interaction and apply a `state` update to the component using `setCount`. The `useState` hook is used to update the state of a component in React. We will talk more on `useState` when learning about Hooks and State Management in React.
 
 ```jsx {monaco-run} { lineNumbers: 'true', height: '13rem' }
 function Counter() {
