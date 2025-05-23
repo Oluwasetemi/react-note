@@ -473,13 +473,12 @@ name: Why does a list need a key?
 
 # Why List [key]{.text-gradient}? Where to find a `key` value?
 
-A list `key` is a unique identifier that gives the lits item a name in the DOM so as to precisely locate it when needed. Some suggestions of getting a unique `key` value include:
+A list `key` is a unique identifier that gives the list item a name in the DOM so as to precisely locate it when needed. Some suggestions of getting a unique `key` value include:
 
 <v-clicks>
 
 - Using the Serial No. or ID of the item as it is on the database
-- Using a unique key generator like `crypto.randomUUID()` or a package like <span text-teal-400>[uuid](https://www.npmjs.com/package/uuid)</span>. Although generating `key` values locally can be tricky as they my change on every re-render, they are best used for local items.
-
+- Using a unique key generator like `crypto.randomUUID()` or a package like <span text-teal-400>[uuid](https://www.npmjs.com/package/uuid)</span>. Although generating key values locally can be tricky since they may change on every re-render, they are best used for local items.
 </v-clicks>
 
 <span v-click>
@@ -601,7 +600,7 @@ transition: slide-down
 
 <span text-4>
 
-We can assign `JSX` to a variable based on a condition. As we know in [JavaScript]{.text-gradient}, we can re-assign values to variables declared with the `let` keyword. In that regard, we can declare what we want to assign based on a condition, then use use any conditional statement to re-assign value or `JSX` that would be rendered to the UI. We can also assign `JSX` directly for cleaner code when using conditional statement like the Ternary Operator.
+We can assign `JSX` to a variable based on a condition. As we know in [JavaScript]{.text-gradient}, we can re-assign values to variables declared with the `let` keyword. In that regard, we can declare what we want to assign based on a condition, then use any conditional statement to re-assign value or `JSX` that would be rendered to the UI. We can also assign `JSX` directly for cleaner code when using conditional statement like the Ternary Operator.
 
 </span>
 

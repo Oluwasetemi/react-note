@@ -27,7 +27,7 @@ hideInToc: true
 
 - #### React.js has been revolutionizing web development for 11 remarkable years, establishing itself as the go-to JavaScript library for developers worldwide 🏆. Now, as we witness the transition from version 18 to version 19, something extraordinary is happening in the React ecosystem ✨.
 
-- #### Enter React 19 – a release that's turning heads for all the right reasons 🎯. But here's what makes this update truly special: instead of adding layers of complexity, it's stripping them away. Think of it as React getting a minimalist makeover that actually makes it more powerful 💪.
+- #### React 19 – a release that's turning heads for all the right reasons 🎯. But here's what makes this update truly special: instead of adding layers of complexity, it's stripping them away. Think of it as React getting a minimalist makeover that actually makes it more powerful 💪.
 
 - #### For all you React enthusiasts out there, this isn't just another update – it's a breath of fresh air 🌬️. React 19 is here to streamline your development process, boost your productivity, and make your coding journey more enjoyable than ever 🚀.
 
