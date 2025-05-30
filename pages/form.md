@@ -254,12 +254,14 @@ function RadioButton() {
   }
 
   return (
+    <>
       <label>
-        <input type="radio" value="male" checked={gender === "male"} onChange={handleChange} /> Male
+        <input type="radio" name="gender" value="male" checked={gender === "male"} onChange={handleChange} /> Male
       </label>
       <label>
-        <input type="radio" value="female" checked={gender === "female"} onChange={handleChange} />  Female
+        <input type="radio" name="gender" value="female" checked={gender === "female"} onChange={handleChange} />  Female
       </label>
+    </>
   )
 }
 
