@@ -254,12 +254,14 @@ function RadioButton() {
   }
 
   return (
+    <>
       <label>
-        <input type="radio" value="male" checked={gender === "male"} onChange={handleChange} /> Male
+        <input type="radio" name="gender" value="male" checked={gender === "male"} onChange={handleChange} /> Male
       </label>
       <label>
-        <input type="radio" value="female" checked={gender === "female"} onChange={handleChange} />  Female
+        <input type="radio" name="gender" value="female" checked={gender === "female"} onChange={handleChange} />  Female
       </label>
+    </>
   )
 }
 
@@ -644,4 +646,4 @@ name: Assignment(Form)
 
 Read more on <span class="text-teal-400 underline"><a href="https://zod.dev/">Zod</a></span> and <span class="text-teal-400 underline"> <a href="https://tanstack.com/form/latest">@tanstack/react-form</a></span>
 
-Create a form using `@tanstack/react-form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from React Hook Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.
+Create a form using `@tanstack/react-form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from Tanstack Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.
