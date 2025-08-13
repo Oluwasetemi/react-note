@@ -7,7 +7,7 @@ info: |
   making of world class developers
   join at [AltSchool Africa](https://altschoolafrica.com)
 author: Oluwasetemi
-download: false
+download: true
 exportFilename: react-note
 export:
   format: pdf
