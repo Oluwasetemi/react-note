@@ -13,6 +13,7 @@
     "postinstall": "npx playwright-core install chromium"
   },
   "dependencies": {
+    "@babel/standalone": "^7.28.3",
     "@slidev/cli": "51.6.0",
     "@slidev/client": "51.6.0",
     "@slidev/theme-default": "latest",

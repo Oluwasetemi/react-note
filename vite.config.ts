@@ -142,6 +142,11 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['@babel/standalone'],
+    },
+  },
   optimizeDeps: {
     // TODO: only exclude in prod.
     include: [
