@@ -5,7 +5,7 @@ import GitHub from '~icons/mdi/github'
 import { useWebSocket } from '@vueuse/core'
 
 // Basic WebSocket connection
-const { data } = useWebSocket('ws://api.oluwasetemi.dev/ws/visitors', {
+const { data } = useWebSocket('wss://api.oluwasetemi.dev/ws/visitors', {
   immediate: true
 });
 
