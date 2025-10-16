@@ -23,7 +23,6 @@ drawings:
   persist: false
 transition: slide-left
 mdc: true
-hideInToc: true
 overviewSnapshots: true
 selectable: true
 ---
