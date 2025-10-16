@@ -6,13 +6,17 @@ hideInToc: true
 
 # Routing and Navigation
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Introduction to Routing and React Router</a>
 - <a @click="$slidev.nav.go($nav.currentPage+3)">Setting Up Routes and Links</a>
-- <a @click="$slidev.nav.go($nav.currentPage+6)">Navigating Between Pages</a>
-- <a @click="$slidev.nav.go($nav.currentPage+7)">Dynamic Routing and URL Parameters</a>
-- <a @click="$slidev.nav.go($nav.currentPage+2)">Redirects and Protected Routes</a>
+- <a @click="$slidev.nav.go($nav.currentPage+7)">Navigating Between Pages</a>
+- <a @click="$slidev.nav.go($nav.currentPage+8)">Dynamic Routing and URL Parameters</a>
+- <a @click="$slidev.nav.go($nav.currentPage+10)">Redirects and Protected Routes</a>
+- <a @click="$slidev.nav.go($nav.currentPage+14)">Tanstack Router</a>
+- <a @click="$slidev.nav.go($nav.currentPage+19)">Frameworks</a>
 
 ---
 hideInToc: true
@@ -76,9 +80,10 @@ See the basic setup with Routes ➠
 ---
 hideInToc: true
 transition: slide-left
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/vq9qn3?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A12%2C17
 name: Basic Setup with Routes
+autoLoad: true
 ---
 
 ---
@@ -89,7 +94,17 @@ name: Explanation of Basic Setup
 
 In a <span class="text-gradient">more structured setup</span>, each route’s component (e.g., Home, About, and NavBar) is imported from its own file. This setup keeps App.js `cleaner and allows for better organization`, especially as your application grows. As you would see below, <span class="text-gradient">index.js</span> wraps the App component in BrowserRouter, enabling client-side routing while <span class="text-gradient">App.js</span> defines routes and imports components for each path.
 
-<iframe src="https://codesandbox.io/embed/nlcw6p?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A11%2C1" style="width: 100%; height: 380px; border:0; border-radius: 4px; overflow: hidden;" title="CodeSandbox Embed" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+
+---
+hideInToc: true
+transition: slide-left
+layout: iframe-lazy
+url: https://codesandbox.io/embed/nlcw6p?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A11%2C1
+name: Basic Setup with Routes
+autoLoad: true
+---
+
+
 
 ---
 hideInToc: true
@@ -166,9 +181,10 @@ In the example in the next page ➠, here is what happens:
 ---
 hideInToc: true
 transition: slide-up
-layout: iframe
-url: https://codesandbox.io/embed/6pcsm2?view=editor+%2B+preview&module=%2Fsrc%2FProfile.js%3A1%2C1
+layout: iframe-lazy
+url: https://codesandbox.io/embed/nqzq6v?view=preview&module=%2Fsrc%2FProfile.js
 name: Redirects and Protected Routes
+autoLoad: true
 ---
 
 ---
@@ -194,9 +210,10 @@ In the next example in the next page ➠, we create a protected route that only 
 ---
 hideInToc: true
 transition: slide-down
-layout: iframe
-url: https://codesandbox.io/embed/x8w7rr?view=editor+%2B+preview&module=%2Fsrc%2FProtectedRoute.js%3A11%2C2
+layout: iframe-lazy
+url: https://codesandbox.io/embed/vhts7t?view=preview&module=%2Fsrc%2FProtectedRoute.js
 name: Redirects and Protected Routes Example
+autoLoad: true
 ---
 
 ---
@@ -263,9 +280,200 @@ hideInToc: true
 transition: slide-up
 ---
 
-## [Tanstack Router]{.text-gradient.text-4xl}
+## [TanstackRouter]{.text-gradient.text-4xl}
 
 Tanstack Router is a powerful and flexible routing library for React applications. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures. With Tanstack Router, you can define routes, handle URL parameters, and manage nested routes with ease.
+
+Step 1: install the router
+
+````md magic-move
+
+```sh
+# npm
+npm install @tanstack/react-router @tanstack/react-router-devtools
+npm install -D @tanstack/router-plugin
+```
+
+```sh
+# pnpm (recommended)
+pnpm add @tanstack/react-router @tanstack/react-router-devtools
+pnpm add -D @tanstack/router-plugin
+```
+
+```sh
+# yarn
+yarn add @tanstack/react-router @tanstack/react-router-devtools
+yarn add -D @tanstack/router-plugin
+```
+
+```sh
+# bun
+bun add @tanstack/react-router @tanstack/react-router-devtools
+bun add -D @tanstack/router-plugin
+```
+````
+
+Step 2: Configure Vite Plugin
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
+
+export default defineConfig({
+  plugins: [
+    tanstackRouter({ target: 'react', autoCodeSplitting: true }),
+    react()
+  ]
+})
+```
+
+---
+hideInToc: true
+transition: slide-left
+---
+
+Step 3: Create Basic Router Setup
+
+````md magic-move
+
+```js
+import { StrictMode } from 'react'
+import ReactDOM from 'react-dom/client'
+import { Outlet, RouterProvider, Link, createRouter, createRoute, createRootRoute, } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+
+// Root route with navigation
+const rootRoute = createRootRoute({
+  component: () => (
+    <>
+      <div className="p-2 flex gap-2">
+        <Link to="/" className="[&.active]:font-bold">
+          Home
+        </Link>
+        <Link to="/about" className="[&.active]:font-bold">
+          About
+        </Link>
+      </div>
+      <hr />
+      <Outlet />
+      <TanStackRouterDevtools />
+    </>
+  ),
+})
+```
+
+
+```js
+// Home page route
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/',
+  component: function Index() {
+    return (
+      <div className="p-2">
+        <h3>Welcome Home!</h3>
+      </div>
+    )
+  },
+})
+```
+
+```js
+// About page route
+const aboutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/about',
+  component: function About() {
+    return <div className="p-2">Hello from About!</div>
+  },
+})
+```
+
+```js
+// Combine routes into tree
+const routeTree = rootRoute.addChildren([indexRoute, aboutRoute])
+
+// Create router instance
+const router = createRouter({ routeTree })
+
+// TypeScript declaration for router
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+```
+
+```js
+// Render the app
+const rootElement = document.getElementById('app')!
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+}
+```
+
+````
+
+
+
+
+---
+hideInToc: true
+transition: slide-left
+layout: iframe-lazy
+url: https://stackblitz.com/edit/vitejs-vite-nfqyhumz?ctl=1&embed=1&file=src%2FApp.jsx
+---
+
+
+---
+hideInToc: true
+transition: slide-left
+---
+
+<div grid class="grid-cols-2 gap-2">
+
+- ✅ 100% TypeScript Support - Fully type-safe routing
+- ✅ File-based Routing - Automatic route generation
+- ✅ Nested Routing - Complex route hierarchies
+- ✅ Search Params - Built-in URL state management
+- ✅ Data Loading - Route-level data fetching
+- ✅ DevTools - Built-in development tools
+- ✅ Code Splitting - Automatic bundle optimization
+
+
+<div>
+
+  ```sh
+  # Create new project
+  npx create-tsrouter-app@latest my-app --template file-router
+
+  # Navigate and install
+  cd my-app
+  npm install
+  npm run dev
+  ```
+
+  <sub>The support for file based routing, route file generation with the route gen tree is truly amazing and innovative.</sub>
+
+</div>
+
+
+</div>
+
+---
+hideInToc: true
+transition: slide-left
+layout: iframe-lazy
+url: https://stackblitz.com/edit/tanstack-router-k5akabnz?ctl=1&embed=1&file=src%2Froutes%2F(this-folder-is-not-in-the-url)%2Froute-group.tsx&view=preview
+---
+
+
 
 ---
 hideInToc: true
@@ -278,9 +486,10 @@ Frameworks are pre-built libraries that provide a structure for building applica
 
 
 - **Next.js**: A React framework for building server-rendered applications. It provides features like static site generation, API routes, and built-in CSS support.
-- **Remix**: A full-stack React framework that focuses on server-rendered applications. It provides features like data loading, nested routes, and built-in caching.
-- **Tanstack Start**: A new framework for building web applications using Tanstack Router. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures.
-- **React Router v7**: The latest version of React Router, which includes new features and improvements over previous versions. It provides a more flexible API for managing routes and handling URL parameters.
+- **Tanstack Start**: A new framework for building web applications using Tanstack Router based and good principles of tanstack query. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures.
+- **Remix** and **React Router v7** : A full-stack React framework that focuses on server-rendered applications. It provides features like data loading, nested routes, and built-in caching.
+- [**Redwood SDK**](https://rwsdk.com/): is a React framework for building server-side web apps on Cloudflare
+- **Waku**, **Vike**
 
 ---
 hideInToc: true

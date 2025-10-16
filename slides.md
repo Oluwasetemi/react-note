@@ -3,7 +3,7 @@ background: https://res.cloudinary.com/drnqdd87d/image/upload/f_auto/nmgakkzd3lm
 title: React Class Note
 titleTemplate: '%s - AltSchool Africa'
 info: |
-  AltSchool v4 React Class Notes
+  React Class Notes
   making of world class developers
   join at [AltSchool Africa](https://altschoolafrica.com)
 author: Oluwasetemi
@@ -318,26 +318,30 @@ src: ./pages/test.md
 
 ---
 name: Pagination Order
-layout: iframe
+layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hwtrzb?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+autoLoad: true
 ---
 
 ---
 name: Infinite Scroll Pagination
-layout: iframe
+layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-zjmule?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+autoLoad: true
 ---
 
 ---
 name: Pagination GraphQL
-layout: iframe
+layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-q5wnda?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+autoLoad: true
 ---
 
 ---
 name: Router Example
-layout: iframe
+layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hswavt?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+autoLoad: true
 ---
 
 <!--

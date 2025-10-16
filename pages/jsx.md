@@ -6,14 +6,16 @@ hideInToc: true
 
 # JSX
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Ways of writing HTML in a JavaScript file</a>
 - <a @click="$slidev.nav.go($nav.currentPage+4)">What is JSX? Syntax and Structure</a>
 - <a @click="$slidev.nav.go($nav.currentPage+6)">The Rules of JSX</a>
-- <a @click="$slidev.nav.go($nav.currentPage+8)">Convert HTML to JSX</a>
-- <a @click="$slidev.nav.go($nav.currentPage+9)">Embedding JavaScript in JSX</a>
-- <a @click="$slidev.nav.go($nav.currentPage+10)">CSS in JSX</a>
+- <a @click="$slidev.nav.go($nav.currentPage+9)">Convert HTML to JSX</a>
+- <a @click="$slidev.nav.go($nav.currentPage+11)">Embedding JavaScript in JSX</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">CSS in JSX</a>
 
 ---
 hideInToc: true
@@ -304,14 +306,12 @@ Here are some HTML to JSX conversion tools:
 
 </v-clicks>
 
-<v-click>
-<iframe
-  width="100%"
-  height="400"
-  src="https://transform.tools/html-to-jsx"
->
-</iframe>
-</v-click>
+---
+hideInToc: true
+transition: slide-left
+layout: iframe-lazy
+url: https://transform.tools/html-to-jsx
+---
 
 ---
 hideInToc: true

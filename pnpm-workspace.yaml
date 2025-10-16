@@ -1,0 +1,4 @@
+onlyBuiltDependencies:
+  - esbuild
+  - playwright-chromium
+  - simple-git-hooks

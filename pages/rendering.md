@@ -6,6 +6,8 @@ hideInToc: true
 
 # Rendering
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Lifecycle (Mount, Trigger, Render and Commit)</a>

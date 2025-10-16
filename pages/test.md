@@ -6,6 +6,8 @@ hideInToc: true
 
 # Testing React Applications
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Introduction to Testing</a>
@@ -159,9 +161,10 @@ The tests ensure that InputField correctly adds tasks and that TodoList displays
 ---
 hideInToc: true
 transition: slide-up
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/p/sandbox/friendly-banzai-4q2mvm?file=%2Fsrc%2FApp.test.js%3A5%2C37
 name: Testing Example
+autoLoad: true
 ---
 
 ---

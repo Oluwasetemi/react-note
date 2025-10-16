@@ -6,6 +6,8 @@ hideInToc: true
 
 # Managing State
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Imperative vs Declarative</a>

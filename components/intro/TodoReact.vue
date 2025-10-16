@@ -17,7 +17,7 @@ const App = () => {
 
   const createTodo = (e) => {
     e.preventDefault()
-    if (!text.trim()) return
+    if (!text?.trim()) return
     setTodos([...todos, { id: id, text: text, completed: false }])
     setId(id + 1)
     setText('')
@@ -109,6 +109,6 @@ function render() {
 
 onMounted(() => {
   render()
-  console.log(React, ReactDOM)
+  // console.log(React, ReactDOM)
 })
 </script>

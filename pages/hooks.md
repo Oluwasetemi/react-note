@@ -6,15 +6,17 @@ hideInToc: true
 
 # React Hooks
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">A New Chapter For React Hooks</a>
 - <a @click="$slidev.nav.go($nav.currentPage+3)">What is state?</a>
 - <a @click="$slidev.nav.go($nav.currentPage+8)">Introduction to React Hooks</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">Basic Hooks: "useState", "useEffect"</a>
-- <a @click="$slidev.nav.go($nav.currentPage+11)">Managing Side Effects with "useEffect"</a>
-- <a @click="$slidev.nav.go($nav.currentPage+19)">Complex state (Right way to update objects and arrays in state) - Mutation</a>
-- <a @click="$slidev.nav.go($nav.currentPage+21)">Immutability</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">Managing Side Effects with "useEffect"</a>
+- <a @click="$slidev.nav.go($nav.currentPage+20)">Complex state (Right way to update objects and arrays in state) - Mutation</a>
+- <a @click="$slidev.nav.go($nav.currentPage+23)">Immutability</a>
 - <a @click="$slidev.nav.go($nav.currentPage+25)">Rules of Hooks</a>
 
 ---
@@ -299,6 +301,98 @@ graph LR
 - Better TypeScript Support: More predictable types
 
 </v-clicks>
+
+---
+hideInToc: true
+name: Basic Hooks: "useState", "useEffect"
+---
+
+# Basic Hooks: useState & useEffect
+
+<div class="grid grid-cols-2 gap-8 h-full">
+
+<!-- useState Section -->
+<div class="space-y-4">
+  <h2 class="text-2xl font-bold text-blue-500">useState</h2>
+  
+  <div class="bg-gray-500 p-4 rounded-lg">
+    <h3 class="text-sm mb-2">Syntax:</h3>
+    <pre class="text-xs"><code>const [state, setState] = useState(initialValue)</code></pre>
+  </div>
+
+  <div class="space-y-3">
+    
+  <div class="p-3 rounded border">
+
+  ```jsx
+  function Counter() {
+    const [count, setCount] = useState(0);
+    const increment = () => setCount(count + 1)
+    
+    return (...);
+  }
+  ```
+
+  </div>
+    <div class="bg-green-50 p-3 rounded">
+      <h4 class="font-mono text-green-800">Key Points:</h4>
+      <ul class="text-xs text-green-700 mt-1">
+        <li>Returns [value, setter] array</li>
+        <li>Initial value only used on first render</li>
+        <li>State updates trigger re-renders</li>
+        <li>Always call at top level of component</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- useEffect Section -->
+<div class="space-y-4">
+  <h2 class="text-2xl font-bold text-green-500">useEffect</h2>
+  
+  <div class="bg-gray-500 p-4 rounded-lg">
+    <h3 class="text-sm mb-2">Syntax:</h3>
+    <pre class="text-sm"><code>useEffect(setup, dependencies?)</code></pre>
+  </div>
+
+  <div class="space-y-3">
+  
+    
+  <div class="p-3 rounded border"> 
+  
+  ```jsx
+  function DataFetcher() {
+    const [data, setData] = useState(null);
+    
+    useEffect(function effect() {
+      // Side effect code here
+      subscribe().then(setData);
+      // Cleanup function (optional)
+      return () => {
+        // Cleanup code
+      };
+    }, []); // Dependencies array
+    
+    return <div>{...}</div>;
+  }
+  ```
+
+  </div>
+
+  <div class="absolute top-10 right-1 z-10 bg-blue-50 p-2 rounded">
+    <h4 class="font-mono text-sm text-blue-800">Dependency Patterns:</h4>
+    <ul class="text-sm text-blue-700 mt-1">
+      <li><code>[]</code> - Run once on mount</li>
+      <li><code>[dep1, dep2]</code> - Run when deps change</li>
+      <li>No array - Run after every render</li>
+      <li>Return function for cleanup</li>
+    </ul>
+  </div>
+  </div>
+</div>
+
+</div>
+
 
 ---
 hideInToc: true
@@ -842,8 +936,8 @@ hideInToc: true
 name: Rules of Hooks
 ---
 
-<div class="flex items-center justify-center">
-  <div class="max-w-l w-full h-full max-h-[700px] overflow-y-auto px-6 py-8 space-y-6 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
+<div class="flex items-center justify-center min-h-[1900px] overflow-y-auto">
+  <div class="max-w-l w-full px-6 py-8 space-y-6 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
     <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
       <h2 class="text-2xl text-blue-500 font-semibold mb-4">Rule 1: Only Call Hooks at the Top Level</h2>
       <div class="space-y-4">
@@ -886,6 +980,7 @@ name: Rules of Hooks
   const [state, setState] = useState(0);
 }</kbd></pre>
         </div>
+        <div class="mb-[20rem]" />
       </div>
     </div>
   </div>

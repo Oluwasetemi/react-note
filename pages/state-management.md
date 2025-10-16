@@ -6,12 +6,14 @@ hideInToc: true
 
 # State Management in React
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Lifting State Up in React</a>
-- <a @click="$slidev.nav.go($nav.currentPage+4)">Context API for Global State</a>
-- <a @click="$slidev.nav.go($nav.currentPage+7)">Introduction to Redux</a>
-- <a @click="$slidev.nav.go($nav.currentPage+8)">Best Practices for State Management</a>
+- <a @click="$slidev.nav.go($nav.currentPage+5)">Context API for Global State</a>
+- <a @click="$slidev.nav.go($nav.currentPage+9)">Introduction to Redux</a>
+- <a @click="$slidev.nav.go($nav.currentPage+10)">Best Practices for State Management</a>
 
 ---
 hideInToc: true
@@ -115,12 +117,15 @@ transition: slide-up
 
 Here is the interactive mode of the code example in the previous slide.
 
-<iframe
-  width="100%"
-  height="400"
-  src="https://codesandbox.io/embed/pzvrd4"
->
-</iframe>
+
+---
+hideInToc: true
+transition: slide-left
+layout: iframe-lazy
+url: https://codesandbox.io/embed/pzvrd4
+---
+
+
 
 ---
 hideInToc: true
@@ -188,12 +193,13 @@ transition: slide-up
 
 Here is a theme context example code in action.
 
-<iframe
-  width="100%"
-  height="400"
-  src="https://codesandbox.io/embed/kwslzk"
->
-</iframe>
+---
+hideInToc: true
+transition: slide-left
+layout: iframe-lazy
+url: https://codesandbox.io/embed/kwslzk
+---
+
 
 ---
 hideInToc: true
@@ -201,7 +207,7 @@ hideInToc: true
 
 # [Introduction to Redux]{.text-gradient}
 
-For large-scale applications with complex state interactions, we can use external library like [Redux]{.text-teal-400} for state management.
+For large-scale applications with complex state interactions, we can use external library like [Redux]{.text-teal-400} for state management and Redux Toolkit(RTK) for more flexibility.
 
 <v-click>
 
@@ -221,6 +227,7 @@ For large-scale applications with complex state interactions, we can use externa
 - Actions: Plain objects that describe what you want to do.
 - Reducers: Pure functions that update the state based on actions.
 - Dispatch: Triggers an action.
+- Redux Toolkit: Managing Async State 
 
 </v-clicks>
 
@@ -247,6 +254,56 @@ const store = createStore(counterReducer)
 ```
 
 </div>
+
+---
+hideInToc: true
+transition: fade
+---
+
+## More Thirty Party Libraries for State management includes `zustand`, `jotai`, `@tanstack/query`, `swr`, `recoil`, `xstate`.
+
+````md magic-move
+
+```js
+import { create } from 'zustand'
+
+const useBearStore = create<BearState>((set) => ({
+  bears: 0,
+  increase: () => set((state) => ({ bears: state.bears + 1 })),
+  decrease: () => set((state) => ({ bears: state.bears - 1 })),
+}))
+
+function BearCounter() {
+  const { bears, increase, decrease } = useBearStore()
+  return (
+    <div>
+      <h1>{bears} bears</h1>
+      <button onClick={increase}>+</button>
+      <button onClick={decrease}>-</button>
+    </div>
+  )
+}
+```
+
+```js
+import { useQuery } from '@tanstack/react-query'
+
+function UserProfile({ userId }: { userId: string }) {
+  const { data: user, isLoading, error } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => fetchUser(userId),
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error loading user</div>
+
+  return <div>{user?.name}</div>
+}
+```
+
+````
+
+
 
 ---
 hideInToc: true

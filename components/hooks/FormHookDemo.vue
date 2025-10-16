@@ -208,8 +208,8 @@ async function formatCode() {
         </svg>
       </button>
       <div class="text-center">
-        <h2 class="text-2xl font-bold">{{ examples[currentIndex].title }}</h2>
-        <p class="text-white/80">{{ examples[currentIndex].description }}</p>
+        <h2 class="text-2xl font-bold">{{ examples[currentIndex]?.title }}</h2>
+        <p class="text-white/80">{{ examples[currentIndex]?.description }}</p>
       </div>
       <button
         @click="nextExample"
@@ -253,7 +253,7 @@ async function formatCode() {
         <div
           ref="codeContainer"
           v-if="ready"
-          v-html="examples[currentIndex]?.code"
+          v-html="examples[currentIndex]?.code || ''"
           class="max-h-[300px] overflow-y-auto p-6 text-sm font-mono leading-relaxed text-gray-100 whitespace-pre-wrap break-words scrollbar-custom"
         ></div>
 

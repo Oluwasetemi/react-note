@@ -6,11 +6,13 @@ hideInToc: true
 
 # Performance Optimization in {React}
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Avoiding Unnecessary Renders with React.memo</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">Optimizing Component Renders with useMemo</a>
-- <a @click="$slidev.nav.go($nav.currentPage+12)">Lazy Loading Components ("React.lazy" and "Suspense")</a>
+- <a @click="$slidev.nav.go($nav.currentPage+13)">Lazy Loading Components ("React.lazy" and "Suspense")</a>
 
 ---
 hideInToc: true
@@ -92,16 +94,13 @@ The main purpose of `memo()` is [performance optimization]{.text-teal-400}, it d
 ---
 hideInToc: true
 transition: slide-down
+layout: iframe-lazy
+url: https://codesandbox.io/embed/rqngm9
 ---
 
-# [Example]{.text-gradient} of `memo()` in [action]{.text-gradient}
 
-<iframe
-  width="100%"
-  height="400"
-  src="https://codesandbox.io/embed/rqngm9"
->
-</iframe>
+
+
 
 ---
 hideInToc: true
@@ -325,12 +324,11 @@ Example code of [Skipping Component Re-rendering]{.text-gradient} with `useMemo(
 
 Ensure the preview tab is loaded. Open dev tool to see the console when you click on the button.
 
-<iframe
-  width="100%"
-  height="400"
-  src="https://codesandbox.io/embed/5mwcd8"
->
-</iframe>
+---
+layout: iframe-lazy
+url: https://codesandbox.io/embed/5mwcd8
+---
+
 
 ---
 hideInToc: true
@@ -734,14 +732,14 @@ function BigSpinner() {
 ---
 hideInToc: true
 transition: slide-left
+layout: iframe-lazy
+url: https://codesandbox.io/embed/gfv64p
 ---
 
-# [Example code of React `<Suspense>` in action]{.text-gradient}
+# React Compiler Helps with everything in this chapter, when starting a new project opt in for the React Compiler.
 
-Showing stale content while fresh content is loading
+1. [https://react.dev/learn/react-compiler](https://react.dev/learn/react-compiler)
 
-<iFrame
-  src="https://codesandbox.io/embed/gfv64p"
-  width="100%"
-  height="400"
-/>
+2. [https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler](https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler)
+
+3. [https://playground.react.dev](https://playground.react.dev)

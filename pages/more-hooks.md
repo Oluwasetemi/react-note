@@ -6,13 +6,20 @@ hideInToc: true
 
 # More Hooks
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">useRef</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">useReducer</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">useContext</a>
+- <a @click="$slidev.nav.go($nav.currentPage+9)">use</a>
 - <a @click="$slidev.nav.go($nav.currentPage+12)">useLayoutEffect</a>
 - <a @click="$slidev.nav.go($nav.currentPage+16)">useDeferredValue</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">useActionState</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">useFormStatus</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">useOptimistic</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">useTransition</a>
 
 ---
 hideInToc: true
@@ -83,9 +90,10 @@ This highlights a key difference: `useState` is for reactive data that affects t
 ---
 hideInToc: true
 transition: slide-right
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/566hdt?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseRefCounter.jsx&hidenavigation=1
 name: useRef Counter
+autoLoad: true
 ---
 
 ---
@@ -169,41 +177,110 @@ You should use useReducer when your <span class="text-teal-400">state logic beco
 
 ---
 hideInToc: true
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/vkmlhg?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseStateCart.jsx%3A25%2C54
 name: useReducer Cart
+autoLoad: true
 ---
 
 ---
 hideInToc: true
-transition: slide-up
+name: Context & Performance Hooks
 ---
 
-## ✴ [ useContext]{.text-gradient.text-4xl}
+# Context & Performance Hooks
 
-Information is passed from a parent component to a child component through props. However, this can become cumbersome when the data needs to be passed through several intermediate components, or when multiple components in the app require the same data. The `Context API` allows a parent component to make certain data available to all components below it in the component tree, regardless of their depth, without the need to pass it explicitly via props.
+<div class="grid grid-cols-2 gap-6 h-full">
 
-The `useContext` hook allows functional components to consume values from context directly, eliminating the need for a `Consumer` component. This simplifies the process of accessing shared state or global data that is provided by a `Context.Provider`.
+<!-- useContext -->
+<div class="space-y-3">
+  <h2 class="text-l font-bold text-purple-600">useContext</h2>
+  
+  <div class="bg-purple-50 p-3 rounded">
+    <h3 class="font-semibold text-purple-800">Syntax</h3>
+    <code class="text-xs">const value = useContext(SomeContext)</code>
+  </div>
 
-<v-clicks>
+  ```jsx
+  const ThemeContext = createContext();
+  
+  function App() {
+    return (
+      <ThemeContext.Provider value="dark">
+        <ThemedButton />
+      </ThemeContext.Provider>
+    );
+  }
+  
+  function ThemedButton() {
+    const theme = use(ThemeContext);
+    return <button className={theme}>Click me</button>;
+  }
+  ```
 
-```jsx
-const value = useContext(SomeContext)
-```
+  <div class="bg-white light:bg-black p-2 rounded text-xs text-black light:text-white">
+    <strong>Use:</strong> Global state sharing without prop drilling.
+  </div>
+</div>
 
-Use Cases:
+<!-- useMemo -->
+<div class="space-y-3">
+  <h2 class="text-l font-bold text-orange-600">useMemo</h2>
+  
+  <div class="bg-orange-50 p-3 rounded">
+    <h3 class="font-semibold text-orange-800">Syntax</h3>
+    <code class="text-xs">const memoized = useMemo(() => fn(), [deps])</code>
+  </div>
 
-- Global State Sharing: Ideal for managing global state across your app, such as authentication status, theming, or user preferences.
+  ```jsx
+  function ExpensiveComponent({ items, filter }) {
+    const filteredItems = useMemo(() => {
+      return items.filter(item => item.category === filter);
+    }, [items, filter]);
+    
+    return (
+      <div>
+        {filteredItems.map(item => <div key={item.id}>{item.name}</div>)}
+      </div>
+    );
+  }
+  ```
 
-- Avoiding Prop Drilling: Context helps eliminate this issue by making the data available to any component in the tree, without having to explicitly pass props down through every intermediate level.
+  <div class="bg-white light:bg-black p-2 rounded text-xs text-black light:text-white">
+    <strong>Use:</strong> Memoize expensive calculations to prevent unnecessary re-computations.
+  </div>
+</div>
 
-</v-clicks>
+</div>
+
+<div class="mt-4 p-3 bg-yellow-50 rounded">
+  <h3 class="font-bold text-yellow-800 mb-2">Performance Tips</h3>
+  <div class="grid grid-cols-2 gap-4 text-sm">
+    <div>
+      <strong class="text-purple-700">useContext:</strong>
+      <ul class="text-xs mt-1">
+        <li>Avoid prop drilling</li>
+        <li>Global state management</li>
+        <li>Theme & auth data</li>
+      </ul>
+    </div>
+    <div>
+      <strong class="text-orange-700">useMemo:</strong>
+      <ul class="text-xs mt-1">
+        <li>Expensive calculations</li>
+        <li>Object/array dependencies</li>
+        <li>Prevent re-renders</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 ---
 hideInToc: true
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/zxzrcz?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseContext.jsx%3A41%2C29
 name: useContext
+autoLoad: true
 ---
 
 ---
@@ -222,7 +299,7 @@ function ThemeProvider({ children }) {
 }
 
 function ThemedComponent() {
-  const theme = useContext(ThemeContext) // Consumes theme directly
+  const theme = use(ThemeContext); // replace with `use`
   return (
     <div style={{ background: theme === 'dark' ? '#333' : '#fff' }}>
       Themed Component
@@ -243,6 +320,78 @@ Without useContext: You&apos;d need to pass the theme prop down manually, making
 
 ---
 hideInToc: true
+name: Concurrent Features
+---
+
+# Concurrent Features
+
+<div class="grid grid-cols-2 gap-6 h-full">
+
+<!-- useTransition -->
+<div class="space-y-3">
+  <h2 class="text-xs font-bold text-indigo-600">useTransition</h2>
+  
+  <div class="bg-indigo-50 p-2 rounded">
+    <code class="text-[12px]">const [isPending, startTransition] = useTransition()</code>
+  </div>
+
+  ```jsx
+  function SearchApp() {
+    const [isPending, startTransition] = useTransition();
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+    
+    const handleSearch = (newQuery) => {
+      setQuery(newQuery);
+      startTransition(() => {
+        // Non-urgent update
+        setResults(expensiveSearch(newQuery));
+      });
+    };
+    return (...);
+  }
+  ```
+
+  <div class="bg-white light:bg-black bg-green-50 p-1 rounded text-xs text-black light:text-white">
+    <strong>Use:</strong> Mark non-urgent updates to keep UI responsive.
+  </div>
+</div>
+
+<!-- startTransition -->
+<div class="space-y-3">
+  <h2 class="text-xl font-bold text-pink-600">startTransition</h2>
+  
+  <div class="bg-pink-50 p-2 rounded">
+    <code class="text-xs">startTransition(() => { /* update */ })</code>
+  </div>
+
+  ```jsx
+  import { startTransition } from 'react';
+  
+  function FilterApp() {
+    const [filter, setFilter] = useState('');
+    const [filteredData, setFilteredData] = useState(data);
+    
+    const handleFilter = (newFilter) => {
+      setFilter(newFilter);
+      startTransition(() => {
+        // Expensive filtering operation
+        setFilteredData(data.filter(item => item.name.includes(newFilter) ));
+      });
+    };
+    return ();
+  }
+  ```
+
+  <div class="bg-white light:bg-black bg-blue-50 p-1 rounded text-xs text-black light:text-white">
+    <strong>Use:</strong> Wrap expensive updates to prevent blocking.
+  </div>
+</div>
+
+</div>
+
+---
+hideInToc: true
 transition: slide-up
 ---
 
@@ -250,7 +399,7 @@ transition: slide-up
 
 useLayoutEffect is a hook designed to perform <span class="text-teal-400">synchronous side effects</span> after DOM mutations `but before the browser repaints the screen`. This ensures that any layout measurements or updates are applied before the user sees them, making it valuable for scenarios where precise alignment or measurements of DOM elements are critical.
 
-It is a <span class="text-teal-400">version of useEffect</span>. However, in contrast, useEffect runs <span class="text-teal-400">asynchronously</span> after the paint cycle, making it more suitable for non-blocking side effects like fetching data or setting up event listeners. While `both hooks allow for side effects`, their timing and use cases differ significantly.
+It is a <span class="text-teal-400">version of useEffect</span>. However, in contrast, useEffect runs <span class="text-teal-400">asynchronously</span> after the paint cycle, making it more suitable for non-blocking side effects like setting up subscriptions or setting up event listeners. While `both hooks allow for side effects`, their timing and use cases differ significantly.
 
 <v-clicks>
 
@@ -287,9 +436,10 @@ Use `useLayoutEffect` when you need to measure or synchronize changes to the DOM
 ---
 hideInToc: true
 transition: slide-right
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/36d7cr?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A8%2C8-8%2C24
 name: useLayoutEffect
+autoLoad: true
 ---
 
 ---
@@ -369,14 +519,82 @@ When using useDeferredValue to optimize performance, a key pitfall is that <span
 ---
 hideInToc: true
 transition: slide-down
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/cc6xlm?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A5%2C17
 name: useDeferredValue Example
+autoLoad: true
 ---
 
 <!--
-TODO: Talk about useOptimistic and useTransition
+TODO: Talk about React 19 hooks useActionState, useFormStatus, use, useOptimistic and useTransition
 -->
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## `useActionState` 
+
+Manages state for form actions and async operations. It provides pending state, error handling, and optimistic updates for form submissions and server actions. The was discussed in the previous chapter. 
+
+## `useFormStatus` 
+
+Returns the status of form submissions, including whether a form is pending submission. This is particularly useful for showing loading states on submit buttons. The was discussed in the previous chapter.
+
+## `useOptimistic`
+
+Enables optimistic UI updates by allowing you to show the expected result of an action immediately, then reconciling with the actual server response when it arrives. Allows you to optimistically update the UI while an asynchronous operation is in progress. It shows the expected result immediately and automatically reverts if the operation fails.
+
+```jsx
+const [optimisticState, addOptimistic] = useOptimistic(state, updateFn);
+```
+
+
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## More on `useOptimistic`
+
+```jsx
+import { useOptimistic } from 'react';
+
+function AppContainer() {
+  const [optimisticState, addOptimistic] = useOptimistic(
+    state,
+    // updateFn
+    (currentState, optimisticValue) => {
+      // merge and return new state
+      // with optimistic value
+    }
+  );
+}
+```
+
+<div class="mt-4 p-3 bg-yellow-50 rounded">
+  <h3 class="font-bold text-yellow-800 mb-2">Concurrent Features</h3>
+  <div class="grid grid-cols-2 gap-4 text-sm">
+    <div>
+      <strong class="text-indigo-700">useTransition:</strong>
+      <ul class="text-xs mt-1 text-black">
+        <li>Hook with pending state</li>
+        <li>Built-in loading indicator</li>
+        <li>Automatic priority handling</li>
+      </ul>
+    </div>
+    <div>
+      <strong class="text-pink-700">startTransition:</strong>
+      <ul class="text-xs mt-1 text-black">
+        <li>Standalone function</li>
+        <li>No loading state</li>
+        <li>Manual priority control</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 ---
 hideInToc: true
@@ -389,3 +607,5 @@ Custom Hooks are reusable functions that contain logic shared across multiple co
 
 - [UseForm](https://stackblitz.com/edit/vitejs-vite-fdk26g?file=package.json)
 - [UseFetch](https://stackblitz.com/edit/vitejs-vite-hyv9j2?file=src%2Fhooks%2FuseFetch.js)
+
+As a way to practice, create a custom hook named `useToggle` and `useCounter`.

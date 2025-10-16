@@ -6,6 +6,8 @@ hideInToc: true
 
 # Form
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Introduction</a>
@@ -14,7 +16,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+9)">Form Validation </a>
 - <a @click="$slidev.nav.go($nav.currentPage+11)">React Hook Form</a>
 - <a @click="$slidev.nav.go($nav.currentPage+13)">Tanstack Form</a>
-- <a @click="$slidev.nav.go($nav.currentPage+12)">New Form Features and Updates in React 19</a>
+- <a @click="$slidev.nav.go($nav.currentPage+17)">New Form Features and Updates in React 19</a>
 
 ---
 hideInToc: true
@@ -431,9 +433,10 @@ The same Registration form using React-Hook-Form and Zod is on the next page ➠
 
 ---
 hideInToc: true
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/26sv4h?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A3%2C64
 name: React Hook Form Example
+autoLoad: true
 ---
 
 
@@ -526,9 +529,10 @@ export default function App() {
 ---
 hideInToc: true
 transition: slide-up
-layout: iframe
+layout: iframe-lazy
 url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?ctl=1&embed=1&file=src%2Findex.jsx&hideExplorer=1
 name: Tanstack Form Example
+autoLoad: true
 ---
 
 ---
@@ -604,9 +608,10 @@ See how forms were handled before form actions and how they&apos;re handled usin
 ---
 hideInToc: true
 transition: slide-up
-layout: iframe
+layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-j9uc3f?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1&hideNavigation=1
 name: Form Actions Example
+autoLoad: true
 ---
 
 ---
@@ -629,9 +634,10 @@ Key Benefits of React 19's Streamlined Form Reset and State Management
 
 ---
 hideInToc: true
-layout: iframe
+layout: iframe-lazy
 url: https://codesandbox.io/embed/ypmc3c?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2Fform.js%3A39%2C5-39%2C8
 name: Form Reset and Management Example
+autoLoad: true
 ---
 
 ---

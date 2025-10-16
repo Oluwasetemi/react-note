@@ -6,6 +6,8 @@ hideInToc: true
 
 # Data Fetching and Working with APIs
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Fetching Data with "fetch" and "axios"</a>
@@ -309,7 +311,8 @@ export default App
 
 ---
 hideInToc: true
-layout: iframe
+layout: iframe-lazy
 name: Using Tanstack Query
 url: https://stackblitz.com/edit/github-zvtcsu?ctl=1&embed=1&file=src%2Findex.tsx&hideExplorer=1
+autoLoad: true
 ---

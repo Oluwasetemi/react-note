@@ -6,6 +6,8 @@ hideInToc: true
 
 # Introduction
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a href="" @click="$slidev.nav.next()">What is a Library/Framework?</a>
@@ -171,8 +173,6 @@ hideInToc: true
 {React} has become one of the most popular JavaScript libraries for building user interfaces. There are several reasons why developers choose {React} over other libraries and frameworks:
 
 <v-clicks>
-
-- **Just What you Paid For**
 
 - **Simple and Less opinionated** : {React} is a lightweight library that focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. This makes it easier to learn and use compared to other libraries and frameworks.
 
@@ -488,8 +488,18 @@ const App = () => {
   )
 }
 ```
+````
 
-```js
+<Todo v-if="$clicks===11" />
+
+</div>
+
+---
+hideInToc: true
+transition: fade-in
+---
+
+```js {monaco} {lineNumbers: 'true', height: '30rem', overflowY: 'scroll'}
 // ui and state
 const App = () => {
   const [todos, setTodos] = React.useState([])
@@ -545,7 +555,12 @@ const App = () => {
 }
 ```
 
-```js
+---
+hideInToc: true
+transition: fade-in
+---
+
+```js {monaco} {lineNumbers: 'true', height: '30rem', overflowY: 'scroll'}
 // ui + state + event handlers
 const App = () => {
   const [todos, setTodos] = React.useState([])
@@ -634,7 +649,12 @@ const App = () => {
 }
 ```
 
-```js
+---
+hideInToc: true
+transition: fade-in
+---
+
+```js {monaco} {lineNumbers: 'true', height: '30rem', overflowY: 'scroll'}
 // ui + state + event handlers + render
 const App = () => {
   const [todos, setTodos] = React.useState([])
@@ -726,26 +746,28 @@ const App = () => {
 const root = ReactDOM.createRoot(document.body)
 root.render(React.createElement(App))
 ```
-````
-
-<Todo v-if="$clicks===11" />
-
-<TodoReact v-if="$clicks===22" />
-
-</div>
 
 ---
 hideInToc: true
-layout: iframe
+transition: fade-in
+---
+
+<TodoReact />
+
+---
+hideInToc: true
+layout: iframe-lazy
 name: Todo App All With JavaScript
 url: https://stackblitz.com/edit/web-platform-zxxs4v?ctl=1&embed=1&file=script.js&hideExplorer=1&hideNavigation=1
+autoLoad: true
 ---
 
 ---
 hideInToc: true
-layout: iframe
+layout: iframe-lazy
 name: Todo App All With React
 url: https://stackblitz.com/edit/vitejs-vite-epzrqa?ctl=1&embed=1&file=main.js&hideExplorer=1&hideNavigation=1
+autoLoad: true
 ---
 
 ---

@@ -6,14 +6,16 @@ hideInToc: true
 
 # Interactivity
 
+<TocIcon />
+
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">How do you make a component interactive? - events</a>
-- <a @click="$slidev.nav.go($nav.currentPage+3)">Creating and adding event handlers</a>
-- <a @click="$slidev.nav.go($nav.currentPage+5)">Dos and Don'ts</a>
-- <a @click="$slidev.nav.go($nav.currentPage+7)">Passing event handlers as props</a>
-- <a @click="$slidev.nav.go($nav.currentPage+8)">Naming event handler props</a>
-- <a @click="$slidev.nav.go($nav.currentPage+9)">Propagation</a>
+- <a @click="$slidev.nav.go($nav.currentPage+4)">Creating and adding event handlers</a>
+- <a @click="$slidev.nav.go($nav.currentPage+6)">Dos and Don'ts</a>
+- <a @click="$slidev.nav.go($nav.currentPage+8)">Passing event handlers as props</a>
+- <a @click="$slidev.nav.go($nav.currentPage+9)">Naming event handler props</a>
+- <a @click="$slidev.nav.go($nav.currentPage+10)">Propagation</a>
 
 ---
 hideInToc: true
