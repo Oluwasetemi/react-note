@@ -337,6 +337,8 @@ autoLoad: true
 ---
 
 ---
+hideInToc: true
+---
 
 ## [Assignment]{.text-gradient.text-4xl}
 
