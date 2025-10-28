@@ -361,7 +361,8 @@ The idea here is super sweet with tailwind like css and ability to render code i
 
 <ul>
   <li ><a href="https://stackblitz.com/~/github.com/Oluwasetemi/star-assignment?file=README.md" target="_blank">Assignment 1 - Play With Your Star</a></li>
-  <li ><a href="https://github.com/Oluwasetemi/Grid-AltSchoolClassWork" target="_blank">Assignment 2 - Getting Griddy With List</a></li>
+  <li ><a href="https://stackblitz.com/~/github.com/Oluwasetemi/Grid-AltSchoolClassWork" target="_blank">Assignment 2 - Getting Griddy With List</a></li>
+  <li ><a href="https://stackblitz.com/fork/github/vitejs/vite/tree/main/packages/create-vite/template-react?file=index.html&terminal=dev" target="_blank">Assignment 3 - Show me a counter with increase, decrease, reset, setValue - It should be styled to taste </a></li>
 </ul>
 
 ---
