@@ -55,3 +55,7 @@ Check the [contributing guide](CONTRIBUTING.md) for more information.
 - [Oluwasetemi](https://github.com/Oluwasetemi)
 - [Victoria Victor](https://github.com/victorvictoria-maker)
 - [Stanley Azi](https://github.com/Stan015)
+- [Olubebe](https://github.com/Olubebe)
+- [rebornay](https://github.com/rebornay)
+- [Caisere](https://github.com/Caisere)
+- [kachi-jasperD](https://github.com/kachi-jasperD)
