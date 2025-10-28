@@ -94,7 +94,6 @@ name: Explanation of Basic Setup
 
 In a <span class="text-gradient">more structured setup</span>, each route’s component (e.g., Home, About, and NavBar) is imported from its own file. This setup keeps App.js `cleaner and allows for better organization`, especially as your application grows. As you would see below, <span class="text-gradient">index.js</span> wraps the App component in BrowserRouter, enabling client-side routing while <span class="text-gradient">App.js</span> defines routes and imports components for each path.
 
-
 ---
 hideInToc: true
 transition: slide-left
@@ -103,8 +102,6 @@ url: https://codesandbox.io/embed/nlcw6p?view=editor+%2B+preview&module=%2Fsrc%2
 name: Basic Setup with Routes
 autoLoad: true
 ---
-
-
 
 ---
 hideInToc: true
@@ -222,6 +219,7 @@ transition: slide-left
 ---
 
 ## [React Router vs. Tanstack Router]{.text-gradient.text-4xl}
+
 React Router is a powerful library for managing routing in React applications, but it can be complex and sometimes overwhelming. Tanstack Router is a newer alternative that aims to simplify routing while providing similar functionality. It offers a more intuitive API, better performance, and improved developer experience.
 
 Tanstack Router is designed to be more flexible and easier to use, making it a great choice for developers looking for a simpler routing solution. It also integrates well with other Tanstack libraries, such as Tanstack Query, providing a cohesive experience for managing data and routing in your applications.
@@ -233,17 +231,17 @@ transition: slide-up
 
 ## Key Differences
 
-| Feature                     | React Router                          | Tanstack Router                      |
-| --------------------------- | ------------------------------------- | ------------------------------------ |
-| **API Complexity**          | More complex, with a steeper learning curve | Simpler and more intuitive API       |
-| **Performance**             | Good, but can be slower with large apps | Optimized for better performance     |
-| **Data Fetching**           | Requires additional libraries (e.g., React Query) | Built-in data fetching capabilities   |
-| **Integration**             | Integrates with various libraries     | Seamless integration with Tanstack libraries |
-| **Community**               | Large and active community            | Growing community, but smaller than React Router |
-| **Documentation**           | Comprehensive, but can be overwhelming | Clear and concise documentation      |
-| **Learning Resources**      | Abundant tutorials and resources      | Fewer resources available            |
-| **Flexibility**             | Highly flexible, but can lead to complexity | More opinionated, but easier to use |
-| **State Management**        | Requires external libraries (e.g., Redux) | Built-in state management capabilities |
+| Feature                | React Router                                      | Tanstack Router                                  |
+| ---------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| **API Complexity**     | More complex, with a steeper learning curve       | Simpler and more intuitive API                   |
+| **Performance**        | Good, but can be slower with large apps           | Optimized for better performance                 |
+| **Data Fetching**      | Requires additional libraries (e.g., React Query) | Built-in data fetching capabilities              |
+| **Integration**        | Integrates with various libraries                 | Seamless integration with Tanstack libraries     |
+| **Community**          | Large and active community                        | Growing community, but smaller than React Router |
+| **Documentation**      | Comprehensive, but can be overwhelming            | Clear and concise documentation                  |
+| **Learning Resources** | Abundant tutorials and resources                  | Fewer resources available                        |
+| **Flexibility**        | Highly flexible, but can lead to complexity       | More opinionated, but easier to use              |
+| **State Management**   | Requires external libraries (e.g., Redux)         | Built-in state management capabilities           |
 
 <style>
   /* reduce font-size of the table */
@@ -287,7 +285,6 @@ Tanstack Router is a powerful and flexible routing library for React application
 Step 1: install the router
 
 ````md magic-move
-
 ```sh
 # npm
 npm install @tanstack/react-router @tanstack/react-router-devtools
@@ -323,8 +320,8 @@ import { tanstackRouter } from '@tanstack/router-plugin/vite'
 export default defineConfig({
   plugins: [
     tanstackRouter({ target: 'react', autoCodeSplitting: true }),
-    react()
-  ]
+    react(),
+  ],
 })
 ```
 
@@ -336,11 +333,17 @@ transition: slide-left
 Step 3: Create Basic Router Setup
 
 ````md magic-move
-
 ```js
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { Outlet, RouterProvider, Link, createRouter, createRoute, createRootRoute, } from '@tanstack/react-router'
+import {
+  Outlet,
+  RouterProvider,
+  Link,
+  createRouter,
+  createRoute,
+  createRootRoute,
+} from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 // Root route with navigation
@@ -362,7 +365,6 @@ const rootRoute = createRootRoute({
   ),
 })
 ```
-
 
 ```js
 // Home page route
@@ -417,11 +419,7 @@ if (!rootElement.innerHTML) {
   )
 }
 ```
-
 ````
-
-
-
 
 ---
 hideInToc: true
@@ -429,7 +427,6 @@ transition: slide-left
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-nfqyhumz?ctl=1&embed=1&file=src%2FApp.jsx
 ---
-
 
 ---
 hideInToc: true
@@ -446,23 +443,21 @@ transition: slide-left
 - ✅ DevTools - Built-in development tools
 - ✅ Code Splitting - Automatic bundle optimization
 
-
 <div>
 
-  ```sh
-  # Create new project
-  npx create-tsrouter-app@latest my-app --template file-router
+```sh
+# Create new project
+npx create-tsrouter-app@latest my-app --template file-router
 
-  # Navigate and install
-  cd my-app
-  npm install
-  npm run dev
-  ```
+# Navigate and install
+cd my-app
+npm install
+npm run dev
+```
 
-  <sub>The support for file based routing, route file generation with the route gen tree is truly amazing and innovative.</sub>
+<sub>The support for file based routing, route file generation with the route gen tree is truly amazing and innovative.</sub>
 
 </div>
-
 
 </div>
 
@@ -473,8 +468,6 @@ layout: iframe-lazy
 url: https://stackblitz.com/edit/tanstack-router-k5akabnz?ctl=1&embed=1&file=src%2Froutes%2F(this-folder-is-not-in-the-url)%2Froute-group.tsx&view=preview
 ---
 
-
-
 ---
 hideInToc: true
 transition: slide-left
@@ -483,7 +476,6 @@ transition: slide-left
 ## [Frameworks]{.text-gradient.text-4xl}
 
 Frameworks are pre-built libraries that provide a structure for building applications. They often include built-in features like routing, state management, and data fetching, making it easier to develop complex applications quickly. Some popular frameworks include:
-
 
 - **Next.js**: A React framework for building server-rendered applications. It provides features like static site generation, API routes, and built-in CSS support.
 - **Tanstack Start**: A new framework for building web applications using Tanstack Router based and good principles of tanstack query. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures.
@@ -509,8 +501,6 @@ transition: slide-left
 
 Tanstack Start is a new framework for building web applications using Tanstack Router. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures. With Tanstack Start, you can define routes, handle URL parameters, and manage nested routes with ease. It also integrates well with other Tanstack libraries, such as Tanstack Query, providing a cohesive experience for managing data and routing in your applications.
 
-
-
 ---
 hideInToc: true
 transition: slide-right
@@ -518,7 +508,7 @@ transition: slide-right
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-Build a simple `Blog Application` with `React Router`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page`. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited.
+Build a simple `Blog Application` with `React Router` and `Tanstack Router`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page`. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading.
 
 Try out [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/installation) for a different experience.
 

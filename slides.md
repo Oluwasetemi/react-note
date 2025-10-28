@@ -337,6 +337,12 @@ autoLoad: true
 ---
 
 ---
+
+## [Assignment]{.text-gradient.text-4xl}
+
+Build a simple `Product App` with routing of your choice. The app should have a proper navigation and pages. Data fetching must be done with the graphql endpoint of the [API](https://api.oluwasetemi.dev) Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading. Implement a pagination approach to the products displayed and show the page to a single product.
+
+---
 name: Router Example
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hswavt?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
@@ -352,8 +358,8 @@ The idea here is super sweet with tailwind like css and ability to render code i
 # Assignments
 
 <ul>
-  <li ><a @click="$slidev.nav.next()">Assignment 1</a></li>
-  <li ><a @click="$nav.currentSlide() + 2">Assignment 2</a></li>
+  <li ><a href="https://stackblitz.com/~/github.com/Oluwasetemi/star-assignment?file=README.md" target="_blank">Assignment 1 - Play With Your Star</a></li>
+  <li ><a href="https://github.com/Oluwasetemi/Grid-AltSchoolClassWork" target="_blank">Assignment 2 - Getting Griddy With List</a></li>
 </ul>
 
 ---
@@ -369,7 +375,6 @@ name: Important Links
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Vitest](https://vitest.dev/)
 - [React Query](https://tanstack.com/query/latest)
-
 
 ---
 hideInToc: true

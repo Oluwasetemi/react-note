@@ -538,6 +538,8 @@ Turn this `li` into a reusability component.
 </li>
 ```
 
+Implement either an accessible modal, accordion and tool tip component
+
 ---
 hideInToc: true
 ---

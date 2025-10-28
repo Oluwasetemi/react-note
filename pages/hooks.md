@@ -304,7 +304,7 @@ graph LR
 
 ---
 hideInToc: true
-name: Basic Hooks: "useState", "useEffect"
+name: Basic Hooks:"useState","useEffect"
 ---
 
 # Basic Hooks: useState & useEffect
@@ -314,24 +314,24 @@ name: Basic Hooks: "useState", "useEffect"
 <!-- useState Section -->
 <div class="space-y-4">
   <h2 class="text-2xl font-bold text-blue-500">useState</h2>
-  
+
   <div class="bg-gray-500 p-4 rounded-lg">
     <h3 class="text-sm mb-2">Syntax:</h3>
     <pre class="text-xs"><code>const [state, setState] = useState(initialValue)</code></pre>
   </div>
 
   <div class="space-y-3">
-    
+
   <div class="p-3 rounded border">
 
-  ```jsx
-  function Counter() {
-    const [count, setCount] = useState(0);
-    const increment = () => setCount(count + 1)
-    
-    return (...);
-  }
-  ```
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+  const increment = () => setCount(count + 1)
+
+  return (...);
+}
+```
 
   </div>
     <div class="bg-green-50 p-3 rounded">
@@ -349,33 +349,32 @@ name: Basic Hooks: "useState", "useEffect"
 <!-- useEffect Section -->
 <div class="space-y-4">
   <h2 class="text-2xl font-bold text-green-500">useEffect</h2>
-  
+
   <div class="bg-gray-500 p-4 rounded-lg">
     <h3 class="text-sm mb-2">Syntax:</h3>
     <pre class="text-sm"><code>useEffect(setup, dependencies?)</code></pre>
   </div>
 
   <div class="space-y-3">
-  
-    
-  <div class="p-3 rounded border"> 
-  
-  ```jsx
-  function DataFetcher() {
-    const [data, setData] = useState(null);
-    
-    useEffect(function effect() {
-      // Side effect code here
-      subscribe().then(setData);
-      // Cleanup function (optional)
-      return () => {
-        // Cleanup code
-      };
-    }, []); // Dependencies array
-    
-    return <div>{...}</div>;
-  }
-  ```
+
+  <div class="p-3 rounded border">
+
+```jsx
+function DataFetcher() {
+  const [data, setData] = useState(null);
+
+  useEffect(function effect() {
+    // Side effect code here
+    subscribe().then(setData);
+    // Cleanup function (optional)
+    return () => {
+      // Cleanup code
+    };
+  }, []); // Dependencies array
+
+  return <div>{...}</div>;
+}
+```
 
   </div>
 
@@ -392,7 +391,6 @@ name: Basic Hooks: "useState", "useEffect"
 </div>
 
 </div>
-
 
 ---
 hideInToc: true
@@ -992,3 +990,11 @@ name: HookForm
 ---
 
 <HookForm />
+
+---
+
+## [Assignment]{.text-gradient.text-4xl}
+
+1. Using the websocket provision in the [API](https://api.oluwasetemi.dev), use effect hook to create a real time display of `tasks` created, updated and delete. You job is to create a simple react application to show the realtime display of the socket communication. See this as an example [Tasks Socket Client](https://api.oluwasetemi.dev/ws/client/tasks).
+
+2. Implement a custom hook for this socket communication.
