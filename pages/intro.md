@@ -11,11 +11,11 @@ hideInToc: true
 <div mt-2 />
 
 - <a href="" @click="$slidev.nav.next()">What is a Library/Framework?</a>
-- <a href="" @click="$nav.go($nav.currentPage + 0)">What is React?</a>
-- <a href="" @click="$nav.go($nav.currentPage + 0)">React vs other frameworks (Vue)</a>
-- <a href="" @click="$nav.go($nav.currentPage + 0)">Why React?</a>
-- <a href="" @click="$nav.go($nav.currentPage + 0)">From pure javascript to React</a>
-- <a href="" @click="$nav.go($nav.currentPage + 0)">Setting up Development Environment (Vite)</a>
+- <a href="" @click="$nav.go($nav.currentPage + 1)">What is React?</a>
+- <a href="" @click="$nav.go($nav.currentPage + 3)">React vs other frameworks (Vue)</a>
+- <a href="" @click="$nav.go($nav.currentPage + 6)">Why React?</a>
+- <a href="" @click="$nav.go($nav.currentPage + 7)">From pure javascript to React</a>
+- <a href="" @click="$nav.go($nav.currentPage + 15)">Setting up Development Environment (Vite)</a>
 
 ---
 hideInToc: true
@@ -243,6 +243,12 @@ function mk() {
 
 ```js
 function mk(type) {
+  return document.createElement(type)
+}
+```
+
+```js
+function mk(type) {
   // create element of type `type` and set text content to 'Hello World'
   const el = document.createElement(type)
   el.textContent = 'Hello World'
@@ -271,6 +277,11 @@ function mk(type, props, children) {
   if (children) el.prepend(...children)
   return el
 }
+```
+
+```js
+mk('span', { className: 'text-orange' }, ['Hello'])
+// <span class="text-orange">Hello</span>
 ```
 
 ```js
@@ -474,6 +485,8 @@ function createTodo(todo) {
 
 ```js
 // just the ui
+// replace the mk() with React.createElement
+// const mk = React.createElement()
 const App = () => {
   return React.createElement(
     'div',
@@ -784,23 +797,27 @@ They automate the process of compiling, bundling, and optimizing code. Some popu
 
 To set up a development environment with {Vite}, you can use the following steps:
 
-1. Install {Vite} globally using {npm} or {yarn} or {pnpm} or {bun}:
+1. Install {Vite} globally(once and for all) or locally (per project) using {npm} or {yarn} or {pnpm} or {bun}:
 
 ````md magic-move
 ```bash
 npm install -g create-vite
+npx create-vite
 ```
 
 ```bash
 yarn global add create-vite
+yarn create-vite
 ```
 
 ```bash
 pnpm add -g create-vite
+pnpx create-vite
 ```
 
 ```bash
 bun add -g create-vite
+bunx create-vite
 ```
 ````
 
@@ -818,15 +835,43 @@ name: Production with vite or setting up everything from scratch
 
 3. Start the development server and Open your browser and navigate to `http://localhost:5173`.
 
+````md magic-move
 ```bash
 npm run dev
 ```
 
+```bash
+pnpm run dev
+```
+
+```bash
+bun run dev
+```
+
+```bash
+yarn run dev
+```
+````
+
 4. Build the project for production and Deploy the project to a hosting service like {Netlify}, {Vercel}, or {GitHub} Pages.
 
-```sh
+````md magic-move
+```bash
 npm run build
 ```
+
+```bash
+pnpm run build
+```
+
+```bash
+bun run build
+```
+
+```bash
+yarn run build
+```
+````
 
 5. You can also customize the build configuration by creating a `vite.config.js` file in the root of the project.
 
@@ -858,7 +903,7 @@ yarn init -y
 ```
 
 ```sh
-pnpm init -y
+pnpm init
 ```
 
 ```sh
@@ -868,9 +913,23 @@ bun init -y
 
 3. Install {React} and {React} DOM:
 
+````md magic-move
 ```sh
-npm install react react-dom
+pnpm add react{@latest,-dom@latest}
 ```
+
+```sh
+npm i react{@latest,-dom@latest}
+```
+
+```sh
+yarn add react{@latest,-dom@latest}
+```
+
+```sh
+bun i react{@latest,-dom@latest}
+```
+````
 
 4. Create an `index.html` file in the root of the project:
 
@@ -880,6 +939,7 @@ npm install react react-dom
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://fav.farm/🇳🇬" />
     <title>My App</title>
   </head>
 
@@ -897,6 +957,11 @@ name: Setting up everything from scratch 2
 
 5. Create a `src` directory in the root of the project and create a `main.jsx` file in the `src` directory:
 
+````md magic-move
+```sh
+mkdir src && cd src
+```
+
 ```jsx
 import React from 'react'
 import { createRoot } from 'react-dom/client'
@@ -913,16 +978,19 @@ const root = createRoot(document.getElementById('app'))
 
 root.render(<App />)
 ```
+````
 
 ---
+
 hideInToc: true
 name: Setting up everything from scratch 3
+
 ---
 
 6. Install {Vite} as a development dependency and @vitejs/plugin-react
 
 ```sh
-npm install -D vite @vitejs/plugin-react
+npm|pnpm|bun|yarn install -D vite@latest @vitejs/plugin-react@latest
 ```
 
 7. Create a `vite.config.js` file in the root of the project:
@@ -936,7 +1004,7 @@ export default defineConfig({
 })
 ```
 
-8. Setup the build script in the `package.json` file:
+8. Setup the build script in the `package.json` file add the following to the file:
 
 ```json
 {
@@ -948,11 +1016,13 @@ export default defineConfig({
 ```
 
 ---
+
 hideInToc: true
 name: Setting up everything from scratch 4
+
 ---
 
-9. Start the development server and Open your browser and navigate to `http://localhost:5173`.
+9. Start the development server and Open your browser and navigate to `http://localhost:5173`.Use pnpm or bun or yarn.
 
 ```sh
 npm run dev
