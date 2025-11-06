@@ -490,7 +490,9 @@ transition: slide-up
 
 ## Next.js
 
-Next.js is a React framework that enables server-side rendering and static site generation. It provides a powerful routing system, allowing you to create dynamic routes and handle URL parameters easily. Next.js also offers features like API routes, built-in CSS support, and automatic code splitting, making it a great choice for building modern web applications. With its App Router and Pages Router, Next.js allows you to choose between a file-based routing system and a more flexible approach, giving you the best of both worlds.
+Next.js is a React framework that enables server-side rendering and static site generation. It provides a powerful routing system, allowing you to create dynamic routes and handle URL parameters easily. Next.js also offers features like API routes, built-in CSS support, and automatic code splitting, making it a great choice for building modern web applications. With its App Router and Pages Router, Next.js allows you to choose between a file-based routing system and a more flexible approach, giving you the best of both worlds. It has the pages and app router system. Old pages using pages is fine but new project should come in app router.
+
+[Simple Auth in Next(pages router)](https://codesandbox.io/p/devbox/hardcore-ganguly-x8pkcd)
 
 ---
 hideInToc: true
