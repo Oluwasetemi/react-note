@@ -465,7 +465,7 @@ npm run dev
 hideInToc: true
 transition: slide-left
 layout: iframe-lazy
-url: https://stackblitz.com/edit/tanstack-router-k5akabnz?ctl=1&embed=1&file=src%2Froutes%2F(this-folder-is-not-in-the-url)%2Froute-group.tsx&view=preview
+url: https://stackblitz.com/edit/tanstack-router-k5akabnz?ctl=1&embed=1&view=preview
 ---
 
 ---
