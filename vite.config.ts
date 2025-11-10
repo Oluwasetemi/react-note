@@ -144,7 +144,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['@babel/standalone'],
+      external: [],
     },
   },
   optimizeDeps: {
