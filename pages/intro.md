@@ -971,20 +971,18 @@ import { createRoot } from 'react-dom/client'
 // }
 
 function App() {
-  return React.createElement('h1', null, 'Hello World')
+  return React.createElement('h1', null, 'Hello World');
 }
 
-const root = createRoot(document.getElementById('app'))
+const root = createRoot(document.getElementById('app'));
 
-root.render(<App />)
+root.render(<App />);
 ```
 ````
 
 ---
-
 hideInToc: true
 name: Setting up everything from scratch 3
-
 ---
 
 6. Install {Vite} as a development dependency and @vitejs/plugin-react
@@ -1016,10 +1014,8 @@ export default defineConfig({
 ```
 
 ---
-
 hideInToc: true
 name: Setting up everything from scratch 4
-
 ---
 
 9. Start the development server and Open your browser and navigate to `http://localhost:5173`.Use pnpm or bun or yarn.
