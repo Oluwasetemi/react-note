@@ -489,6 +489,8 @@ Next.js is a React framework that enables server-side rendering and static site 
 
 * [Sample Todo App](https://github.com/Oluwasetemi/my-tinyuka-nextapp) - [Live URL](https://my-tinyuka-nextapp.vercel.app/)
 
+* [Todo App](https://my-tinyuka-nextapp.vercel.app) - [Repo](https://github.com/Oluwasetemi/my-tinyuka-nextapp)
+
 ---
 hideInToc: true
 transition: slide-left
