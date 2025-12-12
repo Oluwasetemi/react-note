@@ -27,7 +27,7 @@ hideInToc: true
  Imperative: How to do something, Declarative: What to do
 </Tips>
 
-UI is a function of state and it should be declarative using JSX and the power of event interactivity in React. Identifying your component's different visual states, determine what triggers those state chanages, Represent the state in memory using `useState`. Remove any non-essential state variables and connect the event handlers to set the state.
+UI is a function of state and it should be declarative using JSX and the power of event interactivity in React. Identifying your component's different visual states, determine what triggers those state changes, Represent the state in memory using `useState`. Remove any non-essential state variables and connect the event handlers to set the state.
 
 Reacting to user input is a key part of building interactive UIs. Handling user input with React typically involves updating the state of your components based on the user's input and interactions. Triggering state changes based on user input is how you build interactive UIs.
 
