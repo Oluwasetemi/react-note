@@ -60,7 +60,7 @@ name: Declarative Programming Example
 function Form() {
   const [answer, setAnswer] = React.useState('')
   const [error, setError] = React.useState(null)
-  const [status, setStatus] = React.useState('typing')
+  const [status, setStatus] = React.useState('idle')
 
   if (status === 'success') {
     return <h1 tabIndex="-1">That's right!</h1>
@@ -73,18 +73,19 @@ function Form() {
       await submitForm(answer)
       setStatus('success')
     } catch (err) {
-      setStatus('typing')
+      setStatus('error')
       setError(err)
     }
   }
 
   function handleTextareaChange(e) {
+    setStatus('typing')
     setAnswer(e.target.value)
   }
 
   return (
     <>
-      <h2>Sample quiz</h2>
+      <h2>Sample quiz - {status}</h2>
       <p>What should be the correct value?</p>
       <form onSubmit={handleSubmit} className="grid mb-300px">
         <textarea
@@ -95,12 +96,6 @@ function Form() {
           disabled={status === 'submitting'}
         />
         <br />
-        <button
-          className={`btn ${answer.length === 0 || status === 'submitting' ? 'disabled bg-blue-300 cursor-not-allowed' : ''}`}
-          disabled={answer.length === 0 || status === 'submitting'}
-        >
-          Submit
-        </button>
         {error !== null && (
           <p
             role="alert"
@@ -109,6 +104,12 @@ function Form() {
             {error.message}
           </p>
         )}
+        <button
+          className={`btn ${answer.length === 0 || status === 'submitting' ? 'disabled bg-blue-300 cursor-not-allowed' : ''}`}
+          disabled={answer.length === 0 || status === 'submitting'}
+        >
+          Submit
+        </button>
       </form>
     </>
   )
@@ -305,6 +306,97 @@ function Counter() {
 ```
 
 </div>
+
+```jsx {monaco-run} {lineNumbers: 'true', height: '20rem', overflowY: 'scroll'}
+function Form() {
+  function statusReducer(state, action) {
+    switch (action.type) {
+      case 'idle':
+        return { status: 'idle', answer: '', error: null }
+      case 'typing':
+        return { ...state, status: 'typing', answer: action.answer, error: null }
+      case 'submitting':
+        return { ...state, status: 'submitting' }
+      case 'success':
+        return { status: 'success', answer: state.answer, error: null }
+      case 'error':
+        return { ...state, status: 'typing', error: action.error }
+      default:
+        return state
+    }
+  }
+
+  const [state, dispatch] = React.useReducer(statusReducer, {
+    status: 'idle',
+    answer: '',
+    error: null
+  })
+
+  if (state.status === 'success') {
+    return <h1 tabIndex="-1">That's right!<button className="btn" onClick={() => dispatch({type: 'idle'})}>Type Again</button></h1>
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    dispatch({ type: 'submitting' })
+    try {
+      await submitForm(state.answer)
+      dispatch({ type: 'success' })
+    } catch (err) {
+      dispatch({ type: 'error', error: err.message })
+    }
+  }
+
+  function handleTextareaChange(e) {
+    dispatch({ type: 'typing', answer: e.target.value })
+  }
+
+  return (
+    <>
+      <h2>Sample quiz - {state.status}</h2>
+      <p>What should be the correct value?</p>
+      <form onSubmit={handleSubmit} className="grid mb-300px">
+        <textarea
+          className="input"
+          placeholder="Type your answer here..."
+          value={state.answer}
+          onChange={handleTextareaChange}
+          disabled={state.status === 'submitting'}
+        />
+        <br />
+        {state.error && (
+          <p
+            role="alert"
+            className="Error text-red-400 transition-colors duration-300 ease-in-out text-blue-500 hover:text-red-500"
+          >
+            {state.error}
+          </p>
+        )}
+        <button
+          className={`btn ${state.answer.length === 0 || state.status === 'submitting' ? 'disabled bg-blue-300 cursor-not-allowed' : ''}`}
+          disabled={state.answer.length === 0 || state.status === 'submitting'}
+        >
+          Submit
+        </button>
+      </form>
+    </>
+  )
+}
+
+function submitForm(answer) {
+  // Pretend it's hitting the network.
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let shouldError = answer.toLowerCase() !== 'correct'
+      if (shouldError) {
+        reject(new Error('Good guess but a wrong answer. Try again!'))
+      } else {
+        resolve()
+      }
+    }, 1500)
+  })
+}
+```
 
 ---
 hideInToc: true
