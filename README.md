@@ -59,3 +59,5 @@ Check the [contributing guide](CONTRIBUTING.md) for more information.
 - [rebornay](https://github.com/rebornay)
 - [Caisere](https://github.com/Caisere)
 - [kachi-jasperD](https://github.com/kachi-jasperD)
+- [Olamide](https://github.com/oladimejipraise)
+
