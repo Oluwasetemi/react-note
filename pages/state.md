@@ -218,7 +218,7 @@ name: Lifting State Up Example
 
 <div grid="~ cols-2" gap="2">
 
-
+<div grid="~ row-2" gap="2">
 
 ```jsx
 function Panel({ title, children, isActive, onShow }) {
@@ -236,6 +236,10 @@ function Panel({ title, children, isActive, onShow }) {
   )
 }
 ```
+
+<Accordion />
+
+</div>
 
 ```jsx
 function Accordion() {
@@ -306,6 +310,10 @@ function Counter() {
 ```
 
 </div>
+
+---
+hideInToc: true
+---
 
 ```jsx {monaco-run} {lineNumbers: 'true', height: '20rem', overflowY: 'scroll'}
 function Form() {
