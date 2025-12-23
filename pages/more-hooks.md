@@ -13,14 +13,16 @@ hideInToc: true
 - <a @click="$slidev.nav.next()">useRef</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">useReducer</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">useContext</a>
-- <a @click="$slidev.nav.go($nav.currentPage+9)">use</a>
-- <a @click="$slidev.nav.go($nav.currentPage+12)">useLayoutEffect</a>
-- <a @click="$slidev.nav.go($nav.currentPage+16)">useDeferredValue</a>
-- <a @click="$slidev.nav.go($nav.currentPage+16)">useActionState</a>
-- <a @click="$slidev.nav.go($nav.currentPage+16)">useFormStatus</a>
-- <a @click="$slidev.nav.go($nav.currentPage+16)">useOptimistic</a>
-- <a @click="$slidev.nav.go($nav.currentPage+16)">useTransition</a>
-- <a @click="$slidev.nav.go($nav.currentPage+16)">useSyncExternalStore</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">useTransition</a>
+- <a @click="$slidev.nav.go($nav.currentPage+13)">useLayoutEffect</a>
+- <a @click="$slidev.nav.go($nav.currentPage+17)">useDeferredValue</a>
+- <a @click="$slidev.nav.go($nav.currentPage+20)">useActionState</a>
+- <a @click="$slidev.nav.go($nav.currentPage+20)">useFormStatus</a>
+- <a @click="$slidev.nav.go($nav.currentPage+20)">useOptimistic</a>
+- <a @click="$slidev.nav.go($nav.currentPage+22)">customHooks</a>
+- <a @click="$slidev.nav.go($nav.currentPage+27)">useSyncExternalStore</a>
+- <a @click="$slidev.nav.go($nav.currentPage+29)">useEffectEvent</a>
+
 
 ---
 hideInToc: true
@@ -997,3 +999,39 @@ transition: slide-up
 </div>
 
 </v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [useEffectEvent](https://react.dev/reference/react/useEffectEvent)
+
+<v-clicks>
+
+- Extract non-reactive logic from Effects into an Effect Event; it always reads the latest props/state without retriggering the Effect.
+- Define with `useEffectEvent(fn)` at the top level; call only inside Effects (`useEffect`, `useLayoutEffect`, `useInsertionEffect`).
+- Use for non-reactive work (logging, telemetry, imperative calls) instead of making the Effect depend on extra values.
+
+</v-clicks>
+
+```jsx {monaco} {lineNumbers: true, height: '12rem'}
+import { useEffect, useEffectEvent } from 'react'
+
+function ChatRoom({ roomId, theme }) {
+  const onConnected = useEffectEvent(() => {
+    showNotification('Connected!', theme) // theme stays fresh, not reactive
+  })
+
+  useEffect(() => {
+    const connection = createConnection(roomId)
+    connection.on('connected', () => onConnected())
+    connection.connect()
+    return () => connection.disconnect()
+  }, [roomId, onConnected])
+}
+```
+
+<div class="text-xs text-slate-500" v-click>
+Effect Events aren’t a dependency shortcut—keep real reactive deps in the array.
+</div>

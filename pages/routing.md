@@ -17,6 +17,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+10)">Redirects and Protected Routes</a>
 - <a @click="$slidev.nav.go($nav.currentPage+14)">Tanstack Router</a>
 - <a @click="$slidev.nav.go($nav.currentPage+19)">Frameworks</a>
+- <a @click="$slidev.nav.go($nav.currentPage+22)">SEO with unhead</a>
 
 ---
 hideInToc: true
@@ -58,7 +59,7 @@ transition: slide-left
 
 ## [Setting Up Routes and Links]{.text-gradient.text-4xl}
 
-To use React Router, first install the react-router-dom package: `npm/pnpm install react-router-dom`
+To use React Router, first install the react-router package: `npm/pnpm/bun install react-router`
 
 After installing React Router, you can start defining routes and setting up navigation.
 To configure basic routing setup, use these components: BrowserRouter, Routes, Route, Link
@@ -117,7 +118,7 @@ Navigation in React Router is handled by the Link and useNavigate components, al
 ✴ <span class="text-gradient"> Client-Side Navigation with Link:</span> Using "Link" components replaces traditional anchor tags, allowing for smooth client-side transitions.
 
 ```jsx
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 export default function NavigationBar() {
   return (
@@ -135,7 +136,7 @@ export default function NavigationBar() {
 ✴ <span class="text-gradient">Programmatic Navigation with useNavigate:</span> To navigate in response to an event (like a form submission), use the useNavigate hook.
 
 ```jsx
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -483,13 +484,11 @@ transition: slide-up
 
 ## Next.js
 
-Next.js is a React framework that enables server-side rendering and static site generation. It provides a powerful routing system, allowing you to create dynamic routes and handle URL parameters easily. Next.js also offers features like API routes, built-in CSS support, and automatic code splitting, making it a great choice for building modern web applications. With its App Router and Pages Router, Next.js allows you to choose between a file-based routing system and a more flexible approach, giving you the best of both worlds. It has the pages and app router system. Old pages using pages is fine but new project should come in app router.
+Next.js is a React framework that enables server-side rendering and static site generation. It provides a powerful routing system, allowing you to create dynamic routes and handle URL parameters easily. Next.js also offers features like API routes, built-in CSS support, and automatic code splitting, making it a great choice for building modern web applications. With its App Router and Pages Router, Next.js allows you to choose between a file-based routing system and a more flexible approach, giving you the best of both worlds. It has the pages and app router system. Old apps using pages is fine but new project should come in app router.
 
 * [Simple Auth in Next(pages router)](https://codesandbox.io/p/devbox/hardcore-ganguly-x8pkcd)
 
 * [Sample Todo App](https://github.com/Oluwasetemi/my-tinyuka-nextapp) - [Live URL](https://my-tinyuka-nextapp.vercel.app/)
-
-* [Todo App](https://my-tinyuka-nextapp.vercel.app) - [Repo](https://github.com/Oluwasetemi/my-tinyuka-nextapp)
 
 ---
 hideInToc: true
@@ -500,6 +499,39 @@ transition: slide-left
 
 Tanstack Start is a new framework for building web applications using Tanstack Router. It provides a simple and intuitive API for managing routes, making it easy to create complex navigation structures. With Tanstack Start, you can define routes, handle URL parameters, and manage nested routes with ease. It also integrates well with other Tanstack libraries, such as Tanstack Query, providing a cohesive experience for managing data and routing in your applications.
 
+New example project can be created using Tanstack Start CLI(npm create @tanstack/start@latest), Tanstack Builder(pnpx create-start-app@latest)
+
+---
+hideInToc: true
+transition: slide-right
+---
+
+# SEO
+
+Unhead has first-class support for React, allowing you to manage your head tags using a `<Head>` component, the `useHead()` hook, and other ecosystem hooks.
+
+It can directly replace react-helmet, handling a more diverse set of use cases from SEO to structured data.
+
+- Install the `@unhead/react` package
+- Setup the provider using `const head = createHead()`
+- `UnheadProvider` will wrap your application with the `head` prop.
+
+```jsx
+import { createHead, UnheadProvider } from '@unhead/react/client'
+
+const head = createHead()
+
+const root = createRoot( document.getElementById('root'));
+
+root.render(
+  <StrictMode>
+    <UnheadProvider head={head}>
+      <App />
+    </UnheadProvider>
+  </StrictMode>,
+)
+```
+
 ---
 hideInToc: true
 transition: slide-right
@@ -507,7 +539,7 @@ transition: slide-right
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-Build a simple `Blog Application` with `React Router` and `Tanstack Router`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page`. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading.
+Build a simple `Blog Application` with `React Router` and `Tanstack Router`. The app should have a `Home Page` displaying a list of blog posts(fetch the post from the [API](https://api.oluwasetemi.dev)). Each post should have a title and a brief excerpt, with a link to its `Detail Page`. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading.
 
 Try out [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/installation) for a different experience.
 
