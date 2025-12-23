@@ -58,8 +58,10 @@ const FetchDataExample = () => {
   const [data, setData] = React.useState(null)
 
   React.useEffect(() => {
+    let ignore = false;
+
     const fetchData = async () => {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const response = await fetch('https://api.oluwasetemi.dev/posts')
 
       if (!response.ok) console.error('Network response was not ok')
 
@@ -67,7 +69,13 @@ const FetchDataExample = () => {
       setData(jsonData)
     }
 
-    fetchData()
+    if (!ignore) {
+      fetchData()
+    }
+
+    return () => {
+      ignore = true;
+    }
   }, [])
 
   return (
@@ -99,9 +107,19 @@ const AxiosDataExample = () => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
+    let ignore = false;
+
     axios
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => setData(response.data))
+      .get('https://api.oluwasetemi.dev/posts')
+      .then((response) => {
+          if (!ignore) {
+            setData(response.data)
+          }
+        })
+
+    return () => {
+      ignore = true
+    }
   }, [])
 
   if (!data) return <p>Loading...</p>
@@ -147,29 +165,44 @@ In the previous slides a hint of asynchronous fetching was seen. Let's talk more
 ```jsx
 // Using async/await
 useEffect(() => {
+  let ignore = false;
+
   const fetchData = async () => {
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const response = await fetch('https://api.oluwasetemi.dev/posts')
       const jsonData = await response.json()
       setData(jsonData)
     } catch (err) {
       setError(err.message)
     }
   }
-  fetchData()
+
+  if (!ignore) {
+    fetchData()
+  }
+
+  return () => {
+    ignore = true;
+  }
 }, [])
 ```
 
 ```jsx
 // Using .then()
 useEffect(() => {
-  fetch('https://jsonplaceholder.typicode.com/posts')
+  let mounted = true;
+
+  fetch('https://api.oluwasetemi.dev/posts')
     .then((response) => {
       if (!response.ok) throw new Error('Network response was not ok')
       return response.json()
     })
-    .then((jsonData) => setData(jsonData))
-    .catch((err) => setError(err.message))
+    .then((jsonData) => { if (mounted) setData(jsonData) })
+    .catch((err) => { if (mounted) setError(err.message) })
+
+  return () => {
+    mounted = false;
+  }
 }, [])
 ```
 ````
@@ -213,10 +246,12 @@ const [loading, setLoading] = useState(true)
 const [error, setError] = useState(null)
 
 useEffect(() => {
+  let ignore = false;
+
   const fetchData = async () => {
     setLoading(true) // Start loading
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const response = await fetch('https://api.oluwasetemi.dev/posts')
       if (!response.ok) throw new Error('Failed to fetch data')
       const jsonData = await response.json()
       setData(jsonData)
@@ -226,7 +261,13 @@ useEffect(() => {
       setLoading(false) // Stop loading
     }
   }
-  fetchData()
+  if (!ignore) {
+    fetchData()
+  }
+
+  return () => {
+    ignore = true;
+  }
 }, [])
 
 if (loading) return <p>Loading...</p>
@@ -269,16 +310,12 @@ transition: slide-up
 <div v-click="5">
 
 ```jsx {monaco} {lineNumbers: true, height: '17rem'}
-import {
-  useQuery,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { useQuery, QueryClient, QueryClientProvider, } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
 const fetchPosts = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+  const response = await fetch('https://api.oluwasetemi.dev/posts')
   if (!response.ok) throw new Error('Network response was not ok')
   return response.json()
 }
@@ -322,3 +359,9 @@ autoLoad: true
 ## [Assignment]{.text-gradient.text-4xl}
 
 Build a simple `Blog Application` with `React Router` and `Tanstack Router` with Data Fetching Implemented using `Tanstack Query`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page` wrapped in a good card like UI. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading. Implement creating of new blogpost. Use `[https://api.oluwasetemi.dev](https://api.oluwasetemi.dev)` as the API and check the documentation.
+
+---
+hideInToc
+layout: iframe-lazy
+url: https://stackblitz.com/edit/vitejs-vite-r7m8bpox?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+---

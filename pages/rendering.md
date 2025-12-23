@@ -576,7 +576,7 @@ function Greeting({ isLoggedIn }) {
 
 - Using `&&` (AND) Operator
 
--(`Left && Right must match`)
+- (`Left && Right must match`)
 
 ```jsx
 function Notification({ hasMessages }) {
