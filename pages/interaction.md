@@ -10,7 +10,7 @@ hideInToc: true
 
 <div mt-2 />
 
-- <a @click="$slidev.nav.next()">How do you make a component interactive? - events</a>
+- <a @click="$slidev.nav.nextSlide()">How do you make a component interactive? - events</a>
 - <a @click="$slidev.nav.go($nav.currentPage+4)">Creating and adding event handlers</a>
 - <a @click="$slidev.nav.go($nav.currentPage+6)">Dos and Don'ts</a>
 - <a @click="$slidev.nav.go($nav.currentPage+8)">Passing event handlers as props</a>
@@ -138,10 +138,10 @@ React allows you add [event handlers]{.text-teal-400.italic} to JSX. Event handl
 
 ```jsx {hide|*}
 function handleClick() {
-  console.log('Button clicked')
+  console.log('Button clicked');
 }
 
-;<button onClick={handleClick}>Click me</button>
+<button onClick={handleClick}>Click me</button>
 ```
 
 <span v-click>
@@ -322,7 +322,7 @@ function App() {
 
 </div>
 
-<v-clicks>
+<v-clicks class="text-sm">
 
 - `ToggleSwitch` is a custom component.
 - The prop `onToggle` is a custom [event handler]{.text-teal-400.italic} prop that is not tied to a specific browser event. Instead, it is a named function prop that triggers when the button is clicked.
