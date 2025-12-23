@@ -152,7 +152,7 @@ const correct = `
       if (errors.length > 0) {
         console.log('Form has errors:', errors);
       }
-    }, [form]);
+    }, [form.personal.firstName, form.personal.lastName, form.personal.email, form.address.street, form.address.city, form.address.country, form.preferences.newsletter, form.preferences.theme]);
 
     return (
       <form>
