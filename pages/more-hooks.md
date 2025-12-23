@@ -20,6 +20,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+16)">useFormStatus</a>
 - <a @click="$slidev.nav.go($nav.currentPage+16)">useOptimistic</a>
 - <a @click="$slidev.nav.go($nav.currentPage+16)">useTransition</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">useSyncExternalStore</a>
 
 ---
 hideInToc: true
@@ -605,7 +606,394 @@ transition: slide-up
 
 Custom Hooks are reusable functions that contain logic shared across multiple components. They allow you to extract complex logic from components, making them more readable and maintainable. Custom Hooks follow the naming convention `useSomething` to indicate that they are hooks.
 
-- [UseForm](https://stackblitz.com/edit/vitejs-vite-fdk26g?file=package.json)
+- [UseForm](https://stackblitz.com/edit/vitejs-vite-fdk26g?file=useForm.js)
 - [UseFetch](https://stackblitz.com/edit/vitejs-vite-hyv9j2?file=src%2Fhooks%2FuseFetch.js)
 
 As a way to practice, create a custom hook named `useToggle` and `useCounter`.
+
+
+---
+hideInToc: true
+transition: slide-up
+layout: iframe-lazy
+url: https://stackblitz.com/edit/vitejs-vite-fdk26g?ctl=1&embed=1&file=src%2Fhooks%2FuseForm.js
+---
+---
+hideInToc: true
+transition: slide-up
+layout: iframe-lazy
+url: https://stackblitz.com/edit/vitejs-vite-hyv9j2?ctl=1&embed=1&file=src%2Fhooks%2FuseFetch.js
+---
+---
+hideInToc: true
+transition: slide-up
+---
+
+## useToggle Custom Hook
+
+````md magic-move
+```jsx
+function ToggleButton() {
+  const [isOn, setIsOn] = React.useState(false);
+  
+  const toggle = () => setIsOn(prev => !prev);
+  
+  return (
+    <button onClick={toggle}>
+      {isOn ? 'ON' : 'OFF'}
+    </button>
+  );
+}
+```
+
+```jsx
+function useToggle(initialValue = false) {
+  const [value, setValue] = React.useState(initialValue);
+  
+  const toggle = () => setValue(prev => !prev);
+  const setTrue = () => setValue(true);
+  const setFalse = () => setValue(false);
+  
+  return [value, { toggle, setTrue, setFalse }];
+}
+
+function ToggleButton() {
+  const [isOn, { toggle }] = useToggle(false);
+  
+  return (
+    <button onClick={toggle}>
+      {isOn ? 'ON' : 'OFF'}
+    </button>
+  );
+}
+```
+
+```jsx
+function useToggle(initialValue = false) {
+  const [value, setValue] = React.useState(initialValue);
+  const toggle = React.useCallback(() => {
+    setValue(prev => !prev);
+  }, []);
+  const setTrue = React.useCallback(() => {
+    setValue(true);
+  }, []);
+  const setFalse = React.useCallback(() => {
+    setValue(false);
+  }, []);
+  return [value, { toggle, setTrue, setFalse }];
+}
+
+function ToggleButton() {
+  const [isOn, { toggle, setTrue, setFalse }] = useToggle(false);
+  
+  return (
+    <div>
+      <button onClick={toggle}>Toggle</button> <button onClick={setTrue}>ON</button>
+      <button onClick={setFalse}>OFF</button>
+      <span>Status: {isOn ? 'ON' : 'OFF'}</span>
+    </div>
+  );
+}
+```
+````
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## useCounter Custom Hook
+
+````md magic-move
+```jsx
+function Counter() {
+  const [count, setCount] = React.useState(0);
+  
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+  const reset = () => setCount(0);
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+
+```jsx
+function useCounter(initialValue = 0, step = 1) {
+  const [count, setCount] = React.useState(initialValue);
+  
+  const increment = () => setCount(count + step);
+  const decrement = () => setCount(count - step);
+  const reset = () => setCount(initialValue);
+  
+  return [count, { increment, decrement, reset }];
+}
+
+function Counter() {
+  const [count, { increment, decrement, reset }] = useCounter(0, 1);
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+
+```jsx
+function useCounter(initialValue = 0, step = 1) {
+  const [count, setCount] = React.useState(initialValue);
+
+  const increment = React.useCallback(() => {
+    setCount(prev => prev + step);
+  }, [step]);
+  const decrement = React.useCallback(() => {
+    setCount(prev => prev - step);
+  }, [step]);
+  const reset = React.useCallback(() => {
+    setCount(initialValue);
+  }, [initialValue]);
+  return [count, { increment, decrement, reset }];
+}
+
+function Counter() {
+  const [count, { increment, decrement, reset }] = useCounter(0, 5);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+{5}</button> <button onClick={decrement}>-{5}</button> <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+````
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## useSyncExternalStore: useOnlineStatus Hook
+
+````md magic-move
+```jsx
+// Problem: We need to track online/offline status
+function App() {
+  return <div>Am I online?</div>
+}
+```
+
+```jsx
+// Step 1: Basic state management
+function App() {
+  const [isOnline, setIsOnline] = React.useState(() => navigator.onLine);
+  
+  React.useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+  
+  return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
+}
+```
+
+```jsx
+// Step 2: Extract subscribe function
+// subscribe: Registers callbacks for external store changes
+function subscribe(callback) {
+  // Add event listeners that call callback when status changes
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
+  
+  // Return cleanup function to remove listeners
+  return () => {
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
+  };
+}
+
+function App() {
+  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
+  
+  React.useEffect(() => {
+    const unsubscribe = subscribe(() => {
+      setIsOnline(() => navigator.onLine);
+    });
+    return unsubscribe;
+  }, []);
+  return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
+}
+```
+
+```jsx
+// Step 3: Extract getSnapshot function
+function getSnapshot() { // getSnapshot: Returns current value from external store
+  return navigator.onLine; // Read current value from browser API
+}
+
+function subscribe(callback) {
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
+  return () => {
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
+  };
+}
+
+function App() {
+  const [isOnline, setIsOnline] = React.useState(getSnapshot());
+  
+  React.useEffect(() => {
+    const unsubscribe = subscribe(() => {
+      setIsOnline(getSnapshot());
+    });
+    return unsubscribe;
+  }, []);
+  return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
+}
+```
+
+```jsx
+// Step 4: Use useSyncExternalStore hook
+// useSyncExternalStore(subscribe, getSnapshot)
+// - subscribe: Function that subscribes to external store
+// - getSnapshot: Function that returns current snapshot
+function subscribe(callback) {
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
+  return () => {
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
+  };
+}
+function getSnapshot() {
+  return navigator.onLine;
+}
+
+function App() {
+  const isOnline = React.useSyncExternalStore(
+    subscribe,    // How to subscribe to changes
+    getSnapshot    // How to get current value
+  ); // useSyncExternalStore handles subscription and state updates
+  return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
+}
+```
+
+```jsx
+// Step 5: Extract into custom hook
+function subscribe(callback) {
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
+  return () => {
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
+  };
+}
+function getSnapshot() {
+  return navigator.onLine;
+}
+
+function useOnlineStatus() {
+  const isOnline = React.useSyncExternalStore(
+    subscribe,    // Subscribe to online/offline events
+    getSnapshot   // Get current online status
+  );
+  return isOnline;
+
+function App() {
+  const isOnline = useOnlineStatus();
+  return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
+}
+```
+
+```jsx
+// Final: Complete implementation with all functions
+function useOnlineStatus() {
+  const isOnline = React.useSyncExternalStore( subscribe, getSnapshot );
+  return isOnline;
+}
+
+function subscribe(callback) {
+  window.addEventListener('online', callback);
+  window.addEventListener('offline', callback);
+  return () => {
+    window.removeEventListener('online', callback);
+    window.removeEventListener('offline', callback);
+  };
+}
+
+function getSnapshot() {
+  return navigator.onLine;
+}
+
+function App() {
+  const isOnline = useOnlineStatus();
+  return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
+}
+```
+````
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+[Understanding useSyncExternalStore]{.text-sm}
+
+<v-clicks>
+
+<div grid="~ cols-2" gap="2">
+
+<div>
+
+**Why useSyncExternalStore?**
+
+- Handles external store subscriptions safely
+- Prevents tearing (inconsistent state) during concurrent rendering
+- Automatically manages subscription lifecycle
+- Works with React's concurrent features
+
+**Key Functions:**
+
+1. **`subscribe(callback)`**: 
+  - Registers callback for store changes
+  - Returns cleanup function
+  - Called when component mounts/updates
+
+</div>
+
+<div>
+
+2. **`getSnapshot()`**: 
+  - Returns current store value
+  - Must be synchronous
+  - Called during render to get current state
+
+**Use Cases:**
+- Browser APIs (online status, geolocation, media queries)
+- Third-party state management libraries
+- WebSocket connections
+- Browser storage (localStorage, sessionStorage)
+
+</div>
+</div>
+
+</v-clicks>
