@@ -14,6 +14,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+5)">Context API for Global State</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">Introduction to Redux</a>
 - <a @click="$slidev.nav.go($nav.currentPage+10)">Best Practices for State Management</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">Activity and ViewTransition</a>
 
 ---
 hideInToc: true
@@ -150,7 +151,7 @@ There are cases where we would want to share a state across the entire applicati
 
 - Create a context using `React.createContext`.
 - Wrap your application in a `Provider`.
-- Use `useContext` to consume the context in child components.
+- Use `useContext` or `use` to consume the context in child components.
 
 </v-clicks>
 
@@ -179,6 +180,7 @@ function App() {
 }
 
 function Child() {
+  // const { value, setValue } = use(MyContext)
   const { value, setValue } = useContext(MyContext)
   return <button onClick={() => setValue('Updated')}>{value}</button>
 }
@@ -396,3 +398,130 @@ State management best practices ensure your application's state is scalable, mai
 </div>
 
 </div>
+
+---
+hideInToc: true
+---
+
+# Activity and View Transition
+
+## [Activity](https://react.dev/reference/react/Activity) Component (React 19.2)
+
+<v-clicks>
+
+- `<Activity>` hides children via `display: none` while preserving their state and DOM. Stateful hidden components.
+- `mode="visible" | "hidden"` controls whether content shows; hidden content still re-renders at lower priority.
+- Effects inside children are cleaned up while hidden; restored when visible again.
+- Ideal for tabs/sidebars you want to hide without losing state or refetching or prefetching(Media like videos).
+
+
+```jsx {monaco} {lineNumbers: true, height: '13rem'}
+import { Activity, useState } from 'react'
+
+function App() {
+  const [showSidebar, setShowSidebar] = useState(true)
+
+  return (
+    <div className="layout">
+      <button onClick={() => setShowSidebar(prev => !prev)}>
+        Toggle sidebar
+      </button>
+
+      <Activity mode={showSidebar ? 'visible' : 'hidden'}>
+        <Sidebar /> {/* state + DOM preserved while hidden */}
+      </Activity>
+
+      <main>
+        <Content />
+      </main>
+    </div>
+  )
+}
+```
+
+<div class="text-xs text-slate-500" v-click>
+Note: Hidden video/audio/iframe elements keep playing unless their own cleanup stops them.
+</div>
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [View Transition](https://react.dev/reference/react/ViewTransition)
+
+<v-clicks>
+
+- The [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) enables animated DOM swaps for route or view changes. [Read More about SPA use-cases](https://web.dev/learn/css/view-transitions-spas)
+- Wrap DOM updates in `document.startViewTransition` when available; it falls back silently if unsupported.
+- Use CSS to define shared element animations (`view-transition-name`).
+- You can wrap pages, component or group interaction with <ViewTransition /> element and setup a minimal style.
+
+</v-clicks>
+
+````md magic-move
+```jsx {monaco} {lineNumbers: true, height: '13rem'}
+function swapCard(setCard) {
+  const run = () => setCard((prev) => prev === 'A' ? 'B' : 'A')
+  if ('startViewTransition' in document) {
+    document.startViewTransition(run)
+  } else {
+    run()
+  }
+}
+```
+
+```jsx
+function CardView({ card, setCard }) {
+  return (
+    <div className="card" style={{ viewTransitionName: 'card' }}>
+      <p>Card {card}</p>
+      <button onClick={() => swapCard(setCard)}>Switch</button>
+    </div>
+  )
+}
+```
+
+```jsx
+import {ViewTransition} from 'react'
+<ViewTransition enter="slide-in">...</ViewTransition>
+
+<ViewTransition default="slow-fade">
+  <Video />
+</ViewTransition>
+```
+
+```jsx
+<Suspense fallback={<ViewTransition><A /></ViewTransition>}>
+  <ViewTransition><B /></ViewTransition>
+</Suspense>
+```
+
+```css
+::view-transition-group(.slide-in) {
+  
+}
+::view-transition-old(.slide-in) {
+
+}
+::view-transition-new(.slide-in) {
+
+}
+```
+
+```css
+::view-transition-group(root){
+  animation-duration: 200ms;
+}
+
+::view-transition-old(root) {
+  animation-name: slide-out-to-left;
+}
+
+::view-transition-new(root) {
+  animation-name: slide-in-from-right;
+}
+```
+````
