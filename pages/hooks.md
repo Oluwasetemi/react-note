@@ -1096,3 +1096,80 @@ function LiveData() {
   )
 }
 ```
+
+---
+hideInToc: true
+---
+
+```jsx {monaco-run} {lines: 'true', height: '25rem'}
+
+import React from 'react';
+
+/**
+ * An Async Generator that acts as our data source.
+ * It manages its own internal state (num) and timing loop.
+ */
+
+function LiveData() {
+  const [data, setData] = React.useState(undefined);
+  const [error, setError] = React.useState(undefined);
+  
+  async function* liveDataGenerator() {
+    let num = 0;
+    
+    while (true) {
+      // 1. Pause execution for 1 second (simulating network/compute latency)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      // 2. Update internal state
+      num++;
+  
+      // 3. Determine what to yield based on the logic
+      // We return an object distinguishing data from errors to keep the stream alive.
+      // (Throwing an actual Error would terminate the generator).
+      if (num % 3 === 0 && num > 1) {
+        yield { type: 'error', payload: new Error("error:" + num) };
+      } else {
+        yield { type: 'data', payload: "state:" + num };
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    // Initialize the generator
+    const stream = liveDataGenerator();
+    let isMounted = true;
+
+    const consumeStream = async () => {
+      // "for await" handles the async stream automatically
+      for await (const event of stream) {
+        if (!isMounted) break; // Cleanup check
+
+        if (event.type === 'error') {
+          setError(event.payload);
+          setData(undefined);
+        } else {
+          setData(event.payload);
+          setError(undefined);
+        }
+      }
+    };
+
+    consumeStream();
+
+    // Cleanup function to prevent setting state on unmounted component
+    return () => {
+      isMounted = false;
+      // Note: Generators are not cancellable by default from the outside
+      // without AbortSignal, but stopping consumption is enough for React state safety.
+    };
+  }, []);
+
+  return (
+    <div>
+      <div>{data}</div>
+      <div>error: {error ? error.message : ""}</div>
+    </div>
+  );
+}
+```
