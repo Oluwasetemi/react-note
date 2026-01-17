@@ -17,7 +17,7 @@ function SearchForm() {
 
 const correct = `
 function SearchForm() {
-    const [results, formAction] = useActionState(async (state, formData) => {
+    const [results, formAction] = useFormState(async (state, formData) => {
       const query = formData.get('search');
       const results = await fetch(\`/api/search?q=\${query}\`).then(r => r.json());
       return results;
