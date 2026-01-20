@@ -31,7 +31,7 @@ UI is a function of state and it should be declarative using JSX and the power o
 
 Reacting to user input is a key part of building interactive UIs. Handling user input with React typically involves updating the state of your components based on the user's input and interactions. Triggering state changes based on user input is how you build interactive UIs.
 
-When a user type something into the form, the `submit` button becomes enabled. When the user clicks the `submit` button, both the form and the button becomes disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears. The above can be represented imperatively or declaratively. React enforces a declarative approach.
+When a user types something into the form, the `submit` button becomes enabled. When the user clicks the `submit` button, both the form and the button becomes disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears. The above can be represented imperatively or declaratively. React enforces a declarative approach.
 
 ---
 hideInToc: true
