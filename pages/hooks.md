@@ -1103,8 +1103,6 @@ hideInToc: true
 
 ```jsx {monaco-run} {lines: 'true', height: '25rem'}
 
-import React from 'react';
-
 /**
  * An Async Generator that acts as our data source.
  * It manages its own internal state (num) and timing loop.
