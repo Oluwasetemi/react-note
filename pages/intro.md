@@ -801,22 +801,22 @@ To set up a development environment with {Vite}, you can use the following steps
 
 ````md magic-move
 ```bash
-npm install -g create-vite
+npm install -g create-vite # if you want to have it as a global cli - create-vite
 npx create-vite
 ```
 
 ```bash
-yarn global add create-vite
+yarn global add create-vite # if you want to have it as a global cli - create-vite
 yarn create-vite
 ```
 
 ```bash
-pnpm add -g create-vite
+pnpm add -g create-vite # if you want to have it as a global cli - create-vite
 pnpx create-vite
 ```
 
 ```bash
-bun add -g create-vite
+bun add -g create-vite # if you want to have it as a global cli - create-vite
 bunx create-vite
 ```
 ````

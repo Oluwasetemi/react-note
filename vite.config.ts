@@ -1,6 +1,5 @@
 import MarkdownItMagicLink from 'markdown-it-magic-link'
 import { defineConfig } from 'vite'
-import '@slidev/cli'
 
 export default defineConfig({
   slidev: {
@@ -48,7 +47,7 @@ export default defineConfig({
               link: 'https://pinia.vuejs.org/',
             },
             React: {
-              link: 'https://github.com/facebook/react',
+              link: 'https://react.dev',
               imageUrl: 'https://github.com/react.png',
             },
             Nuxt: 'https://github.com/nuxt/nuxt',
@@ -61,7 +60,7 @@ export default defineConfig({
             Svelte: 'https://github.com/sveltejs/svelte',
             Angular: 'https://github.com/angular/angular',
             Nextjs: {
-              link: 'https://github.com/vercel/next.js/',
+              link: 'https://nextjs.org/',
               imageUrl: 'https://github.com/nextjs.png',
             },
             Vite: 'https://github.com/vitejs/vite',
@@ -136,6 +135,34 @@ export default defineConfig({
               link: 'https://www.ecma-international.org/ecma-262/10.0/index.html',
               imageUrl:
                 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/600px-JavaScript-logo.png',
+            },
+            'React Aria': {
+              link: 'https://react-spectrum.adobe.com/react-aria/',
+              imageUrl: 'https://github.com/adobe.png',
+            },
+            'Chakra UI': {
+              link: 'https://chakra-ui.com/',
+              imageUrl: 'https://github.com/chakra-ui.png',
+            },
+            'Material UI': {
+              link: 'https://mui.com/',
+              imageUrl: 'https://github.com/mui.png',
+            },
+            'Base UI': {
+              link: 'https://base-ui.com/',
+              imageUrl: 'https://github.com/mui.png',
+            },
+            Radix: {
+              link: 'https://www.radix-ui.com/',
+              imageUrl: 'https://github.com/radix-ui.png',
+            },
+            shadcn: {
+              link: 'https://ui.shadcn.com/',
+              imageUrl: 'https://github.com/shadcn-ui.png',
+            },
+            Tanstack: {
+              link: 'https://tanstack.com/',
+              imageUrl: 'https://github.com/tanstack.png',
             },
           },
         })

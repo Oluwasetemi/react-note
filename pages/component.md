@@ -522,9 +522,9 @@ name: Assignments on Components
 
 <div />
 
-Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text.
+(1) Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text.
 
-Turn this `li` into a reusability component.
+(2) Turn this `li` into a reusability component using props.
 
 ```html
 <li className="contact-card">
@@ -538,7 +538,9 @@ Turn this `li` into a reusability component.
 </li>
 ```
 
-Implement either an accessible modal, accordion and tool tip component
+(1) and (2) will be Graded as Assignment 1. To submit create a new react project and submit the GitHub link alone.
+
+Implement either an accessible modal, accordion and tool tip component - Practice Question
 
 ---
 hideInToc: true
@@ -546,5 +548,7 @@ hideInToc: true
 
 # Summary
 
-- Try to read the codebase of React Component Libraries from React Aria, Chakra UI, Material UI.
-- Check out [Tanstack](https://tanstack.com/) family of libraries.
+Self Responsibility
+
+- Try to read the codebase of React Component Libraries from {React Aria}, {Chakra UI}, {Material UI}, {Base UI}, {Radix} and read about {shadcn}
+- Check out {Tanstack} family of libraries.
