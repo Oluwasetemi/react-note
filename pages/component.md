@@ -522,9 +522,9 @@ name: Assignments on Components
 
 <div />
 
-(1) Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text.
+(1) Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text. Add styles (based on any of the several ways to add css to react components).
 
-(2) Turn this `li` into a reusability component using props.
+(2) Turn this `li` into a reusability component using props and add styles (based on any of the several ways to add css to react components).
 
 ```html
 <li className="contact-card">
