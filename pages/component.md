@@ -538,7 +538,7 @@ name: Assignments on Components
 </li>
 ```
 
-(1) and (2) will be Graded as Assignment 1. To submit create a new react project and submit the GitHub link alone.
+(1) and (2) will be Graded as Assignment 1. To submit create a new react project, push the code to a new GitHub repo and submit the GitHub link alone.
 
 Implement either an accessible modal, accordion and tool tip component - Practice Question
 
