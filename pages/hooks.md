@@ -614,12 +614,38 @@ const UsersList = () => {
 ```
 
 ```js
-import { createContext, use } from 'react'
+import { createContext, use, useState } from 'react'
 
 const ThemeContext = createContext()
 
+function ThemeProvider ({children}) {
+
+  const [theme, setTheme] = useState('light')
+
+  function toggleTheme() {
+    setTheme(prev => prev === 'light' ? 'dark' : 'dark')
+  }
+
+  return (
+    <ThemeContext value={{theme, toggleTheme}}>
+      {children}
+    </ThemeContext>
+  )
+}
+
+export function useTheme () {
+  const context = use(ThemeContext)
+
+   if (!context) {
+    throw new Error('Theme Context was used within a ThemeProvider');
+  }
+  
+  return context;
+}
+
 const ThemeConsumer = () => {
-  const { theme, toggleTheme } = use(ThemeContext)
+
+  const { theme, toggleTheme } = useTheme()
 
   return <button onClick={toggleTheme}>Current theme: {theme}</button>
 }
