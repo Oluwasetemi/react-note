@@ -9,7 +9,6 @@ export const entries: ChangelogEntry[] = [
     version: 'v2.1',
     date: '2026-05-04',
     changes: [
-      'Added RSC sub-app section',
       'Updated hooks demos with React 19 patterns',
       'Added /changelog and /routes custom pages',
       'Improved iframe-lazy layout with Run/Open buttons',
