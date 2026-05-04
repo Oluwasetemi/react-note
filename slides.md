@@ -23,9 +23,10 @@ drawings:
   persist: false
 transition: slide-left
 mdc: true
-overviewSnapshots: true
+overviewSnapshots: false
 selectable: true
 hideInToc: true
+monacoTypesIgnoreDefaults: true
 ---
 
 # React [Class]{.text-8xl.font-hand.mr-4.text-gradient} Notes
