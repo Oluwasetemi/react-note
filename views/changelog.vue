@@ -19,7 +19,7 @@ import { entries } from '../changelog'
       </p>
     </header>
 
-    <ul class="timeline list-none p-0 m-0 relative">
+    <ul class="list-none p-0 m-0 relative before:content-[''] before:absolute before:left-[10px] before:inset-y-0 before:w-0.5 before:bg-gray-200 dark:before:bg-gray-700">
       <li
         v-for="entry in entries"
         :key="entry.version"
@@ -50,14 +50,3 @@ import { entries } from '../changelog'
   </div>
 </template>
 
-<style scoped>
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 10px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  @apply bg-gray-200 dark:bg-gray-700;
-}
-</style>

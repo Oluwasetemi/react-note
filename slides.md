@@ -31,11 +31,11 @@ monacoTypesIgnoreDefaults: true
 
 # React [Class]{.text-8xl.font-hand.mr-4.text-gradient} Notes
 
-React Class notes for the 2nd Semester
+The Best Way To Ever Learn React
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Are you ready to build a well designed UI from components with your HTML skills? Press <kbd>space</kbd> on your keyboard <carbon:arrow-right class="inline"/>
+    Are you ready to build a well designed UI from components with your <a href="https://html.oluwasetemi.dev" rel="noopener noreferrer" title="Open in HTML note browser">HTML</a>, <a href="https://css.oluwasetemi.dev" rel="noopener noreferrer" title="Open in CSS note browser">CSS</a>, <a href="https://javascript.oluwasetemi.dev" rel="noopener noreferrer" title="Open in JavaScript note browser">JavaScript</a> skills? Press <kbd>space</kbd> on your keyboard <carbon:arrow-right class="inline"/>
   </span>
 </div>
 

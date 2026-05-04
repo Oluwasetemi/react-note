@@ -202,9 +202,6 @@ export default defineConfig({
       'react-dom/client',
       '@babel/standalone',
     ],
-    // Monaco uses import.meta.url for worker resolution — Vite's pre-bundler
-    // wraps ESM in a CJS shim that breaks this, so we exclude it entirely.
-    exclude: ['monaco-editor'],
   },
   worker: {
     format: 'es',
