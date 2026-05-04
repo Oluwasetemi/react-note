@@ -152,9 +152,8 @@ onMounted(async () => {
 
 async function formatCode() {
   // Format code
-  const { default: prettier } = await import(
-    'https://esm.sh/prettier@2.3.2/standalone.mjs'
-  )
+  const { default: prettier } =
+    await import('https://esm.sh/prettier@2.3.2/standalone.mjs')
   const prettierPluginBabel = await import('prettier/parser-babel')
   const code = examples[currentIndex.value].code
   const options = {
@@ -296,25 +295,22 @@ async function formatCode() {
 </template>
 
 <style scoped>
+/* ::-webkit-scrollbar pseudo-selectors cannot be expressed as UnoCSS utility classes */
 .scrollbar-custom {
   scrollbar-width: thin;
   scrollbar-color: #4b5563 #1f2937;
 }
-
 .scrollbar-custom::-webkit-scrollbar {
   width: 8px;
 }
-
 .scrollbar-custom::-webkit-scrollbar-track {
   background: #1f2937;
   border-radius: 4px;
 }
-
 .scrollbar-custom::-webkit-scrollbar-thumb {
   background: #4b5563;
   border-radius: 4px;
 }
-
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
 }

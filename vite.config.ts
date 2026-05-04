@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   slidev: {
     markdown: {
-      markdownItSetup(md) {
+      markdownSetup(md) {
         md.use(MarkdownItMagicLink, {
           linksMap: {
             Nodejs: {
@@ -166,21 +166,44 @@ export default defineConfig({
             },
           },
         })
+        // mdc_inline_props (from @comark/markdown-it with mdc:true) also claims {…} syntax
+        // and runs after "entity" — before magic-link's "before text" position. Move
+        // magic-link before "entity" so it wins the {React} / {Vue} token race.
+        const rules = md.inline.ruler.__rules__
+        const magicIdx = rules.findIndex((r) => r.name === 'magic-link')
+        const entityIdx = rules.findIndex((r) => r.name === 'entity')
+        if (magicIdx !== -1 && entityIdx !== -1 && magicIdx > entityIdx) {
+          const [rule] = rules.splice(magicIdx, 1)
+          rules.splice(entityIdx, 0, rule)
+          md.inline.ruler.__cache__ = null
+        }
       },
     },
   },
   build: {
+    chunkSizeWarningLimit: 2000,
+    sourcemap: false,
+    minify: 'esbuild',
+    target: ['chrome90', 'firefox90', 'safari14'],
     rollupOptions: {
       external: [],
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('monaco-editor')) return 'monaco'
+          if (id.includes('@babel/standalone')) return 'babel'
+        },
+      },
     },
   },
   optimizeDeps: {
-    // TODO: only exclude in prod.
     include: [
       '@vue/compiler-sfc',
       'react',
       'react-dom/client',
       '@babel/standalone',
     ],
+  },
+  worker: {
+    format: 'es',
   },
 })

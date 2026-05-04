@@ -78,19 +78,21 @@ const showSolution = ref(false)
 </script>
 
 <template>
-  <div class="bg-white shadow-md rounded-md p-4 max-w-4xl mx-auto">
+  <div
+    class="bg-white dark:bg-gray-900 shadow-md rounded-md p-4 max-w-4xl mx-auto"
+  >
     <div class="space-y-4 max-h-[500px] overflow-y-auto">
       <transition name="slide">
         <div v-if="!showSolution" key="question" class="space-y-4">
-          <div class="rounded-md p-4 bg-gray-100">
+          <div class="rounded-md p-4 bg-gray-100 dark:bg-gray-800">
             <h2 class="text-xl text-blue-500 font-bold mb-2">
               Create a search form with loading state:
             </h2>
             <div
               v-if="ready"
               v-html="formatted"
-              class="bg-gray-300 text-gray-900 rounded-md p-3 overflow-auto text-sm"
-            ></div>
+              class="bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-3 overflow-auto text-sm"
+            />
           </div>
           <button
             class="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors text-sm"
@@ -102,8 +104,12 @@ const showSolution = ref(false)
       </transition>
       <transition name="slide">
         <div v-if="showSolution" key="solution" class="space-y-4">
-          <div class="bg-green-100 rounded-md p-4 light:text-white">
-            <h2 class="text-xl text-green-900 font-bold mb-2">Solution</h2>
+          <div class="bg-green-100 dark:bg-green-900 rounded-md p-4">
+            <h2
+              class="text-xl text-green-900 dark:text-green-100 font-bold mb-2"
+            >
+              Solution
+            </h2>
             <div class="bg-gray-900 rounded-md p-3 overflow-auto text-sm">
               <pre v-html="formattedSolution"></pre>
             </div>
@@ -121,6 +127,7 @@ const showSolution = ref(false)
 </template>
 
 <style scoped>
+/* Vue transition hook classes — cannot be expressed as utility classes */
 .slide-enter-active,
 .slide-leave-active {
   transition:
@@ -132,9 +139,5 @@ const showSolution = ref(false)
 .slide-leave-to {
   opacity: 0;
   transform: translateY(20px);
-}
-
-pre {
-  font-family: 'Fira Code', monospace;
 }
 </style>

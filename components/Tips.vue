@@ -1,12 +1,15 @@
 <template>
   <aside
-    class="tip pl-3 b-l-5 b-l-type"
-    :class="type"
+    class="tip flex flex-col px-4 py-3 rounded mb-4 items-start max-w-[600px] border-l-5"
+    :class="[typeConfig.bg, typeConfig.border]"
     :style="{ maxWidth: fullWidth ? '100%' : '' }"
     :role="role"
   >
     <section class="flex items-center gap-3 mb-2">
-      <div class="tip__icon">
+      <div
+        class="flex-shrink-0 flex items-center text-xl"
+        :class="typeConfig.icon"
+      >
         <slot name="icon">
           <div v-if="type === 'tip'" class="slidev-icon i-carbon-idea" />
           <div
@@ -23,10 +26,12 @@
           />
         </slot>
       </div>
-      <div class="tip__type">{{ capitalizedType }}</div>
+      <div class="font-medium" :class="typeConfig.icon">
+        {{ capitalizedType }}
+      </div>
     </section>
-    <section class="tip__body">
-      <div class="tip__content">
+    <section class="flex-grow">
+      <div>
         <slot>Default tip content</slot>
       </div>
     </section>
@@ -49,80 +54,41 @@ const props = defineProps({
   },
 })
 
-const capitalizedType = computed(() => {
-  return props.type.charAt(0).toUpperCase() + props.type.slice(1)
-})
+const capitalizedType = computed(
+  () => props.type.charAt(0).toUpperCase() + props.type.slice(1),
+)
 
-const role = computed(() => {
-  return props.type === 'danger' ? 'alert' : 'status'
+const role = computed(() => (props.type === 'danger' ? 'alert' : 'status'))
+
+const typeConfig = computed(() => {
+  const configs = {
+    tip: {
+      bg: 'bg-[#660792]',
+      icon: 'text-[#660792] dark:text-white',
+      border: 'border-l-[#660792]',
+    },
+    info: {
+      bg: 'bg-[#111a2b]',
+      icon: 'text-[#2196f3]',
+      border: 'border-l-[#2196f3]',
+    },
+    success: {
+      bg: 'bg-[#132a1a]',
+      icon: 'text-[#4caf50]',
+      border: 'border-l-[#4caf50]',
+    },
+    danger: {
+      bg: 'bg-[#2b1518]',
+      icon: 'text-[#ff4d4f]',
+      border: 'border-l-[#ff4d4f]',
+    },
+  }
+  return configs[props.type] ?? configs.info
 })
 </script>
 
 <style scoped>
-.tip {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 16px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  align-items: flex-start;
-  max-width: 600px;
-}
-
-.tip__icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.tip__body {
-  flex-grow: 1;
-}
-
-.tip__type {
-  font-weight: medium;
-}
-
-.slidev-icon {
-  font-size: 1.25em;
-}
-
-.tip {
-  background-color: var(--tip-bg, #660792);
-  --uno: b-l-[#660792] light: bg-[#66079270];
-}
-
-.tip__icon,
-.tip__type {
-  color: var(--tip-icon, #660792);
-  /* --uno: dark: color-white ; */
-}
-
-.dark .tip__icon,
-.dark .tip__type {
-  --tip-icon: #fff;
-}
-
-/* Dynamic background colors */
-.info {
-  --tip-bg: #111a2b;
-  --tip-icon: #2196f3;
-  --uno: b-l-[#2196f3] light: bg-[#2196f370];
-}
-
-.success {
-  --tip-bg: #132a1a;
-  --tip-icon: #4caf50;
-  --uno: b-l-[#4caf50] light: bg-[#4caf5070];
-}
-
-.danger {
-  --tip-bg: #2b1518;
-  --tip-icon: #ff4d4f;
-  --uno: b-l-[#ff4d4f] light: bg-[#ff4d4f70];
-}
-
-/* Deep styling */
+/* :deep() is required to style slot-injected content */
 .tip :deep(p) {
   color: #ffffff;
   margin: 0;
