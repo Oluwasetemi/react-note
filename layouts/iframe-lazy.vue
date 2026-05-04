@@ -1,32 +1,52 @@
 <template>
-  <div class="iframe-lazy-container">
-    <div v-if="!isLoaded" class="iframe-placeholder" @click="loadIframe">
+  <div ref="containerRef" class="iframe-lazy-container">
+    <div v-if="!isLoaded" class="iframe-placeholder">
       <div class="placeholder-content">
         <div class="loading-spinner" v-if="isLoading">
           <div class="spinner"></div>
         </div>
         <div v-else class="click-to-load">
-          <div class="play-icon">▶</div>
-          <p>Click to load iframe</p>
-          <small>{{ url }}</small>
+          <p class="url-label">{{ url }}</p>
+          <div class="btn-row">
+            <button class="action-btn run-btn" @click="loadIframe">
+              ▶ Run
+            </button>
+            <a
+              class="action-btn open-btn"
+              :href="url"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ↗ Open
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <iframe
-      v-show="isLoaded"
-      ref="iframeRef"
-      :src="isLoaded ? url : undefined"
-      :title="title || 'Embedded content'"
-      class="iframe-content"
-      frameborder="0"
-      allowfullscreen
-      @load="onIframeLoad"
-    />
+
+    <div v-if="isLoaded" class="iframe-wrapper">
+      <a
+        class="float-open-btn"
+        :href="url"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Open in browser"
+      >↗</a>
+      <iframe
+        ref="iframeRef"
+        :src="url"
+        :title="title || 'Embedded content'"
+        class="iframe-content"
+        frameborder="0"
+        allowfullscreen
+        @load="onIframeLoad"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 interface Props {
@@ -36,22 +56,18 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  autoLoad: false
+  autoLoad: false,
 })
 
 const iframeRef = ref<HTMLIFrameElement>()
+const containerRef = ref<HTMLElement>()
 const isLoaded = ref(false)
 const isLoading = ref(false)
-const containerRef = ref<HTMLElement>()
 
 const loadIframe = async () => {
   if (isLoaded.value || isLoading.value) return
-
   isLoading.value = true
-
-  // Small delay to show loading state
-  await new Promise(resolve => setTimeout(resolve, 100))
-
+  await new Promise((resolve) => setTimeout(resolve, 100))
   isLoaded.value = true
   isLoading.value = false
 }
@@ -60,7 +76,6 @@ const onIframeLoad = () => {
   isLoading.value = false
 }
 
-// Auto-load when slide becomes visible (if autoLoad is enabled)
 onMounted(() => {
   if (props.autoLoad) {
     const { stop } = useIntersectionObserver(
@@ -71,9 +86,7 @@ onMounted(() => {
           stop()
         }
       },
-      {
-        threshold: 0.1
-      }
+      { threshold: 0.1 },
     )
   }
 })
@@ -89,23 +102,13 @@ onMounted(() => {
 
 .iframe-placeholder {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f8f9fa;
   border: 2px dashed #dee2e6;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.iframe-placeholder:hover {
-  background: #e9ecef;
-  border-color: #adb5bd;
 }
 
 .placeholder-content {
@@ -137,17 +140,70 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
-.play-icon {
-  font-size: 48px;
-  color: #007bff;
-  transition: transform 0.2s ease;
+.url-label {
+  font-size: 0.75rem;
+  color: #adb5bd;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.iframe-placeholder:hover .play-icon {
-  transform: scale(1.1);
+.btn-row {
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn {
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.action-btn:hover {
+  opacity: 0.75;
+}
+
+.run-btn {
+  background: #007bff;
+  color: #fff;
+}
+
+.open-btn {
+  background: #e9ecef;
+  color: #343a40;
+}
+
+.iframe-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.float-open-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.float-open-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .iframe-content {
@@ -155,5 +211,6 @@ onMounted(() => {
   height: 100%;
   border: none;
   border-radius: 8px;
+  display: block;
 }
 </style>
