@@ -1,12 +1,17 @@
 <template>
-  <div class="playground-page">
-    <header class="playground-header">
-      <div class="playground-header-left">
-        <button class="back-btn" @click="goBack">← Back to slides</button>
-        <h1 class="playground-title">JS / TS Playground</h1>
+  <div class="flex flex-col h-screen bg-[#0f0f0f] text-[#e5e5e5] font-fast">
+    <header class="flex items-center justify-between px-5 py-[10px] bg-[#1a1a1a] border-b border-[#333] flex-shrink-0">
+      <div class="flex items-center gap-4">
+        <button
+          class="px-[14px] py-[6px] bg-[#2a2a2a] text-[#ccc] border border-[#444] rounded-md cursor-pointer text-sm transition-colors duration-150 hover:bg-[#333]"
+          @click="goBack"
+        >
+          ← Back to slides
+        </button>
+        <h1 class="m-0 text-base font-semibold text-[#e5e5e5]">JS / TS Playground</h1>
       </div>
       <a
-        class="open-btn"
+        class="px-[14px] py-[6px] bg-blue-500 text-white rounded-md no-underline text-sm font-medium transition-opacity duration-150 hover:opacity-85"
         href="https://js-playground-alpha.vercel.app/playground/js-ts"
         target="_blank"
         rel="noopener noreferrer"
@@ -15,12 +20,17 @@
       </a>
     </header>
 
-    <div class="iframe-wrapper">
-      <div v-if="!isLoaded" class="placeholder">
-        <div v-if="isLoading" class="spinner" />
-        <div v-else class="placeholder-content">
-          <p class="placeholder-url">js-playground-alpha.vercel.app</p>
-          <button class="run-btn" @click="load">▶ Launch Playground</button>
+    <div class="flex-1 relative overflow-hidden">
+      <div v-if="!isLoaded" class="absolute inset-0 flex items-center justify-center bg-[#111]">
+        <div v-if="isLoading" class="w-10 h-10 border-4 border-[#333] border-t-blue-500 rounded-full animate-spin" />
+        <div v-else class="flex flex-col items-center gap-4">
+          <p class="m-0 text-[#666] text-sm">js-playground-alpha.vercel.app</p>
+          <button
+            class="px-8 py-3 bg-blue-500 text-white border-0 rounded-lg text-base font-semibold cursor-pointer transition-opacity duration-150 hover:opacity-85"
+            @click="load"
+          >
+            ▶ Launch Playground
+          </button>
         </div>
       </div>
       <iframe
@@ -28,7 +38,7 @@
         src="https://js-playground-alpha.vercel.app/playground/js-ts"
         title="JS / TS Playground"
         allow="cross-origin-isolated"
-        class="playground-iframe"
+        class="w-full h-full border-0 block"
         @load="isLoading = false"
       />
     </div>
@@ -50,131 +60,3 @@ const load = () => {
 
 const goBack = () => router.push('/')
 </script>
-
-<style scoped>
-.playground-page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: #0f0f0f;
-  color: #e5e5e5;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-.playground-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background: #1a1a1a;
-  border-bottom: 1px solid #333;
-  flex-shrink: 0;
-}
-
-.playground-header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.playground-title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #e5e5e5;
-}
-
-.back-btn {
-  padding: 6px 14px;
-  background: #2a2a2a;
-  color: #ccc;
-  border: 1px solid #444;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: background 0.15s;
-}
-
-.back-btn:hover {
-  background: #333;
-}
-
-.open-btn {
-  padding: 6px 14px;
-  background: #3b82f6;
-  color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: opacity 0.15s;
-}
-
-.open-btn:hover {
-  opacity: 0.85;
-}
-
-.iframe-wrapper {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-.placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #111;
-}
-
-.placeholder-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.placeholder-url {
-  margin: 0;
-  color: #666;
-  font-size: 0.85rem;
-}
-
-.run-btn {
-  padding: 12px 32px;
-  background: #3b82f6;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-
-.run-btn:hover {
-  opacity: 0.85;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #333;
-  border-top-color: #3b82f6;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.playground-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-</style>
