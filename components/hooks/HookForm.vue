@@ -1,14 +1,16 @@
 <template>
-  <div class="bg-white shadow-md rounded-md p-4 max-w-xl mx-auto">
+  <div
+    class="bg-white dark:bg-gray-900 shadow-md rounded-md p-4 max-w-xl mx-auto"
+  >
     <div class="space-y-4 max-h-[400px] overflow-y-auto">
       <transition name="slide">
         <div v-if="!showSolution" key="question" class="space-y-4">
-          <div class="rounded-md p-4 bg-gray-100">
+          <div class="rounded-md p-4 bg-gray-100 dark:bg-gray-800">
             <h2 class="text-xl text-blue-500 font-bold mb-2">
               Create a form with complex state handling
             </h2>
             <div
-              class="bg-gray-300 text-gray-900 rounded-md p-3 overflow-auto text-sm"
+              class="bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md p-3 overflow-auto text-sm"
             >
               <pre v-if="ready" v-html="formattedQuestion"></pre>
             </div>
@@ -22,13 +24,13 @@
         </div>
       </transition>
       <transition name="slide">
-        <div
-          v-if="showSolution"
-          key="solution"
-          class="space-y-4 light:text-white"
-        >
-          <div class="bg-green-100 rounded-md p-4">
-            <h2 class="text-xl text-green-900 font-bold mb-2">Solution</h2>
+        <div v-if="showSolution" key="solution" class="space-y-4">
+          <div class="bg-green-100 dark:bg-green-900 rounded-md p-4">
+            <h2
+              class="text-xl text-green-900 dark:text-green-100 font-bold mb-2"
+            >
+              Solution
+            </h2>
             <div class="bg-gray-900 rounded-md p-3 overflow-auto text-sm">
               <pre v-if="ready" v-html="formattedSolution"></pre>
             </div>
@@ -216,9 +218,9 @@ onMounted(async () => {
 
 const showSolution = ref(false)
 </script>
-s
 
-<style>
+<style scoped>
+/* Vue transition hook classes — cannot be expressed as utility classes */
 .slide-enter-active,
 .slide-leave-active {
   transition:
@@ -230,9 +232,5 @@ s
 .slide-leave-to {
   opacity: 0;
   transform: translateY(20px);
-}
-
-pre {
-  font-family: 'Fira Code', monospace;
 }
 </style>

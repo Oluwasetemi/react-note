@@ -11,5 +11,9 @@ export default defineRoutesSetup((routes) => {
       path: '/routes',
       component: () => import('../views/routes.vue'),
     },
+    {
+      path: '/playground',
+      component: () => import('../views/playground.vue'),
+    },
   ]
 })

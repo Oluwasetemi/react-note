@@ -1,14 +1,26 @@
 <template>
-  <div class="lazy-iframe-container" ref="containerRef">
-    <div v-if="!isLoaded" class="iframe-placeholder" @click="loadIframe">
-      <div class="placeholder-content">
-        <div class="loading-spinner" v-if="isLoading">
-          <div class="spinner"></div>
+  <div class="relative w-full min-h-[200px]" ref="containerRef">
+    <div
+      v-if="!isLoaded"
+      class="group absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer transition-all duration-300 min-h-[200px] hover:bg-gray-200 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
+      @click="loadIframe"
+    >
+      <div class="text-center text-gray-500 dark:text-gray-400">
+        <div v-if="isLoading" class="flex items-center justify-center">
+          <div
+            class="w-10 h-10 border-4 border-gray-200 dark:border-gray-600 border-t-blue-500 rounded-full animate-spin"
+          />
         </div>
-        <div v-else class="click-to-load">
-          <div class="play-icon">▶</div>
-          <p>Click to load iframe</p>
-          <small>{{ src }}</small>
+        <div v-else class="flex flex-col items-center gap-2">
+          <div
+            class="text-5xl text-blue-500 transition-transform duration-200 group-hover:scale-110"
+          >
+            ▶
+          </div>
+          <p class="m-0 text-sm">Click to load iframe</p>
+          <small class="text-xs text-gray-400 truncate max-w-[300px]">{{
+            src
+          }}</small>
         </div>
       </div>
     </div>
@@ -24,13 +36,14 @@
       :sandbox="sandbox"
       frameborder="0"
       allowfullscreen
+      class="rounded-lg"
       @load="onIframeLoad"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 interface Props {
@@ -47,7 +60,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   width: '100%',
   height: '400',
-  autoLoad: false
+  autoLoad: false,
 })
 
 const iframeRef = ref<HTMLIFrameElement>()
@@ -55,19 +68,12 @@ const containerRef = ref<HTMLElement>()
 const isLoaded = ref(false)
 const isLoading = ref(false)
 
-const iframeStyle = computed(() => {
-  const baseStyle = props.style || ''
-  return baseStyle
-})
+const iframeStyle = computed(() => props.style || '')
 
 const loadIframe = async () => {
   if (isLoaded.value || isLoading.value) return
-
   isLoading.value = true
-
-  // Small delay to show loading state
-  await new Promise(resolve => setTimeout(resolve, 100))
-
+  await new Promise((resolve) => setTimeout(resolve, 100))
   isLoaded.value = true
   isLoading.value = false
 }
@@ -76,7 +82,6 @@ const onIframeLoad = () => {
   isLoading.value = false
 }
 
-// Auto-load when element becomes visible (if autoLoad is enabled)
 onMounted(() => {
   if (props.autoLoad) {
     const { stop } = useIntersectionObserver(
@@ -87,86 +92,8 @@ onMounted(() => {
           stop()
         }
       },
-      {
-        threshold: 0.1
-      }
+      { threshold: 0.1 },
     )
   }
 })
 </script>
-
-<style scoped>
-.lazy-iframe-container {
-  position: relative;
-  width: 100%;
-  min-height: 200px;
-}
-
-.iframe-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8f9fa;
-  border: 2px dashed #dee2e6;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-height: 200px;
-}
-
-.iframe-placeholder:hover {
-  background: #e9ecef;
-  border-color: #adb5bd;
-}
-
-.placeholder-content {
-  text-align: center;
-  color: #6c757d;
-}
-
-.loading-spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.click-to-load {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.play-icon {
-  font-size: 48px;
-  color: #007bff;
-  transition: transform 0.2s ease;
-}
-
-.iframe-placeholder:hover .play-icon {
-  transform: scale(1.1);
-}
-
-iframe {
-  border-radius: 8px;
-}
-</style>

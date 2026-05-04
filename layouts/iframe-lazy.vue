@@ -1,18 +1,30 @@
 <template>
-  <div ref="containerRef" class="iframe-lazy-container">
-    <div v-if="!isLoaded" class="iframe-placeholder">
-      <div class="placeholder-content">
-        <div class="loading-spinner" v-if="isLoading">
-          <div class="spinner"></div>
+  <div ref="containerRef" class="relative w-full h-full min-h-[400px]">
+    <div
+      v-if="!isLoaded"
+      class="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg"
+    >
+      <div class="text-center text-gray-500 dark:text-gray-400">
+        <div v-if="isLoading" class="flex items-center justify-center">
+          <div
+            class="w-10 h-10 border-4 border-gray-200 dark:border-gray-600 border-t-blue-500 rounded-full animate-spin"
+          />
         </div>
-        <div v-else class="click-to-load">
-          <p class="url-label">{{ url }}</p>
-          <div class="btn-row">
-            <button class="action-btn run-btn" @click="loadIframe">
+        <div v-else class="flex flex-col items-center gap-3">
+          <p
+            class="text-xs text-gray-400 max-w-[400px] overflow-hidden text-ellipsis whitespace-nowrap m-0"
+          >
+            {{ url }}
+          </p>
+          <div class="flex gap-3">
+            <button
+              class="px-5 py-2 rounded-md text-base font-semibold cursor-pointer no-underline border-0 bg-blue-500 text-white transition-opacity duration-200 hover:opacity-75"
+              @click="loadIframe"
+            >
               ▶ Run
             </button>
             <a
-              class="action-btn open-btn"
+              class="px-5 py-2 rounded-md text-base font-semibold cursor-pointer no-underline border-0 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-opacity duration-200 hover:opacity-75"
               :href="url"
               target="_blank"
               rel="noopener noreferrer"
@@ -24,9 +36,9 @@
       </div>
     </div>
 
-    <div v-if="isLoaded" class="iframe-wrapper">
+    <div v-if="isLoaded" class="relative w-full h-full">
       <a
-        class="float-open-btn"
+        class="absolute top-2 right-2 z-10 bg-black/55 text-white px-[10px] py-1 rounded text-sm no-underline transition-colors duration-200 hover:bg-black/80"
         :href="url"
         target="_blank"
         rel="noopener noreferrer"
@@ -36,7 +48,7 @@
         ref="iframeRef"
         :src="url"
         :title="title || 'Embedded content'"
-        class="iframe-content"
+        class="w-full h-full border-0 rounded-lg block"
         frameborder="0"
         allowfullscreen
         @load="onIframeLoad"
@@ -91,126 +103,3 @@ onMounted(() => {
   }
 })
 </script>
-
-<style scoped>
-.iframe-lazy-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 400px;
-}
-
-.iframe-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8f9fa;
-  border: 2px dashed #dee2e6;
-  border-radius: 8px;
-}
-
-.placeholder-content {
-  text-align: center;
-  color: #6c757d;
-}
-
-.loading-spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.click-to-load {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.url-label {
-  font-size: 0.75rem;
-  color: #adb5bd;
-  max-width: 400px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.btn-row {
-  display: flex;
-  gap: 12px;
-}
-
-.action-btn {
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  border: none;
-  transition: opacity 0.2s ease;
-}
-
-.action-btn:hover {
-  opacity: 0.75;
-}
-
-.run-btn {
-  background: #007bff;
-  color: #fff;
-}
-
-.open-btn {
-  background: #e9ecef;
-  color: #343a40;
-}
-
-.iframe-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.float-open-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.float-open-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.iframe-content {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 8px;
-  display: block;
-}
-</style>

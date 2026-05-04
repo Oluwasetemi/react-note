@@ -1,35 +1,15 @@
 <!-- global-top.vue -->
 <script setup>
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useNav } from '@slidev/client'
+
+const { currentSlideNo } = useNav()
+
+// Slides that already render their own TOC — skip the floating icon on these
+const TOC_SLIDES = new Set([
+  4, 27, 43, 58, 71, 85, 117, 131, 156, 187, 212, 227,
+])
 </script>
+
 <template>
-  <TocIcon />
-  <button
-    class="routes-link"
-    title="View all sections"
-    @click="router.push('/routes')"
-  >
-    ⊞
-  </button>
+  <TocIcon v-if="!TOC_SLIDES.has(currentSlideNo)" />
 </template>
-
-<style scoped>
-.routes-link {
-  position: fixed;
-  top: 1rem;
-  right: 3.5rem;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  opacity: 0.45;
-  transition: opacity 0.2s ease;
-  z-index: 100;
-  color: inherit;
-}
-
-.routes-link:hover {
-  opacity: 1;
-}
-</style>

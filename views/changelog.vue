@@ -3,24 +3,45 @@ import { entries } from '../changelog'
 </script>
 
 <template>
-  <div class="changelog-page">
-    <header class="changelog-header">
-      <router-link to="/" class="back-link">← Back to slides</router-link>
-      <h1>
+  <div class="max-w-2xl mx-auto px-6 py-8">
+    <header class="mb-10">
+      <router-link
+        to="/2"
+        class="inline-block mb-4 text-sm text-blue-500 no-underline hover:underline"
+      >
+        Back to slides toc
+      </router-link>
+      <h1 class="text-3xl font-bold m-0 mb-1">
         Course <span class="text-gradient font-hand">Changelog</span>
       </h1>
-      <p class="subtitle">Version history of React Class Notes</p>
+      <p class="m-0 text-gray-500 dark:text-gray-400">
+        Version history of React Class Notes
+      </p>
     </header>
 
-    <ul class="timeline">
-      <li v-for="entry in entries" :key="entry.version" class="timeline-item">
-        <div class="timeline-marker" />
-        <div class="card timeline-card">
-          <div class="entry-header">
-            <span class="version-badge">{{ entry.version }}</span>
-            <span class="entry-date">{{ entry.date }}</span>
+    <ul class="timeline list-none p-0 m-0 relative">
+      <li
+        v-for="entry in entries"
+        :key="entry.version"
+        class="flex gap-5 mb-6 relative"
+      >
+        <div
+          class="w-[22px] h-[22px] rounded-full bg-blue-500 flex-shrink-0 mt-3 z-1"
+        />
+        <div
+          class="flex-1 p-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span
+              class="bg-blue-500 text-white px-[10px] py-[2px] rounded-full text-xs font-bold"
+            >
+              {{ entry.version }}
+            </span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{
+              entry.date
+            }}</span>
           </div>
-          <ul class="change-list">
+          <ul class="m-0 pl-5 leading-relaxed text-gray-700 dark:text-gray-300">
             <li v-for="change in entry.changes" :key="change">{{ change }}</li>
           </ul>
         </div>
@@ -30,48 +51,6 @@ import { entries } from '../changelog'
 </template>
 
 <style scoped>
-.changelog-page {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  font-family: var(--slidev-font-sans, sans-serif);
-  color: #1a1a1a;
-}
-
-.changelog-header {
-  margin-bottom: 2.5rem;
-}
-
-.back-link {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-}
-
-.subtitle {
-  color: #6c757d;
-  margin: 0;
-}
-
-.timeline {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: relative;
-}
-
 .timeline::before {
   content: '';
   position: absolute;
@@ -79,59 +58,6 @@ h1 {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #dee2e6;
-}
-
-.timeline-item {
-  display: flex;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.timeline-marker {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #007bff;
-  flex-shrink: 0;
-  margin-top: 0.75rem;
-  z-index: 1;
-}
-
-.timeline-card {
-  flex: 1;
-  padding: 1rem 1.25rem;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.entry-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.version-badge {
-  background: #007bff;
-  color: #fff;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-.entry-date {
-  color: #6c757d;
-  font-size: 0.85rem;
-}
-
-.change-list {
-  margin: 0;
-  padding-left: 1.25rem;
-  color: #343a40;
-  line-height: 1.7;
+  @apply bg-gray-200 dark:bg-gray-700;
 }
 </style>
