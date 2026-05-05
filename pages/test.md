@@ -11,7 +11,7 @@ hideInToc: true
 <div mt-2 />
 
 - <a @click="$slidev.nav.next()">Introduction to Testing</a>
-- <a @click="$slidev.nav.go($nav.currentPage+2)">Unit Testing with Jest and React Testing Library</a>
+- <a @click="$slidev.nav.go($nav.currentPage+2)">Unit Testing with Vitest and React Testing Library</a>
 - <a @click="$slidev.nav.go($nav.currentPage+4)">Integration Testing</a>
 - <a @click="$slidev.nav.go($nav.currentPage+6)">End-to-End Testing</a>
 
@@ -37,9 +37,13 @@ For React applications, it involves verifying that <span class="text-teal-400">c
 
 A robust testing strategy typically follows the testing pyramid, which emphasizes:
 
-- <span class="text-teal-400">Many</span> Unit Tests: These form the foundation, ensuring the smallest units of your application are reliable.
-- <span class="text-teal-400">Some</span> Integration Tests: These validate that components and modules interact correctly.
-- <span class="text-teal-400">Fewer</span> End-to-End Tests: These confirm the application works as a cohesive whole.
+<div class="text-sm">
+
+- <span class="text-teal-400 text-sm">Many</span> Unit Tests: These form the foundation, ensuring the smallest units of your application are reliable.
+- <span class="text-teal-400 text-sm">Some</span> Integration Tests: These validate that components and modules interact correctly.
+- <span class="text-teal-400 text-sm">Fewer</span> End-to-End Tests: These confirm the application works as a cohesive whole.
+
+</div>
 
 </v-clicks>
 
@@ -48,22 +52,29 @@ hideInToc: true
 transition: slide-up
 ---
 
-## [ Unit Testing with Jest + React Testing Library]{.text-gradient.text-4xl}
+## [ Unit Testing with Vitest + React Testing Library]{.text-gradient.text-4xl}
 
 Unit testing verifies that individual parts of the application (e.g., components, functions) `work as expected in isolation`.
 
-<span class="text-teal-400">Jest</span> is a widely-used JavaScript testing framework offering a robust, zero-configuration setup for running tests. Paired with <span class="text-teal-400">React Testing Library</span> — a lightweight library designed to test the behavior of React components rather than their implementation — it enables developers to focus on how users interact with the UI, ensuring more meaningful and user-centric testing.
+<span class="text-teal-400">Vitest</span> is a blazing-fast unit testing framework powered by Vite, offering native ESM support, TypeScript/JSX out of the box, Jest-compatible API, and instant HMR-driven watch mode — with no extra transpilation config needed in Vite projects. Paired with <span class="text-teal-400">React Testing Library</span> — a lightweight library that tests component behavior from the user's perspective rather than implementation details — it enables meaningful, user-centric tests.
 
-<v-clicks>
+<v-clicks class="text-sm">
 
-### Why use both together ?
+### Why use both together?
 
-Jest provides `the testing framework`, while React Testing Library `enhances it` by focusing on rendering components and testing user interactions.
+<div class="text-sm">
 
-To setup
+Vitest provides `the test runner and assertions`, while React Testing Library `enhances it` by rendering components into a real DOM and exposing user-facing queries like `getByRole`, `getByText`, and `getByTestId`.
 
-- Install <span class="text-teal-400">Jest</span> and <span class="text-teal-400">React Testing Library</span> → `npm install --save-dev jest @testing-library/react @testing-library/jest-dom`.
-- Place test files in a `__tests__` folder or next to components using the `ComponentName.test.js` format.
+
+### Setup (4 steps)
+
+1. Install dependencies → `npm install --save-dev vitest @testing-library/react @testing-library/jest-dom jsdom`
+2. Configure `vite.config.js` — set `environment: 'jsdom'`, `globals: true`, and point to a setup file
+3. Create `src/setupTests.js` and import `'@testing-library/jest-dom'` to extend `expect` with DOM matchers
+4. Place test files next to components as `ComponentName.test.jsx` or inside a `__tests__` folder
+
+</div>
 
 </v-clicks>
 
@@ -77,8 +88,34 @@ The Counter component below includes a button to increment a displayed count val
 
 <div  class="flex gap-2 w-full">
 
-<div v-click  class="w-1/3">
-Counter Component  (Counter.js)
+<div v-click  class="w-1/4">
+
+vite.config.js
+
+```js {monaco} {lineNumbers: true}
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/setupTests.js'],
+  },
+})
+```
+
+src/setupTests.js
+
+```js {monaco} {lineNumbers: true}
+import '@testing-library/jest-dom'
+```
+
+</div>
+
+<div v-click  class="w-1/4">
+Counter.jsx
 
 ```jsx {monaco} {lineNumbers: true}
 import { useState } from 'react'
@@ -89,7 +126,9 @@ const Counter = () => {
   return (
     <div>
       <h1 data-testid="count">{count}</h1>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
     </div>
   )
 }
@@ -99,34 +138,33 @@ export default Counter
 
 </div>
 
-<div v-click  class="w-2/3">
-Test (Counter.test.js)
+<div v-click  class="w-1/2">
+Counter.test.jsx
 
 ```jsx {monaco} {lineNumbers: true}
+// With globals: true in config, no vitest imports needed
 import { render, screen, fireEvent } from '@testing-library/react'
 import Counter from './Counter'
 
 describe('Counter Component', () => {
   // Test the initial state
   test('displays initial count', () => {
-    render(<Counter />) // Render the component
-    // Find the count element
+    render(<Counter />)
     const countElement = screen.getByTestId('count')
-    expect(countElement).toHaveTextContent('0') // Assert it starts at 0
+    expect(countElement).toHaveTextContent('0')
   })
 
   // Test the button functionality
   test('increments count on button click', () => {
     render(<Counter />)
-    const button = screen.getByText(/increment/i) // Find the button
-    fireEvent.click(button) // Simulate a click
-    // Find the count element again
-    const countElement = screen.getByTestId('count')
-    // Assert it increments to 1
-    expect(countElement).toHaveTextContent('1')
+    const button = screen.getByText(/increment/i)
+    fireEvent.click(button)
+    expect(screen.getByTestId('count')).toHaveTextContent('1')
   })
 })
 ```
+
+> 💡 Without `globals: true`, import `describe`, `test`, `expect` from `'vitest'` explicitly.
 
 </div>
 </div>
@@ -144,7 +182,7 @@ This type of testing bridges the gap between unit and end-to-end tests, offering
 
 <v-clicks>
 
-⚠️ Jest and React Testing Library can be used for integration testing.
+⚠️ Vitest and React Testing Library can be used for integration testing.
 
 ### Examples of when to use integration tests{.text-gradient.text-4xl}
 

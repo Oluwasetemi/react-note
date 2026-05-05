@@ -683,18 +683,23 @@ name: Form Hook Demo
 hideInToc: true
 ---
 
-`useActionState()`
+<div flex gap-5>
 
-This hook manages form state and updates based on submission results.
-
-````md magic-move
 ```js
-const [state, formAction] = useActionState(fn, initialState, permalink?)
+useActionState()
 ```
 
 ```js
-import { useActionState } from 'react'
+const [state, formAction] = useActionState(reducerFnAction, initialState, permalink?)
+```
 
+</div>
+
+This hook manages form state and updates based on an action(side effect), its a better replacement for the `onSubmit` event handler. Its natural to the way the web handles form.
+
+<div grid cols-2 gap-5>
+
+```jsx {monaco-run} {autorun: false}
 function Form() {
   const handleSubmit = async (prevState, formData) => {
     const username = formData.get('username')
@@ -703,18 +708,40 @@ function Form() {
       : { success: false, message: 'Invalid username' }
   }
 
-  const [state, formAction] = useActionState(handleSubmit, null)
+  const [state, formAction] = React.useActionState(handleSubmit, null)
 
   return (
     <form action={formAction}>
-      <input type="text" name="username" />
-      <button type="submit">Login</button>
+      <input class="input mt-2 ml-2" placeholder="Are you an admin?" type="text" name="username" />
+      <button class="btn ml-4 p-1" type="submit">Login</button>
       {state && <p>{state.message}</p>}
     </form>
   )
 }
 ```
-````
+
+```jsx {monaco-run} {autorun: false}
+function Cart() {
+  const products = ['react', 'html', 'css', 'js', 'ts']
+  const addToCartAction = async (prevState, formData) => {
+    const product = formData.get('product');
+    const currentProductCount = prevState.cartObject[product] || 0;
+    return { success: true, cart: prevState.cart + 1, lastAdded: product, cartObject: { ...prevState.cartObject, [product]: currentProductCount + 1 } };
+  }
+  const [state, formAction] = React.useActionState(addToCartAction, {cart: 0, cartObject: {}, lastAdded: null})
+  return (
+    <form action={formAction}>
+      <div class="grid cols-[1fr_200px] gap-3">
+        <section> {products.map(each => (<><button key={each} name="product" value={each} class="btn ml-4 p-1" type="submit">{each}({state.cartObject[each] || 0})</button></>))} </section><p>Cart: {state.cart} Last: {state.lastAdded || 'null'}</p>
+      </div>
+    </form>
+  )
+}
+```
+
+
+
+</div>
 
 ---
 hideInToc: true

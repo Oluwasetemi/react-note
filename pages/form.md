@@ -24,7 +24,7 @@ hideInToc: true
 
 # [Introduction]{.text-gradient.text-4xl}
 
-Why are forms so 📝 important ?
+Why are forms so important?
 
 <div  v-click class="flex gap-2">
 
@@ -50,12 +50,7 @@ function App() {
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -205,12 +200,7 @@ function TextInput() {
   }
 
   return (
-    <input
-      type="text"
-      value={name}
-      onChange={handleChange}
-      placeholder="Enter your name"
-    />
+    <input type="text" value={name} onChange={handleChange} placeholder="Enter your name" />
   )
 }
 
@@ -268,23 +258,10 @@ function RadioButton() {
   return (
     <>
       <label>
-        <input
-          type="radio"
-          name="gender"
-          value="male"
-          checked={gender === 'male'}
-          onChange={handleChange}
-        />{' '}
-        Male
+        <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleChange} />{' '} Male
       </label>
       <label>
-        <input
-          type="radio"
-          name="gender"
-          value="female"
-          checked={gender === 'female'}
-          onChange={handleChange}
-        />{' '}
+        <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleChange} />{' '}
         Female
       </label>
     </>
@@ -353,35 +330,29 @@ function EmailValidation() {
       setError('Email is required')
     } else if (value.length < 5) {
       setError('Email must be at least 5 characters long')
-    } else {
-      setError('')
-    }
+    } else { setError('') }
   }
 
   const handleChange = (e) => {
     const { value } = e.target
-    setEmail(value)
+    setEmail(value);
     validateEmail(value)
   }
 ```
 
 ```jsx
-const handleSubmit = (e) => {
-  e.preventDefault()
-  if (!error) {
-    console.log('Email submitted:', email)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!error) { console.log('Email submitted:', email) }
   }
-}
-
-return (
-  <form onSubmit={handleSubmit}>
-    <input type="email" value={email} onChange={handleChange} placeholder="Enter your email" />
-    {error && <p style={{ color: 'red' }}>{error}</p>}
-    <button type="submit" disabled={!!error}>
-      Submit
-    </button>
-  </form>
-)
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="email" value={email} onChange={handleChange} placeholder="Enter your email" />
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button type="submit" disabled={!!error}> Submit </button>
+    </form>
+  )
 }
 
 export default EmailValidation
@@ -573,10 +544,7 @@ const userSchema = z.object({
 })
 
 function App() {
-  const form = useForm({
-    defaultValues: { age: 0 },
-    validators: { onChange: userSchema },
-  })
+  const form = useForm({ defaultValues: { age: 0 }, validators: { onChange: userSchema }, })
   return (
     <div>
       <form.Field

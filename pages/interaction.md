@@ -299,6 +299,7 @@ name: Passing Event Handlers as Props
 Built-in components like `<button>` only support built-in browser events like `onClick`. So in order to pass an [event handler]{.text-gradient.italic} as a prop with a desired name to a component, create a custom component and give their [event handlers]{.text-teal-400.italic} props specific names.
 
 <div flex gap-4>
+
 ```jsx {hide|*}
 // Custom component
 function ToggleSwitch({ onToggle }) {

@@ -45,7 +45,7 @@ const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
 
 </v-click>
 
-<v-clicks>
+<v-clicks class="text-sm">
 
 - `Component`: This is the component that you want to memoize. The memo takes any valid component and return a memoized version of it. It does not modify this component.
 - optional `arePropsEqual`: This is a function that takes two arguments: the component’s previous props, and its new props. It returns true if the old and new props are identical, else it should return false. Usually, this function is optional. By default, React will compare each prop with `Object.is`.
@@ -197,7 +197,11 @@ transition: slide-up
 
 <v-click>
 
+<div class="text-sm">
+
 By default, {React} will re-render the entire components every time it re-runs, this includes re-running every logic. In the below code transitions, we see how we can apply `useMemo` to skip re-doing some logic calculations when {React} re-renders by using the cached values from `useMemo` if the dependencies are unchanged.
+
+</div>
 
 </v-click>
 
@@ -224,7 +228,7 @@ function TodoList({ todos, tab, theme }) {
 
 </div>
 
-<v-click at='3'>
+<v-click at='3' style='font-size: 8px'>
 
 This ability of caching a return value is known as [memoization]{.text-gradient.italic} in {React}. The sole purpose of `useMemo` is for [Performance Optimization]{.text-teal-italic}. If your code does ot work without it, find and fix the bug first. After then you may add `useMemo` to improve performance.
 
@@ -386,9 +390,7 @@ function App() {
   }, [fetchData])
 
   return (
-    <div>
-      <input value={query} onChange={(e) => setQuery(e.target.value)} />
-    </div>
+    <div><input value={query} onChange={(e) => setQuery(e.target.value)} /></div>
   )
 }
 ```
@@ -471,7 +473,6 @@ function Child({ onClick }) {
   console.log('Child re-rendered')
   return <button onClick={onClick}>Click me</button>
 }
-
 function App() {
   const [count, setCount] = useState(0)
 
@@ -486,7 +487,6 @@ function App() {
     </div>
   )
 }
-
 export default App
 ```
 
@@ -498,15 +498,11 @@ function Child({ onClick }) {
   console.log('Child re-rendered')
   return <button onClick={onClick}>Click me</button>
 }
-
 function App() {
   const [count, setCount] = useState(0)
-
   // Use useMemo to memoize the handleClick function
   const handleClick = useMemo(() => {
-    return () => {
-      console.log('Button clicked')
-    }
+    return () => { console.log('Button clicked') }
   }, []) // No dependencies mean this function will remain the same across renders
 
   return (
@@ -516,7 +512,6 @@ function App() {
     </div>
   )
 }
-
 export default App
 ```
 
@@ -528,10 +523,8 @@ function Child({ onClick }) {
   console.log('Child re-rendered')
   return <button onClick={onClick}>Click me</button>
 }
-
 function App() {
   const [count, setCount] = useState(0)
-
   // Memoize the handleClick function so it's the same between renders
   const handleClick = useCallback(() => {
     console.log('Button clicked')
@@ -544,7 +537,6 @@ function App() {
     </div>
   )
 }
-
 export default App
 ```
 ````
@@ -652,12 +644,10 @@ export default function App() {
 // Displaying a fallback while content is loading
 import React, { Suspense } from 'react'
 
-// Simulated data fetching component
 function DataComponent() {
   const data = useFetchData()
   return <div>Data: {data}</div>
 }
-
 export default function App() {
   return (
     <div>
@@ -676,24 +666,18 @@ import { Suspense } from 'react'
 import Albums from './Albums.jsx'
 import Biography from './Biography.jsx'
 import Panel from './Panel.jsx'
-
 export default function ArtistPage({ artist }) {
   return (
     <>
       <h1>{artist.name}</h1>
       <Suspense fallback={<Loading />}>
         <Biography artistId={artist.id} />
-        <Panel>
-          <Albums artistId={artist.id} />
-        </Panel>
+        <Panel> <Albums artistId={artist.id} /> </Panel>
       </Suspense>
     </>
   )
 }
-
-function Loading() {
-  return <h2>🌀 Loading...</h2>
-}
+function Loading() { return <h2>🌀 Loading...</h2> }
 ```
 
 ```jsx
@@ -702,7 +686,6 @@ import { Suspense } from 'react'
 import Albums from './Albums.js'
 import Biography from './Biography.js'
 import Panel from './Panel.js'
-
 export default function ArtistPage({ artist }) {
   return (
     <>
@@ -710,18 +693,13 @@ export default function ArtistPage({ artist }) {
       <Suspense fallback={<BigSpinner />}>
         <Biography artistId={artist.id} />
         <Suspense fallback={<p>Loader 2...</p>}>
-          <Panel>
-            <Albums artistId={artist.id} />
-          </Panel>
+          <Panel> <Albums artistId={artist.id} /> </Panel>
         </Suspense>
       </Suspense>
     </>
   )
 }
-
-function BigSpinner() {
-  return <h2>🌀 Loading...</h2>
-}
+function BigSpinner() { return <h2>🌀 Loading...</h2> }
 ```
 ````
 

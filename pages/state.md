@@ -15,7 +15,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+6)">Lifting state up</a>
 - <a @click="$slidev.nav.go($nav.currentPage+8)">Reducer function</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">Controlled vs Uncontrolled Components</a>
-- <a @click="$slidev.nav.go($nav.currentPage+11)">Keeping your components pure</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">Keeping your components pure</a>
 
 ---
 hideInToc: true

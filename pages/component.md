@@ -68,7 +68,7 @@ clicksStart: 6
 
 EVERY REACT COMPONENT IS A FUNCTION.
 
-<p> Let&apos;s create a simple functional component that displays a <span class="border ">welcome message. </span></p>
+<p> Let&apos;s create a simple functional component that displays a <code>p</code> tag with <span class="border ">you are welcome here. </span></p>
 
 <div>
 
@@ -90,14 +90,27 @@ function Greeting() {
 ```jsx
 // add JSX markup
 function Greeting() {
-  return <p>You are welcome here.</p>
+  return (
+    <p>You are welcome here.</p>
+  )
 }
 ```
 
 ```jsx
-// export the component
+// export the component(named)
+export function Greeting() {
+  return (
+    <p>You are welcome here.</p>
+  )
+}
+```
+
+```jsx
+// export the component(default)
 export default function Greeting() {
-  return <p>You are welcome here.</p>
+  return (
+    <p>You are welcome here.</p>
+  )
 }
 ```
 ````
@@ -211,7 +224,7 @@ name: Exporting, Importing, and Nesting Components
 
 <h1  class="text-gradient text-4xl">Exporting, Importing, and Nesting Components </h1>
 
-<p >Components are powerful because they are reusable. The components created are exported so they can be used (imported) into other files. </p>
+<p>Components are powerful because they are reusable. The components created are exported so they can be used (imported) into other files. </p>
 
 Below, the `Greeting` component created is imported into the root App component in React.
 
@@ -442,7 +455,7 @@ Forwarding Props with Spread Syntax: You can forward all props to child componen
 <div class="grid" grid-cols-2 gap-2>
 
 ```jsx
-function Profile() {
+function Profile(props) {
   return (
     <div>
       <Avatar {...props} />
@@ -455,7 +468,7 @@ function Profile() {
 function Profile({ name = 'default value', ...props }) {
   return (
     <div>
-      <Avatar {...props} />
+      <Avatar name={name} {...props} />
     </div>
   )
 }
@@ -472,7 +485,7 @@ transition: slide-up
 
 # Special Props `children`
 
-The `children` prop is a special prop that allows you to pass components as data to other components. It is used to render whatever you include between the opening and closing tags of the component.
+The `children` prop is a special prop that allows you to make a components accept html, text or another component in between its opening and closing tag. It is used to render whatever you include between the opening and closing tags of the component.
 
 <div grid class="grid-cols-2 gap-2">
 
@@ -484,8 +497,10 @@ function Card({ children }) {
 function App() {
   return (
     <Card>
+      {/* childern */}
       <h1>Card Title</h1>
       <p>Card Content</p>
+      {/* childern */}
     </Card>
   )
 }
@@ -504,7 +519,9 @@ function Card({ title, children }) {
 function App() {
   return (
     <Card title="Card Title">
+      {/* childern */}
       <p>Card Content</p>
+      {/* childern */}
     </Card>
   )
 }

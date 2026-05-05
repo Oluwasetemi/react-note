@@ -409,13 +409,16 @@ hideInToc: true
 
 <v-clicks>
 
+<div class="text-sm">
+
 - `<Activity>` hides children via `display: none` while preserving their state and DOM. Stateful hidden components.
 - `mode="visible" | "hidden"` controls whether content shows; hidden content still re-renders at lower priority.
 - Effects inside children are cleaned up while hidden; restored when visible again.
 - Ideal for tabs/sidebars you want to hide without losing state or refetching or prefetching(Media like videos).
 
+</div>
 
-```jsx {monaco} {lineNumbers: true, height: '13rem'}
+```jsx {monaco} {lineNumbers: true, height: '16rem'}
 import { Activity, useState } from 'react'
 
 function App() {
@@ -423,14 +426,10 @@ function App() {
 
   return (
     <div className="layout">
-      <button onClick={() => setShowSidebar(prev => !prev)}>
-        Toggle sidebar
-      </button>
-
+      <button onClick={() => setShowSidebar(prev => !prev)}> Toggle sidebar </button>
       <Activity mode={showSidebar ? 'visible' : 'hidden'}>
         <Sidebar /> {/* state + DOM preserved while hidden */}
       </Activity>
-
       <main>
         <Content />
       </main>

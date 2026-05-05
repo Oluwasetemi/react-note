@@ -10,12 +10,12 @@ hideInToc: true
 
 <div mt-2 />
 
-- <a href="" @click="$slidev.nav.next()">What is a Library/Framework?</a>
-- <a href="" @click="$nav.go($nav.currentPage + 1)">What is React?</a>
-- <a href="" @click="$nav.go($nav.currentPage + 3)">React vs other frameworks (Vue)</a>
-- <a href="" @click="$nav.go($nav.currentPage + 6)">Why React?</a>
-- <a href="" @click="$nav.go($nav.currentPage + 7)">From pure javascript to React</a>
-- <a href="" @click="$nav.go($nav.currentPage + 15)">Setting up Development Environment (Vite)</a>
+- <a @click="$slidev.nav.next()">What is a Library/Framework?</a>
+- <a @click="$nav.go($nav.currentPage + 2)">What is React?</a>
+- <a @click="$nav.go($nav.currentPage + 4)">React vs other frameworks (Vue)</a>
+- <a @click="$nav.go($nav.currentPage + 7)">Why React?</a>
+- <a @click="$nav.go($nav.currentPage + 8)">From pure javascript to React</a>
+- <a @click="$nav.go($nav.currentPage + 16)">Setting up Development Environment (Vite)</a>
 
 ---
 hideInToc: true
@@ -190,7 +190,9 @@ hideInToc: true
 
 # [From pure javascript to React]{.text-gradient}
 
-```js {monaco-run} { lines: true, height: '20.5em', autorun: false}
+```html {monaco-run} { lines: true, height: '18.5em', autorun: false}
+<div id="makeElemSample"></div>
+<script>
 const makeElem = (elemType, props, children) => {
   const elem = document.createElement(elemType)
 
@@ -214,16 +216,16 @@ const makeElem = (elemType, props, children) => {
 const createTodo = (todo) => {
   const text = makeElem(
     'span',
-    { style: 'flex:1;', ondblclick: () => alert('edit') },
+    { style: 'flex:1;', ondblclick: () => console.log('edit') },
     [todo.text],
   )
-  const x = makeElem('button', { onclick: () => alert('remove') }, ['X'])
+  const x = makeElem('button', { onclick: () => console.log('remove') }, ['X'])
 
   const item = makeElem('li', { style: 'display:flex;' }, [text, x])
   return item
 }
-
-console.log(createTodo({ text: 'Hello World' }).innerHTML)
+document.body.append(createTodo({ text: 'Hello World' }))
+</script>
 ```
 
 ---
@@ -801,22 +803,22 @@ To set up a development environment with {Vite}, you can use the following steps
 
 ````md magic-move
 ```bash
-npm install -g create-vite # if you want to have it as a global cli - create-vite
-npx create-vite
+npm install -g create-vite # if you want to have it as a global cli - use create-vite instead of npx create-vite
+npx create-vite # bunx, pnpm dlx can be used instead npx
 ```
 
 ```bash
-yarn global add create-vite # if you want to have it as a global cli - create-vite
+yarn global add create-vite # if you want to have it as a global cli - use create-vite instead of yarn create-vite
 yarn create-vite
 ```
 
 ```bash
-pnpm add -g create-vite # if you want to have it as a global cli - create-vite
-pnpx create-vite
+pnpm add -g create-vite # if you want to have it as a global cli - use create-vite instead of pnpm dlx create-vite
+pnpm dlx create-vite
 ```
 
 ```bash
-bun add -g create-vite # if you want to have it as a global cli - create-vite
+bun add -g create-vite # if you want to have it as a global cli - use create-vite instead of bunx create-vite
 bunx create-vite
 ```
 ````
@@ -824,7 +826,7 @@ bunx create-vite
 2. Create a new project using Vite:
 
 ```bash
-create-vite my-app
+create-vite my-app # npx create-vite depending on the option from the first step
 cd my-app
 ```
 
@@ -915,19 +917,19 @@ bun init -y
 
 ````md magic-move
 ```sh
-pnpm add react{@latest,-dom@latest}
+pnpm add react{@latest,-dom@latest} # it means install react@latest react-dom@latest npm packages
 ```
 
 ```sh
-npm i react{@latest,-dom@latest}
+npm i react{@latest,-dom@latest} # it means install react@latest react-dom@latest npm packages
 ```
 
 ```sh
-yarn add react{@latest,-dom@latest}
+yarn add react{@latest,-dom@latest} # it means install react@latest react-dom@latest npm packages
 ```
 
 ```sh
-bun i react{@latest,-dom@latest}
+bun i react{@latest,-dom@latest} # it means install react@latest react-dom@latest npm packages
 ```
 ````
 

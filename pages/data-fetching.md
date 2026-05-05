@@ -833,7 +833,6 @@ server.listen(3000, () => {
 // client.js
 import { hydrateRoot } from 'react-dom/client'
 import App from './App'
-
 hydrateRoot(document.getElementById('root'), <App />)
 ```
 
@@ -1015,8 +1014,9 @@ export async function createPost(formData) {
 import { createPost } from './actions'
 
 export default function CreatePostForm() {
+  const [state, formAction] = useActionState(createPost, {})
   return (
-    <form action={createPost}>
+    <form action={formAction}>
       <input name="title" placeholder="Title" />
       <textarea name="content" placeholder="Content" />
       <button type="submit">Create Post</button>
@@ -1073,10 +1073,8 @@ export default function CreatePostForm() {
 
 </div>
 
-- No API routes needed
-- Type-safe by default
-- Automatic revalidation
-- Progressive enhancement (works without JS)
+No API routes needed, Type-safe by default
+Automatic revalidation, Progressive enhancement (works without JS)
 
 </div>
 
