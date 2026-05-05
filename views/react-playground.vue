@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onUnmounted, ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -92,6 +92,27 @@ const formatValue = (value: unknown): string => {
   return String(value)
 }
 
+// ── Console patch — installed for the lifetime of the page ───────────────────
+// Must outlive runCode: React renders and effects fire asynchronously after
+// createRoot().render() returns, so patching inside runCode's finally block
+// would restore console before any component log ever executes.
+const origConsole = { log: console.log, error: console.error, warn: console.warn }
+
+onMounted(() => {
+  console.log = (...args: unknown[]) => {
+    consoleLogs.value.push({ type: 'log', message: args.map(formatValue).join(' ') })
+    origConsole.log.apply(console, args)
+  }
+  console.error = (...args: unknown[]) => {
+    consoleLogs.value.push({ type: 'error', message: args.map(formatValue).join(' ') })
+    origConsole.error.apply(console, args)
+  }
+  console.warn = (...args: unknown[]) => {
+    consoleLogs.value.push({ type: 'warn', message: args.map(formatValue).join(' ') })
+    origConsole.warn.apply(console, args)
+  }
+})
+
 // ── Runner — mirrors the jsx runner in setup/code-runners.ts ──────────────────
 const runCode = async () => {
   if (!previewRef.value || isRunning.value) return
@@ -99,25 +120,6 @@ const runCode = async () => {
   isRunning.value = true
   error.value = ''
   consoleLogs.value = []
-
-  // Patch console so output appears in the panel
-  const orig = {
-    log: console.log,
-    error: console.error,
-    warn: console.warn,
-  }
-  console.log = (...args: unknown[]) => {
-    consoleLogs.value.push({ type: 'log', message: args.map(formatValue).join(' ') })
-    orig.log.apply(console, args)
-  }
-  console.error = (...args: unknown[]) => {
-    consoleLogs.value.push({ type: 'error', message: args.map(formatValue).join(' ') })
-    orig.error.apply(console, args)
-  }
-  console.warn = (...args: unknown[]) => {
-    consoleLogs.value.push({ type: 'warn', message: args.map(formatValue).join(' ') })
-    orig.warn.apply(console, args)
-  }
 
   try {
     const [React, ReactDOM, Babel] = await Promise.all([
@@ -168,10 +170,6 @@ return null;`,
     error.value = err instanceof Error ? err.message : String(err)
   }
   finally {
-    // Always restore console
-    console.log = orig.log
-    console.error = orig.error
-    console.warn = orig.warn
     isRunning.value = false
   }
 }
@@ -179,6 +177,9 @@ return null;`,
 onUnmounted(() => {
   if (reactRoot)
     reactRoot.unmount()
+  console.log = origConsole.log
+  console.error = origConsole.error
+  console.warn = origConsole.warn
 })
 </script>
 <template>
