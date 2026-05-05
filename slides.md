@@ -66,9 +66,9 @@ hideInToc: true
 <Toc columns="2" minDepth="1" maxDepth="2"></Toc>
 
 <div class="flex gap-3 mt-6">
-  <a href="/routes" class="px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm no-underline hover:bg-blue-500/20 transition-colors">📋 All Sections</a>
-  <a href="/playground" class="px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm no-underline hover:bg-green-500/20 transition-colors">▶ JS/TS Playground</a>
-  <a href="/changelog" class="px-4 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm no-underline hover:bg-purple-500/20 transition-colors">📝 Changelog</a>
+  <button @click="$router.push('/routes')" class="px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm cursor-pointer hover:bg-blue-500/20 transition-colors">📋 All Sections</button>
+  <button @click="$router.push('/playground')" class="px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm cursor-pointer hover:bg-green-500/20 transition-colors">▶ JS/TS Playground</button>
+  <button @click="$router.push('/changelog')" class="px-4 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm cursor-pointer hover:bg-purple-500/20 transition-colors">📝 Changelog</button>
 </div>
 
 ---
