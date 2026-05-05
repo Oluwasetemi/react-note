@@ -7,14 +7,16 @@ const previewRef = ref<HTMLElement>()
 const isRunning = ref(false)
 const hasRun = ref(false)
 const error = ref('')
-const consoleLogs = ref<Array<{ type: 'log' | 'error' | 'warn'; message: string }>>([])
+const hasConsoleLogs = ref(false)
+const consoleOutputRef = ref<HTMLElement>()
 
 // Holds the React root so we can unmount on re-run / unmount
 let reactRoot: { unmount: () => void } | null = null
 
 // ── Default starter code ──────────────────────────────────────────────────────
 const DEFAULT_CODE = `function App() {
-  const [count, setCount] = React.useState(0)
+  const [count, setCount] = React.useState(0);
+  console.log('Hello')
 
   return (
     <div style={{ padding: '24px', fontFamily: 'system-ui, sans-serif' }}>
@@ -52,10 +54,16 @@ const code = ref(DEFAULT_CODE)
 // ── Navigation ────────────────────────────────────────────────────────────────
 const goBack = () => router.push('/')
 
+const clearConsole = () => {
+  if (consoleOutputRef.value)
+    consoleOutputRef.value.innerHTML = ''
+  hasConsoleLogs.value = false
+}
+
 const resetCode = () => {
   code.value = DEFAULT_CODE
   error.value = ''
-  consoleLogs.value = []
+  clearConsole()
   hasRun.value = false
   if (previewRef.value)
     previewRef.value.innerHTML = ''
@@ -82,14 +90,31 @@ const formatValue = (value: unknown): string => {
   if (value === undefined) return 'undefined'
   if (typeof value === 'string') return value
   if (typeof value === 'object') {
-    try {
-      return JSON.stringify(value, null, 2)
-    }
-    catch {
-      return String(value)
-    }
+    try { return JSON.stringify(value, null, 2) }
+    catch { return String(value) }
   }
   return String(value)
+}
+
+const addLog = (type: 'log' | 'error' | 'warn', args: unknown[]) => {
+  if (!consoleOutputRef.value) return
+  const entry = document.createElement('div')
+  entry.style.cssText = 'display:flex;gap:8px;align-items:flex-start;padding-bottom:4px;border-bottom:1px solid #2a2a2a;font-size:12px'
+
+  const icon = document.createElement('span')
+  icon.style.flexShrink = '0'
+  icon.style.color = type === 'error' ? '#f87171' : type === 'warn' ? '#fbbf24' : '#60a5fa'
+  icon.textContent = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : '▶'
+
+  const msg = document.createElement('span')
+  msg.style.cssText = 'white-space:pre-wrap;word-break:break-all;line-height:1.5'
+  msg.style.color = type === 'error' ? '#fca5a5' : type === 'warn' ? '#fde047' : '#d4d4d4'
+  msg.textContent = args.map(formatValue).join(' ')
+
+  entry.appendChild(icon)
+  entry.appendChild(msg)
+  consoleOutputRef.value.appendChild(entry)
+  hasConsoleLogs.value = true
 }
 
 // ── Runner — mirrors the jsx runner in setup/code-runners.ts ──────────────────
@@ -98,7 +123,7 @@ const runCode = async () => {
 
   isRunning.value = true
   error.value = ''
-  consoleLogs.value = []
+  clearConsole()
 
   try {
     const [React, ReactDOM, Babel] = await Promise.all([
@@ -116,13 +141,10 @@ const runCode = async () => {
 
     const { code: compiled } = Babel.transform(processed, { presets: ['react'] })
 
-    // Build a custom console that captures to the panel. Passed as a parameter
-    // so every closure inside new Function — including the React component and
-    // its event handlers — closes over this object at definition time.
     const sandboxConsole = {
-      log: (...args: unknown[]) => consoleLogs.value.push({ type: 'log', message: args.map(formatValue).join(' ') }),
-      error: (...args: unknown[]) => consoleLogs.value.push({ type: 'error', message: args.map(formatValue).join(' ') }),
-      warn: (...args: unknown[]) => consoleLogs.value.push({ type: 'warn', message: args.map(formatValue).join(' ') }),
+      log: (...args: unknown[]) => addLog('log', args),
+      error: (...args: unknown[]) => addLog('error', args),
+      warn: (...args: unknown[]) => addLog('warn', args),
     }
 
     // eslint-disable-next-line no-new-func
@@ -267,42 +289,16 @@ onUnmounted(() => {
             <span class="text-xs font-bold text-[#d4d4d4]">Console</span>
             <button
               class="px-3 py-1 bg-[#444] text-[#d4d4d4] border-none rounded text-xs cursor-pointer hover:bg-[#555] transition-colors"
-              @click="consoleLogs = []"
+              @click="clearConsole"
             >
               Clear
             </button>
           </div>
-          <div class="flex-1 overflow-y-auto p-3 space-y-1">
-            <div
-              v-if="consoleLogs.length === 0"
-              class="text-[#555] text-xs italic"
-            >
+          <div class="flex-1 overflow-y-auto p-3">
+            <div v-if="!hasConsoleLogs" class="text-[#555] text-xs italic">
               No output yet.
             </div>
-            <div
-              v-for="(log, i) in consoleLogs"
-              :key="i"
-              class="text-xs flex items-start gap-2 pb-1 border-b border-[#2a2a2a] last:border-0"
-            >
-              <span
-                :class="{
-                  'text-red-400': log.type === 'error',
-                  'text-yellow-400': log.type === 'warn',
-                  'text-blue-400': log.type === 'log',
-                }"
-                class="flex-shrink-0"
-              >
-                {{ log.type === 'error' ? '❌' : log.type === 'warn' ? '⚠️' : '▶' }}
-              </span>
-              <span
-                :class="{
-                  'text-red-300': log.type === 'error',
-                  'text-yellow-300': log.type === 'warn',
-                  'text-[#d4d4d4]': log.type === 'log',
-                }"
-                class="whitespace-pre-wrap break-all leading-relaxed"
-              >{{ log.message }}</span>
-            </div>
+            <div ref="consoleOutputRef" class="space-y-1" />
           </div>
         </div>
       </div>
