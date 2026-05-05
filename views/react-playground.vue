@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { nextTick, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -92,27 +92,6 @@ const formatValue = (value: unknown): string => {
   return String(value)
 }
 
-// ── Console patch — installed for the lifetime of the page ───────────────────
-// Must outlive runCode: React renders and effects fire asynchronously after
-// createRoot().render() returns, so patching inside runCode's finally block
-// would restore console before any component log ever executes.
-const origConsole = { log: console.log, error: console.error, warn: console.warn }
-
-onMounted(() => {
-  console.log = (...args: unknown[]) => {
-    consoleLogs.value.push({ type: 'log', message: args.map(formatValue).join(' ') })
-    origConsole.log.apply(console, args)
-  }
-  console.error = (...args: unknown[]) => {
-    consoleLogs.value.push({ type: 'error', message: args.map(formatValue).join(' ') })
-    origConsole.error.apply(console, args)
-  }
-  console.warn = (...args: unknown[]) => {
-    consoleLogs.value.push({ type: 'warn', message: args.map(formatValue).join(' ') })
-    origConsole.warn.apply(console, args)
-  }
-})
-
 // ── Runner — mirrors the jsx runner in setup/code-runners.ts ──────────────────
 const runCode = async () => {
   if (!previewRef.value || isRunning.value) return
@@ -137,18 +116,26 @@ const runCode = async () => {
 
     const { code: compiled } = Babel.transform(processed, { presets: ['react'] })
 
-    // Execute in a sandboxed Function scope, passing React so JSX helpers resolve
-    // Falls back to looking for a variable named `App` if no explicit export default
+    // Build a custom console that captures to the panel. Passed as a parameter
+    // so every closure inside new Function — including the React component and
+    // its event handlers — closes over this object at definition time.
+    const sandboxConsole = {
+      log: (...args: unknown[]) => consoleLogs.value.push({ type: 'log', message: args.map(formatValue).join(' ') }),
+      error: (...args: unknown[]) => consoleLogs.value.push({ type: 'error', message: args.map(formatValue).join(' ') }),
+      warn: (...args: unknown[]) => consoleLogs.value.push({ type: 'warn', message: args.map(formatValue).join(' ') }),
+    }
+
     // eslint-disable-next-line no-new-func
     const UserComponent = new Function(
       'React',
+      'console',
       `"use strict";
 var __PlaygroundExport__ = undefined;
 ${compiled}
 if (typeof __PlaygroundExport__ !== 'undefined') return __PlaygroundExport__;
 if (typeof App !== 'undefined') return App;
 return null;`,
-    )(React)
+    )(React, sandboxConsole)
 
     if (!UserComponent)
       throw new Error(
@@ -177,9 +164,6 @@ return null;`,
 onUnmounted(() => {
   if (reactRoot)
     reactRoot.unmount()
-  console.log = origConsole.log
-  console.error = origConsole.error
-  console.warn = origConsole.warn
 })
 </script>
 <template>
