@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const sections = [
   { name: 'Introduction', slug: 'intro' },
   { name: 'JSX', slug: 'jsx' },
@@ -16,8 +20,13 @@ const sections = [
   { name: 'Testing', slug: 'test' },
 ]
 
+const tools = [
+  { name: '⚛️ React Playground', route: '/react-playground', color: 'text-cyan-500 dark:text-cyan-400', border: 'hover:border-cyan-500 dark:hover:border-cyan-400' },
+  { name: '▶ JS/TS Playground', route: '/playground', color: 'text-green-500 dark:text-green-400', border: 'hover:border-green-500 dark:hover:border-green-400' },
+]
+
 function goToSlide(slug: string) {
-  window.location.href = `/#/${slug}`
+  router.push(`/${slug}`)
 }
 </script>
 
@@ -45,12 +54,28 @@ function goToSlide(slug: string) {
         class="flex items-center justify-between px-5 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-left cursor-pointer transition-all duration-200 shadow-sm hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md"
         @click="goToSlide(section.slug)"
       >
-        <span class="font-semibold text-sm text-gray-800 dark:text-gray-200">{{
-          section.name
-        }}</span>
+        <span class="font-semibold text-sm text-gray-800 dark:text-gray-200">{{ section.name }}</span>
         <span class="text-blue-500 dark:text-blue-400 text-lg">→</span>
       </button>
     </div>
+
+    <section class="mt-10">
+      <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">
+        Tools
+      </h2>
+      <div class="flex flex-wrap gap-4">
+        <button
+          v-for="tool in tools"
+          :key="tool.route"
+          class="flex items-center gap-2 px-5 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md"
+          :class="[tool.color, tool.border]"
+          @click="router.push(tool.route)"
+        >
+          <span class="font-semibold text-sm">{{ tool.name }}</span>
+          <span class="text-lg">→</span>
+        </button>
+      </div>
+    </section>
 
     <footer class="mt-8 text-center">
       <router-link

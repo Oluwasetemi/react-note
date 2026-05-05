@@ -15,5 +15,9 @@ export default defineRoutesSetup((routes) => {
       path: '/playground',
       component: () => import('../views/playground.vue'),
     },
+    {
+      path: '/react-playground',
+      component: () => import('../views/react-playground.vue'),
+    },
   ]
 })
