@@ -92,7 +92,7 @@ The Counter component below includes a button to increment a displayed count val
 
 vite.config.js
 
-```js {monaco} {lineNumbers: true}
+```js  {lineNumbers: true}
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
@@ -108,7 +108,7 @@ export default defineConfig({
 
 src/setupTests.js
 
-```js {monaco} {lineNumbers: true}
+```js {lineNumbers: true}
 import '@testing-library/jest-dom'
 ```
 
@@ -117,7 +117,7 @@ import '@testing-library/jest-dom'
 <div v-click  class="w-1/4">
 Counter.jsx
 
-```jsx {monaco} {lineNumbers: true}
+```jsx {lineNumbers: true}
 import { useState } from 'react'
 
 const Counter = () => {
@@ -141,7 +141,7 @@ export default Counter
 <div v-click  class="w-1/2">
 Counter.test.jsx
 
-```jsx {monaco} {lineNumbers: true}
+```jsx {lineNumbers: true}
 // With globals: true in config, no vitest imports needed
 import { render, screen, fireEvent } from '@testing-library/react'
 import Counter from './Counter'
