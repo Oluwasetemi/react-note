@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onUnmounted, ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -12,6 +12,24 @@ const consoleOutputRef = ref<HTMLElement>()
 
 // Holds the React root so we can unmount on re-run / unmount
 let reactRoot: { unmount: () => void } | null = null
+
+// ── Syntax highlighting ───────────────────────────────────────────────────────
+const highlightedCode = ref('')
+const editorPreRef = ref<HTMLElement>()
+let highlightTimer: ReturnType<typeof setTimeout> | null = null
+
+const highlight = async (src: string) => {
+  const { codeToHtml } = await import('shiki')
+  highlightedCode.value = await codeToHtml(src, { lang: 'jsx', theme: 'vitesse-dark' })
+}
+
+const syncScroll = (e: Event) => {
+  const ta = e.target as HTMLTextAreaElement
+  if (editorPreRef.value) {
+    editorPreRef.value.scrollTop = ta.scrollTop
+    editorPreRef.value.scrollLeft = ta.scrollLeft
+  }
+}
 
 // ── Default starter code ──────────────────────────────────────────────────────
 const DEFAULT_CODE = `function App() {
@@ -50,6 +68,13 @@ const DEFAULT_CODE = `function App() {
 export default App`
 
 const code = ref(DEFAULT_CODE)
+
+watch(code, (src) => {
+  if (highlightTimer) clearTimeout(highlightTimer)
+  highlightTimer = setTimeout(() => highlight(src), 250)
+})
+
+onMounted(() => highlight(code.value))
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 const goBack = () => router.push('/')
@@ -184,8 +209,8 @@ return null;`,
 }
 
 onUnmounted(() => {
-  if (reactRoot)
-    reactRoot.unmount()
+  if (reactRoot) reactRoot.unmount()
+  if (highlightTimer) clearTimeout(highlightTimer)
 })
 </script>
 <template>
@@ -240,18 +265,29 @@ onUnmounted(() => {
           App.jsx
           <span class="ml-auto text-[#555]">Tab = 2 spaces</span>
         </div>
-        <textarea
-          v-model="code"
-          spellcheck="false"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          class="flex-1 bg-[#1e1e1e] text-[#d4d4d4] p-4 text-sm resize-none outline-none border-none leading-relaxed"
-          style="tab-size: 2; font-family: 'JetBrains Mono', 'Fira Code', monospace"
-          @keydown.tab.prevent="insertTab"
-          @keydown.ctrl.enter.prevent="runCode"
-          @keydown.meta.enter.prevent="runCode"
-        />
+        <div class="relative flex-1 overflow-hidden bg-[#1e1e1e]">
+          <!-- Syntax-highlighted layer (pointer-events:none, scrolls in sync with textarea) -->
+          <div
+            ref="editorPreRef"
+            aria-hidden="true"
+            class="absolute inset-0 overflow-auto p-4 pointer-events-none"
+            v-html="highlightedCode"
+          />
+          <!-- Transparent editing textarea sits on top -->
+          <textarea
+            v-model="code"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            class="absolute inset-0 w-full h-full bg-transparent p-4 text-sm resize-none outline-none border-none leading-relaxed"
+            style="tab-size: 2; font-family: 'JetBrains Mono', 'Fira Code', monospace; color: transparent; caret-color: #d4d4d4; z-index: 1"
+            @keydown.tab.prevent="insertTab"
+            @keydown.ctrl.enter.prevent="runCode"
+            @keydown.meta.enter.prevent="runCode"
+            @scroll="syncScroll"
+          />
+        </div>
       </div>
 
       <!-- ── Preview + Console pane ── -->
@@ -305,4 +341,22 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Make shiki's generated <pre> transparent and match the textarea metrics exactly */
+:deep(.shiki) {
+  background-color: transparent !important;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;   /* text-sm */
+  line-height: 1.625;    /* leading-relaxed */
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  tab-size: 2;
+  white-space: pre;
+  min-height: 100%;
+}
+:deep(.shiki code) {
+  display: block;
+}
+</style>
 
