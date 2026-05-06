@@ -11,7 +11,7 @@ const hasConsoleLogs = ref(false)
 const consoleOutputRef = ref<HTMLElement>()
 
 // Holds the React root so we can unmount on re-run / unmount
-let reactRoot: { unmount: () => void } | null = null
+let reactRoot: unknown = null
 
 // ── Syntax highlighting ───────────────────────────────────────────────────────
 const highlightedCode = ref('')
@@ -93,7 +93,7 @@ const resetCode = () => {
   if (previewRef.value)
     previewRef.value.innerHTML = ''
   if (reactRoot) {
-    reactRoot.unmount()
+    (reactRoot as {unmount: () => void}).unmount()
     reactRoot = null
   }
 }
@@ -157,6 +157,8 @@ const runCode = async () => {
       import('@babel/standalone'),
     ])
 
+    type ReactDOMRoot = ReturnType<typeof ReactDOM.createRoot>
+
     // Pre-process: convert ESM export default syntax to a variable assignment
     // (the react Babel preset does not transform module syntax)
     const processed = code.value
@@ -190,14 +192,14 @@ return null;`,
       )
 
     // Unmount previous React tree before re-rendering
-    if (reactRoot) {
-      reactRoot.unmount()
+    if (reactRoot as ReactDOMRoot) {
+      (reactRoot as {unmount: () => void}).unmount()
       reactRoot = null
     }
     previewRef.value.innerHTML = ''
 
-    reactRoot = (ReactDOM as typeof ReactDOM).createRoot(previewRef.value)
-    reactRoot.render((React as typeof React).createElement(UserComponent))
+    reactRoot = (ReactDOM as typeof ReactDOM).createRoot(previewRef.value);
+    (reactRoot as ReturnType<typeof ReactDOM.createRoot>).render((React as typeof React).createElement(UserComponent));
     hasRun.value = true
   }
   catch (err: unknown) {
@@ -209,7 +211,7 @@ return null;`,
 }
 
 onUnmounted(() => {
-  if (reactRoot) reactRoot.unmount()
+  if (reactRoot) (reactRoot as {unmount: () => void}).unmount()
   if (highlightTimer) clearTimeout(highlightTimer)
 })
 </script>
