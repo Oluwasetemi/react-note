@@ -753,6 +753,80 @@ hideInToc: true
 transition: slide-up
 ---
 
+# [`use()` vs React Query]{.text-gradient}
+
+React 19 ships a built-in `use()` hook that unwraps a Promise inside render — no library needed.
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+
+<div>
+
+**`use()` — built-in, simple reads**
+
+```jsx
+import { use, Suspense } from 'react'
+
+const userPromise = fetch('/api/user').then(r => r.json())
+
+function UserCard() {
+  const user = use(userPromise) // suspends until resolved
+  return <h2>{user.name}</h2>
+}
+
+function App() {
+  return (
+    <ErrorBoundary fallback={<p>Error</p>}>
+      <Suspense fallback={<p>Loading…</p>}>
+        <UserCard />
+      </Suspense>
+    </ErrorBoundary>
+  )
+}
+```
+
+</div>
+
+<div>
+
+**React Query — production data management**
+
+```jsx
+import { useQuery } from '@tanstack/react-query'
+
+function UserCard() {
+  const { data, isPending, error } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => fetch('/api/user').then(r => r.json()),
+  })
+  if (isPending) return <p>Loading…</p>
+  if (error) return <p>Error</p>
+  return <h2>{data.name}</h2>
+}
+```
+
+</div>
+
+</div>
+
+<v-click>
+
+| | `use()` | React Query |
+|---|---|---|
+| Caching | ✗ | ✓ |
+| Retries | ✗ | ✓ |
+| Refetch on focus | ✗ | ✓ |
+| Setup | none | QueryClientProvider |
+| Best for | simple/one-off reads | real apps |
+
+> `use()` is the low-level primitive. Reach for React Query when you need caching, background refetching, or devtools. Deep dive on `use()` is in the **More Hooks** section.
+
+</v-click>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
 # [Server-Side Rendering (SSR) APIs]{.text-gradient.text-4xl}
 
 React provides APIs for rendering components on the server for improved performance and SEO.

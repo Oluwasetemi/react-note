@@ -666,3 +666,37 @@ React Lifecycle:
 - https://react.dev/learn/render-and-commit
 - https://ui.dev/why-react-renders
 - https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Spot the render** — 5 minutes, discuss with a partner.
+
+Look at this component and answer the three questions below.
+
+```jsx
+function Profile({ userId }) {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    fetch(`/api/users/${userId}`)
+      .then(r => r.json())
+      .then(setUser)
+  }, [userId])
+
+  if (!user) return <p>Loading…</p>
+  return <h1>{user.name}</h1>
+}
+```
+
+1. **How many times does this component render** when it first mounts? Name each phase.
+2. **What triggers the second render?** Where in the lifecycle does that happen?
+3. **What happens** if `userId` changes while the fetch is still in flight? Is there a bug?
+
+<Tips type="info">
+There is a subtle bug in question 3. Hint: the Effect cleanup function is the fix.
+</Tips>

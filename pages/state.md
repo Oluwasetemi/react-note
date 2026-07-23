@@ -519,3 +519,43 @@ Keeping your components pure make rendering predictable. Its easier to manage, i
 You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, “set” state instead of mutating preexisting objects.<br />
 Strive to express your component’s logic in the JSX you return. When you need to “change things”, you’ll usually want to do it in an event handler. As a last resort, you can useEffect.
 </Tips>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Lift state up** — 10 minutes, no submission required.
+
+You have two sibling components that each manage their own count. Make them share a single total by lifting state to their parent.
+
+```jsx
+// Before — each component is isolated
+function CounterA() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>A: {count}</button>
+}
+
+function CounterB() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>B: {count}</button>
+}
+
+function App() {
+  return (
+    <>
+      <CounterA />
+      <CounterB />
+      {/* TODO: show combined total here */}
+    </>
+  )
+}
+```
+
+**Goal:** Move state into `App` and pass `count` + `onIncrement` as props to each counter. Display the combined total below the buttons.
+
+<Tips type="tip">
+When two components need to share state, move it to their closest common parent — this is called <strong>lifting state up</strong>.
+</Tips>

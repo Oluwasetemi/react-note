@@ -73,3 +73,17 @@ Reusable code snippet files referenced in slides via `<<< @/snippets/...` import
 ## Prettier
 
 Single quotes, no semicolons. Slidev markdown files use `prettier-plugin-slidev` — always run `pnpm format` before committing slide content.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for this repo. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default canonical label names are used (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

@@ -1198,3 +1198,41 @@ function LiveData() {
   );
 }
 ```
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Build a stopwatch** — 10 minutes, no submission required.
+
+Using `useState` and `useEffect`, build a stopwatch component that:
+
+1. Displays elapsed seconds (e.g. `0s`, `1s`, `2s`…)
+2. Has **Start**, **Stop**, and **Reset** buttons
+3. Cleans up the interval when the component unmounts
+
+```jsx
+// Starter — fill in the gaps
+function Stopwatch() {
+  const [seconds, setSeconds] = useState(0)
+  const [running, setRunning] = useState(false)
+
+  useEffect(() => {
+    // TODO: start interval when running, clear when stopped
+  }, [running])
+
+  return (
+    <div>
+      <p>{seconds}s</p>
+      {/* TODO: buttons */}
+    </div>
+  )
+}
+```
+
+<Tips type="tip">
+The cleanup function returned from <code>useEffect</code> is the key — return <code>() => clearInterval(id)</code> to avoid memory leaks.
+</Tips>

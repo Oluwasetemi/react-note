@@ -534,6 +534,53 @@ root.render(
 
 ---
 hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Two-page app with React Router** — 10 minutes, no submission required.
+
+Create a minimal app with two routes and a working nav link between them.
+
+```jsx
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+
+function Home() {
+  return (
+    <div>
+      <h1>Home</h1>
+      {/* TODO: add a Link to /about */}
+    </div>
+  )
+}
+
+function About() {
+  return (
+    <div>
+      <h1>About</h1>
+      {/* TODO: add a Link back to / */}
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      {/* TODO: add Routes with Route for / and /about */}
+    </BrowserRouter>
+  )
+}
+```
+
+**Bonus:** Add a third route `/users/:id` that reads the `id` param with `useParams` and displays it on screen.
+
+<Tips type="tip">
+<code>&lt;Link to="/about"&gt;</code> renders an <code>&lt;a&gt;</code> tag but prevents a full page reload — that's the core of client-side routing.
+</Tips>
+
+---
+hideInToc: true
 transition: slide-right
 ---
 

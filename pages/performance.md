@@ -101,6 +101,23 @@ url: https://codesandbox.io/embed/rqngm9
 
 
 
+---
+hideInToc: true
+transition: slide-up
+---
+
+# `React.memo` — See It Live
+
+Click the buttons to watch render counts change in real time.
+
+<MemoRenderCounter class="mt-4" />
+
+<v-click>
+
+**What to notice:** "Re-render parent" increments the red child's counter every time — but the green `memo()` child stays at zero until a prop actually changes. That's the entire point of memoization.
+
+</v-click>
+
 
 ---
 hideInToc: true
@@ -721,3 +738,50 @@ url: https://codesandbox.io/embed/gfv64p
 2. [https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler](https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler)
 
 3. [https://playground.react.dev](https://playground.react.dev)
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Break and fix memo** — 10 minutes, no submission required.
+
+This component is wrapped in `memo` but still re-renders on every parent render. Find out why and fix it.
+
+```jsx
+const ItemList = React.memo(function ItemList({ items, onSelect }) {
+  console.log('ItemList rendered')
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={item.id} onClick={() => onSelect(item.id)}>
+          {item.name}
+        </li>
+      ))}
+    </ul>
+  )
+})
+
+function App() {
+  const [count, setCount] = useState(0)
+  const items = [{ id: 1, name: 'Apple' }, { id: 2, name: 'Banana' }]
+
+  return (
+    <>
+      <button onClick={() => setCount(c => c + 1)}>Count: {count}</button>
+      <ItemList items={items} onSelect={(id) => console.log(id)} />
+    </>
+  )
+}
+```
+
+**Questions:**
+1. Why does `ItemList` still re-render when you click the button?
+2. Which hook fixes `items`? Which fixes `onSelect`?
+3. After fixing it, use the live demo from the previous slide to verify your mental model.
+
+<Tips type="tip">
+<code>memo</code> does a shallow comparison of props. A new object reference — even with the same contents — counts as a changed prop.
+</Tips>

@@ -11,47 +11,37 @@
     "export:pdf": "npm run export -- --timeout 160000 --output ./_export/react-note.pdf",
     "export:pptx": "npm run export -- --timeout 160000 --with-clicks false --format pptx --output ./_export/react-note.pptx",
     "format": "prettier --write .",
-    "postinstall": "npx playwright-core install chromium"
+    "postinstall": "pnx playwright-core install chromium"
   },
   "dependencies": {
-    "@slidev/cli": "52.15.1",
-    "@slidev/client": "52.15.1",
+    "@slidev/cli": "52.18.0",
+    "@slidev/client": "52.18.0",
     "@slidev/theme-default": "latest",
     "@vueuse/core": "^14.3.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "vue": "^3.5.33"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "@babel/standalone": "^7.29.3",
+    "@babel/standalone": "^8.0.4",
+    "vite": "^8.1.5",
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/mdi": "^1.2.3",
-    "@slidev/types": "52.14.1",
+    "@slidev/types": "52.18.0",
     "@types/babel__standalone": "^7.1.9",
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "@vue/compiler-sfc": "^3.5.33",
+    "@vue/compiler-sfc": "^3.5.40",
     "cross-env": "^10.1.0",
     "markdown-it-magic-link": "^0.1.4",
-    "nano-staged": "^0.9.0",
+    "nano-staged": "^1.0.2",
     "nodemon": "^3.1.14",
-    "playwright-chromium": "^1.59.1",
-    "prettier": "^3.8.3",
+    "playwright-chromium": "^1.61.1",
+    "prettier": "^3.9.6",
     "prettier-plugin-slidev": "^1.0.5",
     "simple-git-hooks": "^2.13.1",
-    "unocss": "66.6.6"
+    "unocss": "66.7.5"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.33.2",
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "vite": "8",
-        "shiki": "4"
-      }
-    },
-    "patchedDependencies": {
-      "@comark/markdown-it@0.3.4": "patches/@comark__markdown-it@0.3.4.patch"
-    }
-  }
+  "packageManager": "pnpm@11.15.1"
 }

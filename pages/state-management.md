@@ -524,3 +524,51 @@ import {ViewTransition} from 'react'
 }
 ```
 ````
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Add a theme toggle with Context** — 10 minutes, no submission required.
+
+Wire up a global theme (`'light'` | `'dark'`) using the Context API so any component in the tree can read it — no prop drilling.
+
+```jsx
+// 1. Create the context
+const ThemeContext = React.createContext('light')
+
+// 2. Provide it at the top level
+function App() {
+  const [theme, setTheme] = useState('light')
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Navbar />
+      <main style={{ background: theme === 'dark' ? '#111' : '#fff' }}>
+        <Page />
+      </main>
+    </ThemeContext.Provider>
+  )
+}
+
+// 3. Consume it anywhere — no props needed
+function Navbar() {
+  const { theme, setTheme } = useContext(ThemeContext)
+  return (
+    <nav>
+      <button onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
+        {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+      </button>
+    </nav>
+  )
+}
+
+// TODO: Make <Page /> also read from ThemeContext and change its text colour
+```
+
+<Tips type="tip">
+Context re-renders <em>every</em> consumer when the value changes. For performance-sensitive trees, split read-only values from setters into separate contexts.
+</Tips>

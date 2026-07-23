@@ -12,8 +12,13 @@ hideInToc: true
 
 - <a @click="$slidev.nav.next()">Introduction to Testing</a>
 - <a @click="$slidev.nav.go($nav.currentPage+2)">Unit Testing with Vitest and React Testing Library</a>
-- <a @click="$slidev.nav.go($nav.currentPage+4)">Integration Testing</a>
-- <a @click="$slidev.nav.go($nav.currentPage+6)">End-to-End Testing</a>
+- <a @click="$slidev.nav.go($nav.currentPage+3)">Querying the DOM</a>
+- <a @click="$slidev.nav.go($nav.currentPage+4)">userEvent — simulating real interactions</a>
+- <a @click="$slidev.nav.go($nav.currentPage+5)">Unit Testing Example</a>
+- <a @click="$slidev.nav.go($nav.currentPage+6)">Common Assertions</a>
+- <a @click="$slidev.nav.go($nav.currentPage+7)">Integration Testing</a>
+- <a @click="$slidev.nav.go($nav.currentPage+9)">Async Testing</a>
+- <a @click="$slidev.nav.go($nav.currentPage+10)">End-to-End Testing</a>
 
 ---
 hideInToc: true
@@ -77,6 +82,81 @@ Vitest provides `the test runner and assertions`, while React Testing Library `e
 </div>
 
 </v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+name: Querying the DOM
+---
+
+## Querying the DOM — `screen`
+
+React Testing Library renders your component and exposes `screen` to find elements the way a user would — by what they see, not by CSS classes or component internals.
+
+<v-clicks>
+
+**Query priority** — use the highest one that fits:
+
+| Priority | Query | When to use |
+|----------|-------|-------------|
+| 1 | `getByRole('button', { name: /submit/i })` | Most UI elements have an implicit ARIA role |
+| 2 | `getByLabelText('Email')` | Form inputs with a `<label>` |
+| 3 | `getByPlaceholderText('Search…')` | Inputs without a label |
+| 4 | `getByText('Welcome')` | Non-interactive text content |
+| 5 | `getByTestId('count')` | Last resort — adds test-only attributes to production code |
+
+**Three query families:**
+
+- `getBy…` — must exist right now, throws if missing
+- `queryBy…` — returns `null` if missing (use for "should not be there" assertions)
+- `findBy…` — returns a Promise, waits up to 1s (use for async content)
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+name: userEvent
+---
+
+## `userEvent` — simulating real interactions
+
+`userEvent` fires the full sequence of browser events a real user would trigger. Prefer it over `fireEvent` for everything that involves typing, clicking, or focusing.
+
+```jsx
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
+test('user can type into an input', async () => {
+  // Setup userEvent instance first
+  const user = userEvent.setup()
+
+  render(<input placeholder="Your name" />)
+
+  const input = screen.getByPlaceholderText('Your name')
+  await user.type(input, 'Setemi')
+
+  expect(input).toHaveValue('Setemi')
+})
+
+test('user can click a button', async () => {
+  const user = userEvent.setup()
+  const handleClick = vi.fn()
+
+  render(<button onClick={handleClick}>Save</button>)
+
+  await user.click(screen.getByRole('button', { name: /save/i }))
+
+  expect(handleClick).toHaveBeenCalledOnce()
+})
+```
+
+<v-click>
+
+> **`fireEvent.click(btn)`** dispatches one synthetic click event.  
+> **`userEvent.click(btn)`** fires pointerover → pointerenter → mouseover → mousemove → mousedown → mouseup → click — matching real browser behaviour.
+
+</v-click>
 
 ---
 hideInToc: true
@@ -171,6 +251,47 @@ describe('Counter Component', () => {
 
 ---
 hideInToc: true
+transition: slide-up
+name: Common Assertions
+---
+
+## Common Assertions — `jest-dom` matchers
+
+After you find an element with `screen`, use these matchers on `expect(element)`:
+
+<v-clicks>
+
+| Matcher | What it checks |
+|---------|---------------|
+| `toBeInTheDocument()` | Element exists in the DOM |
+| `not.toBeInTheDocument()` | Element is absent (use with `queryBy`) |
+| `toBeVisible()` | Rendered and not hidden by CSS |
+| `toBeDisabled()` | Has `disabled` attribute |
+| `toBeEnabled()` | Does not have `disabled` attribute |
+| `toHaveTextContent('Hello')` | Text content matches (partial or regex) |
+| `toHaveValue('Setemi')` | Input/select/textarea current value |
+| `toHaveAttribute('href', '/about')` | HTML attribute value |
+| `toHaveClass('btn-primary')` | CSS class is present |
+
+**Quick pattern to remember:**
+
+```jsx
+// 1. Render
+render(<MyComponent />)
+
+// 2. Find
+const btn = screen.getByRole('button', { name: /save/i })
+
+// 3. Assert or interact, then assert
+expect(btn).toBeEnabled()
+await user.click(btn)
+expect(screen.getByText('Saved!')).toBeInTheDocument()
+```
+
+</v-clicks>
+
+---
+hideInToc: true
 transition: slide-right
 ---
 
@@ -207,6 +328,52 @@ autoLoad: true
 
 ---
 hideInToc: true
+transition: slide-up
+name: Async Testing
+---
+
+## Async Testing — `findBy` and `waitFor`
+
+When a component fetches data or updates after a delay, your test must wait for the DOM to catch up.
+
+<v-clicks>
+
+**`findBy`** — like `getBy` but returns a Promise. Retries until the element appears (default 1s timeout).
+
+```jsx
+test('shows user name after fetch', async () => {
+  // Mock the fetch so tests don't hit a real server
+  vi.spyOn(global, 'fetch').mockResolvedValue({
+    ok: true,
+    json: async () => ({ name: 'Setemi' }),
+  })
+
+  const user = userEvent.setup()
+  render(<UserProfile userId="1" />)
+
+  // getByText would throw immediately — the data isn't there yet
+  const heading = await screen.findByText('Setemi') // waits for it
+
+  expect(heading).toBeInTheDocument()
+
+  vi.restoreAllMocks()
+})
+```
+
+**`waitFor`** — retries an assertion until it passes, useful when an element changes rather than appears.
+
+```jsx
+await waitFor(() => {
+  expect(screen.getByTestId('status')).toHaveTextContent('Saved')
+})
+```
+
+> Always `await` async queries and interactions — a test that doesn't `await` can pass for the wrong reason.
+
+</v-clicks>
+
+---
+hideInToc: true
 ---
 
 ## [ End to End Testing - (E2E)]{.text-gradient.text-4xl}
@@ -226,3 +393,53 @@ Some popular tools for E2E testing include:
 1️⃣ <span class="text-teal-400">Cypress</span>: A popular tool for E2E testing, great for fast and reliable testing with a rich interface.
 
 2️⃣ <span class="text-teal-400">Playwright</span>: An open-source framework built specifically for E2E testing
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Write your first component test** — 10 minutes, no submission required.
+
+Given this counter component, write three tests using React Testing Library.
+
+```jsx
+// counter.jsx
+export function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <p data-testid="count">Count: {count}</p>
+      <button onClick={() => setCount(c => c + 1)}>Increment</button>
+      <button onClick={() => setCount(c => c - 1)} disabled={count === 0}>
+        Decrement
+      </button>
+    </div>
+  )
+}
+```
+
+```jsx
+// counter.test.jsx — fill in the three tests
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { Counter } from './counter'
+
+test('shows initial count of 0', () => {
+  // TODO
+})
+
+test('increments when the button is clicked', async () => {
+  // TODO: render, click Increment, assert count is 1
+})
+
+test('Decrement button is disabled at zero', () => {
+  // TODO: assert the button has the disabled attribute
+})
+```
+
+<Tips type="tip">
+Use <code>screen.getByText()</code> or <code>screen.getByTestId()</code> to find elements. Use <code>await userEvent.click()</code> (not <code>fireEvent</code>) — it more accurately simulates real user behaviour.
+</Tips>

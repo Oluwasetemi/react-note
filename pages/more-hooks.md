@@ -17,11 +17,11 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+13)">useLayoutEffect</a>
 - <a @click="$slidev.nav.go($nav.currentPage+17)">useDeferredValue</a>
 - <a @click="$slidev.nav.go($nav.currentPage+20)">useActionState</a>
-- <a @click="$slidev.nav.go($nav.currentPage+20)">useFormStatus</a>
-- <a @click="$slidev.nav.go($nav.currentPage+20)">useOptimistic</a>
-- <a @click="$slidev.nav.go($nav.currentPage+22)">customHooks</a>
-- <a @click="$slidev.nav.go($nav.currentPage+27)">useSyncExternalStore</a>
-- <a @click="$slidev.nav.go($nav.currentPage+29)">useEffectEvent</a>
+- <a @click="$slidev.nav.go($nav.currentPage+22)">useFormStatus</a>
+- <a @click="$slidev.nav.go($nav.currentPage+24)">useOptimistic</a>
+- <a @click="$slidev.nav.go($nav.currentPage+25)">customHooks</a>
+- <a @click="$slidev.nav.go($nav.currentPage+30)">useSyncExternalStore</a>
+- <a @click="$slidev.nav.go($nav.currentPage+32)">useEffectEvent</a>
 
 
 ---
@@ -96,7 +96,7 @@ transition: slide-right
 layout: iframe-lazy
 url: https://codesandbox.io/embed/566hdt?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseRefCounter.jsx&hidenavigation=1
 name: useRef Counter
-autoLoad: true
+autoLoad: false
 ---
 
 ---
@@ -183,7 +183,7 @@ hideInToc: true
 layout: iframe-lazy
 url: https://codesandbox.io/embed/vkmlhg?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseStateCart.jsx%3A25%2C54
 name: useReducer Cart
-autoLoad: true
+autoLoad: false
 ---
 
 ---
@@ -283,7 +283,7 @@ hideInToc: true
 layout: iframe-lazy
 url: https://codesandbox.io/embed/zxzrcz?view=editor+%2B+preview&module=%2Fsrc%2Fcomponents%2FuseContext.jsx%3A41%2C29
 name: useContext
-autoLoad: true
+autoLoad: false
 ---
 
 ---
@@ -442,7 +442,7 @@ transition: slide-right
 layout: iframe-lazy
 url: https://codesandbox.io/embed/36d7cr?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A8%2C8-8%2C24
 name: useLayoutEffect
-autoLoad: true
+autoLoad: false
 ---
 
 ---
@@ -525,79 +525,146 @@ transition: slide-down
 layout: iframe-lazy
 url: https://codesandbox.io/embed/cc6xlm?view=editor+%2B+preview&module=%2Fsrc%2FApp.js%3A5%2C17
 name: useDeferredValue Example
-autoLoad: true
+autoLoad: false
 ---
-
-<!--
-TODO: Talk about React 19 hooks useActionState, useFormStatus, use, useOptimistic and useTransition
--->
 
 ---
 hideInToc: true
 transition: slide-up
 ---
 
-## `useActionState` 
+## ✴ [useActionState]{.text-gradient.text-4xl}
 
-Manages state for form actions and async operations. It provides pending state, error handling, and optimistic updates for form submissions and server actions. The was discussed in the previous chapter. 
+<v-clicks>
 
-## `useFormStatus` 
-
-Returns the status of form submissions, including whether a form is pending submission. This is particularly useful for showing loading states on submit buttons. The was discussed in the previous chapter.
-
-## `useOptimistic`
-
-Enables optimistic UI updates by allowing you to show the expected result of an action immediately, then reconciling with the actual server response when it arrives. Allows you to optimistically update the UI while an asynchronous operation is in progress. It shows the expected result immediately and automatically reverts if the operation fails.
+Introduced in React 19, `useActionState` manages the state produced by a form action — including loading state — in a single hook. It replaces the old `useFormState` from `react-dom`.
 
 ```jsx
-const [optimisticState, addOptimistic] = useOptimistic(state, updateFn);
+const [state, formAction, isPending] = useActionState(actionFn, initialState)
 ```
 
+- **`actionFn`** — an `async` function that receives `(prevState, formData)` and returns the next state
+- **`initialState`** — the value of `state` before the first submission
+- **`isPending`** — `true` while the action is running; no separate `useState` needed
 
+When you pass `formAction` to a `<form action={…}>`, React handles the submission lifecycle for you.
+
+</v-clicks>
 
 ---
 hideInToc: true
 transition: slide-up
 ---
 
-## More on `useOptimistic`
+## useActionState — Live Demo
+
+<React19HooksDemo />
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## ✴ [useFormStatus]{.text-gradient.text-4xl}
+
+<v-clicks>
+
+`useFormStatus` lets any component inside a `<form>` read that form's submission state — without prop drilling.
 
 ```jsx
-import { useOptimistic } from 'react';
+import { useFormStatus } from 'react-dom'
 
-function AppContainer() {
-  const [optimisticState, addOptimistic] = useOptimistic(
-    state,
-    // updateFn
-    (currentState, optimisticValue) => {
-      // merge and return new state
-      // with optimistic value
-    }
-  );
+function SubmitButton() {
+  const { pending } = useFormStatus()
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? 'Saving…' : 'Save'}
+    </button>
+  )
 }
 ```
 
-<div class="mt-4 p-3 bg-yellow-50 rounded">
-  <h3 class="font-bold text-yellow-800 mb-2">Concurrent Features</h3>
-  <div class="grid grid-cols-2 gap-4 text-sm">
-    <div>
-      <strong class="text-indigo-700">useTransition:</strong>
-      <ul class="text-xs mt-1 text-black">
-        <li>Hook with pending state</li>
-        <li>Built-in loading indicator</li>
-        <li>Automatic priority handling</li>
-      </ul>
-    </div>
-    <div>
-      <strong class="text-pink-700">startTransition:</strong>
-      <ul class="text-xs mt-1 text-black">
-        <li>Standalone function</li>
-        <li>No loading state</li>
-        <li>Manual priority control</li>
-      </ul>
-    </div>
-  </div>
-</div>
+**Key rules:**
+
+- Must be called inside a component that is rendered *inside* the `<form>` — not in the form component itself
+- `pending` is `true` for the entire duration of the form action
+- Pairs naturally with `useActionState`: one hook owns the state, the other owns the UI feedback
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## ✴ [`use`]{.text-gradient.text-4xl} — Overview
+
+<v-clicks>
+
+`use` is a new React 19 primitive that reads the value of a resource — a Promise or a Context — directly in render.
+
+```jsx
+import { use } from 'react'
+
+// Reading a Context (replaces useContext)
+const theme = use(ThemeContext)
+
+// Reading a Promise (suspends until resolved)
+const data = use(fetchUserPromise)
+```
+
+**When you'd reach for `use`:**
+
+- You already have a Promise (e.g. from a parent Server Component or a cache) and want to unwrap it in a Client Component
+- You want to read a Context conditionally or inside a loop — `use` can be called anywhere, unlike `useContext`
+
+> For production data fetching, `@tanstack/react-query` still gives you caching, retries, and devtools. `use` is the low-level primitive underneath.
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## ✴ [useOptimistic]{.text-gradient.text-4xl} — Overview
+
+<v-clicks>
+
+`useOptimistic` lets you show the *expected* result of an action immediately, before the server responds. React automatically rolls back to the real state if the action fails.
+
+```jsx
+import { useOptimistic } from 'react'
+
+function MessageThread({ messages, sendMessage }) {
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+    messages,
+    (currentMessages, newText) => [
+      ...currentMessages,
+      { text: newText, pending: true },
+    ]
+  )
+
+  async function handleSend(formData) {
+    const text = formData.get('message')
+    addOptimisticMessage(text)   // show immediately
+    await sendMessage(text)      // real network call
+  }
+
+  return (
+    <form action={handleSend}>
+      {optimisticMessages.map((m, i) => (
+        <p key={i} style={{ opacity: m.pending ? 0.5 : 1 }}>{m.text}</p>
+      ))}
+      <input name="message" /><button type="submit">Send</button>
+    </form>
+  )
+}
+```
+
+Best used once you're comfortable with `useActionState` and async data patterns.
+
+</v-clicks>
 
 ---
 hideInToc: true
@@ -1035,3 +1102,46 @@ function ChatRoom({ roomId, theme }) {
 <div class="text-xs text-slate-500" v-click>
 Effect Events aren’t a dependency shortcut—keep real reactive deps in the array.
 </div>
+
+---
+hideInToc: true
+transition: slide-up
+---
+
+## [Practice]{.text-gradient.text-4xl}
+
+**Build `useDebounce`** — 10 minutes, no submission required.
+
+A debounce hook delays running an action until the user has stopped triggering it for a set time. Useful for search inputs that hit an API.
+
+```jsx
+// Starter — implement the hook
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    // TODO: set a timer to update debouncedValue after `delay` ms
+    // TODO: return a cleanup function that clears the timer
+  }, [value, delay])
+
+  return debouncedValue
+}
+
+// Usage — this should only log after the user stops typing for 500ms
+function SearchInput() {
+  const [query, setQuery] = useState('')
+  const debounced = useDebounce(query, 500)
+
+  useEffect(() => {
+    if (debounced) console.log('Search for:', debounced)
+  }, [debounced])
+
+  return <input value={query} onChange={e => setQuery(e.target.value)} />
+}
+```
+
+**Bonus:** Convert the `SearchInput` form action to use `useActionState` so the search result appears below the input without separate state.
+
+<Tips type="tip">
+The pattern is: <code>const id = setTimeout(...)</code> then <code>return () => clearTimeout(id)</code>. The cleanup runs before the next effect — which is exactly what cancels the previous timer.
+</Tips>
