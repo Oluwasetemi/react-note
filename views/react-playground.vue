@@ -1,102 +1,33 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { captureConsole } from '../setup/capture-console'
+import type { ConsoleEntry } from '../setup/capture-console'
+import { useSplitPane } from '../composables/use-split-pane'
+import { useCodeHighlight } from '../composables/use-code-highlight'
 
-const router = useRouter()
-
-// previewRef is a leaf node — Vue never renders children into it,
-// so React can own its DOM freely without vdom conflicts.
 const previewRef = ref<HTMLElement>()
 const splitRef = ref<HTMLElement>()
 const isRunning = ref(false)
 const hasRun = ref(false)
 const error = ref('')
 
+let restoreConsole: (() => void) | null = null
+
 let reactRoot: unknown = null
 let isMounted = false
 
-// ── Draggable pane sizes ──────────────────────────────────────────────────────
-const leftWidthPct = ref(50)
-const consoleHeightPx = ref(160)
-const isDraggingV = ref(false)
-const isDraggingH = ref(false)
-
-const startVerticalDrag = (e: MouseEvent) => {
-  isDraggingV.value = true
-  const startX = e.clientX
-  const startPct = leftWidthPct.value
-
-  const onMove = (e: MouseEvent) => {
-    if (!splitRef.value) return
-    const totalW = splitRef.value.offsetWidth
-    const delta = ((e.clientX - startX) / totalW) * 100
-    leftWidthPct.value = Math.max(20, Math.min(80, startPct + delta))
-  }
-  const onUp = () => {
-    isDraggingV.value = false
-    document.removeEventListener('mousemove', onMove)
-    document.removeEventListener('mouseup', onUp)
-  }
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('mouseup', onUp)
-}
-
-const startHorizontalDrag = (e: MouseEvent) => {
-  isDraggingH.value = true
-  const startY = e.clientY
-  const startH = consoleHeightPx.value
-
-  const onMove = (e: MouseEvent) => {
-    const delta = startY - e.clientY
-    consoleHeightPx.value = Math.max(60, Math.min(520, startH + delta))
-  }
-  const onUp = () => {
-    isDraggingH.value = false
-    document.removeEventListener('mousemove', onMove)
-    document.removeEventListener('mouseup', onUp)
-  }
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('mouseup', onUp)
-}
+// ── Split pane ────────────────────────────────────────────────────────────────
+const { leftWidthPct, consoleHeightPx, isDraggingV, isDraggingH, startVerticalDrag, startHorizontalDrag } =
+  useSplitPane(splitRef, {
+    vertical: { initial: 50, min: 20, max: 80 },
+    horizontal: { initial: 160, min: 60, max: 520 },
+  })
 
 // ── Syntax highlighting ───────────────────────────────────────────────────────
-const highlightedCode = ref('')
 const editorPreRef = ref<HTMLElement>()
 const editorContainerRef = ref<HTMLElement>()
 const editorTextareaRef = ref<HTMLTextAreaElement>()
 
-const onEditorWheel = (e: WheelEvent) => {
-  if (!e.shiftKey) return
-  e.preventDefault()
-  if (!editorTextareaRef.value) return
-  editorTextareaRef.value.scrollLeft += e.deltaY
-  if (editorPreRef.value) editorPreRef.value.scrollLeft = editorTextareaRef.value.scrollLeft
-}
-let highlightTimer: ReturnType<typeof setTimeout> | null = null
-
-const escapeHtml = (s: string) =>
-  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-
-const highlight = async (src: string) => {
-  try {
-    const { codeToHtml } = await import('shiki')
-    const html = await codeToHtml(src, { lang: 'jsx', theme: 'vitesse-dark' })
-    if (isMounted) highlightedCode.value = html
-  } catch {
-    if (isMounted)
-      highlightedCode.value = `<pre><code>${escapeHtml(src)}</code></pre>`
-  }
-}
-
-const syncScroll = (e: Event) => {
-  const ta = e.target as HTMLTextAreaElement
-  if (editorPreRef.value) {
-    editorPreRef.value.scrollTop = ta.scrollTop
-    editorPreRef.value.scrollLeft = ta.scrollLeft
-  }
-}
-
-// ── Default starter code ──────────────────────────────────────────────────────
 const DEFAULT_CODE = `function App() {
   const [count, setCount] = React.useState(0);
 
@@ -135,48 +66,45 @@ const DEFAULT_CODE = `function App() {
 export default App`
 
 const code = ref(DEFAULT_CODE)
+const { highlighted: highlightedCode } = useCodeHighlight(code, 'react')
 
-watch(code, (src) => {
-  if (highlightTimer) clearTimeout(highlightTimer)
-  highlightTimer = setTimeout(() => highlight(src), 60)
-})
+const onEditorWheel = (e: WheelEvent) => {
+  if (!e.shiftKey) return
+  e.preventDefault()
+  if (!editorTextareaRef.value) return
+  editorTextareaRef.value.scrollLeft += e.deltaY
+  if (editorPreRef.value) editorPreRef.value.scrollLeft = editorTextareaRef.value.scrollLeft
+}
 
-onMounted(async () => {
-  isMounted = true
+const syncScroll = (e: Event) => {
+  const ta = e.target as HTMLTextAreaElement
+  if (editorPreRef.value) {
+    editorPreRef.value.scrollTop = ta.scrollTop
+    editorPreRef.value.scrollLeft = ta.scrollLeft
+  }
+}
+
+onMounted(() => {
   editorContainerRef.value?.addEventListener('wheel', onEditorWheel, { passive: false })
-  // Pre-warm the shiki singleton so WASM + theme are loaded before first keystroke.
-  try {
-    const { getSingletonHighlighter } = await import('shiki')
-    await getSingletonHighlighter({ langs: ['jsx'], themes: ['vitesse-dark'] })
-  } catch { /* ignore — highlight() has its own fallback */ }
-  highlight(code.value)
 })
 
 // ── Navigation ────────────────────────────────────────────────────────────────
-const goBack = () => router.push('/')
-
-// ── Console — reactive array so Vue owns the DOM ──────────────────────────────
-interface LogEntry {
-  type: 'log' | 'error' | 'warn'
-  text: string
-}
-const consoleLogs = ref<LogEntry[]>([])
-
-const formatValue = (value: unknown): string => {
-  if (value === null) return 'null'
-  if (value === undefined) return 'undefined'
-  if (typeof value === 'string') return value
-  if (typeof value === 'object') {
-    try { return JSON.stringify(value, null, 2) }
-    catch { return String(value) }
+const goBack = () => {
+  // useRouter() returns undefined in Slidev view components (different inject
+  // context). Use the native history API directly — it always works.
+  if (reactRoot) {
+    try { reactRoot.unmount() } catch { /* ignore */ }
+    vueApp = null
   }
-  return String(value)
+  if (restoreConsole) {
+    restoreConsole()
+    restoreConsole = null
+  }
+  window.history.back()
 }
 
-const addLog = (type: LogEntry['type'], args: unknown[]) => {
-  consoleLogs.value.push({ type, text: args.map(formatValue).join(' ') })
-}
-
+// ── Console ───────────────────────────────────────────────────────────────────
+const consoleLogs = ref<ConsoleEntry[]>([])
 const clearConsole = () => { consoleLogs.value = [] }
 
 const resetCode = () => {
@@ -186,7 +114,7 @@ const resetCode = () => {
   hasRun.value = false
   if (previewRef.value) previewRef.value.innerHTML = ''
   if (reactRoot) {
-    try { (reactRoot as { unmount: () => void }).unmount() } catch { /* ignore */ }
+    try { reactRoot.unmount() } catch { /* ignore */ }
     reactRoot = null
   }
 }
@@ -225,11 +153,11 @@ const runCode = async () => {
     const { code: compiled } = Babel.transform(processed, { presets: ['react'] })
 
     // sandboxConsole is scoped to this run — logs always flow to the panel
-    const sandboxConsole = {
-      log: (...args: unknown[]) => addLog('log', args),
-      error: (...args: unknown[]) => addLog('error', args),
-      warn: (...args: unknown[]) => addLog('warn', args),
-    }
+    // const sandboxConsole = {
+    //   log: (...args: unknown[]) => addLog('log', args),
+    //   error: (...args: unknown[]) => addLog('error', args),
+    //   warn: (...args: unknown[]) => addLog('warn', args),
+    // }
 
     // eslint-disable-next-line no-new-func
     const UserComponent = new Function(
@@ -241,7 +169,7 @@ ${compiled}
 if (typeof __PlaygroundExport__ !== 'undefined') return __PlaygroundExport__;
 if (typeof App !== 'undefined') return App;
 return null;`,
-    )(React, sandboxConsole)
+    )(React)
 
     if (!UserComponent)
       throw new Error('No component found. Use `export default` or name your component `App`.')
@@ -265,10 +193,12 @@ return null;`,
 }
 
 onUnmounted(() => {
-  isMounted = false
-  if (highlightTimer) clearTimeout(highlightTimer)
   editorContainerRef.value?.removeEventListener('wheel', onEditorWheel)
-  try { if (reactRoot) (reactRoot as { unmount: () => void }).unmount() } catch { /* ignore */ }
+  if (restoreConsole) {
+    restoreConsole()
+    restoreConsole = null
+  }
+  try { if (reactRoot) reactRoot.unmount() } catch { /* ignore */ }
   reactRoot = null
 })
 </script>
@@ -288,7 +218,7 @@ onUnmounted(() => {
         >
           ← Back to slides
         </button>
-        <h1 class="m-0 text-base font-semibold text-[#e5e5e5]">⚛️ React Playground</h1>
+        <h1 class="m-0 text-base font-semibold text-[#e5e5e5]">🟢 Vue Playground</h1>
       </div>
       <div class="flex items-center gap-2">
         <button
@@ -298,7 +228,7 @@ onUnmounted(() => {
           ↺ Reset
         </button>
         <button
-          class="px-[14px] py-[6px] bg-[#0070f3] text-white rounded-md cursor-pointer text-sm font-medium transition-opacity duration-150 hover:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="px-[14px] py-[6px] bg-[#42b883] text-white rounded-md cursor-pointer text-sm font-medium transition-opacity duration-150 hover:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed"
           :disabled="isRunning"
           @click="runCode"
         >
@@ -325,8 +255,8 @@ onUnmounted(() => {
         :style="{ width: leftWidthPct + '%' }"
       >
         <div class="px-4 py-2 bg-[#1a1a1a] border-b border-[#333] text-xs text-[#888] flex items-center gap-2 flex-shrink-0">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#58a6ff]" />
-          App.jsx
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#42b883]" />
+          App.vue
           <span class="ml-auto text-[#555]">Tab = 2 spaces · Ctrl+Enter to run</span>
         </div>
         <div ref="editorContainerRef" class="relative flex-1 overflow-hidden bg-[#1e1e1e]">
@@ -356,15 +286,15 @@ onUnmounted(() => {
 
       <!-- ── Vertical drag handle ───────────────────────────────────────── -->
       <div
-        class="flex-shrink-0 w-[5px] bg-[#1a1a1a] border-x border-[#2a2a2a] cursor-col-resize relative group"
-        :class="{ 'bg-[#0070f3]/20': isDraggingV }"
+        class="vertical-handle flex-shrink-0 w-[5px] bg-[#1a1a1a] border-x border-[#2a2a2a] cursor-col-resize relative group"
+        :class="{ 'bg-[#42b883]/20': isDraggingV }"
         @mousedown.prevent="startVerticalDrag"
       >
-        <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-[#333] group-hover:bg-[#0070f3]/50 transition-colors duration-150" />
+        <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-[#333] group-hover:bg-[#42b883]/50 transition-colors duration-150" />
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-[3px]">
-          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/70 transition-colors" />
-          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/70 transition-colors" />
-          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/70 transition-colors" />
+          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#42b883]/70 transition-colors" />
+          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#42b883]/70 transition-colors" />
+          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#42b883]/70 transition-colors" />
         </div>
       </div>
 
@@ -396,15 +326,15 @@ onUnmounted(() => {
 
         <!-- ── Horizontal drag handle ─────────────────────────────────── -->
         <div
-          class="flex-shrink-0 h-[5px] bg-[#1a1a1a] border-y border-[#2a2a2a] cursor-row-resize relative group"
-          :class="{ 'bg-[#0070f3]/20': isDraggingH }"
+          class="horizontal-handle flex-shrink-0 h-[5px] bg-[#1a1a1a] border-y border-[#2a2a2a] cursor-row-resize relative group"
+          :class="{ 'bg-[#42b883]/20': isDraggingH }"
           @mousedown.prevent="startHorizontalDrag"
         >
-          <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-[#333] group-hover:bg-[#0070f3]/50 transition-colors duration-150" />
+          <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-[#333] group-hover:bg-[#42b883]/50 transition-colors duration-150" />
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row gap-[3px]">
-            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/70 transition-colors" />
-            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/70 transition-colors" />
-            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/70 transition-colors" />
+            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#42b883]/70 transition-colors" />
+            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#42b883]/70 transition-colors" />
+            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#42b883]/70 transition-colors" />
           </div>
         </div>
 
