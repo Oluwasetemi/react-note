@@ -88,8 +88,6 @@ export default defineCodeRunnersSetup(() => {
         consoleOutput.innerHTML = ''
       }
 
-      const logs = []
-
       // Helper to format console output
       const formatValue = (value: string|null|object|undefined) => {
         if (value === null) return 'null'
@@ -137,6 +135,7 @@ export default defineCodeRunnersSetup(() => {
       // Setup console interception before loading content
       iframe.onload = () => {
         const iframeWindow = iframe.contentWindow as any
+        const iframeDocument = iframe.contentDocument || iframeWindow?.document;
 
         if (iframeWindow) {
           // Intercept console methods in the iframe
@@ -166,6 +165,31 @@ export default defineCodeRunnersSetup(() => {
             originalConsole.info.apply(iframeWindow.console, args)
             addLog('log', args)
           }
+        }
+
+        // --- NEW: Auto-resize logic ---
+        if (iframeDocument && iframeDocument.body) {
+          const updateHeight = () => {
+            // Get the true height of the content
+            const contentHeight = iframeDocument.documentElement.scrollHeight;
+            
+            // Set the container height (ensure it doesn't drop below your minHeight)
+            container.style.height = `${Math.max(200, contentHeight + 16)}px`; 
+          };
+      
+          // 1. Set the initial height once the iframe loads
+          updateHeight();
+      
+          // 2. Observe the iframe's body for dynamic DOM additions/removals
+          const resizeObserver = new ResizeObserver(() => {
+            updateHeight();
+          });
+          
+          // Using a timeout prevents a "ResizeObserver loop limit exceeded" warning
+          // that sometimes occurs during the initial render tick in iframes.
+          setTimeout(() => {
+            resizeObserver.observe(iframeDocument.body);
+          }, 0);
         }
       }
 
