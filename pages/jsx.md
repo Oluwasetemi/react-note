@@ -142,6 +142,7 @@ container.innerHTML = `
 <div v-click>
 4. <u>String Concatenation:</u> You can use traditional string concatenation to build HTML strings.
 </div>
+
 ```js {hide|*|3-7|4|5|6|*}{at:4}
 const title = 'Hello, World!'
 const paragraph = 'This is a paragraph.'
@@ -401,6 +402,8 @@ function App() {
 hideInToc: true
 transition: slide-down
 name: CSS in JSX
+title: CSS in JSX
+class: 'text-sm'
 ---
 
 2. CSS Classes: To apply styles from an external style sheet or a .module.css, you simply need to reference the JSX element you want to style by it's `className`, `id`, or other attributes
@@ -437,11 +440,11 @@ function StyleJSX() {
 ```
 
 ```jsx
-import ./style.module.css;
+import styles from ./style.module.css;
 
 function StyleJSX() {
   return (
-    <h2 className={style.title}>Hello World!</h2>
+    <h2 className={styles.title}>Hello World!</h2>
   );
 }
 ```
@@ -452,7 +455,7 @@ function StyleJSX() {
 <v-click at="+2">
 <div>
 
-3. Using CSS frameworks like TailwindCSS or UnoCSS: In this method, you simply write your styles in the `className` quote according to guidelines.
+3. Using CSS frameworks like {TailwindCSS} or {UnoCSS}: In this method, you simply write your styles in the `className` quote according to guidelines.
 
 ```jsx
 function App() {
@@ -468,7 +471,15 @@ function App() {
 </v-click>
 
 <div v-click>
-4. Using styled component: Styled components can also be used to style JSX. You simply have to import the component either from a library or your own styled components folder.
+
+4. Using [styled component](https://styled-components.com/): Styled components can also be used to style JSX. You simply have to import the component either from a library or your own styled components folder.
+
+</div>
+
+<div v-click>
+
+5. There is a lot of different ways to add css to jsx, [`styled-jsx`](https://github.com/vercel/styled-jsx) by vercel is another interesting way to make your jsx look great. 
+
 </div>
 
 ---
