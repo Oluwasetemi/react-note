@@ -4,9 +4,13 @@ import { ref, computed, watch } from 'vue'
 import GitHub from '~icons/mdi/github'
 import { useWebSocket } from '@vueuse/core'
 
+const isPrintMode =
+  typeof window !== 'undefined' &&
+  new URLSearchParams(window.location.search).has('print')
+
 // Basic WebSocket connection
 const { data } = useWebSocket('wss://api.oluwasetemi.dev/ws/visitors', {
-  immediate: true,
+  immediate: !isPrintMode,
 })
 
 // Reactive visitor count

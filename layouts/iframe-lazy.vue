@@ -71,6 +71,10 @@ const props = withDefaults(defineProps<Props>(), {
   autoLoad: false,
 })
 
+const isPrintMode =
+  typeof window !== 'undefined' &&
+  new URLSearchParams(window.location.search).has('print')
+
 const iframeRef = ref<HTMLIFrameElement>()
 const containerRef = ref<HTMLElement>()
 const isLoaded = ref(false)
@@ -89,7 +93,7 @@ const onIframeLoad = () => {
 }
 
 onMounted(() => {
-  if (props.autoLoad) {
+  if (props.autoLoad && !isPrintMode) {
     const { stop } = useIntersectionObserver(
       containerRef,
       ([{ isIntersecting }]) => {
