@@ -135,7 +135,7 @@ transition: slide-right
 
 # [Context API for Global State]{.text-gradient}
 
-There are cases where we would want to share a state across the entire application or to one or more parents in different folders of our application. In this case, simply [Lifting Up State]{.text-gradient} is just not enough and won't really be clean code if used because you would have to pass the state as props to any child component that needs it. Example of this complex case is [Theme state management]{.text-teal-400.italic} where would want our entire application to be aware of which theme was toggled. This is where {React}'s [Context API]{.text-gradient.italic} comes in handy.
+There are cases where we would want to share a state across the entire application or to one or more parents in different folders of our application. In this case, simply [Lifting Up State]{.text-gradient} is just not enough and won't really be clean code if used because you would have to pass the state as props to any child component that needs it. Example of this complex case is [Theme state management]{.text-teal-400.italic} where we would want our entire application to be aware of which theme was toggled. This is where {React}'s [Context API]{.text-gradient.italic} comes in handy.
 
 <v-click>
 
