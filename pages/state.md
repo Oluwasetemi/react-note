@@ -27,11 +27,11 @@ hideInToc: true
  Imperative: How to do something, Declarative: What to do
 </Tips>
 
-UI is a function of state and it should be declarative using JSX and the power of event interactivity in React. Identifying your component's different visual states, determine what triggers those state changes, Represent the state in memory using `useState`. Remove any non-essential state variables and connect the event handlers to set the state.
+UI is a function of state and it should be declarative using JSX and the power of event interactivity in React. Identify your component's different visual states, determine what triggers those state changes, represent the state in memory using `useState`, remove any non-essential state variables, and connect the event handlers that set the state.
 
 Reacting to user input is a key part of building interactive UIs. Handling user input with React typically involves updating the state of your components based on the user's input and interactions. Triggering state changes based on user input is how you build interactive UIs.
 
-When a user types something into the form, the `submit` button becomes enabled. When the user clicks the `submit` button, both the form and the button becomes disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears. The above can be represented imperatively or declaratively. React enforces a declarative approach.
+When a user types something into the form, the `submit` button becomes enabled. When the user clicks the `submit` button, both the form and the button become disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears. The above can be represented imperatively or declaratively. React enforces a declarative approach.
 
 ---
 hideInToc: true
@@ -49,7 +49,7 @@ Declarative programming means describing the UI for each visual state rather tha
 - Represent the state in memory using `useState`
 - Connect the event handlers to set the state
 
-The example in the next slide shows a form that has a textarea input field and a submit button. The submit button is disabled when the textarea is empty. When the user types something into the textarea, the submit button becomes enabled. When the user clicks the submit button, the form and the button becomes disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears.
+The example in the next slide shows a form that has a textarea input field and a submit button. The submit button is disabled when the textarea is empty. When the user types something into the textarea, the submit button becomes enabled. When the user clicks the submit button, the form and the button become disabled and a spinner appears. If the network request is successful, the spinner disappears and a success message appears. If the network request fails, the spinner disappears and an error message appears.
 
 ---
 hideInToc: true
@@ -139,7 +139,7 @@ hideInToc: true
 - Identify all the states your component can be in and how it transitions between those states.
 - Group related states together.
 - Avoid contradicting states.
-- Avoid unnecessary and state duplication states.
+- Avoid unnecessary and duplicate state.
 - Avoid deeply nested states.
 
 The goal behind these principles is to make state easy to update without introducing mistakes. Removing redundant and duplicate data from state helps ensure that all its pieces stay in sync.
@@ -166,7 +166,7 @@ const [position, setPosition] = useState({ x: 0, y: 0 })
 hideInToc: true
 ---
 
-# Avoid unnecessary and state duplication states
+# Avoid unnecessary and duplicate state
 
 ```jsx {monaco-diff}
 const [firstName, setFirstName] = useState('');
@@ -180,14 +180,14 @@ const [lastName, setLastName] = useState('');
 const fullName = firstName + ' ' + lastName;
 ```
 
-Use spread operator to override the change part of the state when updating the state.
+Use the spread operator to override the changed part of the state when updating it.
 
 ```jsx
 const [user, setUser] = useState({ firstName: '', lastName: '' })
 setUser({ ...user, firstName: 'John' })
 ```
 
-This way, you don't have to worry about the state being out of sync and unnecessary nesting of states. Keeping the states flat and simple as possible.
+This way, you don't have to worry about the state being out of sync and unnecessary nesting of states. Keep state as flat and simple as possible.
 
 ---
 hideInToc: true
@@ -279,7 +279,7 @@ hideInToc: true
 
 <div />
 
-A reducer function is a function that takes the current state and an action and returns a new state. It's a way to manage state in a more predictable way. It's a pattern that's used in many programming languages and libraries. Its often useful when you have complex state logic that involves multiple sub-states or when the next state depends on the previous state. Extracting the state logic into a reducer function can make your code easier to understand and maintain.
+A reducer function is a function that takes the current state and an action and returns a new state. It's a way to manage state in a more predictable way. It's a pattern that's used in many programming languages and libraries. It's often useful when you have complex state logic that involves multiple sub-states or when the next state depends on the previous state. Extracting the state logic into a reducer function can make your code easier to understand and maintain.
 
 <div grid="~ cols-2" gap="2">
 
@@ -337,7 +337,7 @@ function Form() {
   const [state, dispatch] = React.useReducer(statusReducer, {
     status: 'idle',
     answer: '',
-    error: null
+    error: null,
   })
 
   if (state.status === 'success') {
@@ -513,9 +513,9 @@ function ImpureComponent() {
 
 </div>
 
-Keeping your components pure make rendering predictable. Its easier to manage, it doesn't have any side effects and doesn't depend on anything other than its props and state. Effects are a way to add side effects to your components and it should be done with caution using events, refs and special hooks designed for such purpose.
+Keeping your components pure makes rendering predictable. It's easier to manage because it doesn't have any side effects and doesn't depend on anything other than its props and state. Effects are a way to add side effects to your components and they should be handled with caution using events, refs, and special hooks designed for that purpose.
 
 <Tips type="danger" fullWidth>
 You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, “set” state instead of mutating preexisting objects.<br />
-Strive to express your component’s logic in the JSX you return. When you need to “change things”, you’ll usually want to do it in an event handler. As a last resort, you can useEffect.
+Strive to express your component’s logic in the JSX you return. When you need to “change things”, you’ll usually want to do it in an event handler. As a last resort, you can use `useEffect`.
 </Tips>

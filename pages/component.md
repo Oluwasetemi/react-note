@@ -14,7 +14,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+2)">Your first component</a>
 - <a @click="$slidev.nav.go($nav.currentPage+4)">Single root element</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">Exporting, Importing, and Nesting Components</a>
-- <a @click="$slidev.nav.go($nav.currentPage+8)">Parent and Child component</a>
+- <a @click="$slidev.nav.go($nav.currentPage+8)">Parent and Child Components</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">Props: Passing and Reading Data Between Components</a>
 
 ---
@@ -90,27 +90,21 @@ function Greeting() {
 ```jsx
 // add JSX markup
 function Greeting() {
-  return (
-    <p>You are welcome here.</p>
-  )
+  return <p>You are welcome here.</p>
 }
 ```
 
 ```jsx
 // export the component(named)
 export function Greeting() {
-  return (
-    <p>You are welcome here.</p>
-  )
+  return <p>You are welcome here.</p>
 }
 ```
 
 ```jsx
 // export the component(default)
 export default function Greeting() {
-  return (
-    <p>You are welcome here.</p>
-  )
+  return <p>You are welcome here.</p>
 }
 ```
 ````
@@ -119,7 +113,7 @@ export default function Greeting() {
 
 <div>
   <p> 1. <span class="underline text-xl">Define the component function:</span> React components are <span class="text-teal-400">regular JavaScript functions</span>, but their names must start with a capital letter or they won&apos;t work!</p>
-  <p> 2. <span class="underline text-xl">Write return with parenthensis:</span> Always wrap your JSX markup in parentheses after the return statement. <span class="text-teal-400">Without parentheses</span>, any code on the lines after return will be ignored! </p>
+  <p> 2. <span class="underline text-xl">Write return with parentheses:</span> Always wrap your JSX markup in parentheses after the return statement. <span class="text-teal-400">Without parentheses</span>, any code on the lines after return will be ignored! </p>
   <p> 3.  <span class="underline text-xl">Add JSX markup:</span> Markup is your code structure. Inside the component, <span class="text-teal-400">write your JSX</span>, which looks like HTML but works under the hood as JavaScript.</p>
   <p> 4.  <span class="underline text-xl">Export the component:</span> The <span class="text-teal-400">export default prefix</span> is a standard JavaScript syntax (not specific to React). It lets you mark the main function in a file so that you can later import it from other files.</p>
 </div>
@@ -162,7 +156,7 @@ name: Single root element
 
 <p>In React, a component can only return <span class="text-gradient text-3xl"> ❶ </span> root element.</p>
 
-<p v-click>You cannot return multiple elements (like two divs tags) at the root level. However, you can nest elements within a single root element, such as wrapping them in a parent element or using <span class="text-teal-400">React Fragments </span>. For example:</p>
+<p v-click>You cannot return multiple elements (like two div tags) at the root level. However, you can nest elements within a single root element, such as wrapping them in a parent element or using <span class="text-teal-400">React Fragments </span>. For example:</p>
 
 <div v-click class="flex gap-3 ">
 <div>
@@ -224,7 +218,7 @@ name: Exporting, Importing, and Nesting Components
 
 <h1  class="text-gradient text-4xl">Exporting, Importing, and Nesting Components </h1>
 
-<p>Components are powerful because they are reusable. The components created are exported so they can be used (imported) into other files. </p>
+<p>Components are powerful because they are reusable. The components you create are exported so they can be used (imported) in other files. </p>
 
 Below, the `Greeting` component created is imported into the root App component in React.
 
@@ -296,7 +290,7 @@ transition: slide-left
 # Guide for importing components
 
 <div>
-  <p v-click > 1. <span class="underline text-xl">Use the Correct Path:</span> Ensure you provide the <span class="text-teal-400">correct relative path</span> to the component file you want to import.  For example, import Greeting from './Greeting'; if Greeting.jsx is in the same directory or '../Greeting'; if the Greeting.jsx is one level deeper.</p>
+  <p v-click > 1. <span class="underline text-xl">Use the Correct Path:</span> Ensure you provide the <span class="text-teal-400">correct relative path</span> to the component file you want to import. For example, use import Greeting from './Greeting'; if Greeting.jsx is in the same directory, or '../Greeting'; if Greeting.jsx is one level higher.</p>
   <p v-click> 2. <span class="underline text-xl">Case Sensitivity: </span> Component names are case-sensitive. The imported name must match the exported name exactly. For example, import  <span class="text-teal-400">Greeting</span> from  <span class="text-teal-400">'./greeting'</span>; will fail.</p>
   <div v-click>
 
@@ -383,7 +377,7 @@ transition: slide-down
 
 <h1 class="text-gradient text-4xl">Props <span class="text-common">📨</span>: Passing and Reading Data Between Components</h1>
 
-#### Props (short for properties) allow parent components to pass data to their child components, just like <u>arguments in functions</u> and <u>attributes in html</u>. <span class="text-teal-400">You can pass any JavaScript value as a prop</span> (objects, arrays, functions, etc.). Below, child component `Welcome` is receiving name props from parent component `App`
+#### Props (short for properties) allow parent components to pass data to their child components, just like <u>arguments in functions</u> and <u>attributes in HTML</u>. <span class="text-teal-400">You can pass any JavaScript value as a prop</span> (objects, arrays, functions, etc.). Below, the child component `Welcome` receives name props from the parent component `App`.
 
 <v-click>
 
@@ -485,7 +479,7 @@ transition: slide-up
 
 # Special Props `children`
 
-The `children` prop is a special prop that allows you to make a components accept html, text or another component in between its opening and closing tag. It is used to render whatever you include between the opening and closing tags of the component.
+The `children` prop is a special prop that allows a component to accept HTML, text, or another component between its opening and closing tags. It is used to render whatever you include between those tags.
 
 <div grid class="grid-cols-2 gap-2">
 
@@ -497,10 +491,10 @@ function Card({ children }) {
 function App() {
   return (
     <Card>
-      {/* childern */}
+      {/* children */}
       <h1>Card Title</h1>
       <p>Card Content</p>
-      {/* childern */}
+      {/* children */}
     </Card>
   )
 }
@@ -519,9 +513,9 @@ function Card({ title, children }) {
 function App() {
   return (
     <Card title="Card Title">
-      {/* childern */}
+      {/* children */}
       <p>Card Content</p>
-      {/* childern */}
+      {/* children */}
     </Card>
   )
 }
@@ -539,9 +533,9 @@ name: Assignments on Components
 
 <div />
 
-(1) Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text. Add styles (based on any of the several ways to add css to react components).
+(1) Build a simple information display application that consists of a Header component with a title (e.g., "My Favorite Books"), a BookList component to list three of your favorite book titles, and a Book component for each individual book. Each Book component should accept a title prop and display the title as text. Add styles (using any of the several ways to add CSS to React components).
 
-(2) Turn this `li` into a reusability component using props and add styles (based on any of the several ways to add css to react components).
+(2) Turn this `li` into a reusable component using props, and add styles (using any of the several ways to add CSS to React components).
 
 ```html
 <li className="contact-card">
@@ -555,9 +549,9 @@ name: Assignments on Components
 </li>
 ```
 
-(1) and (2) will be Graded as Assignment 1. To submit create a new react project, push the code to a new GitHub repo and submit the GitHub link alone.
+(1) and (2) will be graded as Assignment 1. To submit, create a new React project, push the code to a new GitHub repository, and submit only the GitHub link.
 
-Implement either an accessible modal, accordion and tool tip component - Practice Question
+Implement an accessible modal, accordion, or tooltip component — Practice Question
 
 ---
 hideInToc: true
@@ -565,7 +559,7 @@ hideInToc: true
 
 # Summary
 
-Self Responsibility
+Personal Responsibility
 
 - Try to read the codebase of React Component Libraries from {React Aria}, {Chakra UI}, {Material UI}, {Base UI}, {Radix} and read about {shadcn}
-- Check out {Tanstack} family of libraries.
+- Check out the {TanStack} family of libraries.

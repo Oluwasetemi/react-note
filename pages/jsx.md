@@ -96,7 +96,7 @@ const content = `
 </div>
 
 ```ts
-// a function to create html elements
+// a function to create HTML elements
 const makeElem = (elemType, props, children) => {
   const elem = document.createElement(elemType)
 
@@ -172,8 +172,8 @@ Note:
 <v-clicks>
 
 - JSX is not the only way to write HTML in React as seen in previous pages, but JSX makes it easier to write React applications
-- JSX converts HTML tags into react elements.
-- JSX is an extension used in React, this means that it is not part of react. It is a separate syntactic tool to help React developers create React elements easily
+- JSX converts HTML tags into React elements.
+- JSX is an extension used with React; it is not part of React itself. It is a separate syntactic tool that helps React developers create React elements easily.
 - JSX is a type of expression in JS, not a statement.
 - JSX allows you to write HTML elements in JavaScript and place them in the DOM without any createElement() and/or appendChild() methods.
 
@@ -187,7 +187,7 @@ name: Syntax and Structure of JSX
 
 [Syntax and Structure of JSX]{.text-gradient.text-4xl}
 
-The syntax of JSX elements looks very much alike with that of HTML elements.
+The syntax of JSX elements looks very similar to that of HTML elements.
 
 For example, if you want to create a `h1` and a `div` using JSX, they will look the same as with normal HTML:
 
@@ -225,7 +225,7 @@ name: Rules of JSX
 
 [The]{.text-4xl} [Rules]{.text-gradient.text-4xl} [of]{.text-4xl} [JSX]{.text-gradient.text-4xl}
 
-There are few rules that guides writing JSX. They include:
+There are a few rules that guide writing JSX. They include:
 
 1. <u>Return a single root element:</u> This is simply saying you should always wrap a group of JSX elements with a single root.
 
@@ -243,7 +243,7 @@ If you don’t want to add an extra `<div>` to your markup, you can use `<>` and
 ```jsx {*|2|6|*}
 // the `<></>` is the parent (root element) called Fragment
 <>
-  <h1>Our parent Element don't even have a public name</h1>
+  <h1>Our parent element doesn't even have a public name</h1>
   <p>Well, everyone knows the name is <b>Fragment</b>!</p>
   <img src="imageUrl" alt="<p> my paddy is always right">
 </>
@@ -295,7 +295,7 @@ name: Convert HTML to JSX
 
 [Convert]{.text-3xl} [HTML]{.text-gradient.text-4xl} [to]{.text-3xl} [JSX]{.text-gradient.text-4xl}
 
-Recall that we stated that `JSX` syntaxes are very similar to that of `HTML`, but being 'very similar' means there are distinctive differences, for example the `class` attribute in HTML is written as `className` in JSX. For this reason, there is need to convert HTML to JSX when migrating from a pure HTML file.
+Recall that we stated that `JSX` syntax is very similar to `HTML`, but there are distinct differences. For example, the `class` attribute in HTML is written as `className` in JSX. For this reason, you need to convert HTML to JSX when migrating from a plain HTML file.
 
 Here are some HTML to JSX conversion tools:
 
@@ -303,7 +303,7 @@ Here are some HTML to JSX conversion tools:
 
 - [transform.tools/html-to-jsx](https://transform.tools/html-to-jsx)
 - [convertsimple.com/convert-html-to-jsx](https://www.convertsimple.com/convert-html-to-jsx/)
-- [Chrome extention: html-to-jsx](https://chromewebstore.google.com/detail/html-to-jsx/gdafcihicjmhjjjkldfdccfbajneiake?hl=en)
+- [Chrome extension: html-to-jsx](https://chromewebstore.google.com/detail/html-to-jsx/gdafcihicjmhjjjkldfdccfbajneiake?hl=en)
 
 </v-clicks>
 
@@ -322,7 +322,7 @@ name: Embedding JavaScript in JSX
 
 [Embedding JavaScript in JSX]{.text-gradient.text-4xl}
 
-There are times you will want to add a little JavaScript logic or reference a dynamic property inside a JSX markup. To achieve this, you simply have to add curly braces (`{}`) which will open up a javascript land/window and allow you to embed a JavaScript logic or reference a dynamic content.
+At times, you will want to add some JavaScript logic or reference a dynamic property inside JSX markup. To achieve this, you simply have to add curly braces (`{}`) which open a JavaScript expression context and allow you to embed JavaScript logic or reference dynamic content.
 
 <div v-click>
 
@@ -357,7 +357,7 @@ name: CSS in JSX
 
 Just like HTML, you can style JSX with inline-styles, external-style, .module.css, and/or any CSS framework/library.
 
-1. Inline CSS: Inline styles in JSX are written as objects with camelCase properties instead of traditional CSS syntax. See inline styles as adding an object to the 'javascript land' of `className` attribute. This means that we would need double curly braces (`{{}}`); one for embedding javascript, the second for applying an object containing styles.
+1. Inline CSS: Inline styles in JSX are written as objects with camelCase properties instead of traditional CSS syntax. Think of inline styles as adding an object within a JavaScript expression. This means that we need double curly braces (`{{}}`): one pair for embedding JavaScript and another for defining the object containing the styles.
 
 <div flex h-50 gap-3 v-click>
 
@@ -406,7 +406,7 @@ title: CSS in JSX
 class: 'text-sm'
 ---
 
-2. CSS Classes: To apply styles from an external style sheet or a .module.css, you simply need to reference the JSX element you want to style by it's `className`, `id`, or other attributes
+2. CSS Classes: To apply styles from an external style sheet or a .module.css, you simply need to reference the JSX element you want to style by its `className`, `id`, or other attributes.
 
 <div flex justify-evenly gap-2>
 
@@ -478,7 +478,7 @@ function App() {
 
 <div v-click>
 
-5. There is a lot of different ways to add css to jsx, [`styled-jsx`](https://github.com/vercel/styled-jsx) by vercel is another interesting way to make your jsx look great. 
+5. There are many ways to add CSS to JSX. [`styled-jsx`](https://github.com/vercel/styled-jsx) by Vercel is another interesting way to make your JSX look great.
 
 </div>
 
@@ -491,4 +491,4 @@ transition: slide-down
 
 <br>
 
-Using HTML to JSX Converter, transform a HTML file you already have to JSX.
+Using an HTML-to-JSX converter, transform an HTML file you already have into JSX.

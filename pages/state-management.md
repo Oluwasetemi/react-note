@@ -23,11 +23,11 @@ transition: fade
 
 # [Lifting State Up in React]{.text-gradient}
 
-[State Management]{.text-teal-400} in {React} is one of the beauty of the library that makes it shine. When a user [interacts]{.text-teal-400.italic} with a reactive element or component, an update which is simply known as [change in state]{.text-teal-400.italic} occur, instantly updating the UI or performing a defined task.
+[State Management]{.text-teal-400} in {React} is one of the features that makes the library shine. When a user [interacts]{.text-teal-400.italic} with a reactive element or component, an update known as a [change in state]{.text-teal-400.italic} occurs, instantly updating the UI or performing a defined task.
 
 <v-click>
 
-In most cases, we perform a "State Update" within the component where it is happening. But how about when we want other components in the same [parent]{.italic} component to be aware of the update or interaction? This is where [Lifting Up State]{.text-gradient} comes in handy, which involves moving the state management that is occurring in "Child1" component to the "Parent" component so that the "Child2" or other children of the parent, including the parent itself would be aware of that particular [State Change]{.text-teal-400.italic}.
+In most cases, we perform a "State Update" within the component where it occurs. But how about when we want other components in the same [parent]{.italic} component to be aware of the update or interaction? This is where [Lifting Up State]{.text-gradient} comes in handy, which involves moving the state management that is occurring in "Child1" component to the "Parent" component so that the "Child2" or other children of the parent, including the parent itself, can be aware of that particular [State Change]{.text-teal-400.italic}.
 
 </v-click>
 
@@ -39,7 +39,7 @@ In most cases, we perform a "State Update" within the component where it is happ
 
 <v-click>
 
-Now that we understand the definition and purpose of [Lifting Up State]{.text-gradient}, lets look at it's code structure in the next slide.
+Now that we understand the definition and purpose of [Lifting Up State]{.text-gradient}, let's look at its code structure in the next slide.
 
 </v-click>
 
@@ -118,15 +118,12 @@ transition: slide-up
 
 Here is the interactive mode of the code example in the previous slide.
 
-
 ---
 hideInToc: true
 transition: slide-left
 layout: iframe-lazy
 url: https://codesandbox.io/embed/pzvrd4
 ---
-
-
 
 ---
 hideInToc: true
@@ -135,7 +132,7 @@ transition: slide-right
 
 # [Context API for Global State]{.text-gradient}
 
-There are cases where we would want to share a state across the entire application or to one or more parents in different folders of our application. In this case, simply [Lifting Up State]{.text-gradient} is just not enough and won't really be clean code if used because you would have to pass the state as props to any child component that needs it. Example of this complex case is [Theme state management]{.text-teal-400.italic} where we would want our entire application to be aware of which theme was toggled. This is where {React}'s [Context API]{.text-gradient.italic} comes in handy.
+There are cases where we want to share state across the entire application or with one or more parents in different folders of our application. In this case, simply [Lifting Up State]{.text-gradient} is just not enough and won't really be clean code if used because you would have to pass the state as props to any child component that needs it. Example of this complex case is [Theme state management]{.text-teal-400.italic} where we would want our entire application to be aware of which theme was toggled. This is where {React}'s [Context API]{.text-gradient.italic} comes in handy.
 
 <v-click>
 
@@ -202,14 +199,13 @@ layout: iframe-lazy
 url: https://codesandbox.io/embed/kwslzk
 ---
 
-
 ---
 hideInToc: true
 ---
 
 # [Introduction to Redux]{.text-gradient}
 
-For large-scale applications with complex state interactions, we can use external library like [Redux]{.text-teal-400} for state management and Redux Toolkit(RTK) for more flexibility.
+For large-scale applications with complex state interactions, we can use an external library like [Redux]{.text-teal-400} for state management and Redux Toolkit(RTK) for more flexibility.
 
 <v-click>
 
@@ -229,7 +225,7 @@ For large-scale applications with complex state interactions, we can use externa
 - Actions: Plain objects that describe what you want to do.
 - Reducers: Pure functions that update the state based on actions.
 - Dispatch: Triggers an action.
-- Redux Toolkit: Managing Async State 
+- Redux Toolkit: Manages asynchronous state
 
 </v-clicks>
 
@@ -262,10 +258,9 @@ hideInToc: true
 transition: fade
 ---
 
-## More Thirty Party Libraries for State management includes `zustand`, `jotai`, `@tanstack/query`, `swr`, `recoil`, `xstate`.
+## More third-party libraries for state management include `zustand`, `jotai`, `@tanstack/query`, `swr`, `recoil`, `xstate`.
 
 ````md magic-move
-
 ```js
 import { create } from 'zustand'
 
@@ -302,10 +297,7 @@ function UserProfile({ userId }: { userId: string }) {
   return <div>{user?.name}</div>
 }
 ```
-
 ````
-
-
 
 ---
 hideInToc: true
@@ -426,7 +418,7 @@ function App() {
 
   return (
     <div className="layout">
-      <button onClick={() => setShowSidebar(prev => !prev)}> Toggle sidebar </button>
+      <button onClick={() => setShowSidebar(prev => !prev)}>Toggle sidebar</button>
       <Activity mode={showSidebar ? 'visible' : 'hidden'}>
         <Sidebar /> {/* state + DOM preserved while hidden */}
       </Activity>
@@ -456,14 +448,14 @@ transition: slide-up
 - The [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) enables animated DOM swaps for route or view changes. [Read More about SPA use-cases](https://web.dev/learn/css/view-transitions-spas)
 - Wrap DOM updates in `document.startViewTransition` when available; it falls back silently if unsupported.
 - Use CSS to define shared element animations (`view-transition-name`).
-- You can wrap pages, component or group interaction with <ViewTransition /> element and setup a minimal style.
+- You can wrap pages, components, or grouped interactions with <ViewTransition /> element and setup a minimal style.
 
 </v-clicks>
 
 ````md magic-move
 ```jsx {monaco} {lineNumbers: true, height: '13rem'}
 function swapCard(setCard) {
-  const run = () => setCard((prev) => prev === 'A' ? 'B' : 'A')
+  const run = () => setCard((prev) => (prev === 'A' ? 'B' : 'A'))
   if ('startViewTransition' in document) {
     document.startViewTransition(run)
   } else {
@@ -500,18 +492,15 @@ import {ViewTransition} from 'react'
 
 ```css
 ::view-transition-group(.slide-in) {
-  
 }
 ::view-transition-old(.slide-in) {
-
 }
 ::view-transition-new(.slide-in) {
-
 }
 ```
 
 ```css
-::view-transition-group(root){
+::view-transition-group(root) {
   animation-duration: 200ms;
 }
 

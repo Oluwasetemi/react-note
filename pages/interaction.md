@@ -27,11 +27,11 @@ transition: slide-up
 In the previous chapter we learned about Components in React and how to create one. Let's talk about making them interactive.
 
 <div flex gap-2 v-click mb-2>
-<div>Bringing back our <span text-teal-400>components mansion</span> (the house), we mentioned that the components of a house are reusable features like the doors, windows, lights, etc. These features needs human <span text-gradient>interaction</span> to be usable or to act in a certain way. For example, if you want to enter or leave the house, you need to open the door (<span text-gradient>interact</span> with the door), you can turn on/off the light as you desire (<span text-gradient>interactivity</span>). </div>
+<div>Bringing back our <span text-teal-400>components mansion</span> (the house), we mentioned that the components of a house are reusable features like the doors, windows, lights, etc. These features need human <span text-gradient>interaction</span> to be usable or to act in a certain way. For example, if you want to enter or leave the house, you need to open the door (<span text-gradient>interact</span> with the door), you can turn on/off the light as you desire (<span text-gradient>interactivity</span>). </div>
 <img class="w-24 h-24" src="/images/house.jpg" alt="a house" />
 </div>
 <v-click>
-The same logic of <span text-gradient>interactivity</span> about a house above applies to React components. For example, you may desire to alert a success message to your users only when they click a button. This can be achieved when you add an <span text-gradient>event</span> to the button to listen to the user's interaction. When the data of a JSX element or a component change over time automatically or due to user interaction, we call it "changing of <span text-gradient>state</span>".
+The same logic of <span text-gradient>interactivity</span> about a house above applies to React components. For example, you may desire to alert a success message to your users only when they click a button. This can be achieved when you add an <span text-gradient>event</span> to the button to listen to the user's interaction. When the data of a JSX element or component changes over time, either automatically or due to user interaction, we call it a "change of <span text-gradient>state</span>."
 </v-click>
 <div v-click mt-4>
 Now that we mentioned <span text-teal-400>Events</span>, let's talk about <span text-gradient>Events in React</span>.
@@ -45,7 +45,7 @@ name: Making a Component Interactive with Events
 
 [Making a Component Interactive with Events]{.text-gradient.text-4xl}
 
-You can add [events]{.text-teal-400} directly to JSX elements rendered by your component. In the example below, the `onClick` event is used to listen for a click interaction and apply a `state` update to the component using `setCount`. The `useState` hook is used to update the state of a component in React. We will talk more on `useState` when learning about Hooks and State Management in React.
+You can add [events]{.text-teal-400} directly to JSX elements rendered by your component. In the example below, the `onClick` event is used to listen for a click interaction and apply a `state` update to the component using `setCount`. The `useState` hook is used to update the state of a component in React. We will discuss `useState` in more detail when learning about Hooks and State Management in React.
 
 ```jsx {monaco-run} { lineNumbers: 'true', height: '13rem' }
 function Counter() {
@@ -71,11 +71,11 @@ transition: fade
 
 # [Roles of State in a React Component's Interactivity]{.text-gradient}
 
-[State]{.text-teal-400} is regarded as the memory of a {React} component. When a component gains interaction, it compares its previous form before the interaction, and its form after the interaction. This action can be termed as <i>"Comparing of [State Change]{.text-teal-400} in the component"</i>. When React compares the before and after form of a component during <span class="text-gradient italic">State Change</span> and they differ, React goes ahead to update the component with the latest changes.
+[State]{.text-teal-400} is regarded as the memory of a {React} component. When a component becomes interactive, React compares its form before and after an interaction. This can be described as <i>"comparing the [State Change]{.text-teal-400} in the component."</i> When React compares the before and after form of a component during <span class="text-gradient italic">State Change</span> and they differ, React goes ahead to update the component with the latest changes.
 
 <v-click>
 
-You can add a [State]{.text-teal-400} to your component using the `useState` Hook React provides. Hooks are helper functions that lets you use some special features in React. [State]{.text-teal-400} updates based on [Interactivity]{.text-gradient}.
+You can add a [State]{.text-teal-400} to your component using the `useState` Hook React provides. Hooks are helper functions that let you use special features in React. [State]{.text-teal-400} updates based on [Interactivity]{.text-gradient}.
 
 </v-click>
 
@@ -132,21 +132,21 @@ name: Creating and Adding Event Handlers to JSX in React
 
 [Creating and Adding Event Handlers to JSX in React]{.text-gradient.text-4xl}
 
-React allows you add [event handlers]{.text-teal-400.italic} to JSX. Event handlers are functions we created to be triggered when a user interacts with a `Component` or a `JSX` element like clicking, hovering, focusing on a `button`.
+React allows you to add [event handlers]{.text-teal-400.italic} to JSX. Event handlers are functions we create to be triggered when a user interacts with a `Component` or a `JSX` element, such as by clicking, hovering over, or focusing on a `button`.
 
 <!-- prettier-ignore-start -->
 
 ```jsx {hide|*}
 function handleClick() {
-  console.log('Button clicked');
+  console.log('Button clicked')
 }
 
-<button onClick={handleClick}>Click me</button>
+;<button onClick={handleClick}>Click me</button>
 ```
 
 <span v-click>
 
-In the above codeblock, we created our [event handler]{.text-teal-400.italic} (`handleClick()`) and passed it to the `onClick` prop of the `button` element to console log 'Button clicked' when a user clicks the button.
+In the code block above, we created an [event handler]{.text-teal-400.italic} (`handleClick()`) and passed it to the `onClick` prop of the `button` element to log 'Button clicked' to the console when a user clicks the button.
 
 </span>
 
@@ -296,18 +296,14 @@ name: Passing Event Handlers as Props
 
 [Passing Event Handlers as Props]{.text-gradient.text-4xl}
 
-Built-in components like `<button>` only support built-in browser events like `onClick`. So in order to pass an [event handler]{.text-gradient.italic} as a prop with a desired name to a component, create a custom component and give their [event handlers]{.text-teal-400.italic} props specific names.
+Built-in components like `<button>` only support built-in browser events like `onClick`. So in order to pass an [event handler]{.text-gradient.italic} as a prop with a desired name to a component, create a custom component and give its [event handler]{.text-teal-400.italic} props specific names.
 
 <div flex gap-4>
 
 ```jsx {hide|*}
 // Custom component
 function ToggleSwitch({ onToggle }) {
-  return (
-    <button onClick={onToggle}>
-      Toggle
-    </button>
-  );
+  return <button onClick={onToggle}>Toggle</button>
 }
 ```
 

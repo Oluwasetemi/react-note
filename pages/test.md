@@ -66,7 +66,6 @@ Unit testing verifies that individual parts of the application (e.g., components
 
 Vitest provides `the test runner and assertions`, while React Testing Library `enhances it` by rendering components into a real DOM and exposing user-facing queries like `getByRole`, `getByText`, and `getByTestId`.
 
-
 ### Setup (4 steps)
 
 1. Install dependencies → `npm install --save-dev vitest @testing-library/react @testing-library/jest-dom jsdom`
@@ -92,7 +91,7 @@ The Counter component below includes a button to increment a displayed count val
 
 vite.config.js
 
-```js  {lineNumbers: true}
+```js {lineNumbers: true}
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
@@ -126,9 +125,7 @@ const Counter = () => {
   return (
     <div>
       <h1 data-testid="count">{count}</h1>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   )
 }
@@ -209,14 +206,14 @@ autoLoad: true
 hideInToc: true
 ---
 
-## [ End to End Testing - (E2E)]{.text-gradient.text-4xl}
+## [End-to-End Testing (E2E)]{.text-gradient.text-4xl}
 
 End-to-End (E2E) testing verifies the entire application flow, simulating real-world user interactions and ensuring that everything works as expected from start to finish. Unlike unit or integration tests that focus on isolated components or their interactions, `E2E tests cover full workflows and validate the complete system`, including interactions with external services (APIs, databases, etc.).
 
 It verifies that:
 
 - The application functions correctly when accessed by a user.
-- Different components work together as intended, from the frontend to backend.
+- Different components work together as intended, from the frontend to the backend.
 - There are no broken links, errors, or unexpected behaviors in the user experience.
 
 💡In an E2E test for a TodoApp, you would verify that a user can open the app, add a task, see the task appear in the list, and either complete or delete the task.

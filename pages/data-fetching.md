@@ -25,7 +25,7 @@ transition: slide-down
 
 # [Fetching Data with "fetch" and "axios"]{.text-gradient}
 
-[Data Fetching]{.text-teal-400} is one of the key aspect of coding. Often times, we would want to fetch data from an external library or database by consuming APIs connecting us to the backend where the data are stored. There would also be a need where you want to send to the database instead, or update it. This process of sending and/or receiving data from an external or backend database is termed as [Data Fetching]{.text-teal-400.italic}.
+[Data Fetching]{.text-teal-400} is one of the key aspects of coding. Often, we want to fetch data from an external service or database by consuming APIs that connect us to the backend where the data is stored. We may also need to send data to the database or update it. This process of sending and/or receiving data from an external service or backend database is called [Data Fetching]{.text-teal-400.italic}.
 
 <v-click>
 
@@ -54,14 +54,14 @@ transition: slide-left
 
 # [Using the fetch() API]{.text-gradient}
 
-To use the `fetch()` API in {React}, you need to properly manage state to avoid infinite API calls and simply call the `fetch()` in a promise or an async/await function, passing the methods, header, authorization, etc, if needed. Below are simply performing a `GET` request without error handling which is addressed in subsequent slides. If you will use `useEffect` it should be done like this but it is generally discouraged in favour of `swr` or `@tanstack/react-query`.
+To use the `fetch()` API in {React}, properly manage state to avoid infinite API calls. Call `fetch()` with promises or async/await, passing the method, headers, authorization, and other options as needed. The example below performs a simple `GET` request without error handling, which is addressed in subsequent slides. If you use `useEffect`, it should be done like this, although libraries such as `swr` or `@tanstack/react-query` are generally preferred.
 
 ```jsx {monaco} {lineNumbers: true, height: '20rem'}
 const FetchDataExample = () => {
   const [data, setData] = React.useState(null)
 
   React.useEffect(() => {
-    let ignore = false;
+    let ignore = false
 
     const fetchData = async () => {
       const response = await fetch('https://api.oluwasetemi.dev/posts')
@@ -77,7 +77,7 @@ const FetchDataExample = () => {
     }
 
     return () => {
-      ignore = true;
+      ignore = true
     }
   }, [])
 
@@ -110,15 +110,13 @@ const AxiosDataExample = () => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    let ignore = false;
+    let ignore = false
 
-    axios
-      .get('https://api.oluwasetemi.dev/posts')
-      .then((response) => {
-          if (!ignore) {
-            setData(response.data)
-          }
-        })
+    axios.get('https://api.oluwasetemi.dev/posts').then((response) => {
+      if (!ignore) {
+        setData(response.data)
+      }
+    })
 
     return () => {
       ignore = true
@@ -144,9 +142,9 @@ hideInToc: true
 transition: fade
 ---
 
-# [Handling Asynchronous Data and Promise]{.text-gradient}
+# [Handling Asynchronous Data and Promises]{.text-gradient}
 
-In the previous slides a hint of asynchronous fetching was seen. Let's talk more on how to properly handle asynchronous fetching.
+The previous slides introduced asynchronous fetching. Let's discuss how to handle it properly.
 
 <v-click>
 
@@ -168,7 +166,7 @@ In the previous slides a hint of asynchronous fetching was seen. Let's talk more
 ```jsx
 // Using async/await
 useEffect(() => {
-  let ignore = false;
+  let ignore = false
 
   const fetchData = async () => {
     try {
@@ -185,7 +183,7 @@ useEffect(() => {
   }
 
   return () => {
-    ignore = true;
+    ignore = true
   }
 }, [])
 ```
@@ -193,18 +191,22 @@ useEffect(() => {
 ```jsx
 // Using .then()
 useEffect(() => {
-  let mounted = true;
+  let mounted = true
 
   fetch('https://api.oluwasetemi.dev/posts')
     .then((response) => {
       if (!response.ok) throw new Error('Network response was not ok')
       return response.json()
     })
-    .then((jsonData) => { if (mounted) setData(jsonData) })
-    .catch((err) => { if (mounted) setError(err.message) })
+    .then((jsonData) => {
+      if (mounted) setData(jsonData)
+    })
+    .catch((err) => {
+      if (mounted) setError(err.message)
+    })
 
   return () => {
-    mounted = false;
+    mounted = false
   }
 }, [])
 ```
@@ -214,7 +216,7 @@ useEffect(() => {
 
 <div v-click="7">
 
-The `async/await` is a modern syntax that makes asynchronous code look synchronous, improving readability.
+`async/await` is modern syntax that makes asynchronous code look synchronous, improving readability.
 
 </div>
 
@@ -249,7 +251,7 @@ const [loading, setLoading] = useState(true)
 const [error, setError] = useState(null)
 
 useEffect(() => {
-  let ignore = false;
+  let ignore = false
 
   const fetchData = async () => {
     setLoading(true) // Start loading
@@ -269,7 +271,7 @@ useEffect(() => {
   }
 
   return () => {
-    ignore = true;
+    ignore = true
   }
 }, [])
 
@@ -301,16 +303,15 @@ transition: slide-up
 - Install: `npm/pnpm/bun install swr`
 - Core hook: `useSWR(key, fetcher, options)` for GET + revalidation
 - Mutations: `useSWRMutation(key, mutator, { onSuccess: () => mutate() })`
-- Subscription-style updates: `revalidateOnFocus`, `revalidateOnReconnect`, `refreshInterval`, and manual `mutate`. `useSWRSubscription` - is a React hook that allows subscribing to real-time data sources with SWR.
+- Subscription-style updates: `revalidateOnFocus`, `revalidateOnReconnect`, `refreshInterval`, and manual `mutate`. `useSWRSubscription` is a React hook that allows you to subscribe to real-time data sources with SWR.
 - You can enable the suspense option to use SWR with React Suspense. `{suspense: true}`
-- Pagination support(normal and infinite loading) and Prefetching of Data.
+- Pagination support (normal and infinite loading) and data prefetching.
 
 </v-clicks>
 
 ---
 hideInToc: true
 ---
-
 
 ```jsx {monaco} {lineNumbers: true, height: '24rem'}
 import useSWR from 'swr'
@@ -337,10 +338,10 @@ function Comments() {
     'https://api.oluwasetemi.dev/comments',
     fetcher,
     {
-      revalidateOnFocus: true,      // subscribe on focus
-      revalidateOnReconnect: true,  // subscribe on reconnect
-      refreshInterval: 0,           // set >0 for polling subscription
-    }
+      revalidateOnFocus: true, // subscribe on focus
+      revalidateOnReconnect: true, // subscribe on reconnect
+      refreshInterval: 0, // set >0 for polling subscription
+    },
   )
 
   const { trigger, isMutating } = useSWRMutation(
@@ -348,7 +349,7 @@ function Comments() {
     postComment,
     {
       onSuccess: () => mutate(), // revalidate after mutation
-    }
+    },
   )
 
   if (isLoading) return <p>Loading...</p>
@@ -372,7 +373,6 @@ function Comments() {
   )
 }
 ```
-
 
 ---
 hideInToc: true
@@ -439,7 +439,7 @@ export default App
 ---
 hideInToc: true
 layout: iframe-lazy
-name: Using Tanstack Query
+name: Using TanStack Query
 url: https://stackblitz.com/edit/github-zvtcsu?ctl=1&embed=1&file=src%2Findex.tsx&hideExplorer=1
 autoLoad: true
 ---
@@ -461,6 +461,7 @@ class: text-sm
 <div>
 
 **Key Benefits:**
+
 - Declarative loading states - no manual `isLoading` flags
 - Coordinates multiple async operations
 - Prevents "waterfall" loading patterns
@@ -482,6 +483,7 @@ class: text-sm
 </div>
 
 **What can trigger Suspense?**
+
 - Data fetching with Suspense-enabled frameworks (React Query with `useSuspenseQuery`, SWR with `{suspense: true}`)
 - Lazy-loaded components with `React.lazy()`
 - Reading from Suspense-enabled resources
@@ -580,9 +582,7 @@ const Contact = lazy(() => import('./pages/Contact'))
 ```jsx
 import { lazy, Suspense } from 'react'
 
-const HeavyComponent = lazy(() =>
-  import('./HeavyComponent')
-)
+const HeavyComponent = lazy(() => import('./HeavyComponent'))
 
 function App() {
   return (
@@ -599,8 +599,6 @@ function App() {
 
 </div>
 
-
-
 ---
 hideInToc: true
 ---
@@ -616,11 +614,13 @@ Error Boundaries catch JavaScript errors anywhere in the component tree, log the
 <div>
 
 **What Error Boundaries catch:**
+
 - Errors during rendering
 - Errors in lifecycle methods
 - Errors in constructors of components below them
 
 **What they DON'T catch:**
+
 - Event handlers (use try/catch instead)
 - Async code (setTimeout, promises)
 - Server-side rendering errors
@@ -669,11 +669,9 @@ The `react-error-boundary` library provides a simpler, hook-based way to handle 
 **Installation:**
 
 ````md magic-move
-
 ```bash
 npm install react-error-boundary
 ```
-
 
 ```jsx
 import { ErrorBoundary } from 'react-error-boundary'
@@ -707,7 +705,6 @@ function App() {
   )
 }
 ```
-
 ````
 
 **Docs:** [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
@@ -797,7 +794,7 @@ hideInToc: true
 # [SSR Example with renderToString]{.text-gradient}
 
 ```jsx {monaco} {lineNumbers: true, height: '22rem'}
-// server.js (Node.js + Express(Hono, Fasify, Nest))
+// server.js (Node.js + Express, Hono, Fastify, or Nest)
 import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -867,8 +864,8 @@ app.get('*', (req, res) => {
       },
       onError(error) {
         console.error(error)
-      }
-    }
+      },
+    },
   )
 })
 ```
@@ -890,12 +887,12 @@ RSC enables components to run **only on the server**, reducing bundle size and e
 
 **Key Differences:**
 
-| **Server Components** | **Client Components** |
-|---|---|
-| Run only on server | Run on client (& server during SSR) |
-| Can directly access databases/APIs | Must fetch via API endpoints |
-| Zero JavaScript sent to client | JavaScript bundle sent to client |
-| Cannot use hooks/state/effects | Can use all React features & `use client` |
+| **Server Components**              | **Client Components**                     |
+| ---------------------------------- | ----------------------------------------- |
+| Run only on server                 | Run on client (& server during SSR)       |
+| Can directly access databases/APIs | Must fetch via API endpoints              |
+| Zero JavaScript sent to client     | JavaScript bundle sent to client          |
+| Cannot use hooks/state/effects     | Can use all React features & `use client` |
 
 </div>
 
@@ -937,7 +934,7 @@ hideInToc: true
 
 ```jsx {monaco} {lineNumbers: true, height: '22rem'}
 // app/page.jsx (Server Component - default in Next.js)
-import { db } from '@/lib/db'  // Direct database access!
+import { db } from '@/lib/db' // Direct database access!
 
 export default async function PostsPage() {
   // Fetch data directly on the server
@@ -946,7 +943,7 @@ export default async function PostsPage() {
   return (
     <div>
       <h1>Blog Posts</h1>
-      {posts.map(post => (
+      {posts.map((post) => (
         <article key={post.id}>
           <h2>{post.title}</h2>
           <p>{post.excerpt}</p>
@@ -959,18 +956,14 @@ export default async function PostsPage() {
 
 ```jsx
 // app/like-button.jsx (Client Component)
-'use client'  // Mark as client component
+'use client' // Mark as client component
 
 import { useState } from 'react'
 
 export default function LikeButton() {
   const [likes, setLikes] = useState(0)
 
-  return (
-    <button onClick={() => setLikes(likes + 1)}>
-      ❤️ {likes}
-    </button>
-  )
+  return <button onClick={() => setLikes(likes + 1)}>❤️ {likes}</button>
 }
 ```
 
@@ -992,7 +985,7 @@ Server Actions let you call server-side functions directly from client component
 
 ```jsx
 // app/actions.js
-'use server'  // Mark file as containing server actions
+'use server' // Mark file as containing server actions
 
 import { db } from '@/lib/db'
 
@@ -1001,13 +994,12 @@ export async function createPost(formData) {
   const content = formData.get('content')
 
   const post = await db.post.create({
-    data: { title, content }
+    data: { title, content },
   })
 
   return { success: true, post }
 }
 ```
-
 
 ```jsx
 'use client'
@@ -1045,10 +1037,9 @@ import { useActionState } from 'react'
 import { createPost } from './actions'
 
 export default function CreatePostForm() {
-  const [state, formAction, isPending] = useActionState(
-    createPost,
-    { message: '' }
-  )
+  const [state, formAction, isPending] = useActionState(createPost, {
+    message: '',
+  })
 
   return (
     <form action={formAction}>
@@ -1091,14 +1082,14 @@ Mix Server and Client Components for optimal performance.
 ```jsx {monaco} {lineNumbers: true, height: '20rem'}
 // app/posts/page.jsx (Server Component)
 import { db } from '@/lib/db'
-import LikeButton from './LikeButton'  // Client Component
+import LikeButton from './LikeButton' // Client Component
 
 export default async function PostsPage() {
-  const posts = await db.post.findMany()  // Server-side query
+  const posts = await db.post.findMany() // Server-side query
 
   return (
     <div>
-      {posts.map(post => (
+      {posts.map((post) => (
         <article key={post.id}>
           <h2>{post.title}</h2>
           <p>{post.content}</p>
@@ -1111,12 +1102,12 @@ export default async function PostsPage() {
 }
 ```
 
-
 <div>
 
 **Pattern:** Server Component (data fetching) → Client Component (interactivity)
 
 **Docs:**
+
 - [React Server Components](https://react.dev/reference/rsc/server-components)
 - [Server Actions](https://react.dev/reference/rsc/server-actions)
 - [Next.js App Router](https://nextjs.org/docs/app)
@@ -1128,7 +1119,7 @@ export default async function PostsPage() {
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-Build a simple `Blog Application` with `React Router` and `Tanstack Router` with Data Fetching Implemented using `Tanstack Query` or `SWR`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page` wrapped in a good card like UI. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading. Implement creating of new blogpost. Use `[https://api.oluwasetemi.dev](https://api.oluwasetemi.dev)` as the API and check the documentation.
+Build a simple `Blog Application` with `React Router` and `TanStack Router`, with data fetching implemented using `TanStack Query` or `SWR`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page` wrapped in a well-designed card UI. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement an Error Boundary and Suspense with lazy loading. Implement the creation of new blog posts. Use `[https://api.oluwasetemi.dev](https://api.oluwasetemi.dev)` as the API and check the documentation.
 
 ---
 hideInToc: true

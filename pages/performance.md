@@ -47,7 +47,7 @@ const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
 
 <v-clicks class="text-sm">
 
-- `Component`: This is the component that you want to memoize. The memo takes any valid component and return a memoized version of it. It does not modify this component.
+- `Component`: This is the component that you want to memoize. `memo` takes any valid component and returns a memoized version of it. It does not modify this component.
 - optional `arePropsEqual`: This is a function that takes two arguments: the component’s previous props, and its new props. It returns true if the old and new props are identical, else it should return false. Usually, this function is optional. By default, React will compare each prop with `Object.is`.
 
 </v-clicks>
@@ -97,10 +97,6 @@ transition: slide-down
 layout: iframe-lazy
 url: https://codesandbox.io/embed/rqngm9
 ---
-
-
-
-
 
 ---
 hideInToc: true
@@ -162,7 +158,7 @@ transition: slide-down
 
 # [Optimizing Component Renders with useMemo]{.text-gradient}
 
-`useMemo()` is a hook that memoizes the result of an expensive computation and only recalculates it when one of its dependencies changes. This can prevent costly calculations during re-renders. `useMemo()` takes a two parameters; a pure function calculating the value that you want to cache, and a dependency array [] that contains the reactive values referenced inside the calculating function.
+`useMemo()` is a hook that memoizes the result of an expensive computation and only recalculates it when one of its dependencies changes. This can prevent costly calculations during re-renders. `useMemo()` takes two parameters; a pure function calculating the value that you want to cache, and a dependency array [] that contains the reactive values referenced inside the calculating function.
 
 ```jsx {hide|*}
 const cachedValue = useMemo(calculateValue, dependencies)
@@ -193,13 +189,13 @@ transition: slide-up
 
 # [Usage]{.text-gradient} of `useMemo(calculateValue, [dep])`
 
-[Skipping Expensive Logic Re-calculation:]{.text-teal-400} On the first render, `useMemo` returns the result of calling calculateValue with no arguments. During next renders, if the dependency values did not change, it will return an already stored value from the last render, or call calculateValue again if the dependency values has changed, and return the result that calculateValue has returned.
+[Skipping Expensive Logic Re-calculation:]{.text-teal-400} On the first render, `useMemo` returns the result of calling calculateValue with no arguments. During next renders, if the dependency values did not change, it will return an already stored value from the last render, or call calculateValue again if the dependency values have changed, and return the result that calculateValue has returned.
 
 <v-click>
 
 <div class="text-sm">
 
-By default, {React} will re-render the entire components every time it re-runs, this includes re-running every logic. In the below code transitions, we see how we can apply `useMemo` to skip re-doing some logic calculations when {React} re-renders by using the cached values from `useMemo` if the dependencies are unchanged.
+By default, {React} will re-render the entire component whenever it runs again; this includes rerunning all of its logic. In the code transitions below, we see how we can apply `useMemo` to skip re-doing some logic calculations when {React} re-renders by using the cached values from `useMemo` if the dependencies are unchanged.
 
 </div>
 
@@ -230,7 +226,7 @@ function TodoList({ todos, tab, theme }) {
 
 <v-click at='3' style='font-size: 8px'>
 
-This ability of caching a return value is known as [memoization]{.text-gradient.italic} in {React}. The sole purpose of `useMemo` is for [Performance Optimization]{.text-teal-italic}. If your code does ot work without it, find and fix the bug first. After then you may add `useMemo` to improve performance.
+This ability of caching a return value is known as [memoization]{.text-gradient.italic} in {React}. The sole purpose of `useMemo` is for [Performance Optimization]{.text-teal-italic}. If your code does not work without it, find and fix the bug first. After then you may add `useMemo` to improve performance.
 
 </v-click>
 
@@ -245,7 +241,7 @@ transition: slide-up
 
 <div>
 
-[Skipping Component Re-rendering:]{.text-teal-400} In addition to caching the values of logics to avoid re-calculation every time a re-render occurs, `useMemo()` can also help to [optimize]{.text-teal-400} the re-rendering of child components with the aid of `memo()`.
+[Skipping Component Re-rendering:]{.text-teal-400} In addition to caching the results of logic to avoid recalculation every time a re-render occurs, `useMemo()` can also help to [optimize]{.text-teal-400} the re-rendering of child components with the aid of `memo()`.
 
 <v-clicks>
 
@@ -332,7 +328,6 @@ Ensure the preview tab is loaded. Open dev tool to see the console when you clic
 layout: iframe-lazy
 url: https://codesandbox.io/embed/5mwcd8
 ---
-
 
 ---
 hideInToc: true
@@ -585,7 +580,7 @@ hideInToc: true
 transition: slide-up
 ---
 
-# [Displaying a fallback UI with React `<Suspence>`]{.text-gradient}
+# [Displaying a Fallback UI with React `<Suspense>`]{.text-gradient}
 
 `<Suspense>` allows you to display a fallback until its children have finished loading.
 
@@ -672,7 +667,7 @@ export default function ArtistPage({ artist }) {
       <h1>{artist.name}</h1>
       <Suspense fallback={<Loading />}>
         <Biography artistId={artist.id} />
-        <Panel> <Albums artistId={artist.id} /> </Panel>
+        <Panel><Albums artistId={artist.id} /></Panel>
       </Suspense>
     </>
   )
@@ -693,7 +688,7 @@ export default function ArtistPage({ artist }) {
       <Suspense fallback={<BigSpinner />}>
         <Biography artistId={artist.id} />
         <Suspense fallback={<p>Loader 2...</p>}>
-          <Panel> <Albums artistId={artist.id} /> </Panel>
+          <Panel><Albums artistId={artist.id} /></Panel>
         </Suspense>
       </Suspense>
     </>

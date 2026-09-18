@@ -14,7 +14,7 @@ hideInToc: true
 - <a @click="$nav.go($nav.currentPage + 2)">What is React?</a>
 - <a @click="$nav.go($nav.currentPage + 4)">React vs other frameworks (Vue)</a>
 - <a @click="$nav.go($nav.currentPage + 7)">Why React?</a>
-- <a @click="$nav.go($nav.currentPage + 8)">From pure javascript to React</a>
+- <a @click="$nav.go($nav.currentPage + 8)">From Plain JavaScript to React</a>
 - <a @click="$nav.go($nav.currentPage + 16)">Setting up Development Environment (Vite)</a>
 
 ---
@@ -31,7 +31,7 @@ Javascript libraries and frameworks are tools that help developers build applica
 
 **Library** is a collection of pre-written code that developers can call upon to perform specific tasks. Libraries offer various functionalities, but you are in control of how and when to use them. {React} is often considered a library because it focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. {Vue}, {Angular}, and {Svelte} are other examples of libraries. {jQuery} is another example of a library that provides functionalities like DOM manipulation, event handling, and AJAX calls.
 
-**Framework** A framework is a more opinionated structure or skeleton for building applications. It typically provides everything needed (like a routing system, data management, etc.) and controls the flow of the application. Although {Nextjs} uses {React}, it is considered a framework because it provides a predefined structure for building applications, including file-based routing, server-side rendering, and static site generation. {Nuxt} is another example of a framework that uses {Vue}.
+**Framework**: A framework is a more opinionated structure or skeleton for building applications. It typically provides everything needed (like a routing system, data management, etc.) and controls the flow of the application. Although {Next.js} uses {React}, it is considered a framework because it provides a predefined structure for building applications, including file-based routing, server-side rendering, and static site generation. {Nuxt} is another example of a framework that uses {Vue}.
 
 </v-clicks>
 
@@ -87,7 +87,7 @@ Both libraries have their strengths and weaknesses, and the choice between them 
 
 <v-clicks>
 
-- **Learning Curve**: {React} has a steeper learning curve compared to Vue because it requires developers to learn JSX, hooks, and other concepts. {Vue}, on the other hand, is easier to learn because it uses a template-based syntax that is similar to HTML even though it has composables and support JSX as well.
+- **Learning Curve**: {React} has a steeper learning curve compared to Vue because it requires developers to learn JSX, hooks, and other concepts. {Vue}, on the other hand, is easier to learn because it uses a template-based syntax that is similar to HTML, although it also has composables and supports JSX.
 
 - **Performance**: {React} uses a virtual DOM to improve performance by updating only the parts of the UI that have changed. Vue also uses a virtual DOM but has a more optimized reactivity system that can update the UI more efficiently especially with its vapor rendering.
 
@@ -174,13 +174,13 @@ hideInToc: true
 
 <v-clicks>
 
-- **Simple and Less opinionated** : {React} is a lightweight library that focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. This makes it easier to learn and use compared to other libraries and frameworks.
+- **Simple and Less Opinionated**: {React} is a lightweight library that focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. This makes it easier to learn and use compared to other libraries and frameworks.
 
-- **Popular** : It has a wide spread adoption and a large community of developers and companies that contribute to its development and maintenance. This means that there are plenty of resources available for learning {React} and getting help when needed. Jobs are also available for {React} developers.
+- **Popular**: It has widespread adoption and a large community of developers and companies that contribute to its development and maintenance. This means that there are plenty of resources available for learning {React} and getting help when needed. Jobs are also available for {React} developers.
 
-- **Performance** : {React} uses a virtual DOM to improve performance by updating only the parts of the UI that have changed. This makes {React} faster and more efficient than other libraries and frameworks. If its becomes slow then its on you the developer.
+- **Performance**: {React} uses a virtual DOM to improve performance by updating only the parts of the UI that have changed. This makes {React} faster and more efficient than other libraries and frameworks. If it becomes slow, then it's up to you, the developer, to optimize it.
 
-- **Flexibility** : {React} is flexible and allows developers to build applications the way they want.
+- **Flexibility**: {React} is flexible and allows developers to build applications the way they want.
 
 </v-clicks>
 
@@ -193,38 +193,40 @@ hideInToc: true
 ```html {monaco-run} { lines: true, height: '18.5em', autorun: false}
 <div id="makeElemSample"></div>
 <script>
-const makeElem = (elemType, props, children) => {
-  const elem = document.createElement(elemType)
+  const makeElem = (elemType, props, children) => {
+    const elem = document.createElement(elemType)
 
-  if (props) {
-    for (const [key, value] of Object.entries(props)) {
-      if (key === 'onclick' && props['once']) {
-        elem.addEventListener('click', value, { once: true })
-      } else {
-        elem[key] = value
+    if (props) {
+      for (const [key, value] of Object.entries(props)) {
+        if (key === 'onclick' && props['once']) {
+          elem.addEventListener('click', value, { once: true })
+        } else {
+          elem[key] = value
+        }
       }
     }
+
+    if (children) {
+      elem.prepend(...children)
+    }
+
+    return elem
   }
 
-  if (children) {
-    elem.prepend(...children)
+  const createTodo = (todo) => {
+    const text = makeElem(
+      'span',
+      { style: 'flex:1;', ondblclick: () => console.log('edit') },
+      [todo.text],
+    )
+    const x = makeElem('button', { onclick: () => console.log('remove') }, [
+      'X',
+    ])
+
+    const item = makeElem('li', { style: 'display:flex;' }, [text, x])
+    return item
   }
-
-  return elem
-}
-
-const createTodo = (todo) => {
-  const text = makeElem(
-    'span',
-    { style: 'flex:1;', ondblclick: () => console.log('edit') },
-    [todo.text],
-  )
-  const x = makeElem('button', { onclick: () => console.log('remove') }, ['X'])
-
-  const item = makeElem('li', { style: 'display:flex;' }, [text, x])
-  return item
-}
-document.body.append(createTodo({ text: 'Hello World' }))
+  document.body.append(createTodo({ text: 'Hello World' }))
 </script>
 ```
 
@@ -336,7 +338,7 @@ mk('div', { id: 'app' }, [
 ```
 
 ```js
-// extract a separate store for the ui amd state
+// extract a separate store for the UI and state
 let ui = {}
 let state = { id: 0, todos: [] }
 
@@ -390,7 +392,7 @@ function app() {
 ```
 
 ```js
-// we need to create a edit, remove and add function
+// we need to create edit, remove, and add functions
 function add(e) {
   e.preventDefault()
 
@@ -793,7 +795,7 @@ hideInToc: true
 
 Let us talk about build tools, they are tools that help developers build and deploy applications.
 
-They automate the process of compiling, bundling, and optimizing code. Some popular build tools include {webpack}, {turporepo}, {Parcel}, and Vite({Rolldown}, {Rollup}, {esbuild}, {OXC}), and {Rspack}.
+They automate the process of compiling, bundling, and optimizing code. Some popular build tools include {webpack}, {Turborepo}, {Parcel}, Vite ({Rolldown}, {Rollup}, {esbuild}, {OXC}), and {Rspack}.
 
 {Vite} is a build tool that is designed to be fast and lightweight. It uses ES modules to improve performance and provides a zero-config setup for building modern web applications. {Vite} supports {React}, {Vue}, and other frameworks and libraries.
 
@@ -804,7 +806,7 @@ To set up a development environment with {Vite}, you can use the following steps
 ````md magic-move
 ```bash
 npm install -g create-vite # if you want to have it as a global cli - use create-vite instead of npx create-vite
-npx create-vite # bunx, pnpm dlx can be used instead npx
+npx create-vite # bunx or pnpm dlx can be used instead of npx
 ```
 
 ```bash
@@ -835,7 +837,7 @@ hideInToc: true
 name: Production with vite or setting up everything from scratch
 ---
 
-3. Start the development server and Open your browser and navigate to `http://localhost:5173`.
+3. Start the development server, open your browser, and navigate to `http://localhost:5173`.
 
 ````md magic-move
 ```bash
@@ -855,7 +857,7 @@ yarn run dev
 ```
 ````
 
-4. Build the project for production and Deploy the project to a hosting service like {Netlify}, {Vercel}, or {GitHub} Pages.
+4. Build the project for production and deploy it to a hosting service like {Netlify}, {Vercel}, or {GitHub} Pages.
 
 ````md magic-move
 ```bash
@@ -973,12 +975,12 @@ import { createRoot } from 'react-dom/client'
 // }
 
 function App() {
-  return React.createElement('h1', null, 'Hello World');
+  return React.createElement('h1', null, 'Hello World')
 }
 
-const root = createRoot(document.getElementById('app'));
+const root = createRoot(document.getElementById('app'))
 
-root.render(<App />);
+root.render(<App />)
 ```
 ````
 
@@ -1004,7 +1006,7 @@ export default defineConfig({
 })
 ```
 
-8. Setup the build script in the `package.json` file add the following to the file:
+8. Set up the build script by adding the following to the `package.json` file:
 
 ```json
 {
@@ -1020,13 +1022,13 @@ hideInToc: true
 name: Setting up everything from scratch 4
 ---
 
-9. Start the development server and Open your browser and navigate to `http://localhost:5173`.Use pnpm or bun or yarn.
+9. Start the development server, open your browser, and navigate to `http://localhost:5173`. You can also use pnpm, bun, or yarn.
 
 ```sh
 npm run dev
 ```
 
-10. Build the project for production and Deploy the project to a hosting service like {Netlify}, {Vercel}, or {GitHub} Pages.
+10. Build the project for production and deploy it to a hosting service like {Netlify}, {Vercel}, or {GitHub} Pages.
 
 ```sh
 npm run build

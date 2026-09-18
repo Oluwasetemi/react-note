@@ -11,7 +11,7 @@ const load = () => {
   isLoaded.value = true
 }
 
-const goBack = () => router.push('/')
+const goBack = () => router.push('/2')
 </script>
 <template>
   <div class="flex flex-col h-screen bg-[#0f0f0f] text-[#e5e5e5] font-fast">
@@ -59,4 +59,3 @@ const goBack = () => router.push('/')
     </div>
   </div>
 </template>
-

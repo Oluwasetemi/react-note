@@ -24,11 +24,11 @@ name: React Lifecycle
 
 # [React Lifecycle (Mount, Trigger, Render and Commit)]{.text-gradient}
 
-Components built in {React} passes through some stages before being displayed on the browser. These stages of rendering components are called [React Lifecycle]{.text-teal-400.italic}. Declarative approach to rendering is what {React} follows. Developers describes what the UI should look like in their code while {React} takes care of how the components are rendered on the screen.
+Components built in React pass through several stages before being displayed in the browser. These rendering stages are called the [React Lifecycle]{.text-teal-400.italic}. React follows a declarative approach to rendering: developers describe what the UI should look like, while React takes care of rendering the components on the screen.
 
 <v-click>
 
-{React} Components Rendering Stages:
+React Components Rendering Stages:
 
 </v-click>
 
@@ -44,7 +44,7 @@ Components built in {React} passes through some stages before being displayed on
 
 <v-click>
 
-This is the initial placement of components in Reacts Virtual DOM at the `createRoot` level. By this, we mean that {React} takes the components and creates a [snapshot]{.text-teal-400.italic} to populate actual Browser DOM nodes at the [FIRST]{.italic} rendering of the components.
+This is the initial placement of components in React's Virtual DOM at the `createRoot` level. By this, we mean that {React} takes the components and creates a [snapshot]{.text-teal-400.italic} to populate actual Browser DOM nodes at the [FIRST]{.italic} rendering of the components.
 
 </v-click>
 
@@ -72,7 +72,7 @@ name: Trigger
 
 <div flex gap-3>
 
-At this stage, React watches for [interactivity]{.text-gradient.italic} within mounted components so as to [trigger]{.text-teal-400.italic} updates. Undoubtedly, the only thing that can trigger a re-render in a React application is when there is a [State Change]{.text-gradient.italic}, and this change in state are caused by either automated or user [interactivity]{.text-gradient.italic} like clicking a button or setting a time interval for updates.
+At this stage, React watches for [interactivity]{.text-gradient.italic} within mounted components to [trigger]{.text-teal-400.italic} updates. A re-render in a React application can be triggered by a [State Change]{.text-gradient.italic}. These state changes can be caused by automated processes or user [interactivity]{.text-gradient.italic}, such as clicking a button or setting a time interval for updates.
 
 <img v-click w-80 h-45 mb-2 src="/lifecycle-trigger.png" alt="react trigger lifecycle" />
 
@@ -112,7 +112,7 @@ function getCurrentTime() {
 
 <div v-click w-80>
 
-In this example code, Only the time is being updated every second, not the entire application. This is why you can type on the input and the values don't refresh as the time is updated.
+In this example code, only the time is being updated every second, not the entire application. This is why you can type on the input and the values don't refresh as the time is updated.
 
 During a [trigger]{.text-gradient}, {React} checks to see what part of the component changed, and thus, re-renders only that part. In this case, time state is being updated with `setTime` within an interval.
 
@@ -130,7 +130,7 @@ name: Render
 
 <div flex gap-3>
 
-This is the stage where {React} calls the components to know what to display on the screen. At first trigger ([mount]{.text-teal-400}), {React} renders from the `root` which is the entire components. But during a [state change]{.text-gradient.italic} trigger, {React} searches for the part that changed and updates only that part as seen in the example code from previous slide.
+This is the stage where {React} calls the components to know what to display on the screen. At the first trigger ([mount]{.text-teal-400}), {React} renders from the `root`, which includes all the components. But during a [state change]{.text-gradient.italic} trigger, {React} searches for the part that changed and updates only that part as seen in the example code on the previous slide.
 
 <img w-80 h-45 mb-2 src="/lifecycle-render.png" alt="react render lifecycle" />
 
@@ -142,7 +142,7 @@ This is the stage where {React} calls the components to know what to display on 
 
 <div flex gap-3>
 
-{React} after rendering updates, [commits]{.text-teal-400.italic} them to the changes to actual DOM for us to see. During first trigger ([mount]{.text-teal-400}), [committing]{.text-teal-400.italic} changes is the same as appending the components to the DOM using the `appendChild()` API. While subsequent triggers due to [interactivity]{.text-gradient.italic} are committed to the UI based on the calculations of the part that actually changed and needs to be updated.
+After rendering updates, {React} [commits]{.text-teal-400.italic} the changes to the actual DOM for us to see. During the first trigger ([mount]{.text-teal-400}), [committing]{.text-teal-400.italic} changes is the same as appending the components to the DOM using the `appendChild()` API. While subsequent triggers due to [interactivity]{.text-gradient.italic} are committed to the UI based on the calculations of the part that actually changed and needs to be updated.
 
 <img w-80 h-45 mb-2 src="/lifecycle-commit.png" alt="react commit lifecycle" />
 
@@ -156,7 +156,7 @@ transition: slide-up
 name: React Lifecycle in Summary
 ---
 
-# [Lifecycle Summery]{.text-gradient}
+# [Lifecycle Summary]{.text-gradient}
 
 <div flex gap-4>
 
@@ -391,7 +391,7 @@ name: Rendering lists
 
 # [Rendering lists]{.text-gradient}
 
-Often times we would want to render a list of items from an array or a database. This is usually accomplished with the `li` element in `HTML`. Rendering a list from an array of items in {React} requires a careful procedure:
+Often, we want to render a list of items from an array or a database. This is usually accomplished with the `li` element in `HTML`. Rendering a list from an array of items in {React} requires a careful procedure:
 
 <div text-4>
 
@@ -418,7 +418,7 @@ Often times we would want to render a list of items from an array or a database.
 ```
 
 ```jsx
-// an array of people and job object
+// an array of people and job objects
 const people = [
   { name: "Alice Johnson", job:"Software Engineer" },
   { name: "Brian Thompson", job: "Graphic Designer" },
@@ -475,7 +475,7 @@ name: Why does a list need a key?
 
 # Why List [key]{.text-gradient}? Where to find a `key` value?
 
-A list `key` is a unique identifier that gives the list item a name in the DOM so as to precisely locate it when needed. Some suggestions of getting a unique `key` value include:
+A list `key` is a unique identifier that gives the list item a name in the DOM so as to precisely locate it when needed. Some suggestions for obtaining a unique `key` value include:
 
 <v-clicks>
 
@@ -504,7 +504,7 @@ name: Conditional rendering - if-else, ternary, && operator
 
 # [Conditional rendering - if-else, ternary, && operator]{.text-gradient}
 
-Sometime we want to trigger a [state change]{.text-teal-400} based on a certain condition in our application. When the stated condition is met, a specified part of our application gets rendered or re-rendered. This act is term [Conditional Rendering]{.text-gradient.italic}.
+Sometimes, we want to trigger a [state change]{.text-teal-400} based on a certain condition in our application. When that condition is met, a specified part of our application is rendered or re-rendered. This is called [Conditional Rendering]{.text-gradient.italic}.
 
 <span v-click>In {React}, we can render our `JSX` based on a condition in various ways which include:</span>
 
@@ -602,7 +602,7 @@ transition: slide-down
 
 <span text-4>
 
-We can assign `JSX` to a variable based on a condition. As we know in [JavaScript]{.text-gradient}, we can re-assign values to variables declared with the `let` keyword. In that regard, we can declare what we want to assign based on a condition, then use any conditional statement to re-assign value or `JSX` that would be rendered to the UI. We can also assign `JSX` directly for cleaner code when using conditional statement like the Ternary Operator.
+We can assign `JSX` to a variable based on a condition. As we know in [JavaScript]{.text-gradient}, we can re-assign values to variables declared with the `let` keyword. In that regard, we can declare what we want to assign based on a condition, then use any conditional statement to re-assign value or `JSX` that would be rendered to the UI. We can also assign `JSX` directly for cleaner code when using a conditional statement like the ternary operator.
 
 </span>
 

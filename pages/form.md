@@ -15,7 +15,7 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+6)">Form Controls</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">Form Validation </a>
 - <a @click="$slidev.nav.go($nav.currentPage+11)">React Hook Form</a>
-- <a @click="$slidev.nav.go($nav.currentPage+13)">Tanstack Form</a>
+- <a @click="$slidev.nav.go($nav.currentPage+13)">TanStack Form</a>
 - <a @click="$slidev.nav.go($nav.currentPage+17)">New Form Features and Updates in React 19</a>
 
 ---
@@ -29,7 +29,7 @@ Why are forms so important?
 <div  v-click class="flex gap-2">
 
 <div>
-Forms allow users to input and submit information. They enable users to perform essential tasks such as sharing data, completing actions, and providing feedback. Without forms, core functionalities on the web like logging in or signing up won't be possible. Forms are what <span class="text-teal-400">facilitates user interaction with the page </span>, enabling dynamic experiences.
+Forms allow users to input and submit information. They enable users to perform essential tasks such as sharing data, completing actions, and providing feedback. Without forms, core functionality on the web, such as logging in or signing up, would not be possible. Forms <span class="text-teal-400">facilitate user interaction with the page</span>, enabling dynamic experiences.
 
 The form 👉 here will submit then the page will refresh, but this is not what we want to happen. We want to prevent this default behavior and let `React control the form and its data`. Handling forms is about how you handle the data when it changes value or gets submitted.
 
@@ -70,7 +70,7 @@ name: Handling Form Inputs
 
 [Handling Form Inputs - Data Binding]{.text-gradient.text-4xl}
 
-When users interact with form elements (like inputs), it may trigger changes in the data and UI. This interaction is managed through data binding — how UI element reacts when the `data changes` and vice versa.
+When users interact with form elements (like inputs), it may trigger changes in the data and UI. This interaction is managed through data binding—how a UI element reacts when the `data changes` and vice versa.
 
 There are two types of data binding in React:
 
@@ -345,7 +345,7 @@ function EmailValidation() {
     e.preventDefault()
     if (!error) { console.log('Email submitted:', email) }
   }
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <input type="email" value={email} onChange={handleChange} placeholder="Enter your email" />
@@ -369,7 +369,7 @@ transition: slide-down
 
 <div mt-1 />
 
-Zod is a schema validation library that works well with `TypeScript` and `React`. Zod is particularly useful for validating data from forms thereby helping to catch errors early in the development process.
+Zod is a schema validation library that works well with `TypeScript` and `React`. Zod is particularly useful for validating form data, thereby helping to catch errors early in the development process.
 
 To use Zod in a React application, you'll first need to install it: `npm/pnpm install zod`
 
@@ -434,14 +434,14 @@ autoLoad: true
 ---
 hideInToc: true
 transition: slide-up
-name: Tanstack Form
+name: TanStack Form
 ---
 
-# Tanstack `<Form />`
+# TanStack `<Form />`
 
 TanStack Form is the ultimate solution for handling forms in web applications, providing a powerful and flexible approach to form management. Designed with first-class TypeScript support, headless UI components, and a framework-agnostic design, it streamlines form handling and ensures a seamless experience across various front-end frameworks.
 
-To use Tanstack Form in a React application, you'll first need to install it: `npm/pnpm/bun/yarn install @tanstack/react-form`
+To use TanStack Form in a React application, you'll first need to install it: `npm/pnpm/bun/yarn install @tanstack/react-form`
 
 - A Form Instance is an object that represents an individual form and provides methods and properties for working with the form.
 - A Form Field is a component that represents an individual field within a form. It provides methods and properties for managing the field's state, validation, and submission.
@@ -450,7 +450,7 @@ To use Tanstack Form in a React application, you'll first need to install it: `n
 ---
 hideInToc: true
 transition: slide-up
-name: Tanstack Form Example
+name: TanStack Form Example
 ---
 
 <div class="scrollable">
@@ -522,7 +522,7 @@ hideInToc: true
 transition: slide-up
 layout: iframe-lazy
 url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?ctl=1&embed=1&file=src%2Findex.jsx&hideExplorer=1
-name: Tanstack Form Example
+name: TanStack Form Example
 autoLoad: true
 ---
 
@@ -544,7 +544,10 @@ const userSchema = z.object({
 })
 
 function App() {
-  const form = useForm({ defaultValues: { age: 0 }, validators: { onChange: userSchema }, })
+  const form = useForm({
+    defaultValues: { age: 0 },
+    validators: { onChange: userSchema },
+  })
   return (
     <div>
       <form.Field
@@ -592,9 +595,9 @@ In previous React versions, handling form submissions typically involved <span c
 
 <v-click>
 
-Form Actions in React 19 introduce a more streamlined approach. They are a specialized implementation of `Server Actions` (actions in React 19 that allow any component to perform server-side operations directly) that focus specifically on handling form submissions. It allow developers to attach specific actions directly to form submissions <span class="text-teal-400">without needing intermediate API routes or external libraries</span>. This feature integrates form handling with server-side logic seamlessly, enabling simpler, more direct interactions with the server.
+Form Actions in React 19 introduce a more streamlined approach. They are a specialized implementation of `Server Actions` (actions in React 19 that allow any component to perform server-side operations directly) that focuses specifically on handling form submissions. They allow developers to attach specific actions directly to form submissions <span class="text-teal-400">without needing intermediate API routes or external libraries</span>. This feature integrates form handling with server-side logic seamlessly, enabling simpler, more direct interactions with the server.
 
-It simplify this process by allowing us to <span class="text-teal-400">handle submissions directly on the server side</span>, bypassing the need for an API route. Form actions make it easier to define and customize actions like saving, editing, or deleting data right in the form itself, making the handling of form logic more straightforward and efficient.
+They simplify this process by allowing us to <span class="text-teal-400">handle submissions directly on the server side</span>, bypassing the need for an API route. Form actions make it easier to define and customize actions like saving, editing, or deleting data right in the form itself, making the handling of form logic more straightforward and efficient.
 
 See how forms were handled before form actions and how they&apos;re handled using form actions 👉
 
@@ -617,9 +620,9 @@ name: Form Reset and Management
 
 `2. Form Reset and State Management`
 
-React 19 introduced improvements in managing form state and resetting forms, making it easier to <span class="text-teal-400">handle form data consistently and efficiently</span>. Previously, managing form reset behavior required explicit handling of state and additional code. The update make this process more efficient and straightforward by making form resets more predictable and easier to manage, reducing the need for extra code and ensuring a cleaner, more intuitive form experience.
+React 19 introduced improvements in managing form state and resetting forms, making it easier to <span class="text-teal-400">handle form data consistently and efficiently</span>. Previously, managing form reset behavior required explicit handling of state and additional code. The updates make this process more efficient and straightforward by making form resets more predictable and easier to manage, reducing the need for extra code and ensuring a cleaner, more intuitive form experience.
 
-Before React 19, form resetting was done by manually updating each field&apos;s state or setting all state variables back to their initial values. This approach could lead to <span class="text-teal-400">more verbose code and was prone to errors</span>, especially in large forms but in React 19, the entire form state is managed more easily. The approach is particularly useful with Form Actions or any forms that use server-side actions because it resets the form to its original state automatically, <span class="text-teal-400">without needing to define each field individually</span>.
+Before React 19, form resetting was done by manually updating each field&apos;s state or setting all state variables back to their initial values. This approach could lead to <span class="text-teal-400">more verbose code and was prone to errors</span>, especially in large forms. In React 19, the entire form state is managed more easily. The approach is particularly useful with Form Actions or any forms that use server-side actions because it resets the form to its original state automatically, <span class="text-teal-400">without needing to define each field individually</span>.
 
 Key Benefits of React 19's Streamlined Form Reset and State Management
 
@@ -647,10 +650,10 @@ name: Assignment(Form)
 
 Read more on <span class="text-teal-400 underline"><a href="https://zod.dev/">Zod</a></span> and <span class="text-teal-400 underline"> <a href="https://tanstack.com/form/latest">@tanstack/react-form</a></span>
 
-Create a form using `@tanstack/react-form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from Tanstack Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.
+Create a form using `@tanstack/react-form` that includes fields for name, age, and email. Utilize Zod to define a validation schema that ensures the <span class="text-teal-400 underline">name is a non-empty string</span>, the <span class="text-teal-400 underline">age is a positive integer</span>, and the <span class="text-teal-400 underline">email matches a valid email</span> format. Implement the form such that when the user submits it, any validation errors are displayed beneath the corresponding input fields, guiding the user to correct their entries. Use the useForm hook from TanStack Form to manage form state and error handling, and integrate `Zod's zodResolver` to link the validation schema with the form. Ensure that the form is `styled for clarity and usability`, enhancing the user experience during input validation.
 
 ---
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-Build a simple `Product Creation Application`. Build a simple form that will create a product using the [API](https://api.oluwasetemi.dev) product endpoint requirements. Add proper validation based on the API required fields. Use All the learning from the class teaching to guide you. A form library and a no form library version is required.
+Build a simple `Product Creation Application`. Build a simple form that will create a product using the [API](https://api.oluwasetemi.dev) product endpoint requirements. Add proper validation based on the API required fields. Use everything you learned in class to guide you. Both a form-library version and a version without a form library are required.

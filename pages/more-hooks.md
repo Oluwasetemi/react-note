@@ -23,7 +23,6 @@ hideInToc: true
 - <a @click="$slidev.nav.go($nav.currentPage+27)">useSyncExternalStore</a>
 - <a @click="$slidev.nav.go($nav.currentPage+29)">useEffectEvent</a>
 
-
 ---
 hideInToc: true
 transition: slide-down
@@ -116,13 +115,13 @@ const [state, dispatch] = useReducer(reducer, initialState, init?)
 
 The hook takes three parameters: a <span class="text-teal-400">reducer</span> function, an <span class="text-teal-400">initialState</span>, and an optional <span class="text-teal-400">init</span> function.
 
-The `reducer` is a function that specifies how the state is updated, structured as `(state, action) => newState` (React passes the current state and action to the reducer , which <span class="text-teal-400">calculates and returns the next state</span>. React then saves the new state, <span class="text-teal-400">re-renders your component</span> with it, and updates the UI accordingly).
+The `reducer` is a function that specifies how the state is updated, structured as `(state, action) => newState` (React passes the current state and action to the reducer, which <span class="text-teal-400">calculates and returns the next state</span>. React then saves the new state, <span class="text-teal-400">re-renders your component</span> with it, and updates the UI accordingly).
 
 The `initialState` is the starting value of the state.
 
 The optional `init` function allows you to compute the initial state, useful for heavy initialization logic.
 
-useReducer returns an array with two elements: `state` and `dispatch`. The state holds the current value, while dispatch is a function that lets you change state in response to interaction - you can call to send actions, update the state, and trigger a re-render. This makes useReducer ideal for managing complex state logic or when state transitions depend on the current state and actions.
+useReducer returns an array with two elements: `state` and `dispatch`. The state holds the current value, while dispatch is a function that lets you change state in response to an interaction—you can call it to send actions, update the state, and trigger a re-render. This makes useReducer ideal for managing complex state logic or when state transitions depend on the current state and actions.
 
 Use Cases: <span class="text-teal-400">Complex state logic</span> & <span class="text-teal-400">Centralized state management within a component</span>.
 
@@ -198,28 +197,28 @@ name: Context & Performance Hooks
 <!-- useContext -->
 <div class="space-y-3">
   <h2 class="text-l font-bold text-purple-600">useContext</h2>
-  
+
   <div class="bg-purple-50 p-3 rounded">
     <h3 class="font-semibold text-purple-800">Syntax</h3>
     <code class="text-xs">const value = useContext(SomeContext)</code>
   </div>
 
-  ```jsx
-  const ThemeContext = createContext();
-  
-  function App() {
-    return (
-      <ThemeContext.Provider value="dark">
-        <ThemedButton />
-      </ThemeContext.Provider>
-    );
-  }
-  
-  function ThemedButton() {
-    const theme = use(ThemeContext);
-    return <button className={theme}>Click me</button>;
-  }
-  ```
+```jsx
+const ThemeContext = createContext()
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <ThemedButton />
+    </ThemeContext.Provider>
+  )
+}
+
+function ThemedButton() {
+  const theme = use(ThemeContext)
+  return <button className={theme}>Click me</button>
+}
+```
 
   <div class="bg-white light:bg-black p-2 rounded text-xs text-black light:text-white">
     <strong>Use:</strong> Global state sharing without prop drilling.
@@ -229,25 +228,27 @@ name: Context & Performance Hooks
 <!-- useMemo -->
 <div class="space-y-3">
   <h2 class="text-l font-bold text-orange-600">useMemo</h2>
-  
+
   <div class="bg-orange-50 p-3 rounded">
     <h3 class="font-semibold text-orange-800">Syntax</h3>
     <code class="text-xs">const memoized = useMemo(() => fn(), [deps])</code>
   </div>
 
-  ```jsx
-  function ExpensiveComponent({ items, filter }) {
-    const filteredItems = useMemo(() => {
-      return items.filter(item => item.category === filter);
-    }, [items, filter]);
-    
-    return (
-      <div>
-        {filteredItems.map(item => <div key={item.id}>{item.name}</div>)}
-      </div>
-    );
-  }
-  ```
+```jsx
+function ExpensiveComponent({ items, filter }) {
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => item.category === filter)
+  }, [items, filter])
+
+  return (
+    <div>
+      {filteredItems.map((item) => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+    </div>
+  )
+}
+```
 
   <div class="bg-white light:bg-black p-2 rounded text-xs text-black light:text-white">
     <strong>Use:</strong> Memoize expensive calculations to prevent unnecessary re-computations.
@@ -302,7 +303,7 @@ function ThemeProvider({ children }) {
 }
 
 function ThemedComponent() {
-  const theme = use(ThemeContext); // replace with `use`
+  const theme = use(ThemeContext) // replace with `use`
   return (
     <div style={{ background: theme === 'dark' ? '#333' : '#fff' }}>
       Themed Component
@@ -333,27 +334,27 @@ name: Concurrent Features
 <!-- useTransition -->
 <div class="space-y-3">
   <h2 class="text-xs font-bold text-indigo-600">useTransition</h2>
-  
+
   <div class="bg-indigo-50 p-2 rounded">
     <code class="text-[12px]">const [isPending, startTransition] = useTransition()</code>
   </div>
 
-  ```jsx
-  function SearchApp() {
-    const [isPending, startTransition] = useTransition();
-    const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
-    
-    const handleSearch = (newQuery) => {
-      setQuery(newQuery);
-      startTransition(() => {
-        // Non-urgent update
-        setResults(expensiveSearch(newQuery));
-      });
-    };
-    return (...);
-  }
-  ```
+```jsx
+function SearchApp() {
+  const [isPending, startTransition] = useTransition();
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+
+  const handleSearch = (newQuery) => {
+    setQuery(newQuery);
+    startTransition(() => {
+      // Non-urgent update
+      setResults(expensiveSearch(newQuery));
+    });
+  };
+  return (...);
+}
+```
 
   <div class="bg-white light:bg-black bg-green-50 p-1 rounded text-xs text-black light:text-white">
     <strong>Use:</strong> Mark non-urgent updates to keep UI responsive.
@@ -363,28 +364,28 @@ name: Concurrent Features
 <!-- startTransition -->
 <div class="space-y-3">
   <h2 class="text-xl font-bold text-pink-600">startTransition</h2>
-  
+
   <div class="bg-pink-50 p-2 rounded">
     <code class="text-xs">startTransition(() => { /* update */ })</code>
   </div>
 
-  ```jsx
-  import { startTransition } from 'react';
-  
-  function FilterApp() {
-    const [filter, setFilter] = useState('');
-    const [filteredData, setFilteredData] = useState(data);
-    
-    const handleFilter = (newFilter) => {
-      setFilter(newFilter);
-      startTransition(() => {
-        // Expensive filtering operation
-        setFilteredData(data.filter(item => item.name.includes(newFilter) ));
-      });
-    };
-    return ();
-  }
-  ```
+```jsx
+import { startTransition } from 'react';
+
+function FilterApp() {
+  const [filter, setFilter] = useState('');
+  const [filteredData, setFilteredData] = useState(data);
+
+  const handleFilter = (newFilter) => {
+    setFilter(newFilter);
+    startTransition(() => {
+      // Expensive filtering operation
+      setFilteredData(data.filter(item => item.name.includes(newFilter) ));
+    });
+  };
+  return ();
+}
+```
 
   <div class="bg-white light:bg-black bg-blue-50 p-1 rounded text-xs text-black light:text-white">
     <strong>Use:</strong> Wrap expensive updates to prevent blocking.
@@ -469,7 +470,7 @@ Use useLayoutEffect when you need to measure DOM elements and apply layout chang
 ---
 hideInToc: true
 transition: slide-up
-name: useDeferredValue 
+name: useDeferredValue
 ---
 
 ## ✴ [useDeferredValue ]{.text-gradient.text-4xl}
@@ -482,7 +483,7 @@ Syntax
 const deferredValue = useDeferredValue(value)
 ```
 
-value: The original value to defer and it returns a deferred value that may lag behind the original during updates.
+`value` is the original value to defer. The hook returns a deferred value that may lag behind the original during updates.
 
 <v-clicks>
 
@@ -537,23 +538,21 @@ hideInToc: true
 transition: slide-up
 ---
 
-## `useActionState` 
+## `useActionState`
 
-Manages state for form actions and async operations. It provides pending state, error handling, and optimistic updates for form submissions and server actions. The was discussed in the previous chapter. 
+Manages state for form actions and async operations. It provides pending state, error handling, and optimistic updates for form submissions and server actions. This was discussed in the previous chapter.
 
-## `useFormStatus` 
+## `useFormStatus`
 
-Returns the status of form submissions, including whether a form is pending submission. This is particularly useful for showing loading states on submit buttons. The was discussed in the previous chapter.
+Returns the status of form submissions, including whether a form is pending submission. This is particularly useful for showing loading states on submit buttons. This was discussed in the previous chapter.
 
 ## `useOptimistic`
 
-Enables optimistic UI updates by allowing you to show the expected result of an action immediately, then reconciling with the actual server response when it arrives. Allows you to optimistically update the UI while an asynchronous operation is in progress. It shows the expected result immediately and automatically reverts if the operation fails.
+Enables optimistic UI updates by allowing you to show the expected result of an action immediately, then reconciling it with the actual server response when it arrives. You can optimistically update the UI while an asynchronous operation is in progress. It shows the expected result immediately and automatically reverts if the operation fails.
 
 ```jsx
-const [optimisticState, addOptimistic] = useOptimistic(state, updateFn);
+const [optimisticState, addOptimistic] = useOptimistic(state, updateFn)
 ```
-
-
 
 ---
 hideInToc: true
@@ -563,7 +562,7 @@ transition: slide-up
 ## More on `useOptimistic`
 
 ```jsx
-import { useOptimistic } from 'react';
+import { useOptimistic } from 'react'
 
 function AppContainer() {
   const [optimisticState, addOptimistic] = useOptimistic(
@@ -572,8 +571,8 @@ function AppContainer() {
     (currentState, optimisticValue) => {
       // merge and return new state
       // with optimistic value
-    }
-  );
+    },
+  )
 }
 ```
 
@@ -611,8 +610,7 @@ Custom Hooks are reusable functions that contain logic shared across multiple co
 - [UseForm](https://stackblitz.com/edit/vitejs-vite-fdk26g?file=useForm.js)
 - [UseFetch](https://stackblitz.com/edit/vitejs-vite-hyv9j2?file=src%2Fhooks%2FuseFetch.js)
 
-As a way to practice, create a custom hook named `useToggle` and `useCounter`.
-
+For practice, create custom hooks named `useToggle` and `useCounter`.
 
 ---
 hideInToc: true
@@ -620,12 +618,14 @@ transition: slide-up
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-fdk26g?ctl=1&embed=1&file=src%2Fhooks%2FuseForm.js
 ---
+
 ---
 hideInToc: true
 transition: slide-up
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hyv9j2?ctl=1&embed=1&file=src%2Fhooks%2FuseFetch.js
 ---
+
 ---
 hideInToc: true
 transition: slide-up
@@ -636,65 +636,58 @@ transition: slide-up
 ````md magic-move
 ```jsx
 function ToggleButton() {
-  const [isOn, setIsOn] = React.useState(false);
-  
-  const toggle = () => setIsOn(prev => !prev);
-  
-  return (
-    <button onClick={toggle}>
-      {isOn ? 'ON' : 'OFF'}
-    </button>
-  );
+  const [isOn, setIsOn] = React.useState(false)
+
+  const toggle = () => setIsOn((prev) => !prev)
+
+  return <button onClick={toggle}>{isOn ? 'ON' : 'OFF'}</button>
 }
 ```
 
 ```jsx
 function useToggle(initialValue = false) {
-  const [value, setValue] = React.useState(initialValue);
-  
-  const toggle = () => setValue(prev => !prev);
-  const setTrue = () => setValue(true);
-  const setFalse = () => setValue(false);
-  
-  return [value, { toggle, setTrue, setFalse }];
+  const [value, setValue] = React.useState(initialValue)
+
+  const toggle = () => setValue((prev) => !prev)
+  const setTrue = () => setValue(true)
+  const setFalse = () => setValue(false)
+
+  return [value, { toggle, setTrue, setFalse }]
 }
 
 function ToggleButton() {
-  const [isOn, { toggle }] = useToggle(false);
-  
-  return (
-    <button onClick={toggle}>
-      {isOn ? 'ON' : 'OFF'}
-    </button>
-  );
+  const [isOn, { toggle }] = useToggle(false)
+
+  return <button onClick={toggle}>{isOn ? 'ON' : 'OFF'}</button>
 }
 ```
 
 ```jsx
 function useToggle(initialValue = false) {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState(initialValue)
   const toggle = React.useCallback(() => {
-    setValue(prev => !prev);
-  }, []);
+    setValue((prev) => !prev)
+  }, [])
   const setTrue = React.useCallback(() => {
-    setValue(true);
-  }, []);
+    setValue(true)
+  }, [])
   const setFalse = React.useCallback(() => {
-    setValue(false);
-  }, []);
-  return [value, { toggle, setTrue, setFalse }];
+    setValue(false)
+  }, [])
+  return [value, { toggle, setTrue, setFalse }]
 }
 
 function ToggleButton() {
-  const [isOn, { toggle, setTrue, setFalse }] = useToggle(false);
-  
+  const [isOn, { toggle, setTrue, setFalse }] = useToggle(false)
+
   return (
     <div>
-      <button onClick={toggle}>Toggle</button> <button onClick={setTrue}>ON</button>
+      <button onClick={toggle}>Toggle</button>{' '}
+      <button onClick={setTrue}>ON</button>
       <button onClick={setFalse}>OFF</button>
       <span>Status: {isOn ? 'ON' : 'OFF'}</span>
     </div>
-  );
+  )
 }
 ```
 ````
@@ -709,12 +702,12 @@ transition: slide-up
 ````md magic-move
 ```jsx
 function Counter() {
-  const [count, setCount] = React.useState(0);
-  
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
-  const reset = () => setCount(0);
-  
+  const [count, setCount] = React.useState(0)
+
+  const increment = () => setCount(count + 1)
+  const decrement = () => setCount(count - 1)
+  const reset = () => setCount(0)
+
   return (
     <div>
       <p>Count: {count}</p>
@@ -722,24 +715,24 @@ function Counter() {
       <button onClick={decrement}>-</button>
       <button onClick={reset}>Reset</button>
     </div>
-  );
+  )
 }
 ```
 
 ```jsx
 function useCounter(initialValue = 0, step = 1) {
-  const [count, setCount] = React.useState(initialValue);
-  
-  const increment = () => setCount(count + step);
-  const decrement = () => setCount(count - step);
-  const reset = () => setCount(initialValue);
-  
-  return [count, { increment, decrement, reset }];
+  const [count, setCount] = React.useState(initialValue)
+
+  const increment = () => setCount(count + step)
+  const decrement = () => setCount(count - step)
+  const reset = () => setCount(initialValue)
+
+  return [count, { increment, decrement, reset }]
 }
 
 function Counter() {
-  const [count, { increment, decrement, reset }] = useCounter(0, 1);
-  
+  const [count, { increment, decrement, reset }] = useCounter(0, 1)
+
   return (
     <div>
       <p>Count: {count}</p>
@@ -747,35 +740,37 @@ function Counter() {
       <button onClick={decrement}>-</button>
       <button onClick={reset}>Reset</button>
     </div>
-  );
+  )
 }
 ```
 
 ```jsx
 function useCounter(initialValue = 0, step = 1) {
-  const [count, setCount] = React.useState(initialValue);
+  const [count, setCount] = React.useState(initialValue)
 
   const increment = React.useCallback(() => {
-    setCount(prev => prev + step);
-  }, [step]);
+    setCount((prev) => prev + step)
+  }, [step])
   const decrement = React.useCallback(() => {
-    setCount(prev => prev - step);
-  }, [step]);
+    setCount((prev) => prev - step)
+  }, [step])
   const reset = React.useCallback(() => {
-    setCount(initialValue);
-  }, [initialValue]);
-  return [count, { increment, decrement, reset }];
+    setCount(initialValue)
+  }, [initialValue])
+  return [count, { increment, decrement, reset }]
 }
 
 function Counter() {
-  const [count, { increment, decrement, reset }] = useCounter(0, 5);
+  const [count, { increment, decrement, reset }] = useCounter(0, 5)
 
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={increment}>+{5}</button> <button onClick={decrement}>-{5}</button> <button onClick={reset}>Reset</button>
+      <button onClick={increment}>+{5}</button>{' '}
+      <button onClick={decrement}>-{5}</button>{' '}
+      <button onClick={reset}>Reset</button>
     </div>
-  );
+  )
 }
 ```
 ````
@@ -798,21 +793,21 @@ function App() {
 ```jsx
 // Step 1: Basic state management
 function App() {
-  const [isOnline, setIsOnline] = React.useState(() => navigator.onLine);
-  
+  const [isOnline, setIsOnline] = React.useState(() => navigator.onLine)
+
   React.useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-    
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-    
+    const handleOnline = () => setIsOnline(true)
+    const handleOffline = () => setIsOnline(false)
+
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-  
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  }, [])
+
   return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
 }
 ```
@@ -822,53 +817,54 @@ function App() {
 // subscribe: Registers callbacks for external store changes
 function subscribe(callback) {
   // Add event listeners that call callback when status changes
-  window.addEventListener('online', callback);
-  window.addEventListener('offline', callback);
-  
+  window.addEventListener('online', callback)
+  window.addEventListener('offline', callback)
+
   // Return cleanup function to remove listeners
   return () => {
-    window.removeEventListener('online', callback);
-    window.removeEventListener('offline', callback);
-  };
+    window.removeEventListener('online', callback)
+    window.removeEventListener('offline', callback)
+  }
 }
 
 function App() {
-  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
-  
+  const [isOnline, setIsOnline] = React.useState(navigator.onLine)
+
   React.useEffect(() => {
     const unsubscribe = subscribe(() => {
-      setIsOnline(() => navigator.onLine);
-    });
-    return unsubscribe;
-  }, []);
+      setIsOnline(() => navigator.onLine)
+    })
+    return unsubscribe
+  }, [])
   return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
 }
 ```
 
 ```jsx
 // Step 3: Extract getSnapshot function
-function getSnapshot() { // getSnapshot: Returns current value from external store
-  return navigator.onLine; // Read current value from browser API
+function getSnapshot() {
+  // getSnapshot: Returns current value from external store
+  return navigator.onLine // Read current value from browser API
 }
 
 function subscribe(callback) {
-  window.addEventListener('online', callback);
-  window.addEventListener('offline', callback);
+  window.addEventListener('online', callback)
+  window.addEventListener('offline', callback)
   return () => {
-    window.removeEventListener('online', callback);
-    window.removeEventListener('offline', callback);
-  };
+    window.removeEventListener('online', callback)
+    window.removeEventListener('offline', callback)
+  }
 }
 
 function App() {
-  const [isOnline, setIsOnline] = React.useState(getSnapshot());
-  
+  const [isOnline, setIsOnline] = React.useState(getSnapshot())
+
   React.useEffect(() => {
     const unsubscribe = subscribe(() => {
-      setIsOnline(getSnapshot());
-    });
-    return unsubscribe;
-  }, []);
+      setIsOnline(getSnapshot())
+    })
+    return unsubscribe
+  }, [])
   return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
 }
 ```
@@ -879,22 +875,22 @@ function App() {
 // - subscribe: Function that subscribes to external store
 // - getSnapshot: Function that returns current snapshot
 function subscribe(callback) {
-  window.addEventListener('online', callback);
-  window.addEventListener('offline', callback);
+  window.addEventListener('online', callback)
+  window.addEventListener('offline', callback)
   return () => {
-    window.removeEventListener('online', callback);
-    window.removeEventListener('offline', callback);
-  };
+    window.removeEventListener('online', callback)
+    window.removeEventListener('offline', callback)
+  }
 }
 function getSnapshot() {
-  return navigator.onLine;
+  return navigator.onLine
 }
 
 function App() {
   const isOnline = React.useSyncExternalStore(
-    subscribe,    // How to subscribe to changes
-    getSnapshot    // How to get current value
-  ); // useSyncExternalStore handles subscription and state updates
+    subscribe, // How to subscribe to changes
+    getSnapshot, // How to get current value
+  ) // useSyncExternalStore handles subscription and state updates
   return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
 }
 ```
@@ -929,25 +925,25 @@ function App() {
 ```jsx
 // Final: Complete implementation with all functions
 function useOnlineStatus() {
-  const isOnline = React.useSyncExternalStore( subscribe, getSnapshot );
-  return isOnline;
+  const isOnline = React.useSyncExternalStore(subscribe, getSnapshot)
+  return isOnline
 }
 
 function subscribe(callback) {
-  window.addEventListener('online', callback);
-  window.addEventListener('offline', callback);
+  window.addEventListener('online', callback)
+  window.addEventListener('offline', callback)
   return () => {
-    window.removeEventListener('online', callback);
-    window.removeEventListener('offline', callback);
-  };
+    window.removeEventListener('online', callback)
+    window.removeEventListener('offline', callback)
+  }
 }
 
 function getSnapshot() {
-  return navigator.onLine;
+  return navigator.onLine
 }
 
 function App() {
-  const isOnline = useOnlineStatus();
+  const isOnline = useOnlineStatus()
   return <div>{isOnline ? '✅ Online' : '❌ Offline'}</div>
 }
 ```
@@ -975,21 +971,24 @@ transition: slide-up
 
 **Key Functions:**
 
-1. **`subscribe(callback)`**: 
-  - Registers callback for store changes
-  - Returns cleanup function
-  - Called when component mounts/updates
+1. **`subscribe(callback)`**:
+
+- Registers callback for store changes
+- Returns cleanup function
+- Called when component mounts/updates
 
 </div>
 
 <div>
 
-2. **`getSnapshot()`**: 
-  - Returns current store value
-  - Must be synchronous
-  - Called during render to get current state
+2. **`getSnapshot()`**:
+
+- Returns current store value
+- Must be synchronous
+- Called during render to get current state
 
 **Use Cases:**
+
 - Browser APIs (online status, geolocation, media queries)
 - Third-party state management libraries
 - WebSocket connections
@@ -1033,5 +1032,5 @@ function ChatRoom({ roomId, theme }) {
 ```
 
 <div class="text-xs text-slate-500" v-click>
-Effect Events aren’t a dependency shortcut—keep real reactive deps in the array.
+Effect Events aren’t a dependency shortcut—keep real reactive dependencies in the array.
 </div>

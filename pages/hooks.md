@@ -35,7 +35,7 @@ hideInToc: true
 
 - #### In the following slides, you’ll see how hooks model state, effects, and complex behavior in a clean, composable way. ⚡
 
-- #### They heavy build on a concept in JavaScript called closures and here is a [video](https://www.youtube.com/watch?v=KJP1E-Y-xyo) showing how to implement hooks in a very simple way.
+- #### They build heavily on a JavaScript concept called closures. Here is a [video](https://www.youtube.com/watch?v=KJP1E-Y-xyo) showing how to implement hooks in a very simple way.
 
 </v-clicks>
 
@@ -114,7 +114,7 @@ hideInToc: true
 
 ````md magic-move
 ```js
-import { useState } from "react";
+import { useState } from 'react'
 ```
 
 ```js
@@ -420,7 +420,7 @@ function DataFetcher({ id }) {
       setData(json)
     }
     if (mounted) fetchData()
-    return () => mounted = false // 2. Effect Cleanup
+    return () => (mounted = false) // 2. Effect Cleanup
   }, [id]) // 3. Dependencies
   return <div>{data ? <DisplayData data={data} /> : 'Loading...'}</div>
 }
@@ -509,7 +509,7 @@ graph TD
   A --> D[DOM Manipulation]
 
   B --> B1["API Calls(use `swr` or `tanstack/react-query`)"]
-  B --> B2["Local Storage(useSyncExteralStore)"]
+  B --> B2["Local Storage (useSyncExternalStore)"]
 
   C --> C1[WebSocket]
   C --> C2[Event Listeners]
@@ -695,7 +695,7 @@ const [state, formAction] = useActionState(reducerFnAction, initialState, permal
 
 </div>
 
-This hook manages form state and updates based on an action(side effect), its a better replacement for the `onSubmit` event handler. Its natural to the way the web handles form.
+This hook manages form state and updates based on an action (side effect). It's a better replacement for the `onSubmit` event handler and is more natural to how the web handles forms.
 
 <div grid cols-2 gap-5>
 
@@ -732,14 +732,12 @@ function Cart() {
   return (
     <form action={formAction}>
       <div class="grid cols-[1fr_200px] gap-3">
-        <section> {products.map(each => (<><button key={each} name="product" value={each} class="btn ml-4 p-1" type="submit">{each}({state.cartObject[each] || 0})</button></>))} </section><p>Cart: {state.cart} Last: {state.lastAdded || 'null'}</p>
+        <section>{products.map(each => (<><button key={each} name="product" value={each} class="btn ml-4 p-1" type="submit">{each}({state.cartObject[each] || 0})</button></>))}</section><p>Cart: {state.cart} Last: {state.lastAdded || 'null'}</p>
       </div>
     </form>
   )
 }
 ```
-
-
 
 </div>
 
@@ -1034,7 +1032,7 @@ name: HookForm
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-1. Using the websocket provision in the [API](https://api.oluwasetemi.dev), use effect hook to create a real time display of `tasks` created, updated and delete. You job is to create a simple react application to show the realtime display of the socket communication. See this as an example [Tasks Socket Client](https://api.oluwasetemi.dev/ws/client/tasks).
+1. Using the WebSocket provided by the [API](https://api.oluwasetemi.dev), use the effect hook to create a real-time display of `tasks` as they are created, updated, and deleted. Your job is to create a simple React application that shows the socket communication in real time. See this as an example [Tasks Socket Client](https://api.oluwasetemi.dev/ws/client/tasks).
 
 2. Implement a custom hook for this socket communication.
 
@@ -1043,82 +1041,81 @@ hideInToc: true
 ---
 
 ```jsx {monaco-run} {lines: 'true', height: '25rem'}
-
 function LiveData() {
   class SimpleEventEmitter {
     constructor() {
-      this.events = {};
+      this.events = {}
     }
-  
+
     on(event, listener) {
       if (!this.events[event]) {
-        this.events[event] = [];
+        this.events[event] = []
       }
-      this.events[event].push(listener);
+      this.events[event].push(listener)
     }
-  
+
     off(event, listener) {
-      if (!this.events[event]) return;
-      this.events[event] = this.events[event].filter(l => l !== listener);
+      if (!this.events[event]) return
+      this.events[event] = this.events[event].filter((l) => l !== listener)
     }
-  
+
     emit(event, ...args) {
-      if (!this.events[event]) return;
-      this.events[event].forEach(listener => listener(...args));
+      if (!this.events[event]) return
+      this.events[event].forEach((listener) => listener(...args))
     }
   }
-  const [num, setNum] = React.useState(0);
-  const [data, setData] = React.useState(undefined);
-  const [error, setError] = React.useState(undefined);
-  
+  const [num, setNum] = React.useState(0)
+  const [data, setData] = React.useState(undefined)
+  const [error, setError] = React.useState(undefined)
+
   // Use useRef to persist the event emitter across renders
-  const eventRef = React.useRef(null);
+  const eventRef = React.useRef(null)
   if (!eventRef.current) {
-    eventRef.current = new SimpleEventEmitter();
+    eventRef.current = new SimpleEventEmitter()
   }
-  const event = eventRef.current;
+  const event = eventRef.current
 
   React.useEffect(() => {
     if (num % 3 === 0 && num > 1) {
-      const err = new Error("error:" + num);
-      event.emit("error", err);
+      const err = new Error('error:' + num)
+      event.emit('error', err)
     } else {
-      event.emit("data", "state:" + num);
+      event.emit('data', 'state:' + num)
     }
-  }, [num, event]);
-  
+  }, [num, event])
+
   React.useEffect(() => {
     const onData = (value) => {
-      setData(value);
-      setError(undefined);
-    };
+      setData(value)
+      setError(undefined)
+    }
 
     const onError = (err) => {
-      setError(err);
-      setData(undefined);
-    };
+      setError(err)
+      setData(undefined)
+    }
 
-    event.on("data", onData);
-    event.on("error", onError);
+    event.on('data', onData)
+    event.on('error', onError)
 
     return () => {
-      event.off("data", onData);
-      event.off("error", onError);
-    };
-  }, [event]);
+      event.off('data', onData)
+      event.off('error', onError)
+    }
+  }, [event])
 
   React.useEffect(() => {
     const timer = setInterval(() => {
-      setNum((prevNum) => prevNum + 1); // Use functional update
-    }, 1000);
+      setNum((prevNum) => prevNum + 1) // Use functional update
+    }, 1000)
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <div>
       <div>{data}</div>
-      <div>error: {error ? error.message : ""}</div>
+      <div>error: {error ? error.message : ''}</div>
     </div>
   )
 }
@@ -1129,72 +1126,71 @@ hideInToc: true
 ---
 
 ```jsx {monaco-run} {lines: 'true', height: '25rem'}
-
 /**
  * An Async Generator that acts as our data source.
  * It manages its own internal state (num) and timing loop.
  */
 
 function LiveData() {
-  const [data, setData] = React.useState(undefined);
-  const [error, setError] = React.useState(undefined);
-  
+  const [data, setData] = React.useState(undefined)
+  const [error, setError] = React.useState(undefined)
+
   async function* liveDataGenerator() {
-    let num = 0;
-    
+    let num = 0
+
     while (true) {
       // 1. Pause execution for 1 second (simulating network/compute latency)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
       // 2. Update internal state
-      num++;
-  
+      num++
+
       // 3. Determine what to yield based on the logic
       // We return an object distinguishing data from errors to keep the stream alive.
       // (Throwing an actual Error would terminate the generator).
       if (num % 3 === 0 && num > 1) {
-        yield { type: 'error', payload: new Error("error:" + num) };
+        yield { type: 'error', payload: new Error('error:' + num) }
       } else {
-        yield { type: 'data', payload: "state:" + num };
+        yield { type: 'data', payload: 'state:' + num }
       }
     }
   }
 
   React.useEffect(() => {
     // Initialize the generator
-    const stream = liveDataGenerator();
-    let isMounted = true;
+    const stream = liveDataGenerator()
+    let isMounted = true
 
     const consumeStream = async () => {
       // "for await" handles the async stream automatically
       for await (const event of stream) {
-        if (!isMounted) break; // Cleanup check
+        if (!isMounted) break // Cleanup check
 
         if (event.type === 'error') {
-          setError(event.payload);
-          setData(undefined);
+          setError(event.payload)
+          setData(undefined)
         } else {
-          setData(event.payload);
-          setError(undefined);
+          setData(event.payload)
+          setError(undefined)
         }
       }
-    };
+    }
 
-    consumeStream();
+    consumeStream()
 
     // Cleanup function to prevent setting state on unmounted component
     return () => {
-      isMounted = false;
+      isMounted = false
       // Note: Generators are not cancellable by default from the outside
       // without AbortSignal, but stopping consumption is enough for React state safety.
-    };
-  }, []);
+    }
+  }, [])
 
   return (
     <div>
       <div>{data}</div>
-      <div>error: {error ? error.message : ""}</div>
+      <div>error: {error ? error.message : ''}</div>
     </div>
-  );
+  )
 }
 ```
