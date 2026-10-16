@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-routing
 ---
 
 # Routing and Navigation
-
-<TocIcon />
 
 <div mt-2 />
 

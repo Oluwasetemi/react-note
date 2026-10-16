@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-testing
 ---
 
 # Testing React Applications
-
-<TocIcon />
 
 <div mt-2 />
 

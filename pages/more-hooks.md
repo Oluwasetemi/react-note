@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-more-hooks
 ---
 
 # More Hooks
-
-<TocIcon />
 
 <div mt-2 />
 

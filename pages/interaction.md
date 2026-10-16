@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-interactivity
 ---
 
 # Interactivity
-
-<TocIcon />
 
 <div mt-2 />
 

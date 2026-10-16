@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-components
 ---
 
 # Components in React
-
-<TocIcon />
 
 <div mt-2 />
 

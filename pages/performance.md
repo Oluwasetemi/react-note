@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-performance
 ---
 
 # Performance Optimization in {React}
-
-<TocIcon />
 
 <div mt-2 />
 

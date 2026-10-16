@@ -59,6 +59,7 @@ notes
 
 ---
 hideInToc: true
+routeAlias: course-toc
 ---
 
 # Table of contents
@@ -75,6 +76,8 @@ hideInToc: true
 ---
 name: Introduction
 layout: center
+chapterTitle: Introduction
+chapterToc: chapter-intro
 ---
 
 <h1 flex="~ col">
@@ -93,6 +96,8 @@ src: ./pages/intro.md
 ---
 name: JSX
 layout: center
+chapterTitle: JSX
+chapterToc: chapter-jsx
 ---
 
 <h1 flex="~ col">
@@ -111,6 +116,8 @@ src: ./pages/jsx.md
 ---
 name: Component
 layout: center
+chapterTitle: Components
+chapterToc: chapter-components
 ---
 
 <h1 flex="~ col">
@@ -129,6 +136,8 @@ src: ./pages/component.md
 ---
 name: Interaction
 layout: center
+chapterTitle: Interactivity
+chapterToc: chapter-interactivity
 ---
 
 <h1 flex="~ col">
@@ -147,6 +156,8 @@ src: ./pages/interaction.md
 ---
 name: Rendering
 layout: center
+chapterTitle: Rendering
+chapterToc: chapter-rendering
 ---
 
 <h1 flex="~ col">
@@ -165,6 +176,8 @@ src: ./pages/rendering.md
 ---
 name: Hooks
 layout: center
+chapterTitle: React Hooks
+chapterToc: chapter-hooks
 ---
 
 <h1 flex="~ col">
@@ -183,6 +196,8 @@ src: ./pages/hooks.md
 ---
 name: State
 layout: center
+chapterTitle: Managing State
+chapterToc: chapter-state
 ---
 
 <h1 flex="~ col">
@@ -201,6 +216,8 @@ src: ./pages/state.md
 ---
 name: Form
 layout: center
+chapterTitle: Forms
+chapterToc: chapter-forms
 ---
 
 <h1 flex="~ col">
@@ -219,6 +236,8 @@ src: ./pages/form.md
 ---
 name: More Hooks
 layout: center
+chapterTitle: More Hooks
+chapterToc: chapter-more-hooks
 ---
 
 <h1 flex="~ col">
@@ -237,6 +256,8 @@ src: ./pages/more-hooks.md
 ---
 name: Routing
 layout: center
+chapterTitle: Routing and Navigation
+chapterToc: chapter-routing
 ---
 
 <h1 flex="~ col">
@@ -255,6 +276,8 @@ src: ./pages/routing.md
 ---
 name: State Management
 layout: center
+chapterTitle: State Management
+chapterToc: chapter-state-management
 ---
 
 <h1 flex="~ col">
@@ -273,6 +296,8 @@ src: ./pages/state-management.md
 ---
 name: Data Fetching
 layout: center
+chapterTitle: Data Fetching
+chapterToc: chapter-data-fetching
 ---
 
 <h1 flex="~ col">
@@ -291,6 +316,8 @@ src: ./pages/data-fetching.md
 ---
 name: Performance
 layout: center
+chapterTitle: Performance Optimization
+chapterToc: chapter-performance
 ---
 
 <h1 flex="~ col">
@@ -309,6 +336,8 @@ src: ./pages/performance.md
 ---
 name: Test
 layout: center
+chapterTitle: Testing
+chapterToc: chapter-testing
 ---
 
 <h1 flex="~ col">
@@ -325,7 +354,35 @@ src: ./pages/test.md
 ---
 
 ---
+name: Appendix and Resources
+layout: center
+chapterTitle: Appendix and Resources
+chapterToc: chapter-appendix
+---
+
+# Appendix and [Resources]{.text-gradient}
+
+Demos, assignments, useful links, and contributors
+
+---
+hideInToc: true
+routeAlias: chapter-appendix
+---
+
+# Appendix and [Resources]{.text-gradient}
+
+- <Link to="pagination-order">Pagination Order Demo</Link>
+- <Link to="infinite-scroll-pagination">Infinite Scroll Pagination Demo</Link>
+- <Link to="pagination-graphql">GraphQL Pagination Demo</Link>
+- <Link to="final-assignment">Final Assignment</Link>
+- <Link to="router-example">Router Example</Link>
+- <Link to="assignments">Assignments</Link>
+- <Link to="important-links">Important Links</Link>
+- <Link to="contributors">Contributors</Link>
+
+---
 name: Pagination Order
+routeAlias: pagination-order
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hwtrzb?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
 autoLoad: true
@@ -333,6 +390,7 @@ autoLoad: true
 
 ---
 name: Infinite Scroll Pagination
+routeAlias: infinite-scroll-pagination
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-zjmule?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
 autoLoad: true
@@ -340,6 +398,7 @@ autoLoad: true
 
 ---
 name: Pagination GraphQL
+routeAlias: pagination-graphql
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-q5wnda?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
 autoLoad: true
@@ -347,6 +406,7 @@ autoLoad: true
 
 ---
 hideInToc: true
+routeAlias: final-assignment
 ---
 
 ## [Assignment]{.text-gradient.text-4xl}
@@ -355,6 +415,7 @@ Build a simple `Product App` with routing of your choice. The app should have a 
 
 ---
 name: Router Example
+routeAlias: router-example
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hswavt?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
 autoLoad: true
@@ -364,6 +425,8 @@ autoLoad: true
 The idea here is super sweet with tailwind like css and ability to render code is powerful and the opportunities here is endless.
 -->
 
+---
+routeAlias: assignments
 ---
 
 # Assignments
@@ -377,6 +440,7 @@ The idea here is super sweet with tailwind like css and ability to render code i
 ---
 hideInToc: true
 name: Important Links
+routeAlias: important-links
 ---
 
 # Important Links
@@ -390,6 +454,7 @@ name: Important Links
 
 ---
 hideInToc: true
+routeAlias: contributors
 ---
 
 # Contributors
@@ -401,4 +466,3 @@ hideInToc: true
 - {@Caisere}
 - {@kachi-jasperD}
 - {@oladimejipraise}
-

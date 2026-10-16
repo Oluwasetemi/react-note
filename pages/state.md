@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-state
 ---
 
 # Managing State
-
-<TocIcon />
 
 <div mt-2 />
 

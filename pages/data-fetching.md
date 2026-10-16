@@ -2,11 +2,10 @@
 layout: center
 transition: slide-up
 hideInToc: true
+routeAlias: chapter-data-fetching
 ---
 
 # Data Fetching and Working with APIs
-
-<TocIcon />
 
 <div mt-2 />
 
