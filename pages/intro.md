@@ -27,9 +27,9 @@ hideInToc: true
 
 <div />
 
-Javascript libraries and frameworks are tools that help developers build applications faster and more efficiently. They provide a set of functionalities that can be reused across different projects, saving time and effort.
+JavaScript libraries and frameworks are tools that help developers build applications faster and more efficiently. They provide a set of functionalities that can be reused across different projects, saving time and effort.
 
-**Library** is a collection of pre-written code that developers can call upon to perform specific tasks. Libraries offer various functionalities, but you are in control of how and when to use them. {React} is often considered a library because it focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. {Vue}, {Angular}, and {Svelte} are other examples of libraries. {jQuery} is another example of a library that provides functionalities like DOM manipulation, event handling, and AJAX calls.
+A **library** is a collection of pre-written code that developers can use to perform specific tasks. Libraries offer various functionalities, but you are in control of how and when to use them. {React} is often considered a library because it focuses on rendering the UI. It doesn't provide everything needed to build an application, but it does provide a way to build user interfaces. {Vue}, {Angular}, and {Svelte} are other examples of libraries. {jQuery} is another example of a library that provides functionalities like DOM manipulation, event handling, and AJAX calls.
 
 **Framework**: A framework is a more opinionated structure or skeleton for building applications. It typically provides everything needed (like a routing system, data management, etc.) and controls the flow of the application. Although {Next.js} uses {React}, it is considered a framework because it provides a predefined structure for building applications, including file-based routing, server-side rendering, and static site generation. {Nuxt} is another example of a framework that uses {Vue}.
 
@@ -68,7 +68,7 @@ clicksStart: 2
 - **State Management**: {React} provides a way to manage the state of the application using hooks and context API.
 - **Lifecycle Methods**: {React} provides lifecycle methods that allow developers to hook into different stages of the component lifecycle.
 - **Server-side Rendering**: {React} supports server-side rendering, which improves the performance and SEO of the application.
-- **Server Components**: {React} 19 introduces server components, which allow developers to build components that can be rendered on the server and sent to the client. Uses Server Actions to fetch data on the server and send it to the client with heavy support for streaming and partial hydration.
+- **Server Components**: {React} 19 introduces Server Components, which can be rendered on the server and sent to the client. It uses Server Actions to handle server-side data operations, with extensive support for streaming and partial hydration.
 
 In summary, {React} allows developers to create user interfaces from components, write components with code and markup in JSX, add interactivity with events, state and props. Going further to full-stack capabilities with server components and server actions for better data fetching and rendering. Allowing developers to build fast, interactive, and scalable applications.
 
@@ -83,15 +83,15 @@ clicksStart: 1
 
 {React} and {Vue} are two popular JavaScript libraries for building user interfaces.
 
-Both libraries have their strengths and weaknesses, and the choice between them depends on the requirements of the project and the preferences of the developers. During the course of this workshop, we will be focusing on {React} in the second semester, later on we will explore {Vue} but it is worth noting some of the key differences between {React} and Vue:
+Both libraries have strengths and weaknesses, and the choice between them depends on the project's requirements and the developers' preferences. We will focus on {React} during the second semester and explore {Vue} later. First, it is worth noting some key differences between {React} and {Vue}:
 
 <v-clicks>
 
 - **Learning Curve**: {React} has a steeper learning curve compared to Vue because it requires developers to learn JSX, hooks, and other concepts. {Vue}, on the other hand, is easier to learn because it uses a template-based syntax that is similar to HTML, although it also has composables and supports JSX.
 
-- **Performance**: {React} uses a virtual DOM to improve performance by updating only the parts of the UI that have changed. Vue also uses a virtual DOM but has a more optimized reactivity system that can update the UI more efficiently especially with its vapor rendering.
+- **Performance**: {React} uses a virtual DOM to improve performance by updating only the parts of the UI that have changed. {Vue} also uses a virtual DOM but has a more optimized reactivity system that can update the UI more efficiently, especially with Vapor Mode.
 
-- **State Management**: {React} provides a way to manage the state of the application using `useState` hooks and context API. Vue also provides a way to manage the state of the application using {Pinia}, which is a state management library.
+- **State Management**: {React} provides ways to manage application state with the `useState` hook and the Context API. {Vue} also supports application state management through libraries such as {Pinia}.
 
 </v-clicks>
 
@@ -188,7 +188,7 @@ hideInToc: true
 hideInToc: true
 ---
 
-# [From pure javascript to React]{.text-gradient}
+# [From Plain JavaScript to React]{.text-gradient}
 
 ```html {monaco-run} { lines: true, height: '18.5em', autorun: false}
 <div id="makeElemSample"></div>
@@ -234,7 +234,7 @@ hideInToc: true
 hideInToc: true
 ---
 
-# [From pure javascript to React]{.text-gradient}
+# [From Plain JavaScript to React]{.text-gradient}
 
 <div class="overflow-y-scroll h-full">
 
@@ -793,7 +793,7 @@ hideInToc: true
 
 # [Setting up Development Environment Vite]{.text-gradient}
 
-Let us talk about build tools, they are tools that help developers build and deploy applications.
+Build tools help developers build and deploy applications.
 
 They automate the process of compiling, bundling, and optimizing code. Some popular build tools include {webpack}, {Turborepo}, {Parcel}, Vite ({Rolldown}, {Rollup}, {esbuild}, {OXC}), and {Rspack}.
 

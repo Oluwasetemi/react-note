@@ -16,11 +16,17 @@ let reactRoot: { unmount: () => void } | null = null
 let restoreConsole: (() => void) | null = null
 
 // ── Split pane ────────────────────────────────────────────────────────────────
-const { leftWidthPct, consoleHeightPx, isDraggingV, isDraggingH, startVerticalDrag, startHorizontalDrag } =
-  useSplitPane(splitRef, {
-    vertical: { initial: 50, min: 20, max: 80 },
-    horizontal: { initial: 160, min: 60, max: 520 },
-  })
+const {
+  leftWidthPct,
+  consoleHeightPx,
+  isDraggingV,
+  isDraggingH,
+  startVerticalDrag,
+  startHorizontalDrag,
+} = useSplitPane(splitRef, {
+  vertical: { initial: 50, min: 20, max: 80 },
+  horizontal: { initial: 160, min: 60, max: 520 },
+})
 
 // ── Syntax highlighting & Editor Setup ────────────────────────────────────────
 const editorPreRef = ref<HTMLElement>()
@@ -70,7 +76,8 @@ const onEditorWheel = (e: WheelEvent) => {
   e.preventDefault()
   if (!editorTextareaRef.value) return
   editorTextareaRef.value.scrollLeft += e.deltaY
-  if (editorPreRef.value) editorPreRef.value.scrollLeft = editorTextareaRef.value.scrollLeft
+  if (editorPreRef.value)
+    editorPreRef.value.scrollLeft = editorTextareaRef.value.scrollLeft
 }
 
 const syncScroll = (e: Event) => {
@@ -82,13 +89,19 @@ const syncScroll = (e: Event) => {
 }
 
 onMounted(() => {
-  editorContainerRef.value?.addEventListener('wheel', onEditorWheel, { passive: false })
+  editorContainerRef.value?.addEventListener('wheel', onEditorWheel, {
+    passive: false,
+  })
 })
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 const goBack = () => {
   if (reactRoot) {
-    try { reactRoot.unmount() } catch { /* ignore */ }
+    try {
+      reactRoot.unmount()
+    } catch {
+      /* ignore */
+    }
     reactRoot = null
   }
   if (restoreConsole) {
@@ -100,7 +113,9 @@ const goBack = () => {
 
 // ── Console ───────────────────────────────────────────────────────────────────
 const consoleLogs = ref<ConsoleEntry[]>([])
-const clearConsole = () => { consoleLogs.value = [] }
+const clearConsole = () => {
+  consoleLogs.value = []
+}
 
 const resetCode = () => {
   code.value = DEFAULT_CODE
@@ -109,7 +124,11 @@ const resetCode = () => {
   hasRun.value = false
   if (previewRef.value) previewRef.value.innerHTML = ''
   if (reactRoot) {
-    try { reactRoot.unmount() } catch { /* ignore */ }
+    try {
+      reactRoot.unmount()
+    } catch {
+      /* ignore */
+    }
     reactRoot = null
   }
 }
@@ -120,7 +139,9 @@ const insertTab = (e: KeyboardEvent) => {
   const start = ta.selectionStart
   const end = ta.selectionEnd
   code.value = `${code.value.substring(0, start)}  ${code.value.substring(end)}`
-  nextTick(() => { ta.selectionStart = ta.selectionEnd = start + 2 })
+  nextTick(() => {
+    ta.selectionStart = ta.selectionEnd = start + 2
+  })
 }
 
 // ── Runner ────────────────────────────────────────────────────────────────────
@@ -145,11 +166,22 @@ const runCode = async () => {
 
     // Pre-process ESM export default syntax to a variable assignment
     const processed = code.value
-      .replace(/\bexport\s+default\s+function\s+(\w+)/, 'var __PlaygroundExport__ = function $1')
-      .replace(/\bexport\s+default\s+class\s+(\w+)/, 'var __PlaygroundExport__ = class $1')
+      .replace(
+        /\bexport\s+default\s+function\s+(\w+)/,
+        'var __PlaygroundExport__ = function $1',
+      )
+      .replace(
+        /\bexport\s+default\s+class\s+(\w+)/,
+        'var __PlaygroundExport__ = class $1',
+      )
       .replace(/\bexport\s+default\s+/, 'var __PlaygroundExport__ = ')
 
-    const { code: compiled } = Babel.transform(processed, { presets: ['react'] })
+    const transformResult = Babel.transform(processed, { presets: ['react'] })
+    const compiled = transformResult?.code
+
+    if (!compiled) {
+      throw new Error('Babel did not produce any compiled code.')
+    }
 
     // eslint-disable-next-line no-new-func
     const UserComponent = new Function(
@@ -164,17 +196,25 @@ return null;`,
     )(React, console)
 
     if (!UserComponent) {
-      throw new Error('No component found. Use `export default` or name your component `App`.')
+      throw new Error(
+        'No component found. Use `export default` or name your component `App`.',
+      )
     }
 
     if (reactRoot) {
-      try { reactRoot.unmount() } catch { /* ignore teardown errors */ }
+      try {
+        reactRoot.unmount()
+      } catch {
+        /* ignore teardown errors */
+      }
       reactRoot = null
     }
     previewRef.value.innerHTML = ''
 
-    reactRoot = (ReactDOM as typeof ReactDOM).createRoot(previewRef.value);
-    (reactRoot as ReturnType<typeof ReactDOM.createRoot>).render((React as typeof React).createElement(UserComponent));
+    reactRoot = (ReactDOM as typeof ReactDOM).createRoot(previewRef.value)
+    ;(reactRoot as ReturnType<typeof ReactDOM.createRoot>).render(
+      (React as typeof React).createElement(UserComponent),
+    )
     hasRun.value = true
   } catch (err: unknown) {
     error.value = err instanceof Error ? err.message : String(err)
@@ -189,7 +229,11 @@ onUnmounted(() => {
     restoreConsole()
     restoreConsole = null
   }
-  try { if (reactRoot) reactRoot.unmount() } catch { /* ignore */ }
+  try {
+    if (reactRoot) reactRoot.unmount()
+  } catch {
+    /* ignore */
+  }
   reactRoot = null
 })
 </script>
@@ -201,7 +245,9 @@ onUnmounted(() => {
     :class="{ 'select-none': isDraggingV || isDraggingH }"
   >
     <!-- Header -->
-    <header class="flex items-center justify-between px-5 py-[10px] bg-[#1a1a1a] border-b border-[#333] flex-shrink-0">
+    <header
+      class="flex items-center justify-between px-5 py-[10px] bg-[#1a1a1a] border-b border-[#333] flex-shrink-0"
+    >
       <div class="flex items-center gap-4">
         <button
           class="px-[14px] py-[6px] bg-[#2a2a2a] text-[#ccc] border border-[#444] rounded-md cursor-pointer text-sm transition-colors duration-150 hover:bg-[#333]"
@@ -209,7 +255,9 @@ onUnmounted(() => {
         >
           ← Back to slides
         </button>
-        <h1 class="m-0 text-base font-semibold text-[#e5e5e5]">⚛️ React Playground</h1>
+        <h1 class="m-0 text-base font-semibold text-[#e5e5e5]">
+          ⚛️ React Playground
+        </h1>
       </div>
       <div class="flex items-center gap-2">
         <button
@@ -234,23 +282,31 @@ onUnmounted(() => {
       class="px-5 py-2 bg-red-900/40 border-b border-red-700 text-red-300 text-xs flex items-start gap-2 flex-shrink-0"
     >
       <span class="flex-shrink-0 mt-0.5">❌</span>
-      <pre class="m-0 whitespace-pre-wrap break-all leading-relaxed">{{ error }}</pre>
+      <pre class="m-0 whitespace-pre-wrap break-all leading-relaxed">{{
+        error
+      }}</pre>
     </div>
 
     <!-- Split pane -->
     <div ref="splitRef" class="flex flex-1 overflow-hidden">
-
       <!-- ── Left: Editor ───────────────────────────────────────────────── -->
       <div
         class="flex flex-col min-w-0 overflow-hidden"
         :style="{ width: leftWidthPct + '%' }"
       >
-        <div class="px-4 py-2 bg-[#1a1a1a] border-b border-[#333] text-xs text-[#888] flex items-center gap-2 flex-shrink-0">
+        <div
+          class="px-4 py-2 bg-[#1a1a1a] border-b border-[#333] text-xs text-[#888] flex items-center gap-2 flex-shrink-0"
+        >
           <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#0070f3]" />
           App.jsx
-          <span class="ml-auto text-[#555]">Tab = 2 spaces · Ctrl+Enter to run</span>
+          <span class="ml-auto text-[#555]"
+            >Tab = 2 spaces · Ctrl+Enter to run</span
+          >
         </div>
-        <div ref="editorContainerRef" class="relative flex-1 overflow-hidden bg-[#1e1e1e]">
+        <div
+          ref="editorContainerRef"
+          class="relative flex-1 overflow-hidden bg-[#1e1e1e]"
+        >
           <div
             ref="editorPreRef"
             aria-hidden="true"
@@ -266,7 +322,14 @@ onUnmounted(() => {
             autocorrect="off"
             autocapitalize="off"
             class="absolute inset-0 w-full h-full bg-transparent p-4 text-sm resize-none outline-none border-none leading-relaxed"
-            style="tab-size: 2; font-family: 'JetBrains Mono', 'Fira Code', monospace; color: transparent; caret-color: #d4d4d4; z-index: 1; overflow: auto"
+            style="
+              tab-size: 2;
+              font-family: 'JetBrains Mono', 'Fira Code', monospace;
+              color: transparent;
+              caret-color: #d4d4d4;
+              z-index: 1;
+              overflow: auto;
+            "
             @keydown.tab.prevent="insertTab"
             @keydown.ctrl.enter.prevent="runCode"
             @keydown.meta.enter.prevent="runCode"
@@ -281,20 +344,32 @@ onUnmounted(() => {
         :class="{ 'bg-[#0070f3]/30': isDraggingV }"
         @mousedown.prevent="startVerticalDrag"
       >
-        <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-[#333] group-hover:bg-[#0070f3]/60 transition-colors duration-150" />
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-[3px]">
-          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors" />
-          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors" />
-          <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors" />
+        <div
+          class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-[#333] group-hover:bg-[#0070f3]/60 transition-colors duration-150"
+        />
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-[3px]"
+        >
+          <span
+            class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors"
+          />
+          <span
+            class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors"
+          />
+          <span
+            class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors"
+          />
         </div>
       </div>
 
       <!-- ── Right: Preview + Console ──────────────────────────────────── -->
       <div
         class="flex flex-col min-w-0 overflow-hidden"
-        :style="{ width: (100 - leftWidthPct) + '%' }"
+        :style="{ width: 100 - leftWidthPct + '%' }"
       >
-        <div class="px-4 py-2 bg-[#1a1a1a] border-b border-[#333] text-xs text-[#888] flex items-center gap-2 flex-shrink-0">
+        <div
+          class="px-4 py-2 bg-[#1a1a1a] border-b border-[#333] text-xs text-[#888] flex items-center gap-2 flex-shrink-0"
+        >
           <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#3fb950]" />
           Preview
         </div>
@@ -307,12 +382,21 @@ onUnmounted(() => {
             style="font-family: system-ui, sans-serif"
           >
             Press
-            <kbd class="mx-1.5 px-2 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs text-gray-600">▶ Run</kbd>
+            <kbd
+              class="mx-1.5 px-2 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs text-gray-600"
+              >▶ Run</kbd
+            >
             or
-            <kbd class="mx-1.5 px-2 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs text-gray-600">Ctrl+Enter</kbd>
+            <kbd
+              class="mx-1.5 px-2 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs text-gray-600"
+              >Ctrl+Enter</kbd
+            >
             to render
           </div>
-          <div ref="previewRef" class="absolute inset-0 bg-white overflow-auto" />
+          <div
+            ref="previewRef"
+            class="absolute inset-0 bg-white overflow-auto"
+          />
         </div>
 
         <!-- ── Horizontal drag handle ─────────────────────────────────── -->
@@ -321,11 +405,21 @@ onUnmounted(() => {
           :class="{ 'bg-[#0070f3]/30': isDraggingH }"
           @mousedown.prevent="startHorizontalDrag"
         >
-          <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-[#333] group-hover:bg-[#0070f3]/60 transition-colors duration-150" />
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row gap-[3px]">
-            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors" />
-            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors" />
-            <span class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors" />
+          <div
+            class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-[#333] group-hover:bg-[#0070f3]/60 transition-colors duration-150"
+          />
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row gap-[3px]"
+          >
+            <span
+              class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors"
+            />
+            <span
+              class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors"
+            />
+            <span
+              class="w-[3px] h-[3px] rounded-full bg-[#555] group-hover:bg-[#0070f3]/80 transition-colors"
+            />
           </div>
         </div>
 
@@ -334,7 +428,9 @@ onUnmounted(() => {
           class="bg-[#1e1e1e] flex flex-col overflow-hidden flex-shrink-0"
           :style="{ height: consoleHeightPx + 'px' }"
         >
-          <div class="px-3 py-2 bg-[#2d2d2d] border-b border-[#444] flex items-center justify-between flex-shrink-0">
+          <div
+            class="px-3 py-2 bg-[#2d2d2d] border-b border-[#444] flex items-center justify-between flex-shrink-0"
+          >
             <span class="text-xs font-bold text-[#d4d4d4]">Console</span>
             <button
               class="px-3 py-1 bg-[#444] text-[#d4d4d4] border-none rounded text-xs cursor-pointer hover:bg-[#555] transition-colors"
@@ -344,7 +440,10 @@ onUnmounted(() => {
             </button>
           </div>
           <div class="flex-1 overflow-y-auto p-3 space-y-1 min-h-0">
-            <div v-if="consoleLogs.length === 0" class="text-[#555] text-xs italic">
+            <div
+              v-if="consoleLogs.length === 0"
+              class="text-[#555] text-xs italic"
+            >
               No output yet.
             </div>
             <div
@@ -354,12 +453,30 @@ onUnmounted(() => {
             >
               <span
                 class="flex-shrink-0"
-                :style="{ color: log.type === 'error' ? '#f87171' : log.type === 'warn' ? '#fbbf24' : '#60a5fa' }"
-              >{{ log.type === 'error' ? '❌' : log.type === 'warn' ? '⚠️' : '▶' }}</span>
+                :style="{
+                  color:
+                    log.type === 'error'
+                      ? '#f87171'
+                      : log.type === 'warn'
+                        ? '#fbbf24'
+                        : '#60a5fa',
+                }"
+                >{{
+                  log.type === 'error' ? '❌' : log.type === 'warn' ? '⚠️' : '▶'
+                }}</span
+              >
               <span
                 class="whitespace-pre-wrap break-all leading-relaxed"
-                :style="{ color: log.type === 'error' ? '#fca5a5' : log.type === 'warn' ? '#fde047' : '#d4d4d4' }"
-              >{{ log.text }}</span>
+                :style="{
+                  color:
+                    log.type === 'error'
+                      ? '#fca5a5'
+                      : log.type === 'warn'
+                        ? '#fde047'
+                        : '#d4d4d4',
+                }"
+                >{{ log.text }}</span
+              >
             </div>
           </div>
         </div>

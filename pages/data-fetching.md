@@ -25,7 +25,7 @@ transition: slide-down
 
 # [Fetching Data with "fetch" and "axios"]{.text-gradient}
 
-[Data Fetching]{.text-teal-400} is one of the key aspects of coding. Often, we want to fetch data from an external service or database by consuming APIs that connect us to the backend where the data is stored. We may also need to send data to the database or update it. This process of sending and/or receiving data from an external service or backend database is called [Data Fetching]{.text-teal-400.italic}.
+[Data Fetching]{.text-teal-400} is a key aspect of application development. We often retrieve data from an external service or database through APIs that connect the application to a backend. We may also need to send or update data. These exchanges between an application and an external service or backend database are called [Data Fetching]{.text-teal-400.italic}.
 
 <v-click>
 
@@ -35,7 +35,7 @@ How do we perform [Data Fetching]{.text-gradient} in {React}?
 
 <v-click>
 
-We can achieve this using the built-in `fetch()` API, or by using a third-party library like `Axios()`
+We can do this with the built-in `fetch()` API or a third-party library such as `axios`.
 
 </v-click>
 
@@ -43,7 +43,7 @@ We can achieve this using the built-in `fetch()` API, or by using a third-party 
 
 - [fetch() API]{.text-gradient}: A built-in JavaScript API for making HTTP requests. It returns a Promise and works natively in modern browsers. While lightweight, it requires manual handling of JSON parsing (`response.json()`) and HTTP errors (`response.ok`).
 
-- [axios]{.text-gradient}: A third-party library that simplifies HTTP requests. It has built-in support for JSON transformation, better error handling, and allows configuration of global defaults (e.g., base URLs or headers). For instance, `axios.get('/api/data')` is simpler than setting up options for fetch.
+- [axios]{.text-gradient}: A third-party library that simplifies HTTP requests. It has built-in support for JSON transformation and better error handling, and it allows you to configure global defaults (e.g., base URLs or headers). For instance, `axios.get('/api/data')` is simpler than setting up options for fetch.
 
 </v-clicks>
 
@@ -400,7 +400,11 @@ transition: slide-up
 <div v-click="5">
 
 ```jsx {monaco} {lineNumbers: true, height: '17rem'}
-import { useQuery, QueryClient, QueryClientProvider, } from '@tanstack/react-query'
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
@@ -546,7 +550,9 @@ Code splitting reduces initial bundle size by loading components on demand.
 import HeavyComponent from './HeavyComponent'
 function App() {
   return (
-    <div><HeavyComponent /></div>
+    <div>
+      <HeavyComponent />
+    </div>
   )
 }
 ```

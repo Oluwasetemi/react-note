@@ -59,7 +59,7 @@ transition: fade-out
 
 # [Usage]{.text-gradient} of `memo()`
 
-As previously stated, {React} will re-render a component if its parent re-renders, but with `memo()`, you can prevent a component from re-rendering when its parent re-renders, except there is a state change in that component.
+As previously stated, {React} will re-render a component if its parent re-renders. With `memo()`, however, you can prevent that re-render unless the component's own state changes.
 
 ````md magic-move
 ```jsx
@@ -158,7 +158,7 @@ transition: slide-down
 
 # [Optimizing Component Renders with useMemo]{.text-gradient}
 
-`useMemo()` is a hook that memoizes the result of an expensive computation and only recalculates it when one of its dependencies changes. This can prevent costly calculations during re-renders. `useMemo()` takes two parameters; a pure function calculating the value that you want to cache, and a dependency array [] that contains the reactive values referenced inside the calculating function.
+`useMemo()` is a hook that memoizes the result of an expensive computation and only recalculates it when one of its dependencies changes. This can prevent costly calculations during re-renders. `useMemo()` takes two parameters: a pure function that calculates the value you want to cache and a dependency array (`[]`) containing the reactive values referenced inside that function.
 
 ```jsx {hide|*}
 const cachedValue = useMemo(calculateValue, dependencies)
@@ -189,7 +189,7 @@ transition: slide-up
 
 # [Usage]{.text-gradient} of `useMemo(calculateValue, [dep])`
 
-[Skipping Expensive Logic Re-calculation:]{.text-teal-400} On the first render, `useMemo` returns the result of calling calculateValue with no arguments. During next renders, if the dependency values did not change, it will return an already stored value from the last render, or call calculateValue again if the dependency values have changed, and return the result that calculateValue has returned.
+[Skipping Expensive Logic Re-calculation:]{.text-teal-400} On the first render, `useMemo` returns the result of calling calculateValue with no arguments. On subsequent renders, if the dependencies have not changed, it returns the value stored from the previous render. If they have changed, it calls `calculateValue` again and returns the new result.
 
 <v-click>
 
@@ -226,7 +226,7 @@ function TodoList({ todos, tab, theme }) {
 
 <v-click at='3' style='font-size: 8px'>
 
-This ability of caching a return value is known as [memoization]{.text-gradient.italic} in {React}. The sole purpose of `useMemo` is for [Performance Optimization]{.text-teal-italic}. If your code does not work without it, find and fix the bug first. After then you may add `useMemo` to improve performance.
+This ability of caching a return value is known as [memoization]{.text-gradient.italic} in {React}. The sole purpose of `useMemo` is for [Performance Optimization]{.text-teal-italic}. If your code does not work without it, find and fix the bug first. After that, you may add `useMemo` to improve performance.
 
 </v-click>
 
@@ -385,7 +385,9 @@ function App() {
   }, [fetchData])
 
   return (
-    <div><input value={query} onChange={(e) => setQuery(e.target.value)} /></div>
+    <div>
+      <input value={query} onChange={(e) => setQuery(e.target.value)} />
+    </div>
   )
 }
 ```
@@ -497,7 +499,9 @@ function App() {
   const [count, setCount] = useState(0)
   // Use useMemo to memoize the handleClick function
   const handleClick = useMemo(() => {
-    return () => { console.log('Button clicked') }
+    return () => {
+      console.log('Button clicked')
+    }
   }, []) // No dependencies mean this function will remain the same across renders
 
   return (
@@ -667,12 +671,16 @@ export default function ArtistPage({ artist }) {
       <h1>{artist.name}</h1>
       <Suspense fallback={<Loading />}>
         <Biography artistId={artist.id} />
-        <Panel><Albums artistId={artist.id} /></Panel>
+        <Panel>
+          <Albums artistId={artist.id} />
+        </Panel>
       </Suspense>
     </>
   )
 }
-function Loading() { return <h2>🌀 Loading...</h2> }
+function Loading() {
+  return <h2>🌀 Loading...</h2>
+}
 ```
 
 ```jsx
@@ -688,13 +696,17 @@ export default function ArtistPage({ artist }) {
       <Suspense fallback={<BigSpinner />}>
         <Biography artistId={artist.id} />
         <Suspense fallback={<p>Loader 2...</p>}>
-          <Panel><Albums artistId={artist.id} /></Panel>
+          <Panel>
+            <Albums artistId={artist.id} />
+          </Panel>
         </Suspense>
       </Suspense>
     </>
   )
 }
-function BigSpinner() { return <h2>🌀 Loading...</h2> }
+function BigSpinner() {
+  return <h2>🌀 Loading...</h2>
+}
 ```
 ````
 

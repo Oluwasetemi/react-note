@@ -114,7 +114,7 @@ export default function Greeting() {
 <div>
   <p> 1. <span class="underline text-xl">Define the component function:</span> React components are <span class="text-teal-400">regular JavaScript functions</span>, but their names must start with a capital letter or they won&apos;t work!</p>
   <p> 2. <span class="underline text-xl">Write return with parentheses:</span> Always wrap your JSX markup in parentheses after the return statement. <span class="text-teal-400">Without parentheses</span>, any code on the lines after return will be ignored! </p>
-  <p> 3.  <span class="underline text-xl">Add JSX markup:</span> Markup is your code structure. Inside the component, <span class="text-teal-400">write your JSX</span>, which looks like HTML but works under the hood as JavaScript.</p>
+  <p> 3.  <span class="underline text-xl">Add JSX markup:</span> Markup defines your code's structure. Inside the component, <span class="text-teal-400">write your JSX</span>, which looks like HTML but is transformed into JavaScript.</p>
   <p> 4.  <span class="underline text-xl">Export the component:</span> The <span class="text-teal-400">export default prefix</span> is a standard JavaScript syntax (not specific to React). It lets you mark the main function in a file so that you can later import it from other files.</p>
 </div>
 
@@ -340,7 +340,7 @@ function App() {
 export default App
 ```
 
-This enhances reusability across different parts of the app or projects, improves maintainability with an organized layout, and promotes cleaner code by breaking the UI into smaller, manageable pieces.
+This approach improves reusability across different parts of an app or across projects, makes an organized layout easier to maintain, and promotes cleaner code by breaking the UI into smaller, manageable pieces.
 
 ---
 hideInToc: true
@@ -377,7 +377,7 @@ transition: slide-down
 
 <h1 class="text-gradient text-4xl">Props <span class="text-common">📨</span>: Passing and Reading Data Between Components</h1>
 
-#### Props (short for properties) allow parent components to pass data to their child components, just like <u>arguments in functions</u> and <u>attributes in HTML</u>. <span class="text-teal-400">You can pass any JavaScript value as a prop</span> (objects, arrays, functions, etc.). Below, the child component `Welcome` receives name props from the parent component `App`.
+#### Props (short for properties) allow parent components to pass data to their child components, just like <u>arguments in functions</u> and <u>attributes in HTML</u>. <span class="text-teal-400">You can pass any JavaScript value as a prop</span> (objects, arrays, functions, etc.). Below, the child component `Welcome` receives a `name` prop from the parent component `App`.
 
 <v-click>
 
@@ -551,7 +551,7 @@ name: Assignments on Components
 
 (1) and (2) will be graded as Assignment 1. To submit, create a new React project, push the code to a new GitHub repository, and submit only the GitHub link.
 
-Implement an accessible modal, accordion, or tooltip component — Practice Question
+Practice question: Implement an accessible modal, accordion, or tooltip component.
 
 ---
 hideInToc: true

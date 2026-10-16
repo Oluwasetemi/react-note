@@ -56,7 +56,7 @@ transition: slide-up
 
 Unit testing verifies that individual parts of the application (e.g., components, functions) `work as expected in isolation`.
 
-<span class="text-teal-400">Vitest</span> is a blazing-fast unit testing framework powered by Vite, offering native ESM support, TypeScript/JSX out of the box, Jest-compatible API, and instant HMR-driven watch mode — with no extra transpilation config needed in Vite projects. Paired with <span class="text-teal-400">React Testing Library</span> — a lightweight library that tests component behavior from the user's perspective rather than implementation details — it enables meaningful, user-centric tests.
+<span class="text-teal-400">Vitest</span> is a blazing-fast unit testing framework powered by Vite, offering native ESM support, TypeScript/JSX out of the box, a Jest-compatible API, and instant HMR-driven watch mode — with no extra transpilation config needed in Vite projects. Paired with <span class="text-teal-400">React Testing Library</span> — a lightweight library that tests component behavior from the user's perspective rather than implementation details — it enables meaningful, user-centric tests.
 
 <v-clicks class="text-sm">
 
@@ -83,7 +83,7 @@ transition: slide-down
 name: Unit Testing Example
 ---
 
-The Counter component below includes a button to increment a displayed count value, with tests verifying `the initial count is displayed correctly` & `clicking the button increments the count`.
+The Counter component below includes a button that increments the displayed count. Its tests verify that `the initial count is displayed correctly` and that `clicking the button increments the count`.
 
 <div  class="flex gap-2 w-full">
 
@@ -173,7 +173,7 @@ transition: slide-right
 
 ## [ Integration Testing]{.text-gradient.text-4xl}
 
-Integration testing ensures that `multiple components or functions work seamlessly together`, focusing on their interactions rather than testing them in isolation (unit testing). It validates workflows like how a parent component communicates with its children or how a form submits data to an API.
+Integration testing ensures that `multiple components or functions work seamlessly together`. It focuses on their interactions rather than testing them in isolation, as unit testing does. It validates workflows such as communication between a parent component and its children or the submission of form data to an API.
 
 This type of testing bridges the gap between unit and end-to-end tests, offering confidence in component interactions without the complexity of testing the entire application.
 
@@ -208,7 +208,7 @@ hideInToc: true
 
 ## [End-to-End Testing (E2E)]{.text-gradient.text-4xl}
 
-End-to-End (E2E) testing verifies the entire application flow, simulating real-world user interactions and ensuring that everything works as expected from start to finish. Unlike unit or integration tests that focus on isolated components or their interactions, `E2E tests cover full workflows and validate the complete system`, including interactions with external services (APIs, databases, etc.).
+End-to-end (E2E) testing verifies the entire application flow by simulating real-world user interactions and ensuring that everything works as expected from start to finish. Unlike unit or integration tests that focus on isolated components or their interactions, `E2E tests cover full workflows and validate the complete system`, including interactions with external services (APIs, databases, etc.).
 
 It verifies that:
 
@@ -216,7 +216,7 @@ It verifies that:
 - Different components work together as intended, from the frontend to the backend.
 - There are no broken links, errors, or unexpected behaviors in the user experience.
 
-💡In an E2E test for a TodoApp, you would verify that a user can open the app, add a task, see the task appear in the list, and either complete or delete the task.
+💡 In an E2E test for a TodoApp, you would verify that a user can open the app, add a task, see the task appear in the list, and either complete or delete the task.
 
 Some popular tools for E2E testing include:
 

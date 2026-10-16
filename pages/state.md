@@ -39,7 +39,7 @@ name: Declarative Programming
 ---
 
 <Tips type="tip" fullWidth>
-This involves listing out all the states your component can be in and how it transitions between those states. EMPTY: form has a disabled submit button, TYPING: Form has an enabled submit button, SUBMITTING: Form and button are disabled, spinner appears, SUCCESS: Spinner disappears, success message appears, ERROR: Spinner disappears, error message appears.
+This involves listing all the states your component can be in and how it transitions between them. EMPTY: The form has a disabled submit button. TYPING: The form has an enabled submit button. SUBMITTING: The form and button are disabled, and a spinner appears. SUCCESS: The spinner disappears, and a success message appears. ERROR: The spinner disappears, and an error message appears.
 </Tips>
 
 Declarative programming means describing the UI for each visual state rather than micromanaging the UI (imperative).
@@ -279,7 +279,7 @@ hideInToc: true
 
 <div />
 
-A reducer function is a function that takes the current state and an action and returns a new state. It's a way to manage state in a more predictable way. It's a pattern that's used in many programming languages and libraries. It's often useful when you have complex state logic that involves multiple sub-states or when the next state depends on the previous state. Extracting the state logic into a reducer function can make your code easier to understand and maintain.
+A reducer function takes the current state and an action and returns a new state. It is a pattern used in many programming languages and libraries to manage state more predictably. It's often useful when you have complex state logic that involves multiple sub-states or when the next state depends on the previous state. Extracting the state logic into a reducer function can make your code easier to understand and maintain.
 
 <div grid="~ cols-2" gap="2">
 
@@ -322,7 +322,12 @@ function Form() {
       case 'idle':
         return { status: 'idle', answer: '', error: null }
       case 'typing':
-        return { ...state, status: 'typing', answer: action.answer, error: null }
+        return {
+          ...state,
+          status: 'typing',
+          answer: action.answer,
+          error: null,
+        }
       case 'submitting':
         return { ...state, status: 'submitting' }
       case 'success':
@@ -341,7 +346,14 @@ function Form() {
   })
 
   if (state.status === 'success') {
-    return <h1 tabIndex="-1">That's right!<button className="btn" onClick={() => dispatch({type: 'idle'})}>Type Again</button></h1>
+    return (
+      <h1 tabIndex="-1">
+        That's right!
+        <button className="btn" onClick={() => dispatch({ type: 'idle' })}>
+          Type Again
+        </button>
+      </h1>
+    )
   }
 
   async function handleSubmit(e) {
@@ -513,9 +525,9 @@ function ImpureComponent() {
 
 </div>
 
-Keeping your components pure makes rendering predictable. It's easier to manage because it doesn't have any side effects and doesn't depend on anything other than its props and state. Effects are a way to add side effects to your components and they should be handled with caution using events, refs, and special hooks designed for that purpose.
+Keeping your components pure makes rendering predictable. Pure components are easier to manage because they have no side effects and depend only on their props and state. Effects are a way to add side effects to your components and they should be handled with caution using events, refs, and special hooks designed for that purpose.
 
 <Tips type="danger" fullWidth>
 You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, “set” state instead of mutating preexisting objects.<br />
-Strive to express your component’s logic in the JSX you return. When you need to “change things”, you’ll usually want to do it in an event handler. As a last resort, you can use `useEffect`.
+Strive to express your component’s logic in the JSX you return. When you need to “change things,” you’ll usually want to do so in an event handler. As a last resort, you can use `useEffect`.
 </Tips>

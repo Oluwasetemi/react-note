@@ -114,7 +114,7 @@ function getCurrentTime() {
 
 In this example code, only the time is being updated every second, not the entire application. This is why you can type on the input and the values don't refresh as the time is updated.
 
-During a [trigger]{.text-gradient}, {React} checks to see what part of the component changed, and thus, re-renders only that part. In this case, time state is being updated with `setTime` within an interval.
+During a [trigger]{.text-gradient}, {React} checks which part of the component changed and then re-renders only that part. In this case, time state is being updated with `setTime` within an interval.
 
 </div>
 
@@ -130,7 +130,7 @@ name: Render
 
 <div flex gap-3>
 
-This is the stage where {React} calls the components to know what to display on the screen. At the first trigger ([mount]{.text-teal-400}), {React} renders from the `root`, which includes all the components. But during a [state change]{.text-gradient.italic} trigger, {React} searches for the part that changed and updates only that part as seen in the example code on the previous slide.
+At this stage, {React} calls the components to determine what to display on the screen. At the first trigger ([mount]{.text-teal-400}), {React} renders from the `root`, which includes all the components. But during a [state change]{.text-gradient.italic} trigger, {React} searches for the part that changed and updates only that part as seen in the example code on the previous slide.
 
 <img w-80 h-45 mb-2 src="/lifecycle-render.png" alt="react render lifecycle" />
 
@@ -397,8 +397,8 @@ Often, we want to render a list of items from an array or a database. This is us
 
 <v-clicks>
 
-- You can render a list of items from an array using `map()` to loop over the items and create a `li` of each item in the DOM, and you can filter specific data with `filter()` before mapping.
-- Each `li` item should always have a `key` which serves as a unique identifier.
+- You can render a list of items from an array by using `map()` to create an `li` element for each item. You can also select specific data with `filter()` before mapping.
+- Each `li` item should have a `key` that serves as a unique identifier.
 
 </v-clicks>
 
@@ -475,12 +475,12 @@ name: Why does a list need a key?
 
 # Why List [key]{.text-gradient}? Where to find a `key` value?
 
-A list `key` is a unique identifier that gives the list item a name in the DOM so as to precisely locate it when needed. Some suggestions for obtaining a unique `key` value include:
+A list `key` is a unique identifier that helps React match each item with its corresponding component between renders. Some suggestions for obtaining a unique `key` value include:
 
 <v-clicks>
 
 - Using the Serial No. or ID of the item as it is on the database
-- Using a unique key generator like `crypto.randomUUID()` or a package like <span text-teal-400>[uuid](https://www.npmjs.com/package/uuid)</span>. Although generating key values locally can be tricky since they may change on every re-render, they are best used for local items.
+- Using a unique-key generator such as `crypto.randomUUID()` or a package such as <span text-teal-400>[uuid](https://www.npmjs.com/package/uuid)</span>. Generate the key when creating the item, not during rendering, so that it remains stable across renders.
 </v-clicks>
 
 <span v-click>
@@ -506,7 +506,7 @@ name: Conditional rendering - if-else, ternary, && operator
 
 Sometimes, we want to trigger a [state change]{.text-teal-400} based on a certain condition in our application. When that condition is met, a specified part of our application is rendered or re-rendered. This is called [Conditional Rendering]{.text-gradient.italic}.
 
-<span v-click>In {React}, we can render our `JSX` based on a condition in various ways which include:</span>
+<span v-click>In {React}, we can render `JSX` conditionally in several ways, including:</span>
 
 <div flex gap-3>
 
@@ -602,7 +602,7 @@ transition: slide-down
 
 <span text-4>
 
-We can assign `JSX` to a variable based on a condition. As we know in [JavaScript]{.text-gradient}, we can re-assign values to variables declared with the `let` keyword. In that regard, we can declare what we want to assign based on a condition, then use any conditional statement to re-assign value or `JSX` that would be rendered to the UI. We can also assign `JSX` directly for cleaner code when using a conditional statement like the ternary operator.
+We can assign `JSX` to a variable based on a condition. In [JavaScript]{.text-gradient}, values assigned to variables declared with `let` can be changed. Therefore, we can use a conditional statement to assign or reassign the `JSX` that will be rendered in the UI. We can also assign `JSX` directly for cleaner code when using a conditional statement like the ternary operator.
 
 </span>
 

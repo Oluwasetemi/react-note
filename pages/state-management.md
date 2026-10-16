@@ -23,11 +23,11 @@ transition: fade
 
 # [Lifting State Up in React]{.text-gradient}
 
-[State Management]{.text-teal-400} in {React} is one of the features that makes the library shine. When a user [interacts]{.text-teal-400.italic} with a reactive element or component, an update known as a [change in state]{.text-teal-400.italic} occurs, instantly updating the UI or performing a defined task.
+[State Management]{.text-teal-400} is one of the features that makes {React} shine. When a user [interacts]{.text-teal-400.italic} with an element or component, the interaction may cause a [change in state]{.text-teal-400.italic}, which updates the UI or performs a defined task.
 
 <v-click>
 
-In most cases, we perform a "State Update" within the component where it occurs. But how about when we want other components in the same [parent]{.italic} component to be aware of the update or interaction? This is where [Lifting Up State]{.text-gradient} comes in handy, which involves moving the state management that is occurring in "Child1" component to the "Parent" component so that the "Child2" or other children of the parent, including the parent itself, can be aware of that particular [State Change]{.text-teal-400.italic}.
+In most cases, we perform a "State Update" within the component where it originates. But what if other components under the same [parent]{.italic} need to know about that update? This is where [Lifting Up State]{.text-gradient} becomes useful. We move the state from `Child1` to `Parent` so that `Child2`, the parent's other children, and the parent itself can respond to the [State Change]{.text-teal-400.italic}.
 
 </v-click>
 
@@ -50,7 +50,7 @@ transition: slide-down
 
 # [Lifting Up State]{.text-gradient} in {React} [Code Structure]{.text-gradient.text-3xl}
 
-The structure of a [Lifted State]{.text-teal-400.italic} is just as its name sounds; [Lifting Up].
+The structure of [Lifted State]{.text-teal-400.italic} is exactly what its name suggests: [Lifting Up].
 
 <div v-click="1">
 
@@ -105,7 +105,7 @@ function ChildB({ setValue }) {
 
 <div v-click="3">
 
-In the code example above, we see a transition where we were previously managing state in "ChildA" and then making it available everywhere by [Lifting Up The State]{.text-teal-400.italic} to the parent.
+In the code example above, state that was previously managed in `ChildA` becomes available to sibling components after it is [lifted up]{.text-teal-400.italic} to the parent.
 
 </div>
 
@@ -132,11 +132,11 @@ transition: slide-right
 
 # [Context API for Global State]{.text-gradient}
 
-There are cases where we want to share state across the entire application or with one or more parents in different folders of our application. In this case, simply [Lifting Up State]{.text-gradient} is just not enough and won't really be clean code if used because you would have to pass the state as props to any child component that needs it. Example of this complex case is [Theme state management]{.text-teal-400.italic} where we would want our entire application to be aware of which theme was toggled. This is where {React}'s [Context API]{.text-gradient.italic} comes in handy.
+Sometimes we need to share state across the entire application or with components in different parts of the component tree. In these cases, [Lifting Up State]{.text-gradient} is not enough: passing state as props through every intermediate component would make the code difficult to maintain. [Theme state management]{.text-teal-400.italic}, where the entire application must know which theme is active, is one example. This is where {React}'s [Context API]{.text-gradient.italic} becomes useful.
 
 <v-click>
 
-[Context API]{.text-gradient.italic} is a built-in {React} feature to create and manage global state without passing props manually.
+The [Context API]{.text-gradient.italic} is a built-in {React} feature for creating and managing global state without passing props manually through every level of the component tree.
 
 </v-click>
 
@@ -205,7 +205,7 @@ hideInToc: true
 
 # [Introduction to Redux]{.text-gradient}
 
-For large-scale applications with complex state interactions, we can use an external library like [Redux]{.text-teal-400} for state management and Redux Toolkit(RTK) for more flexibility.
+For large-scale applications with complex state interactions, we can use an external library like [Redux]{.text-teal-400} for state management and Redux Toolkit (RTK) for greater flexibility.
 
 <v-click>
 
@@ -258,17 +258,20 @@ hideInToc: true
 transition: fade
 ---
 
-## More third-party libraries for state management include `zustand`, `jotai`, `@tanstack/query`, `swr`, `recoil`, `xstate`.
+## Other third-party state management libraries include `zustand`, `jotai`, `@tanstack/query`, `swr`, `recoil`, and `xstate`.
 
 ````md magic-move
 ```js
 import { create } from 'zustand'
 
-const useBearStore = create<BearState>((set) => ({
-  bears: 0,
-  increase: () => set((state) => ({ bears: state.bears + 1 })),
-  decrease: () => set((state) => ({ bears: state.bears - 1 })),
-}))
+const useBearStore =
+  create <
+  BearState >
+  ((set) => ({
+    bears: 0,
+    increase: () => set((state) => ({ bears: state.bears + 1 })),
+    decrease: () => set((state) => ({ bears: state.bears - 1 })),
+  }))
 
 function BearCounter() {
   const { bears, increase, decrease } = useBearStore()
@@ -403,7 +406,7 @@ hideInToc: true
 
 <div class="text-sm">
 
-- `<Activity>` hides children via `display: none` while preserving their state and DOM. Stateful hidden components.
+- `<Activity>` hides children via `display: none` while preserving their state and DOM, allowing hidden components to remain stateful.
 - `mode="visible" | "hidden"` controls whether content shows; hidden content still re-renders at lower priority.
 - Effects inside children are cleaned up while hidden; restored when visible again.
 - Ideal for tabs/sidebars you want to hide without losing state or refetching or prefetching(Media like videos).
@@ -418,7 +421,9 @@ function App() {
 
   return (
     <div className="layout">
-      <button onClick={() => setShowSidebar(prev => !prev)}>Toggle sidebar</button>
+      <button onClick={() => setShowSidebar((prev) => !prev)}>
+        Toggle sidebar
+      </button>
       <Activity mode={showSidebar ? 'visible' : 'hidden'}>
         <Sidebar /> {/* state + DOM preserved while hidden */}
       </Activity>
@@ -448,7 +453,7 @@ transition: slide-up
 - The [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) enables animated DOM swaps for route or view changes. [Read More about SPA use-cases](https://web.dev/learn/css/view-transitions-spas)
 - Wrap DOM updates in `document.startViewTransition` when available; it falls back silently if unsupported.
 - Use CSS to define shared element animations (`view-transition-name`).
-- You can wrap pages, components, or grouped interactions with <ViewTransition /> element and setup a minimal style.
+- You can wrap pages, components, or grouped interactions with a `<ViewTransition />` element and set up minimal styling.
 
 </v-clicks>
 
@@ -485,8 +490,16 @@ import {ViewTransition} from 'react'
 ```
 
 ```jsx
-<Suspense fallback={<ViewTransition><A /></ViewTransition>}>
-  <ViewTransition><B /></ViewTransition>
+<Suspense
+  fallback={
+    <ViewTransition>
+      <A />
+    </ViewTransition>
+  }
+>
+  <ViewTransition>
+    <B />
+  </ViewTransition>
 </Suspense>
 ```
 

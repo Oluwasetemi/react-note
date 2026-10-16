@@ -280,7 +280,7 @@ function ToggleButton() {
       >
         {/* {isActive ? 'ON' : 'OFF'} */ 'Practice'}
       </button>
-      {/*<div>It may get difficult but with time you will always get better. This note is filled with gems - dig dont scratch the surface - find and own them, read it and contribute to it.</div>*/}
+      {/*<div>It may be difficult at first, but you will improve with time. This note is filled with gems—dig deeply rather than merely scratching the surface. Find them, understand them, read the note, and contribute to it.</div>*/}
     </>
   )
 }
@@ -695,7 +695,7 @@ const [state, formAction] = useActionState(reducerFnAction, initialState, permal
 
 </div>
 
-This hook manages form state and updates based on an action (side effect). It's a better replacement for the `onSubmit` event handler and is more natural to how the web handles forms.
+This hook manages form state and updates based on an action (side effect). It offers a better alternative to the `onSubmit` event handler and aligns more closely with how the web handles forms.
 
 <div grid cols-2 gap-5>
 
@@ -712,8 +712,15 @@ function Form() {
 
   return (
     <form action={formAction}>
-      <input class="input mt-2 ml-2" placeholder="Are you an admin?" type="text" name="username" />
-      <button class="btn ml-4 p-1" type="submit">Login</button>
+      <input
+        class="input mt-2 ml-2"
+        placeholder="Are you an admin?"
+        type="text"
+        name="username"
+      />
+      <button class="btn ml-4 p-1" type="submit">
+        Login
+      </button>
       {state && <p>{state.message}</p>}
     </form>
   )
@@ -724,15 +731,44 @@ function Form() {
 function Cart() {
   const products = ['react', 'html', 'css', 'js', 'ts']
   const addToCartAction = async (prevState, formData) => {
-    const product = formData.get('product');
-    const currentProductCount = prevState.cartObject[product] || 0;
-    return { success: true, cart: prevState.cart + 1, lastAdded: product, cartObject: { ...prevState.cartObject, [product]: currentProductCount + 1 } };
+    const product = formData.get('product')
+    const currentProductCount = prevState.cartObject[product] || 0
+    return {
+      success: true,
+      cart: prevState.cart + 1,
+      lastAdded: product,
+      cartObject: {
+        ...prevState.cartObject,
+        [product]: currentProductCount + 1,
+      },
+    }
   }
-  const [state, formAction] = React.useActionState(addToCartAction, {cart: 0, cartObject: {}, lastAdded: null})
+  const [state, formAction] = React.useActionState(addToCartAction, {
+    cart: 0,
+    cartObject: {},
+    lastAdded: null,
+  })
   return (
     <form action={formAction}>
       <div class="grid cols-[1fr_200px] gap-3">
-        <section>{products.map(each => (<><button key={each} name="product" value={each} class="btn ml-4 p-1" type="submit">{each}({state.cartObject[each] || 0})</button></>))}</section><p>Cart: {state.cart} Last: {state.lastAdded || 'null'}</p>
+        <section>
+          {products.map((each) => (
+            <>
+              <button
+                key={each}
+                name="product"
+                value={each}
+                class="btn ml-4 p-1"
+                type="submit"
+              >
+                {each}({state.cartObject[each] || 0})
+              </button>
+            </>
+          ))}
+        </section>
+        <p>
+          Cart: {state.cart} Last: {state.lastAdded || 'null'}
+        </p>
       </div>
     </form>
   )
@@ -1032,7 +1068,7 @@ name: HookForm
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-1. Using the WebSocket provided by the [API](https://api.oluwasetemi.dev), use the effect hook to create a real-time display of `tasks` as they are created, updated, and deleted. Your job is to create a simple React application that shows the socket communication in real time. See this as an example [Tasks Socket Client](https://api.oluwasetemi.dev/ws/client/tasks).
+1. Using the WebSocket provided by the [API](https://api.oluwasetemi.dev), use the effect hook to create a real-time display of `tasks` as they are created, updated, and deleted. Your job is to create a simple React application that shows the socket communication in real time. Use this [Tasks Socket Client](https://api.oluwasetemi.dev/ws/client/tasks) as an example.
 
 2. Implement a custom hook for this socket communication.
 

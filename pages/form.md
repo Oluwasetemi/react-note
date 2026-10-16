@@ -31,7 +31,7 @@ Why are forms so important?
 <div>
 Forms allow users to input and submit information. They enable users to perform essential tasks such as sharing data, completing actions, and providing feedback. Without forms, core functionality on the web, such as logging in or signing up, would not be possible. Forms <span class="text-teal-400">facilitate user interaction with the page</span>, enabling dynamic experiences.
 
-The form 👉 here will submit then the page will refresh, but this is not what we want to happen. We want to prevent this default behavior and let `React control the form and its data`. Handling forms is about how you handle the data when it changes value or gets submitted.
+Submitting the form 👉 causes the page to refresh, but this is not the behavior we want. We want to prevent this default behavior and let `React control the form and its data`. Handling forms is about how you handle the data when it changes value or gets submitted.
 
 How can I collect user input and handle it effectively in React👇?
 
@@ -50,7 +50,12 @@ function App() {
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -70,7 +75,7 @@ name: Handling Form Inputs
 
 [Handling Form Inputs - Data Binding]{.text-gradient.text-4xl}
 
-When users interact with form elements (like inputs), it may trigger changes in the data and UI. This interaction is managed through data binding—how a UI element reacts when the `data changes` and vice versa.
+When users interact with form elements (such as inputs), their actions may trigger changes in the data and UI. This interaction is managed through data binding—how a UI element reacts when the `data changes` and vice versa.
 
 There are two types of data binding in React:
 
@@ -200,7 +205,12 @@ function TextInput() {
   }
 
   return (
-    <input type="text" value={name} onChange={handleChange} placeholder="Enter your name" />
+    <input
+      type="text"
+      value={name}
+      onChange={handleChange}
+      placeholder="Enter your name"
+    />
   )
 }
 
@@ -258,10 +268,23 @@ function RadioButton() {
   return (
     <>
       <label>
-        <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleChange} />{' '} Male
+        <input
+          type="radio"
+          name="gender"
+          value="male"
+          checked={gender === 'male'}
+          onChange={handleChange}
+        />{' '}
+        Male
       </label>
       <label>
-        <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleChange} />{' '}
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          checked={gender === 'female'}
+          onChange={handleChange}
+        />{' '}
         Female
       </label>
     </>
@@ -374,7 +397,7 @@ Zod is a schema validation library that works well with `TypeScript` and `React`
 To use Zod in a React application, you'll first need to install it: `npm/pnpm install zod`
 
 <h3 v-click>
-Step-by-step example of how to use Zod for validating a user registration form.
+Here is a step-by-step example of how to use Zod to validate a user registration form.
 </h3>
 
 <div v-click>
@@ -597,7 +620,7 @@ In previous React versions, handling form submissions typically involved <span c
 
 Form Actions in React 19 introduce a more streamlined approach. They are a specialized implementation of `Server Actions` (actions in React 19 that allow any component to perform server-side operations directly) that focuses specifically on handling form submissions. They allow developers to attach specific actions directly to form submissions <span class="text-teal-400">without needing intermediate API routes or external libraries</span>. This feature integrates form handling with server-side logic seamlessly, enabling simpler, more direct interactions with the server.
 
-They simplify this process by allowing us to <span class="text-teal-400">handle submissions directly on the server side</span>, bypassing the need for an API route. Form actions make it easier to define and customize actions like saving, editing, or deleting data right in the form itself, making the handling of form logic more straightforward and efficient.
+Form Actions simplify this process by allowing us to <span class="text-teal-400">handle submissions directly on the server side</span>, bypassing the need for an API route. Form actions make it easier to define and customize actions like saving, editing, or deleting data right in the form itself, making the handling of form logic more straightforward and efficient.
 
 See how forms were handled before form actions and how they&apos;re handled using form actions 👉
 

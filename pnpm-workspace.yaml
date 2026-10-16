@@ -1,4 +1,21 @@
-onlyBuiltDependencies:
-  - esbuild
-  - playwright-chromium
-  - simple-git-hooks
+allowBuilds:
+  esbuild: true
+  playwright-chromium: true
+  simple-git-hooks: false
+
+peerDependencyRules:
+  allowedVersions:
+    vite: '8'
+    shiki: '4'
+
+patchedDependencies:
+  '@comark/markdown-it@0.3.4': patches/@comark__markdown-it@0.3.4.patch
+
+minimumReleaseAgeExclude:
+  - argparse@3.0.3
+  - baseline-browser-mapping@2.11.29
+  - cytoscape@3.34.4
+  - electron-to-chromium@1.5.457
+  - markdown-it@14.3.3
+  - markdown-it@15.0.3
+  - node-releases@2.0.59

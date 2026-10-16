@@ -44,7 +44,7 @@ import { useRef } from 'react'
 const refContainer = useRef(initialValue)
 ```
 
-- Initialization: useRef `accepts a parameter (initialValue)` during the first render, which initializes the ref.current property. This initial value is ignored in subsequent renders.
+- Initialization: `useRef` accepts an `initialValue` parameter that initializes the `ref.current` property during the first render. This initial value is ignored on subsequent renders.
 - Returned Object: It returns an object with a single property, `current`.
 
 Unlike useState, refs are mutable. You can directly update ref.current without causing a re-render.
@@ -115,13 +115,13 @@ const [state, dispatch] = useReducer(reducer, initialState, init?)
 
 The hook takes three parameters: a <span class="text-teal-400">reducer</span> function, an <span class="text-teal-400">initialState</span>, and an optional <span class="text-teal-400">init</span> function.
 
-The `reducer` is a function that specifies how the state is updated, structured as `(state, action) => newState` (React passes the current state and action to the reducer, which <span class="text-teal-400">calculates and returns the next state</span>. React then saves the new state, <span class="text-teal-400">re-renders your component</span> with it, and updates the UI accordingly).
+The `reducer` is a function that specifies how state is updated and has the structure `(state, action) => newState`. React passes the current state and action to the reducer, which <span class="text-teal-400">calculates and returns the next state</span>. React then saves the new state, <span class="text-teal-400">re-renders your component</span> with it, and updates the UI accordingly.
 
 The `initialState` is the starting value of the state.
 
 The optional `init` function allows you to compute the initial state, useful for heavy initialization logic.
 
-useReducer returns an array with two elements: `state` and `dispatch`. The state holds the current value, while dispatch is a function that lets you change state in response to an interaction—you can call it to send actions, update the state, and trigger a re-render. This makes useReducer ideal for managing complex state logic or when state transitions depend on the current state and actions.
+`useReducer` returns an array with two elements: `state` and `dispatch`. The state holds the current value, while `dispatch` is a function that lets you change state in response to an interaction. You can call it to send actions, update the state, and trigger a re-render. This makes `useReducer` ideal for managing complex state logic or state transitions that depend on the current state and actions.
 
 Use Cases: <span class="text-teal-400">Complex state logic</span> & <span class="text-teal-400">Centralized state management within a component</span>.
 
@@ -403,7 +403,7 @@ transition: slide-up
 
 useLayoutEffect is a hook designed to perform <span class="text-teal-400">synchronous side effects</span> after DOM mutations `but before the browser repaints the screen`. This ensures that any layout measurements or updates are applied before the user sees them, making it valuable for scenarios where precise alignment or measurements of DOM elements are critical.
 
-It is a <span class="text-teal-400">version of useEffect</span>. However, in contrast, useEffect runs <span class="text-teal-400">asynchronously</span> after the paint cycle, making it more suitable for non-blocking side effects like setting up subscriptions or setting up event listeners. While `both hooks allow for side effects`, their timing and use cases differ significantly.
+It is a <span class="text-teal-400">variation of useEffect</span>. In contrast, `useEffect` runs <span class="text-teal-400">asynchronously</span> after the paint cycle, making it more suitable for non-blocking side effects such as subscriptions or event listeners. While `both hooks allow for side effects`, their timing and use cases differ significantly.
 
 <v-clicks>
 
@@ -415,7 +415,7 @@ useLayoutEffect(setup, dependencies?)
 
 Use Cases:
 
-- DOM Measurements: If you need to measure an element&apos;s dimensions before rendering dependent content, such as calculating a tooltip's position.
+- DOM Measurements: Measure an element&apos;s dimensions before rendering dependent content, such as when calculating a tooltip's position.
 
 - Avoiding Flickers: When you want to avoid the user seeing visual changes (e.g., moving elements) after the paint cycle.
 
@@ -548,7 +548,7 @@ Returns the status of form submissions, including whether a form is pending subm
 
 ## `useOptimistic`
 
-Enables optimistic UI updates by allowing you to show the expected result of an action immediately, then reconciling it with the actual server response when it arrives. You can optimistically update the UI while an asynchronous operation is in progress. It shows the expected result immediately and automatically reverts if the operation fails.
+Enables optimistic UI updates by showing the expected result of an action immediately and then reconciling it with the server response when it arrives. The optimistic update automatically reverts if the operation fails.
 
 ```jsx
 const [optimisticState, addOptimistic] = useOptimistic(state, updateFn)

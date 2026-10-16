@@ -27,7 +27,7 @@ name: Ways of writing HTML in a JavaScript file
 Ever wondered how you can write HTML in a JavaScript file?
 
 <v-clicks>
-There are several ways to achieve this which include:
+There are several ways to achieve this, including:
 
 1. <u>Using `Template Literals (``)`:</u> Template literals allow you to embed HTML directly into JavaScript using backticks. They provide an easy way to write multi-line HTML strings.
 
@@ -175,7 +175,7 @@ Note:
 - JSX converts HTML tags into React elements.
 - JSX is an extension used with React; it is not part of React itself. It is a separate syntactic tool that helps React developers create React elements easily.
 - JSX is a type of expression in JS, not a statement.
-- JSX allows you to write HTML elements in JavaScript and place them in the DOM without any createElement() and/or appendChild() methods.
+- JSX allows you to write HTML-like elements in JavaScript and place them in the DOM without calling `createElement()` or `appendChild()` directly.
 
 </v-clicks>
 
@@ -233,7 +233,7 @@ There are a few rules that guide writing JSX. They include:
 // the `<div></div>` is the parent (root element)
 <div>
   <h1>I am the first Element in the group!</h1>
-  <p>Well I am the second, but I have details more than you do!</p>
+  <p>Well, I am the second, but I have more details than you do!</p>
   <img src="imageUrl" alt="I am the bigger picture guys.">
 </div>
 ```
@@ -273,7 +273,7 @@ hideInToc: true
 name: Rules of JSX
 ---
 
-3. <u>Use camelCase for most of the things!:</u> JSX converts to JavaScript, and attributes written in JSX become keys of JavaScript objects. As we know, JavaScript has limitations on variable names, hence using camelCase is recommended. For example, their names can’t contain dashes or be reserved words like `class`. Since `class` is a reserved word, in React you write `className` instead.
+3. <u>Use camelCase for most things:</u> JSX converts to JavaScript, and attributes written in JSX become keys in JavaScript objects. Because JavaScript restricts which names can be used as variables, camelCase is recommended. For example, their names can’t contain dashes or be reserved words like `class`. Since `class` is a reserved word, in React you write `className` instead.
 
 ```jsx {hide|3|4|*}
 // using camelCase in JSX
@@ -406,7 +406,7 @@ title: CSS in JSX
 class: 'text-sm'
 ---
 
-2. CSS Classes: To apply styles from an external style sheet or a .module.css, you simply need to reference the JSX element you want to style by its `className`, `id`, or other attributes.
+2. CSS Classes: To apply styles from an external style sheet or CSS module, reference the JSX element you want to style by its `className`, `id`, or other attributes.
 
 <div flex justify-evenly gap-2>
 

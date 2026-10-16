@@ -258,7 +258,7 @@ export default defineCodeRunnersSetup(() => {
         presets: ['react'],
       })
 
-      let Component = new Function(`return (React) => ${result.code}`)()(React)
+      let Component = new Function(`return (React) => ${result?.code}`)()(React)
       let app = React.createElement(Component)
       const el = document.createElement('div')
       el.className = 'jsx-runner'

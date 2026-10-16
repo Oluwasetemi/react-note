@@ -62,7 +62,7 @@ transition: slide-left
 To use React Router, first install the react-router package: `npm/pnpm/bun install react-router`
 
 After installing React Router, you can start defining routes and setting up navigation.
-To configure basic routing setup, use these components: BrowserRouter, Routes, Route, Link
+To configure basic routing, use these components: `BrowserRouter`, `Routes`, `Route`, and `Link`.
 
 - <span class="text-gradient">BrowserRouter</span> enables routing functionality across the app.
 - <span class="text-gradient">Routes</span> holds each route.
@@ -71,7 +71,7 @@ To configure basic routing setup, use these components: BrowserRouter, Routes, R
 
 <v-clicks>
 
-In the basic setup in the next page ➠, `BrowserRouter` wraps the entire application, which allows React Router to manage the routing. We define the `Routes component`, which holds multiple Route elements. Each Route specifies a path (like / for the home page) and an element (like `<Home />` or `<About />`) that gets rendered when the path is matched. This approach is ideal for quick setups and demos, where you might not need to split everything into separate files.
+In the basic setup on the next page ➠, `BrowserRouter` wraps the entire application, allowing React Router to manage routing. We define the `Routes` component, which contains multiple `Route` elements. Each `Route` specifies a path (such as `/` for the home page) and an element (such as `<Home />` or `<About />`) that is rendered when the path matches. This approach is ideal for quick setups and demos, where you might not need to split everything into separate files.
 
 <span class="text-gradient">PS: You most likely won&apos;t do this while building your applications.</span>
 
@@ -93,7 +93,7 @@ transition: slide-left
 name: Explanation of Basic Setup
 ---
 
-In a <span class="text-gradient">more structured setup</span>, each route’s component (e.g., Home, About, and NavBar) is imported from its own file. This setup keeps App.js `cleaner and allows for better organization`, especially as your application grows. As you would see below, <span class="text-gradient">index.js</span> wraps the App component in BrowserRouter, enabling client-side routing while <span class="text-gradient">App.js</span> defines routes and imports components for each path.
+In a <span class="text-gradient">more structured setup</span>, each route’s component (e.g., Home, About, and NavBar) is imported from its own file. This setup keeps App.js `cleaner and allows for better organization`, especially as your application grows. As you will see below, <span class="text-gradient">index.js</span> wraps the App component in BrowserRouter, enabling client-side routing, while <span class="text-gradient">App.js</span> defines routes and imports components for each path.
 
 ---
 hideInToc: true
@@ -133,7 +133,7 @@ export default function NavigationBar() {
 </div>
 
 <div v-click>
-✴ <span class="text-gradient">Programmatic Navigation with useNavigate:</span> To navigate in response to an event (like a form submission), use the useNavigate hook.
+✴ <span class="text-gradient">Programmatic Navigation with `useNavigate`:</span> To navigate in response to an event (such as a form submission), use the `useNavigate` hook.
 
 ```jsx
 import { useNavigate } from 'react-router'
@@ -193,7 +193,7 @@ hideInToc: true
 
 Redirects and protected routes are essential for `securing certain parts` of your application or `guiding users` to appropriate pages. Protected routes, for instance, restrict access to authenticated users, while redirects can send users to a different path if certain conditions aren't met.
 
-In the next example in the next page ➠, we create a protected route that only allows authenticated users to access it. If the user is not authenticated, they are redirected to the login page.
+In the example on the next page ➠, we create a protected route that only authenticated users can access. If the user is not authenticated, they are redirected to the login page.
 
 <v-clicks>
 
@@ -337,7 +337,14 @@ Step 3: Create Basic Router Setup
 ```js
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { Outlet, RouterProvider, Link, createRouter, createRoute, createRootRoute, } from '@tanstack/react-router'
+import {
+  Outlet,
+  RouterProvider,
+  Link,
+  createRouter,
+  createRoute,
+  createRootRoute,
+} from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 // Root route with navigation
@@ -429,7 +436,7 @@ transition: slide-left
 
 <div grid class="grid-cols-2 gap-2">
 
-- ✅ 100% TypeScript Support - Fully type-safe routing(can disable by adding a boolean in the `vite.config.js`)
+- ✅ 100% TypeScript Support - Fully type-safe routing (which can be disabled by adding a boolean option in `vite.config.js`)
 - ✅ File-based Routing - Automatic route generation
 - ✅ Nested Routing - Complex route hierarchies
 - ✅ Search Params - Built-in URL state management
@@ -513,7 +520,7 @@ Unhead has first-class support for React, allowing you to manage your head tags 
 It can directly replace react-helmet, handling a more diverse set of use cases from SEO to structured data.
 
 - Install the `@unhead/react` package
-- Setup the provider using `const head = createHead()`
+- Set up the provider using `const head = createHead()`
 - `UnheadProvider` will wrap your application with the `head` prop.
 
 ```jsx
