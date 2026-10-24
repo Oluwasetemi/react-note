@@ -12,15 +12,14 @@ routeAlias: chapter-more-hooks
 - <a @click="$slidev.nav.next()">useRef</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">useReducer</a>
 - <a @click="$slidev.nav.go($nav.currentPage+9)">useContext</a>
-- <a @click="$slidev.nav.go($nav.currentPage+12)">useTransition</a>
-- <a @click="$slidev.nav.go($nav.currentPage+13)">useLayoutEffect</a>
-- <a @click="$slidev.nav.go($nav.currentPage+17)">useDeferredValue</a>
-- <a @click="$slidev.nav.go($nav.currentPage+20)">useActionState</a>
-- <a @click="$slidev.nav.go($nav.currentPage+20)">useFormStatus</a>
-- <a @click="$slidev.nav.go($nav.currentPage+20)">useOptimistic</a>
-- <a @click="$slidev.nav.go($nav.currentPage+22)">customHooks</a>
-- <a @click="$slidev.nav.go($nav.currentPage+27)">useSyncExternalStore</a>
-- <a @click="$slidev.nav.go($nav.currentPage+29)">useEffectEvent</a>
+- <a @click="$slidev.nav.go($nav.currentPage+12)">Async React and useTransition</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">Activity</a>
+- <a @click="$slidev.nav.go($nav.currentPage+17)">useLayoutEffect</a>
+- <a @click="$slidev.nav.go($nav.currentPage+21)">useDeferredValue</a>
+- <a @click="$slidev.nav.go($nav.currentPage+24)">Actions and useOptimistic</a>
+- <a @click="$slidev.nav.go($nav.currentPage+26)">Custom Hooks</a>
+- <a @click="$slidev.nav.go($nav.currentPage+31)">useSyncExternalStore</a>
+- <a @click="$slidev.nav.go($nav.currentPage+33)">useEffectEvent</a>
 
 ---
 hideInToc: true
@@ -323,75 +322,162 @@ Without useContext: You&apos;d need to pass the theme prop down manually, making
 
 ---
 hideInToc: true
-name: Concurrent Features
+name: Async React Mental Model
 ---
 
-# Concurrent Features
+# Async React: [Coordination, Not Just Speed]{.text-gradient}
 
-<div class="grid grid-cols-2 gap-6 h-full">
+When an interaction crosses a network boundary, the UI has an **in-between state**. Updating every part as soon as possible can produce flicker, stale content, or a wall of spinners.
 
-<!-- useTransition -->
-<div class="space-y-3">
-  <h2 class="text-xs font-bold text-indigo-600">useTransition</h2>
+<v-clicks>
 
-  <div class="bg-indigo-50 p-2 rounded">
-    <code class="text-[12px]">const [isPending, startTransition] = useTransition()</code>
-  </div>
+- A Transition is not a one-off trick for making slow rendering faster.
+- It coordinates urgent feedback, background work, Suspense, and optimistic updates.
+- The goal is one intentional loading sequence that works on both fast and slow networks.
+
+</v-clicks>
+
+<div class="mt-6 grid grid-cols-3 gap-3 text-center text-sm">
+  <div class="rounded bg-teal-500/15 p-3"><strong>1. Immediate</strong><br>Respond to the interaction</div>
+  <div class="rounded bg-amber-500/15 p-3"><strong>2. Loading</strong><br>Keep useful UI visible</div>
+  <div class="rounded bg-violet-500/15 p-3"><strong>3. Complete</strong><br>Reveal the final result</div>
+</div>
+
+<p class="mt-5 text-xs opacity-70">Mental model adapted from the <a href="https://www.youtube.com/watch?v=B_2E96URooA">React Conf 2025 keynote</a>.</p>
+
+---
+hideInToc: true
+name: Transitions Coordinate Background Work
+---
+
+# `useTransition`: Keep Urgent Updates Responsive
 
 ```jsx
-function SearchApp() {
-  const [isPending, startTransition] = useTransition();
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+function SearchPage() {
+  const [query, setQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isPending, startTransition] = useTransition()
 
-  const handleSearch = (newQuery) => {
-    setQuery(newQuery);
+  function handleChange(event) {
+    const nextQuery = event.target.value
+    setQuery(nextQuery) // urgent: keep typing responsive
+
     startTransition(() => {
-      // Non-urgent update
-      setResults(expensiveSearch(newQuery));
-    });
-  };
-  return (...);
+      setSearchQuery(nextQuery) // render results in the background
+    })
+  }
+
+  return (
+    <>
+      <input value={query} onChange={handleChange} />
+      <SearchResults query={searchQuery} dimmed={isPending} />
+    </>
+  )
 }
 ```
 
-  <div class="bg-white light:bg-black bg-green-50 p-1 rounded text-xs text-black light:text-white">
-    <strong>Use:</strong> Mark non-urgent updates to keep UI responsive.
-  </div>
-</div>
+<v-clicks>
 
-<!-- startTransition -->
-<div class="space-y-3">
-  <h2 class="text-xl font-bold text-pink-600">startTransition</h2>
+- `isPending` gives immediate feedback while the Transition is running.
+- React may interrupt outdated background renders when a newer update arrives.
+- `startTransition` changes update priority; it does **not** make blocking JavaScript faster.
+- Never use a Transition to control the text input itself.
 
-  <div class="bg-pink-50 p-2 rounded">
-    <code class="text-xs">startTransition(() => { /* update */ })</code>
-  </div>
+</v-clicks>
+
+---
+hideInToc: true
+name: Async Actions with useTransition
+---
+
+# Async Actions: One Pending Lifecycle
+
+A Transition can include an async mutation and stay pending while the Action completes.
 
 ```jsx
-import { startTransition } from 'react';
+const [isPending, startTransition] = useTransition()
 
-function FilterApp() {
-  const [filter, setFilter] = useState('');
-  const [filteredData, setFilteredData] = useState(data);
+function submit(formData) {
+  startTransition(async () => {
+    const savedItem = await saveItem(formData)
 
-  const handleFilter = (newFilter) => {
-    setFilter(newFilter);
-    startTransition(() => {
-      // Expensive filtering operation
-      setFilteredData(data.filter(item => item.name.includes(newFilter) ));
-    });
-  };
-  return ();
+    // State updates after await need another Transition today.
+    startTransition(() => setSelectedItem(savedItem))
+  })
 }
 ```
 
-  <div class="bg-white light:bg-black bg-blue-50 p-1 rounded text-xs text-black light:text-white">
-    <strong>Use:</strong> Wrap expensive updates to prevent blocking.
+<div class="grid grid-cols-2 gap-5 mt-4 text-sm">
+  <div class="rounded bg-green-500/15 p-3">
+    <strong>React coordinates</strong>
+    <ul><li>Pending state</li><li>Async errors</li><li>Background rendering</li></ul>
+  </div>
+  <div class="rounded bg-red-500/15 p-3">
+    <strong>You still design</strong>
+    <ul><li>Immediate feedback</li><li>Error messages</li><li>Retry behavior</li></ul>
   </div>
 </div>
 
+---
+hideInToc: true
+name: The Three Paints
+---
+
+# Design the [Three Paints]{.text-gradient}
+
+| Moment        | User should see                            | React tool                   |
+| ------------- | ------------------------------------------ | ---------------------------- |
+| **Immediate** | The button, tab, or field responds now     | `isPending`, `useOptimistic` |
+| **Loading**   | Existing content or a useful shell remains | `<Suspense>`, a Transition   |
+| **Complete**  | The final content arrives as one result    | Commit, optionally animate   |
+
+<v-clicks>
+
+### Ask before adding a spinner
+
+1. Can the current content stay useful while the next screen loads?
+2. Does the user need local feedback near the control they used?
+3. Will several independent loading indicators feel like one experience—or noise?
+
+> `useOptimistic` gives immediate feedback, Suspense describes loading, and Transitions coordinate both.
+
+</v-clicks>
+
+---
+hideInToc: true
+name: Activity
+---
+
+# Preserve Hidden UI with `<Activity>`
+
+```jsx
+import { Activity } from 'react'
+
+function Tabs({ activeTab }) {
+  return (
+    <Activity mode={activeTab === 'details' ? 'visible' : 'hidden'}>
+      <DetailsTab />
+    </Activity>
+  )
+}
+```
+
+<div class="grid grid-cols-2 gap-5 mt-4 text-sm">
+  <div class="rounded bg-blue-500/15 p-3">
+    <strong>When hidden</strong>
+    <ul><li>DOM and state are preserved</li><li>Effects are cleaned up</li><li>Updates run at lower priority</li></ul>
+  </div>
+  <div class="rounded bg-purple-500/15 p-3">
+    <strong>When visible again</strong>
+    <ul><li>Previous state returns</li><li>Effects reconnect</li><li>Back navigation can feel instant</li></ul>
+  </div>
 </div>
+
+<v-click>
+
+**Practice:** Replace `{activeTab === 'details' && <DetailsTab />}` with `<Activity>`. Type into a field, switch tabs, and confirm that the field value survives.
+
+</v-click>
 
 ---
 hideInToc: true
@@ -528,74 +614,63 @@ name: useDeferredValue Example
 autoLoad: true
 ---
 
-<!--
-TODO: Talk about React 19 hooks useActionState, useFormStatus, use, useOptimistic and useTransition
--->
+---
+hideInToc: true
+transition: slide-up
+name: Actions and Optimistic UI
+---
+
+# Actions: Model the Whole User Intent
+
+An **Action** is an async operation performed inside a Transition. Instead of coordinating loading, errors, and updates independently, model them as one lifecycle.
+
+<div class="grid grid-cols-3 gap-3 my-5 text-center text-sm">
+  <div class="rounded bg-teal-500/15 p-3"><strong>Start</strong><br>Show local pending feedback</div>
+  <div class="rounded bg-amber-500/15 p-3"><strong>Await</strong><br>Run the mutation</div>
+  <div class="rounded bg-violet-500/15 p-3"><strong>Finish</strong><br>Commit or report an error</div>
+</div>
+
+- `useActionState` stores the Action's result and exposes pending state.
+- `useFormStatus` lets a child submit button read its parent form's status.
+- Action props such as `<form action={save}>` integrate with this lifecycle.
+- `useOptimistic` temporarily shows the expected result while the Action runs.
+
+> Put reusable async behavior in design components, routers, and data libraries instead of rebuilding the coordination in every screen.
 
 ---
 hideInToc: true
 transition: slide-up
+name: Optimistic UI Exercise
 ---
 
-## `useActionState`
-
-Manages state for form actions and async operations. It provides pending state, error handling, and optimistic updates for form submissions and server actions. This was discussed in the previous chapter.
-
-## `useFormStatus`
-
-Returns the status of form submissions, including whether a form is pending submission. This is particularly useful for showing loading states on submit buttons. This was discussed in the previous chapter.
-
-## `useOptimistic`
-
-Enables optimistic UI updates by showing the expected result of an action immediately and then reconciling it with the server response when it arrives. The optimistic update automatically reverts if the operation fails.
+# `useOptimistic`: Immediate, Honest Feedback
 
 ```jsx
-const [optimisticState, addOptimistic] = useOptimistic(state, updateFn)
-```
-
----
-hideInToc: true
-transition: slide-up
----
-
-## More on `useOptimistic`
-
-```jsx
-import { useOptimistic } from 'react'
-
-function AppContainer() {
-  const [optimisticState, addOptimistic] = useOptimistic(
-    state,
-    // updateFn
-    (currentState, optimisticValue) => {
-      // merge and return new state
-      // with optimistic value
-    },
+function TodoList({ todos, saveTodo }) {
+  const [optimisticTodos, addOptimisticTodo] = useOptimistic(
+    todos,
+    (currentTodos, draft) => [...currentTodos, { ...draft, pending: true }],
   )
+
+  async function addTodoAction(formData) {
+    const draft = { id: crypto.randomUUID(), text: formData.get('text') }
+    addOptimisticTodo(draft)
+    await saveTodo(draft)
+  }
+
+  return <form action={addTodoAction}>{/* render optimisticTodos */}</form>
 }
 ```
 
-<div class="mt-4 p-3 bg-yellow-50 rounded">
-  <h3 class="font-bold text-yellow-800 mb-2">Concurrent Features</h3>
-  <div class="grid grid-cols-2 gap-4 text-sm">
-    <div>
-      <strong class="text-indigo-700">useTransition:</strong>
-      <ul class="text-xs mt-1 text-black">
-        <li>Hook with pending state</li>
-        <li>Built-in loading indicator</li>
-        <li>Automatic priority handling</li>
-      </ul>
-    </div>
-    <div>
-      <strong class="text-pink-700">startTransition:</strong>
-      <ul class="text-xs mt-1 text-black">
-        <li>Standalone function</li>
-        <li>No loading state</li>
-        <li>Manual priority control</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<v-clicks>
+
+- Show a pending style so the optimistic item is not mistaken for confirmed data.
+- Let the canonical server result replace the optimistic state.
+- If the Action fails, React removes the optimistic result; show a useful error and retry path.
+
+**Practice:** Add a two-second delay and a forced failure. Can users tell what is pending, confirmed, or rejected?
+
+</v-clicks>
 
 ---
 hideInToc: true
