@@ -543,7 +543,7 @@ export default function App() {
 hideInToc: true
 transition: slide-up
 layout: iframe-lazy
-url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?ctl=1&embed=1&file=src%2Findex.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?ctl=1&file=src%2Findex.jsx&hideExplorer=1
 name: TanStack Form Example
 autoLoad: true
 ---
@@ -629,7 +629,7 @@ See how forms were handled before form actions and how they&apos;re handled usin
 hideInToc: true
 transition: slide-up
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-j9uc3f?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1&hideNavigation=1
+url: https://stackblitz.com/edit/vitejs-vite-j9uc3f?ctl=1&file=src%2FApp.jsx&hideExplorer=1&hideNavigation=1
 name: Form Actions Example
 autoLoad: true
 ---
