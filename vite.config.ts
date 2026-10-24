@@ -1,7 +1,15 @@
 import MarkdownItMagicLink from 'markdown-it-magic-link'
 import { defineConfig } from 'vite'
 
+// WebContainer embeds require an isolated host as well as iframe opt-in.
+const isolationHeaders = {
+  'Cross-Origin-Opener-Policy': 'same-origin',
+  'Cross-Origin-Embedder-Policy': 'credentialless',
+}
+
 export default defineConfig({
+  server: { headers: isolationHeaders },
+  preview: { headers: isolationHeaders },
   slidev: {
     markdown: {
       markdownSetup(md) {

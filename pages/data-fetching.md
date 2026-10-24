@@ -435,7 +435,8 @@ export default App
 hideInToc: true
 layout: iframe-lazy
 name: Using TanStack Query
-url: https://stackblitz.com/edit/github-zvtcsu?ctl=1&file=src%2Findex.tsx&hideExplorer=1
+url: https://stackblitz.com/edit/github-zvtcsu?embed=1&corp=1&ctl=1&file=src%2Findex.tsx&hideExplorer=1
+crossOriginIsolated: true
 autoLoad: true
 ---
 
@@ -1121,5 +1122,6 @@ Build a simple `Blog Application` with `React Router` and `TanStack Router`, wit
 ---
 hideInToc: true
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-r7m8bpox?ctl=1&file=src%2FApp.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/vitejs-vite-r7m8bpox?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
+crossOriginIsolated: true
 ---

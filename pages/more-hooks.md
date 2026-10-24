@@ -690,14 +690,16 @@ For practice, create custom hooks named `useToggle` and `useCounter`.
 hideInToc: true
 transition: slide-up
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-fdk26g?ctl=1&file=src%2Fhooks%2FuseForm.js
+url: https://stackblitz.com/edit/vitejs-vite-fdk26g?embed=1&corp=1&ctl=1&file=src%2Fhooks%2FuseForm.js
+crossOriginIsolated: true
 ---
 
 ---
 hideInToc: true
 transition: slide-up
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-hyv9j2?ctl=1&file=src%2Fhooks%2FuseFetch.js
+url: https://stackblitz.com/edit/vitejs-vite-hyv9j2?embed=1&corp=1&ctl=1&file=src%2Fhooks%2FuseFetch.js
+crossOriginIsolated: true
 ---
 
 ---
