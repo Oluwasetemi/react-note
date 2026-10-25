@@ -3,50 +3,125 @@ import { entries } from '../changelog'
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto px-6 py-8">
-    <header class="mb-10">
-      <router-link
-        to="/2"
-        class="inline-block mb-4 text-sm text-blue-500 no-underline hover:underline"
-      >
-        Back to slides toc
-      </router-link>
-      <h1 class="text-3xl font-bold m-0 mb-1">
-        Course <span class="text-gradient font-hand">Changelog</span>
-      </h1>
-      <p class="m-0 text-gray-500 dark:text-gray-400">
-        Version history of React Class Notes
-      </p>
-    </header>
-
-    <ul class="list-none p-0 m-0 relative before:content-[''] before:absolute before:left-[10px] before:inset-y-0 before:w-0.5 before:bg-gray-200 dark:before:bg-gray-700">
-      <li
-        v-for="entry in entries"
-        :key="entry.version"
-        class="flex gap-5 mb-6 relative"
-      >
-        <div
-          class="w-[22px] h-[22px] rounded-full bg-blue-500 flex-shrink-0 mt-3 z-1"
-        />
-        <div
-          class="flex-1 p-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm"
+  <main
+    class="changelog-page h-dvh overflow-y-auto overscroll-y-contain"
+    aria-labelledby="changelog-title"
+    tabindex="0"
+    @keydown.stop
+  >
+    <div class="changelog-progress" aria-hidden="true" />
+    <div class="max-w-2xl mx-auto px-6 py-8">
+      <header class="mb-10">
+        <router-link
+          to="/2"
+          class="inline-block mb-4 text-sm text-blue-500 no-underline hover:underline"
         >
-          <div class="flex items-center gap-3 mb-3">
-            <span
-              class="bg-blue-500 text-white px-[10px] py-[2px] rounded-full text-xs font-bold"
+          Back to slides toc
+        </router-link>
+        <h1 id="changelog-title" class="text-3xl font-bold m-0 mb-1">
+          Course <span class="text-gradient font-hand">Changelog</span>
+        </h1>
+        <p class="m-0 text-gray-500 dark:text-gray-400">
+          Version history of React Class Notes
+        </p>
+      </header>
+
+      <ul
+        class="list-none p-0 m-0 relative before:content-[''] before:absolute before:left-[10px] before:inset-y-0 before:w-0.5 before:bg-gray-200 dark:before:bg-gray-700"
+      >
+        <li
+          v-for="entry in entries"
+          :key="entry.version"
+          class="changelog-release flex gap-5 mb-6 relative"
+        >
+          <div
+            class="changelog-marker w-[22px] h-[22px] rounded-full bg-blue-500 flex-shrink-0 mt-3 z-1"
+            aria-hidden="true"
+          />
+          <div
+            class="flex-1 min-w-0 p-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm"
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <span
+                class="bg-blue-500 text-white px-[10px] py-[2px] rounded-full text-xs font-bold"
+              >
+                {{ entry.version }}
+              </span>
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{
+                entry.date
+              }}</span>
+            </div>
+            <ul
+              class="m-0 pl-5 leading-relaxed text-gray-700 dark:text-gray-300"
             >
-              {{ entry.version }}
-            </span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{
-              entry.date
-            }}</span>
+              <li v-for="change in entry.changes" :key="change">
+                {{ change }}
+              </li>
+            </ul>
           </div>
-          <ul class="m-0 pl-5 leading-relaxed text-gray-700 dark:text-gray-300">
-            <li v-for="change in entry.changes" :key="change">{{ change }}</li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
+        </li>
+      </ul>
+    </div>
+  </main>
 </template>
 
+<style>
+.changelog-progress {
+  display: none;
+}
+
+/* Decorative enhancement only: unsupported browsers retain the full history. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (
+    (animation-timeline: scroll()) and (animation-timeline: view()) and
+      (animation-range: entry)
+  ) {
+    .changelog-page {
+      scroll-timeline: --changelog-scroll block;
+    }
+
+    .changelog-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      height: 3px;
+      z-index: 10;
+      pointer-events: none;
+      background: linear-gradient(90deg, #3b82f6, #a855f7);
+      transform-origin: left;
+      animation: changelog-progress auto linear both;
+      animation-timeline: --changelog-scroll;
+    }
+
+    .changelog-release {
+      view-timeline: --changelog-release block;
+    }
+
+    .changelog-marker {
+      animation: changelog-marker auto cubic-bezier(0.23, 1, 0.32, 1) both;
+      animation-timeline: --changelog-release;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes changelog-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes changelog-marker {
+  from {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>
