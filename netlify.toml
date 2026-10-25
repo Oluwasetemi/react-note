@@ -5,6 +5,13 @@ command = "npm run build"
 [build.environment]
 NODE_VERSION = "24"
 
+# Required by the StackBlitz WebContainer embed.
+[[headers]]
+for = "/*"
+[headers.values]
+Cross-Origin-Opener-Policy = "same-origin"
+Cross-Origin-Embedder-Policy = "credentialless"
+
 [[redirects]]
 from = "/.well-known/*"
 to = "/.well-known/:splat"

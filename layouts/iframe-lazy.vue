@@ -43,13 +43,16 @@
         target="_blank"
         rel="noopener noreferrer"
         title="Open in browser"
-      >↗</a>
+        >↗</a
+      >
       <iframe
         ref="iframeRef"
         :src="url"
         :title="title || 'Embedded content'"
         class="w-full h-full border-0 rounded-lg block"
         frameborder="0"
+        :allow="crossOriginIsolated ? 'cross-origin-isolated' : undefined"
+        :credentialless="credentialless || undefined"
         allowfullscreen
         @load="onIframeLoad"
       />
@@ -65,6 +68,9 @@ interface Props {
   url: string
   title?: string
   autoLoad?: boolean
+  crossOriginIsolated?: boolean
+  // Legacy EngineBlock embeds do not send COEP headers.
+  credentialless?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

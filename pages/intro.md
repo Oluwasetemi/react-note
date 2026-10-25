@@ -774,7 +774,9 @@ transition: fade-in
 hideInToc: true
 layout: iframe-lazy
 name: Todo App All With JavaScript
-url: https://stackblitz.com/edit/web-platform-zxxs4v?ctl=1&embed=1&file=script.js&hideExplorer=1&hideNavigation=1
+url: https://stackblitz.com/edit/web-platform-zxxs4v?embed=1&ctl=1&file=script.js&hideExplorer=1&hideNavigation=1
+# EngineBlock has no COEP response headers; isolate it in a credentialless frame.
+credentialless: true
 autoLoad: true
 ---
 
@@ -782,7 +784,8 @@ autoLoad: true
 hideInToc: true
 layout: iframe-lazy
 name: Todo App All With React
-url: https://stackblitz.com/edit/vitejs-vite-epzrqa?ctl=1&embed=1&file=main.js&hideExplorer=1&hideNavigation=1
+url: https://stackblitz.com/edit/vitejs-vite-epzrqa?embed=1&corp=1&ctl=1&file=main.js&hideExplorer=1&hideNavigation=1
+crossOriginIsolated: true
 autoLoad: true
 ---
 

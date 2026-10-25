@@ -12,6 +12,8 @@ routeAlias: chapter-performance
 - <a @click="$slidev.nav.next()">Avoiding Unnecessary Renders with React.memo</a>
 - <a @click="$slidev.nav.go($nav.currentPage+5)">Optimizing Component Renders with useMemo</a>
 - <a @click="$slidev.nav.go($nav.currentPage+13)">Lazy Loading Components ("React.lazy" and "Suspense")</a>
+- <a @click="$slidev.nav.go($nav.currentPage+16)">Diagnosing with React Performance Tracks</a>
+- <a @click="$slidev.nav.go($nav.currentPage+17)">React Compiler</a>
 
 ---
 hideInToc: true
@@ -720,10 +722,58 @@ layout: iframe-lazy
 url: https://codesandbox.io/embed/gfv64p
 ---
 
-# React Compiler Helps with everything in this chapter, when starting a new project opt in for the React Compiler.
+---
+hideInToc: true
+transition: slide-up
+name: React Performance Tracks
+---
 
-1. [https://react.dev/learn/react-compiler](https://react.dev/learn/react-compiler)
+# Diagnose Before You Optimize
 
-2. [https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler](https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler)
+React 19.2 adds React-specific tracks to Chrome DevTools performance profiles.
 
-3. [https://playground.react.dev](https://playground.react.dev)
+<div class="grid grid-cols-2 gap-5 my-5 text-sm">
+  <div class="rounded bg-blue-500/15 p-3">
+    <strong>Scheduler track</strong>
+    <ul><li>Blocking interaction work</li><li>Transition work</li><li>Suspended and resumed work</li></ul>
+  </div>
+  <div class="rounded bg-purple-500/15 p-3">
+    <strong>Components track</strong>
+    <ul><li>Component render time</li><li>Effect timing</li><li>Repeated expensive work</li></ul>
+  </div>
+</div>
+
+<v-clicks>
+
+1. Record the slow interaction in Chrome's **Performance** panel.
+2. Find whether the delay is blocking work, Transition work, rendering, or an Effect.
+3. Optimize the measured bottleneck, then record again and compare.
+
+> A Transition coordinates an experience; it does not make expensive JavaScript faster.
+
+</v-clicks>
+
+---
+hideInToc: true
+transition: slide-up
+name: React Compiler
+---
+
+# React Compiler: Less Manual Memoization
+
+React Compiler can automatically memoize components and values, reducing the need to reach for `memo`, `useMemo`, and `useCallback` by default.
+
+<v-clicks>
+
+- Write clear, idiomatic React first.
+- Use React Performance Tracks or the Profiler to locate a real bottleneck.
+- Confirm that the Compiler is enabled and compiling the component.
+- Add manual memoization only when measurement shows that it is still useful.
+
+</v-clicks>
+
+### Explore
+
+1. [React Compiler guide](https://react.dev/learn/react-compiler)
+2. [Next.js React Compiler configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler)
+3. [React Compiler Playground](https://playground.react.dev)

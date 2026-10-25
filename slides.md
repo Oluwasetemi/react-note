@@ -381,18 +381,22 @@ routeAlias: chapter-appendix
 - <Link to="contributors">Contributors</Link>
 
 ---
+hideInToc: true
 name: Pagination Order
 routeAlias: pagination-order
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-hwtrzb?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/vitejs-vite-hwtrzb?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
+crossOriginIsolated: true
 autoLoad: true
 ---
 
 ---
+hideInToc: true
 name: Infinite Scroll Pagination
 routeAlias: infinite-scroll-pagination
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-zjmule?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/vitejs-vite-zjmule?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
+crossOriginIsolated: true
 autoLoad: true
 ---
 
@@ -400,8 +404,10 @@ autoLoad: true
 name: Pagination GraphQL
 routeAlias: pagination-graphql
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-q5wnda?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/vitejs-vite-q5wnda?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
+crossOriginIsolated: true
 autoLoad: true
+hideInToc: true
 ---
 
 ---
@@ -409,15 +415,17 @@ hideInToc: true
 routeAlias: final-assignment
 ---
 
-## [Assignment]{.text-gradient.text-4xl}
+# [Assignment]{.text-gradient.text-4xl}
 
 Build a simple `Product App` with routing of your choice. The app should have a proper navigation and pages. Data fetching must be done with the graphql endpoint of the [API](https://api.oluwasetemi.dev) Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement Error Boundary and Suspense with LazyLoading. Implement a pagination approach to the products displayed and show the page to a single product.
 
 ---
+hideInToc: true
 name: Router Example
 routeAlias: router-example
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-hswavt?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/vitejs-vite-hswavt?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
+crossOriginIsolated: true
 autoLoad: true
 ---
 

@@ -425,7 +425,8 @@ if (!rootElement.innerHTML) {
 hideInToc: true
 transition: slide-left
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-nfqyhumz?ctl=1&embed=1&file=src%2FApp.jsx
+url: https://stackblitz.com/edit/vitejs-vite-nfqyhumz?embed=1&corp=1&ctl=1&file=src%2FApp.jsx
+crossOriginIsolated: true
 ---
 
 ---
@@ -465,7 +466,8 @@ npm run dev
 hideInToc: true
 transition: slide-left
 layout: iframe-lazy
-url: https://stackblitz.com/edit/tanstack-router-k5akabnz?ctl=1&embed=1&view=preview
+url: https://stackblitz.com/edit/tanstack-router-k5akabnz?embed=1&corp=1&ctl=1&view=preview
+crossOriginIsolated: true
 ---
 
 ---

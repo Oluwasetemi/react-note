@@ -49,37 +49,31 @@ We can do this with the built-in `fetch()` API or a third-party library such as 
 ---
 hideInToc: true
 transition: slide-left
+class: 'text-sm'
 ---
 
-# [Using the fetch() API]{.text-gradient}
+[Using the fetch() API]{.text-gradient.mt--5.pb-5}
 
 To use the `fetch()` API in {React}, properly manage state to avoid infinite API calls. Call `fetch()` with promises or async/await, passing the method, headers, authorization, and other options as needed. The example below performs a simple `GET` request without error handling, which is addressed in subsequent slides. If you use `useEffect`, it should be done like this, although libraries such as `swr` or `@tanstack/react-query` are generally preferred.
 
-```jsx {monaco} {lineNumbers: true, height: '20rem'}
+```jsx {monaco-run} {lineNumbers: true}
 const FetchDataExample = () => {
   const [data, setData] = React.useState(null)
-
   React.useEffect(() => {
     let ignore = false
-
     const fetchData = async () => {
-      const response = await fetch('https://api.oluwasetemi.dev/posts')
-
+      const response = await fetch('https://api.oluwasetemi.dev/health')
       if (!response.ok) console.error('Network response was not ok')
-
       const jsonData = await response.json()
       setData(jsonData)
     }
-
     if (!ignore) {
       fetchData()
     }
-
     return () => {
       ignore = true
     }
   }, [])
-
   return (
     <ul>
       {data.map((item) => (
@@ -88,8 +82,6 @@ const FetchDataExample = () => {
     </ul>
   )
 }
-
-export default FetchDataExample
 ```
 
 ---
@@ -101,7 +93,7 @@ transition: fade
 
 Since `Axios` is a third-party library, you would need to install the package by running `npm install axios`. Once it is installed, import the package to your component and properly manage state to avoid infinite requests. Again, error handling is detailed in the subsequent slide on properly handling errors while fetching data.
 
-```jsx {monaco} {lineNumbers: true, height: '20rem'}
+```jsx {monaco-run} {lineNumbers: true, height: '20rem'}
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -111,7 +103,7 @@ const AxiosDataExample = () => {
   useEffect(() => {
     let ignore = false
 
-    axios.get('https://api.oluwasetemi.dev/posts').then((response) => {
+    axios.get('https://api.oluwasetemi.dev/health').then((response) => {
       if (!ignore) {
         setData(response.data)
       }
@@ -443,7 +435,8 @@ export default App
 hideInToc: true
 layout: iframe-lazy
 name: Using TanStack Query
-url: https://stackblitz.com/edit/github-zvtcsu?ctl=1&embed=1&file=src%2Findex.tsx&hideExplorer=1
+url: https://stackblitz.com/edit/github-zvtcsu?embed=1&corp=1&ctl=1&file=src%2Findex.tsx&hideExplorer=1
+crossOriginIsolated: true
 autoLoad: true
 ---
 
@@ -1129,5 +1122,6 @@ Build a simple `Blog Application` with `React Router` and `TanStack Router`, wit
 ---
 hideInToc: true
 layout: iframe-lazy
-url: https://stackblitz.com/edit/vitejs-vite-r7m8bpox?ctl=1&embed=1&file=src%2FApp.jsx&hideExplorer=1
+url: https://stackblitz.com/edit/vitejs-vite-r7m8bpox?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
+crossOriginIsolated: true
 ---
