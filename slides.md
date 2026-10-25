@@ -67,10 +67,10 @@ routeAlias: course-toc
 <Toc columns="2" minDepth="1" maxDepth="2"></Toc>
 
 <div class="flex gap-3 mt-6">
-  <button @click="$router.push('/routes')" class="px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm cursor-pointer hover:bg-blue-500/20 transition-colors flex items-center gap-1.5"><span class="i-mdi-format-list-bulleted inline-block" /> All Sections</button>
-  <button @click="$router.push('/playground')" class="px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm cursor-pointer hover:bg-green-500/20 transition-colors flex items-center gap-1.5"><span class="i-mdi-code-braces inline-block" /> JS/TS Playground</button>
-  <button @click="$router.push('/react-playground')" class="px-4 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm cursor-pointer hover:bg-cyan-500/20 transition-colors flex items-center gap-1.5"><span class="i-logos-react inline-block" /> React Playground</button>
-  <button @click="$router.push('/changelog')" class="px-4 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm cursor-pointer hover:bg-purple-500/20 transition-colors flex items-center gap-1.5"><span class="i-mdi-history inline-block" /> Changelog</button>
+  <a href="/routes" class="px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm cursor-pointer hover:bg-blue-500/20 transition-colors flex items-center gap-1.5 no-underline"><span class="i-mdi-format-list-bulleted inline-block" /> All Sections</a>
+  <a href="/playground" class="px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm cursor-pointer hover:bg-green-500/20 transition-colors flex items-center gap-1.5 no-underline"><span class="i-mdi-code-braces inline-block" /> JS/TS Playground</a>
+  <a href="/react-playground" class="px-4 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm cursor-pointer hover:bg-cyan-500/20 transition-colors flex items-center gap-1.5 no-underline"><span class="i-logos-react inline-block" /> React Playground</a>
+  <a href="/changelog" class="px-4 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm cursor-pointer hover:bg-purple-500/20 transition-colors flex items-center gap-1.5 no-underline"><span class="i-mdi-history inline-block" /> Changelog</a>
 </div>
 
 ---
