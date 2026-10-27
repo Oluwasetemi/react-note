@@ -1117,7 +1117,9 @@ export default async function PostsPage() {
 
 ## [Assignment]{.text-gradient.text-4xl}
 
-Build a simple `Blog Application` with `React Router` and `TanStack Router`, with data fetching implemented using `TanStack Query` or `SWR`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page` wrapped in a well-designed card UI. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement an Error Boundary and Suspense with lazy loading. Implement the creation of new blog posts. Use `[https://api.oluwasetemi.dev](https://api.oluwasetemi.dev)` as the API and check the documentation.
+Build a simple `Blog Application` with `React Router` and `TanStack Router`, with data fetching implemented using `TanStack Query` or `SWR`. The app should have a `Home Page` displaying a list of blog posts. Each post should have a title and a brief excerpt, with a link to its `Detail Page` wrapped in a well-designed card UI. The `Detail Page` should show the full content of the selected blog post, which can be dynamically generated. Users should be able to go back to the `Home Page` from any page or the previous page. Also, <span class="text-gradient">handle 404 errors</span> by displaying a fallback page when a non-existent route is visited. Implement an Error Boundary and Suspense with lazy loading. Implement the creation of new blog posts. Use [https://api.oluwasetemi.dev](https://api.oluwasetemi.dev) as the API and check the documentation.
+
+Put the code on GitHub(public) and host it on any of the hosting platforms. You will submit the GitHub url and hosted link.
 
 ---
 hideInToc: true
