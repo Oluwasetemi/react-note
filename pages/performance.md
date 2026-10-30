@@ -95,9 +95,16 @@ The main purpose of `memo()` is [performance optimization]{.text-teal-400}, it d
 ---
 hideInToc: true
 transition: slide-down
-layout: iframe-lazy
-url: https://codesandbox.io/embed/rqngm9
+layout: center
 ---
+
+# `memo()` in action
+
+<ReactMemoDemo />
+
+<div class="mt-3 text-xs opacity-70">
+  Prefer the original example? <a href="https://codesandbox.io/p/sandbox/rqngm9" target="_blank" rel="noopener noreferrer">Open it in CodeSandbox ↗</a>
+</div>
 
 ---
 hideInToc: true
@@ -260,7 +267,10 @@ transition: slide-up
 //Without Optimization (No useMemo and React.memo):
 function ExpensiveCalculation({ items }) {
   console.log('Running expensive calculation')
-  const result = items.reduce((sum, item) => sum + item, 0)
+  const result = Array.from({ length: items }, (_, i) => i + 1).reduce(
+    (sum, item) => sum + item,
+    0,
+  )
   return <div>Sum: {result}</div>
 }
 
@@ -270,8 +280,10 @@ function App() {
 
   return (
     <div>
-      <ExpensiveCalculation items={items} />
-      <button onClick={() => setCount(count + 1)}>Increase Count</button>
+      <ExpensiveCalculation items={items?.length} />
+      <button onClick={() => setCount(count + 1)}>
+        Increase Count {count}
+      </button>
     </div>
   )
 }
@@ -285,7 +297,10 @@ const ExpensiveCalculation = React.memo(({ items }) => {
   console.log('Running expensive calculation')
   // Memoize the result of the expensive calculation
   const result = React.useMemo(() => {
-    return items.reduce((sum, item) => sum + item, 0)
+    return Array.from({ length: items }, (_, i) => i + 1).reduce(
+      (sum, item) => sum + item,
+      0,
+    )
   }, [items])
 
   return <div>Sum: {result}</div>
@@ -327,7 +342,7 @@ Ensure the preview tab is loaded. Open dev tool to see the console when you clic
 
 ---
 layout: iframe-lazy
-url: https://codesandbox.io/embed/5mwcd8
+url: https://codesandbox.io/embed/y5kpgc?view=editor+%2B+preview&module=%2Fsrc%2FApp.tsx&expanddevtools=1
 ---
 
 ---

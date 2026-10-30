@@ -16,8 +16,16 @@
           >
             {{ url }}
           </p>
+          <p
+            v-if="openExternallyOnly"
+            class="max-w-[420px] m-0 text-sm leading-relaxed"
+          >
+            CodeSandbox cannot run inside this cross-origin isolated deck. Open
+            the demo in a new tab instead.
+          </p>
           <div class="flex gap-3">
             <button
+              v-if="!openExternallyOnly"
               class="px-5 py-2 rounded-md text-base font-semibold cursor-pointer no-underline border-0 bg-blue-500 text-white transition-opacity duration-200 hover:opacity-75"
               @click="loadIframe"
             >
@@ -29,7 +37,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              ↗ Open
+              ↗ {{ openExternallyOnly ? 'Open in CodeSandbox' : 'Open' }}
             </a>
           </div>
         </div>
@@ -51,8 +59,8 @@
         :title="title || 'Embedded content'"
         class="w-full h-full border-0 rounded-lg block"
         frameborder="0"
-        :allow="crossOriginIsolated ? 'cross-origin-isolated' : undefined"
-        :credentialless="credentialless || undefined"
+        :allow="iframeAllow"
+        :credentialless="useCredentialless || undefined"
         allowfullscreen
         @load="onIframeLoad"
       />
@@ -61,21 +69,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 interface Props {
   url: string
   title?: string
   autoLoad?: boolean
-  crossOriginIsolated?: boolean
-  // Legacy EngineBlock embeds do not send COEP headers.
+  // Legacy embeds that do not send COEP headers can opt into an anonymous frame.
   credentialless?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   autoLoad: false,
 })
+
+type EmbedVendor = 'codesandbox' | 'stackblitz' | 'other'
+
+const embedVendor = computed<EmbedVendor>(() => {
+  try {
+    const hostname = new URL(props.url).hostname
+
+    if (hostname === 'codesandbox.io' || hostname.endsWith('.codesandbox.io')) {
+      return 'codesandbox'
+    }
+
+    if (hostname === 'stackblitz.com' || hostname.endsWith('.stackblitz.com')) {
+      return 'stackblitz'
+    }
+  } catch {
+    // Treat malformed and relative URLs as generic embeds.
+  }
+
+  return 'other'
+})
+
+// The iframe permission is vendor-specific. Only StackBlitz WebContainers need it.
+const iframeAllow = computed(() =>
+  embedVendor.value === 'stackblitz' ? 'cross-origin-isolated' : undefined,
+)
+
+// Credentialless is an explicit escape hatch for legacy embeds, never a vendor default.
+const useCredentialless = computed(() => props.credentialless === true)
+
+// CodeSandbox needs credentialed cross-origin requests, which the deck's required
+// StackBlitz isolation policy blocks. Avoid rendering a known-broken frame.
+const openExternallyOnly = computed(
+  () =>
+    typeof window !== 'undefined' &&
+    window.crossOriginIsolated &&
+    embedVendor.value === 'codesandbox',
+)
 
 const isPrintMode =
   typeof window !== 'undefined' &&
@@ -87,7 +131,7 @@ const isLoaded = ref(false)
 const isLoading = ref(false)
 
 const loadIframe = async () => {
-  if (isLoaded.value || isLoading.value) return
+  if (openExternallyOnly.value || isLoaded.value || isLoading.value) return
   isLoading.value = true
   await new Promise((resolve) => setTimeout(resolve, 100))
   isLoaded.value = true
@@ -99,7 +143,7 @@ const onIframeLoad = () => {
 }
 
 onMounted(() => {
-  if (props.autoLoad && !isPrintMode) {
+  if (props.autoLoad && !isPrintMode && !openExternallyOnly.value) {
     const { stop } = useIntersectionObserver(
       containerRef,
       ([{ isIntersecting }]) => {

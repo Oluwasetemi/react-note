@@ -436,7 +436,6 @@ hideInToc: true
 layout: iframe-lazy
 name: Using TanStack Query
 url: https://stackblitz.com/edit/github-zvtcsu?embed=1&corp=1&ctl=1&file=src%2Findex.tsx&hideExplorer=1
-crossOriginIsolated: true
 autoLoad: true
 ---
 
@@ -1125,5 +1124,4 @@ Put the code on GitHub(public) and host it on any of the hosting platforms. You 
 hideInToc: true
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-r7m8bpox?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
-crossOriginIsolated: true
 ---

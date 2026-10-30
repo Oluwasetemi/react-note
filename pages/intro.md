@@ -785,7 +785,6 @@ hideInToc: true
 layout: iframe-lazy
 name: Todo App All With React
 url: https://stackblitz.com/edit/vitejs-vite-epzrqa?embed=1&corp=1&ctl=1&file=main.js&hideExplorer=1&hideNavigation=1
-crossOriginIsolated: true
 autoLoad: true
 ---
 

@@ -386,7 +386,6 @@ name: Pagination Order
 routeAlias: pagination-order
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hwtrzb?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
-crossOriginIsolated: true
 autoLoad: true
 ---
 
@@ -396,7 +395,6 @@ name: Infinite Scroll Pagination
 routeAlias: infinite-scroll-pagination
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-zjmule?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
-crossOriginIsolated: true
 autoLoad: true
 ---
 
@@ -405,7 +403,6 @@ name: Pagination GraphQL
 routeAlias: pagination-graphql
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-q5wnda?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
-crossOriginIsolated: true
 autoLoad: true
 hideInToc: true
 ---
@@ -425,7 +422,6 @@ name: Router Example
 routeAlias: router-example
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-hswavt?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1
-crossOriginIsolated: true
 autoLoad: true
 ---
 

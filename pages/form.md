@@ -544,7 +544,6 @@ hideInToc: true
 transition: slide-up
 layout: iframe-lazy
 url: https://stackblitz.com/edit/tanstack-form-ebyuvxlk?embed=1&corp=1&ctl=1&file=src%2Findex.jsx&hideExplorer=1
-crossOriginIsolated: true
 name: TanStack Form Example
 autoLoad: true
 ---
@@ -631,7 +630,6 @@ hideInToc: true
 transition: slide-up
 layout: iframe-lazy
 url: https://stackblitz.com/edit/vitejs-vite-j9uc3f?embed=1&corp=1&ctl=1&file=src%2FApp.jsx&hideExplorer=1&hideNavigation=1
-crossOriginIsolated: true
 name: Form Actions Example
 autoLoad: true
 ---
